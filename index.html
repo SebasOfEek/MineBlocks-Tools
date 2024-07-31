@@ -523,113 +523,117 @@
     </table>
     <pre id="outputCommand">/summon </pre>
     <script>
-    function resetFields() {
-        document.getElementById('quantity').value = '';
-        document.getElementById('posX').value = '';
-        document.getElementById('posY').value = '';
-        document.getElementById('name').value = '';
-        document.getElementById('health').value = '';
-        document.getElementById('holding').value = '';
-        document.getElementById('armor').value = '';
-        document.getElementById('defaultDrops').value = '';
-        document.getElementById('drops').value = '';
-        document.getElementById('skin').value = '';
-        document.getElementById('aggro').value = '';
-        document.getElementById('charged').value = '';
-        document.getElementById('baby').value = '';
-    }
+        
+        function resetFields() {
+            document.getElementById('quantity').value = '';
+            document.getElementById('posX').value = '';
+            document.getElementById('posY').value = '';
+            document.getElementById('name').value = '';
+            document.getElementById('health').value = '';
+            document.getElementById('holding').value = '';
+            document.getElementById('armor').value = '';
+            document.getElementById('defaultDrops').value = '';
+            document.getElementById('drops').value = '';
+            document.getElementById('skin').value = '';
+            document.getElementById('aggro').value = '';
+            document.getElementById('charged').value = '';
+            document.getElementById('baby').value = '';
+        }
+    
+        function updateMobOptions() {
+            var mobType = document.getElementById('mobType').value;
+            
+            resetFields();
 
-    function updateMobOptions() {
-        var mobType = document.getElementById('mobType').value;
+            var creeperChargedRow = document.getElementById('creeperChargedRow');
+            var spawnskinOptions = document.getElementById('spawnskinOptions');
+            var aggroRow = document.getElementById('aggroRow');
+            var handItemRow = document.getElementById('handItemRow');
+            var armorRow = document.getElementById('armorRow');
+            var babyRow = document.getElementById('babyRow');
+            var defaultDropsRow = document.getElementById('defaultDropsRow');
 
-        resetFields(); // Llamada a la función para restablecer los campos
+            creeperChargedRow.style.display = 'none';
+            spawnskinOptions.style.display = 'none';
+            aggroRow.style.display = 'none';
+            handItemRow.style.display = 'none';
+            armorRow.style.display = 'none';
+            babyRow.style.display = 'none';
+            defaultDropsRow.style.display = 'table-row';
 
-        var creeperChargedRow = document.getElementById('creeperChargedRow');
-        var spawnskinOptions = document.getElementById('spawnskinOptions');
-        var aggroRow = document.getElementById('aggroRow');
-        var handItemRow = document.getElementById('handItemRow');
-        var armorRow = document.getElementById('armorRow');
-        var babyRow = document.getElementById('babyRow');
-        var defaultDropsRow = document.getElementById('defaultDropsRow');
+            //CONDICIONES
+            
+            if (mobType === ' creeper') {
+                creeperChargedRow.style.display = 'table-row';
+            } else if (mobType === ' spawnskin') {
+                spawnskinOptions.style.display = 'table-row';
+                aggroRow.style.display = 'table-row';
+                armorRow.style.display = 'table-row';
+                defaultDropsRow.style.display = 'none';
+            } else if (mobType === ' pigman' || mobType === ' enderman') {
+                handItemRow.style.display = 'table-row';
+            } else if (mobType === ' zombie') {
+                armorRow.style.display = 'table-row'; 
+            } else if (mobType === ' bat') {
+                defaultDropsRow.style.display = 'none';
+            }
+            
 
-        // Ocultar todos los recuadros
-        creeperChargedRow.style.display = 'none';
-        spawnskinOptions.style.display = 'none';
-        aggroRow.style.display = 'none';
-        handItemRow.style.display = 'none';
-        armorRow.style.display = 'none';
-        babyRow.style.display = 'none';
-        defaultDropsRow.style.display = 'table-row';
-
-        // Mostrar recuadros según el tipo de mob seleccionado
-        if (mobType === ' creeper') {
-            creeperChargedRow.style.display = 'table-row';
-        } else if (mobType === ' spawnskin') {
-            spawnskinOptions.style.display = 'table-row';
-            aggroRow.style.display = 'table-row';
-            armorRow.style.display = 'table-row';
-            defaultDropsRow.style.display = 'none';
-        } else if (mobType === ' pigman' || mobType === ' enderman') {
-            handItemRow.style.display = 'table-row';
-        } else if (mobType === ' zombie') {
-            armorRow.style.display = 'table-row'; 
+            var animalMobs = [' cow', ' sheep', ' mooshroom', ' pig', ' rabbit', ' wolf', ' cowctus', ' chicken'];
+            if (animalMobs.includes(mobType)) {
+                babyRow.style.display = 'table-row';
+            }
         }
 
-        var animalMobs = [' cow', ' sheep', ' mooshroom', ' pig', ' squid', ' rabbit', ' wolf', ' cowctus', ' chicken'];
-        if (animalMobs.includes(mobType)) {
-            babyRow.style.display = 'table-row';
+        function generateCommand() {
+            var mobType = document.getElementById('mobType').value;
+            var quantity = document.getElementById('quantity').value || 1;
+            var posX = document.getElementById('posX').value;
+            var posY = document.getElementById('posY').value;
+            var name = document.getElementById('name').value;
+            var health = document.getElementById('health').value;
+            var holding = document.getElementById('holding').value;
+            var armor = document.getElementById('armor').value;
+            var defaultDrops = document.getElementById('defaultDrops').value;
+            var drops = document.getElementById('drops').value;
+            var skin = document.getElementById('skin').value;
+            var aggro = document.getElementById('aggro').value;
+            var charged = document.getElementById('charged').value;
+            var baby = document.getElementById('baby').value;
+
+            var command = `/summon${mobType}`;
+            if (quantity > 0) command += ` ${quantity}`;
+            command += ` ~${posX} ~${posY} {`;
+
+            if (name) command += `name:"${name}", `;
+            if (health) command += `health:${health}, `;
+            if (holding && (mobType === ' pigman' || mobType === ' enderman')) command += `holding:"${holding}", `;
+            if (armor && (mobType === ' zombie' || mobType === ' spawnskin')) command += `armor:[{id:"${armor}"}], `;
+            if (defaultDrops !== "") command += `defaultDrops:${defaultDrops === 'true' ? 1 : 0}, `;
+            if (drops) command += `Drops:[${drops}], `;
+            if (skin && mobType === ' spawnskin') command += `skin:"${skin}", `;
+            if (aggro && mobType === ' spawnskin') command += `aggro:"${aggro}", `;
+            if (charged !== "") command += `charged:${charged}, `;
+            if (baby !== "" && [' cow', ' sheep', ' mooshroom', ' pig', ' chicken', ' rabbit', ' wolf', ' cowctus'].includes(mobType)) command += `baby:${baby}, `;
+
+            command = command.replace(/, $/, ""); 
+            command += "}";
+
+            document.getElementById('outputCommand').textContent = command;
         }
-    }
 
-    function generateCommand() {
-        var mobType = document.getElementById('mobType').value;
-        var quantity = document.getElementById('quantity').value || 1;
-        var posX = document.getElementById('posX').value;
-        var posY = document.getElementById('posY').value;
-        var name = document.getElementById('name').value;
-        var health = document.getElementById('health').value;
-        var holding = document.getElementById('holding').value;
-        var armor = document.getElementById('armor').value;
-        var defaultDrops = document.getElementById('defaultDrops').value;
-        var drops = document.getElementById('drops').value;
-        var skin = document.getElementById('skin').value;
-        var aggro = document.getElementById('aggro').value;
-        var charged = document.getElementById('charged').value;
-        var baby = document.getElementById('baby').value;
-
-        var command = `/summon ${mobType}`;
-        if (quantity > 0) command += ` ${quantity}`;
-        command += ` ~${posX} ~${posY} {`;
-
-        if (name) command += `name:"${name}", `;
-        if (health) command += `health:${health}, `;
-        if (holding && (mobType === 'pigman' || mobType === 'enderman')) command += `holding:"${holding}", `;
-        if (armor && (mobType === 'zombie' || mobType === 'spawnskin')) command += `armor:[{id:"${armor}"}], `;
-        if (defaultDrops !== "") command += `defaultDrops:${defaultDrops === 'true' ? 1 : 0}, `;
-        if (drops) command += `Drops:[${drops}], `;
-        if (skin && mobType === 'spawnskin') command += `skin:"${skin}", `;
-        if (aggro && mobType === 'spawnskin') command += `aggro:"${aggro}", `;
-        if (charged !== "") command += `charged:${charged}, `;
-        if (baby !== "" && [' cow', ' sheep', ' mooshroom', ' pig', ' chicken', ' rabbit', ' wolf', ' cowctus'].includes(mobType)) command += `baby:${baby}, `;
-
-        command = command.replace(/, $/, ""); 
-        command += "}";
-
-        document.getElementById('outputCommand').textContent = command;
-    }
-
-    function copyCommand() {
-        var command = document.getElementById('outputCommand').textContent;
-        navigator.clipboard.writeText(command).then(() => {
-            var copyButton = document.getElementById('copyButton');
-            copyButton.textContent = 'Copiado';
-            copyButton.classList.add('success');
-            setTimeout(() => {
-                copyButton.textContent = 'Copiar Comando';
-                copyButton.classList.remove('success');
-            }, 2000);
-        });
-    }
-</script>
+        function copyCommand() {
+            var command = document.getElementById('outputCommand').textContent;
+            navigator.clipboard.writeText(command).then(() => {
+                var copyButton = document.getElementById('copyButton');
+                copyButton.textContent = 'Copiado';
+                copyButton.classList.add('success');
+                setTimeout(() => {
+                    copyButton.textContent = 'Copiar Comando';
+                    copyButton.classList.remove('success');
+                }, 2000);
+            });
+        }
+    </script>
 </body>
 </html>
