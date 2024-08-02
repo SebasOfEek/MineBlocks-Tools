@@ -9,17 +9,18 @@
             max-width: 500px;
             margin: 0 auto;
             padding: 20px;
-            background-color: rgba(138, 160, 153); 
+            background-color: rgba(138, 160, 153, 0.5);
             box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
             border-radius: 10px;
         }
         td {
-            padding: 8px;
+            padding: 10px;
+            position: relative;
         }
         input, select {
-            width: 100%;
-            padding: 8px;
-            margin: 2px 0;
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 5px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
@@ -44,9 +45,6 @@
         button.success:hover {
             background-color: #218838;
         }
-        button:hover {
-            background-color: #0056b3;
-        }
         pre {
             background-color: #f8f9fa;
             padding: 10px;
@@ -57,10 +55,39 @@
             word-wrap: break-word;
             overflow-x: auto;
             max-width: 480px;
-            margin:auto;
+            margin: auto;
             margin-top: 12px;
         }
-    </style>
+        .tooltip {
+            position: absolute;
+            bottom: 100%; /* Posiciona el tooltip encima del contenido */
+            left: 50%; /* Centra el tooltip en el contenido */
+            transform: translateX(10%) translateY(50px); /* Ajusta la posición del tooltip */
+            background-color: #333;
+            color: #fff;
+            padding: 8px;
+            border-radius: 5px;
+            white-space: nowrap;
+            display: none;
+            font-size: 14px;
+            z-index: 10;
+            width: 250px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+        }
+        td:hover .tooltip {
+            display: block;
+        }
+        .question-mark {
+            cursor: pointer;
+            font-weight: bold;
+            color: #007BFF;
+            margin-left: 5px;
+            position: relative;
+        }    </style>
 </head>
 <body>
     <table>
@@ -134,6 +161,8 @@
                    <option value="balloon">Balloon</option>
                    <option value="bamboo">Bamboo</option>
                    <option value="bamboo_block">Bamboo Block</option>
+                   <option value="stairs_bamboo">Bamboo Stairs</option>
+                   <option value="slab_bamboo">Bamboo Slab</option>
                    <option value="bamboo_door">Bamboo Door</option>
                    <option value="barrier">Barrier</option>
                    <option value="bed">Bed</option>
@@ -257,6 +286,7 @@
                    <option value="flint">Flint</option>
                    <option value="flint_and_steel">Flint and Steel</option>
                    <option value="furnace">Furnace</option>
+                   <option value="frosted_ice">Frosted Ice</option>
                    <option value="ghast_tear">Ghast Tear</option>
                    <option value="glass">Glass</option>
                    <option value="backdrop_glass">Glass Backdrop</option>
@@ -272,6 +302,7 @@
                    <option value="gold_leggings">Gold Leggings</option>
                    <option value="gold_nugget">Gold Nugget</option>
                    <option value="gold_ore">Gold Ore</option>
+                   <option value="gold_soil">Gold Soild</option>
                    <option value="slab_gold">Gold Slab</option>
                    <option value="stairs_gold">Gold Stairs</option>
                    <option value="golden_apple">Golden Apple</option>
@@ -302,6 +333,7 @@
                    <option value="iron_ingot">Iron Ingot</option>
                    <option value="iron_leggings">Iron Leggings</option>
                    <option value="iron_ore">Iron Ore</option>
+                   <option value="iron_nugget">Iron Nugget</option>
                    <option value="iron_pickaxe">Iron Pickaxe</option>
                    <option value="iron_shovel">Iron Shovel</option>
                    <option value="slab_iron">Iron Slab</option>
@@ -331,6 +363,8 @@
                    <option value="melon_block">Melon Block</option>
                    <option value="melon_seed">Melon Seed</option>
                    <option value="minecart">Minecart</option>
+                   <option value="minecart_furnace">Minecart Furnace</option>
+                   <option value="minecart_chest">Minecart Chest</option>
                    <option value="rail">Minecart Rail</option>                   
                    <option value="monster_spawner">Monster Spawner</option>
                    <option value="moss">Moss</option>
