@@ -60,9 +60,9 @@
         }
         .tooltip {
             position: absolute;
-            bottom: 100%; /* Posiciona el tooltip encima del contenido */
-            left: 50%; /* Centra el tooltip en el contenido */
-            transform: translateX(10%) translateY(50px); /* Ajusta la posición del tooltip */
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(10%) translateY(50px);
             background-color: #333;
             color: #fff;
             padding: 8px;
@@ -87,7 +87,8 @@
             color: #007BFF;
             margin-left: 5px;
             position: relative;
-        }    </style>
+        }
+    </style>
 </head>
 <body>
     <table>
@@ -96,30 +97,30 @@
             <td>
                 <select id="mobType" onchange="updateMobOptions()">
                     <option value="">--Seleccionar--</option>
-                    <option value=" zombie">Zombie</option>
-                    <option value=" spawnskin">Spawnskin</option>
-                    <option value=" skeleton">Skeleton</option>
-                    <option value=" creeper">Creeper</option>
-                    <option value=" spider">Spider</option>
-                    <option value=" enderman">Enderman</option>
-                    <option value=" blaze">Blaze</option>
-                    <option value=" ghast">Ghast</option>
-                    <option value=" magmacube">Magma Cube</option>
-                    <option value=" slime">Slime</option>
-                    <option value=" enderdragon">Ender Dragon</option>
-                    <option value=" nethereye">Nethereye</option>
-                    <option value=" cow">Cow</option>
-                    <option value=" sheep">Sheep</option>
-                    <option value=" mooshroom">Mooshroom</option>
-                    <option value=" pig">Pig</option>
-                    <option value=" squid">Squid</option>
-                    <option value=" bat">Bat</option>
-                    <option value=" chicken">Chicken</option>
-                    <option value=" rabbit">Rabbit</option>
-                    <option value=" wolf">Wolf</option>
-                    <option value=" pigman">Zombie Pigman</option>
-                    <option value=" snowgolem">Snow Golem</option>
-                    <option value=" cowctus">Cactus Cow</option>
+                    <option value="zombie">Zombie</option>
+                    <option value="spawnskin">Spawnskin</option>
+                    <option value="skeleton">Skeleton</option>
+                    <option value="creeper">Creeper</option>
+                    <option value="spider">Spider</option>
+                    <option value="enderman">Enderman</option>
+                    <option value="blaze">Blaze</option>
+                    <option value="ghast">Ghast</option>
+                    <option value="magmacube">Magma Cube</option>
+                    <option value="slime">Slime</option>
+                    <option value="enderdragon">Ender Dragon</option>
+                    <option value="nethereye">Nethereye</option>
+                    <option value="cow">Cow</option>
+                    <option value="sheep">Sheep</option>
+                    <option value="mooshroom">Mooshroom</option>
+                    <option value="pig">Pig</option>
+                    <option value="squid">Squid</option>
+                    <option value="bat">Bat</option>
+                    <option value="chicken">Chicken</option>
+                    <option value="rabbit">Rabbit</option>
+                    <option value="wolf">Wolf</option>
+                    <option value="pigman">Zombie Pigman</option>
+                    <option value="snowgolem">Snow Golem</option>
+                    <option value="cowctus">Cactus Cow</option>
                 </select>
             </td>
         </tr>
@@ -172,10 +173,6 @@
                 </select>
             </td>
         </tr>
-        <tr>
-            <td>Drops personalizados:</td>
-            <td><input type="text" id="drops" placeholder="Próximamente disponible" disabled></td>
-        </tr>
         <tr id="creeperChargedRow" style="display: none;">
             <td>Creeper Cargado:</td>
             <td>
@@ -203,8 +200,118 @@
         </tr>
         <tr id="babyRow" style="display: none;">
             <td>Bebé:</td>
-            <td><input type="number" id="baby"></td>
-
+            <td><input type="number" id="baby" onchange="handleBabyChange()"></td>
+        </tr>
+        <tr>
+            <td>Loot Tags:</td>
+            <td>
+                <select id="drops" onchange="updateConditionals()">
+                    <option value="">--Seleccionar--</option>
+                    <option value="1">Sí</option>
+                    <option value="2">No</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="additionalRows" class="additional-rows" style="display: none;">
+            <td>Drops items:</td>
+            <td>
+                <select id="additional1">
+                    <option value="">--Seleccionar--</option>
+                    <option value="stairs_wooden_planks">Wooden Planks Stairs</option>
+                    <option value="pressure_plate_wooden">Wooden Pressure Plate</option>
+                    <option value="wooden_shovel">Wooden Shovel</option>
+                    <option value="wooden_sword">Wooden Sword</option>
+                    <option value="wool">Wool</option>
+                    <option value="backdrop_wool">Wool Backdrop</option>
+                    <option value="yellow_flower">Yellow Flower</option>
+                </select>
+            </td>  
+        </tr>
+        <tr id="additionalRows2" class="additional-rows" style="display: none;">
+            <td>Cantidad:</td>
+            <td><input type="number" id="additional2"></td>
+        </tr>
+        <tr id="additionalRows3" class="additional-rows" style="display: none;">
+            <td>Bonus:</td>
+            <td><input type="text" id="additional3"></td>
+        </tr>
+        <tr id="additionalRows4" class="additional-rows" style="display: none;">
+            <td>Loot Bonus:</td>
+            <td><input type="number" id="additional4"></td>
+        </tr>
+        <tr id="additionalRows5" class="additional-rows" style="display: none;">
+            <td>Oportunidad:</td>
+            <td><input type="number" id="additional5"></td>
+        </tr>
+        <tr id="additionalRows6" class="additional-rows" style="display: none;">
+            <td>¿Tiene variante?:</td>
+            <td>
+                <select id="additional6">
+                    <option value="">--Seleccionar--</option>
+                    <option value="mooshroom">Mooshroom</option>
+                    <option value="cowctus">Cactus Cow</option>
+                    <option value="normal">Normal</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="additionalRows7" class="additional-rows" style="display: none;">
+            <td>¿Está esquilada?:</td>
+            <td>
+                <select id="additional7">
+                    <option value="">--Seleccionar--</option>
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="additionalRows9" class="additional-rows" style="display: none;">
+            <td>¿Es bebé?:</td>
+            <td>
+                <select id="additional9">
+                    <option value="">--Seleccionar--</option>
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="additionalRows10" class="additional-rows" style="display: none;">
+            <td>¿Tiene color?:</td>
+            <td>
+                <select id="additional10">
+                    <option value="">--Seleccionar--</option>
+                    <option value="red">Red</option>
+                    <option value="green">Green</option>
+                    <option value="blue">Blue</option>
+                    <option value="brown">Brown</option>
+                    <option value="cyan">Cyan</option>
+                    <option value="lightblue">Lightblue</option>
+                    <option value="lightgreen">Lightgreen</option>
+                    <option value="magenta">Magenta</option>
+                    <option value="orange">Orange</option>
+                    <option value="pink">Pink</option>
+                    <option value="purple">Purple</option>
+                    <option value="white">White</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="lightgray">Lightgray</option>
+                    <option value="gray">Gray</option>
+                    <option value="black">Black</option>
+                    <option value="rainbow">Rainbow</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="additionalRows11" class="additional-rows" style="display: none;">
+            <td>¿Está en llamas?:</td>
+            <td>
+                <select id="additional11">
+                    <option value="">--Seleccionar--</option>
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="additionalRows12" class="additional-rows" style="display: none;">
+            <td>Tamaño:</td>
+            <td><input type="text" id="additional12"></td>
         </tr>
         <tr>
             <td colspan="2">
@@ -214,17 +321,71 @@
         </tr>
     </table>
     <pre id="outputCommand">/summon </pre>
-    <script>
     
-        document.getElementById('quantity').addEventListener('input', function() {
-        var quantityInput = document.getElementById('quantity');
-        var value = parseInt(quantityInput.value, 10);
+    <script>
+        function updateConditionals() {
+            const drops = document.getElementById('drops').value;
+            const mobType = document.getElementById('mobType').value;
+            const additionalRows = document.querySelectorAll('.additional-rows');
 
-        // Verifica si el valor excede el máximo permitido
-        if (value > 20) {
-            quantityInput.value = 20; // Establece el valor al máximo permitido
+            // Resetear la visibilidad de todas las filas adicionales
+            additionalRows.forEach(row => row.style.display = 'none');
+
+            if (drops === '1') {
+                document.getElementById('additionalRows').style.display = 'table-row';
+                document.getElementById('additionalRows2').style.display = 'table-row';
+                document.getElementById('additionalRows3').style.display = 'table-row';
+                document.getElementById('additionalRows4').style.display = 'table-row';
+                document.getElementById('additionalRows5').style.display = 'table-row';
+                document.getElementById('additionalRows11').style.display = 'table-row';
+                
+                const animalMobs = ['cow', 'sheep', 'mooshroom', 'pig', 'rabbit', 'wolf', 'cowctus', 'chicken'];
+                const babyRow = document.getElementById('additionalRows9');
+                if (animalMobs.includes(mobType) && mobType !== 'squid' && mobType !== 'bat') {
+                    babyRow.style.display = 'table-row';
+                }
+
+                if (mobType === 'cow' || mobType === 'mooshroom' || mobType === 'cowctus') {
+                    document.getElementById('additionalRows6').style.display = 'table-row';
+                }
+
+                if (mobType === 'sheep') {
+                    document.getElementById('additionalRows7').style.display = 'table-row';
+                }
+
+                if (mobType === 'wolf' || mobType === 'sheep') {
+                    document.getElementById('additionalRows10').style.display = 'table-row';
+                }
+
+                if (mobType === 'slime' || mobType === 'magmacube') {
+                    document.getElementById('additionalRows12').style.display = 'table-row';
+                }
+            }
         }
+
+        document.getElementById('quantity').addEventListener('input', function() {
+            var quantityInput = document.getElementById('quantity');
+            var value = parseInt(quantityInput.value, 10);
+
+            if (value > 20) {
+                quantityInput.value = 20;
+            }
         });
+
+        function handleBabyChange() {
+            const baby = document.getElementById('baby').value;
+            const mobType = document.getElementById('mobType').value;
+            const sheared = document.getElementById('additional7');
+            const isBaby = document.getElementById('additional9');
+
+            if (mobType === 'sheep' && baby > 0) {
+                sheared.disabled = true;
+                isBaby.disabled = true;
+            } else {
+                sheared.disabled = false;
+                isBaby.disabled = false;
+            }
+        }
         
         function resetFields() {
             document.getElementById('quantity').value = '';
@@ -240,8 +401,9 @@
             document.getElementById('aggro').value = '';
             document.getElementById('charged').value = '';
             document.getElementById('baby').value = '';
+            document.querySelectorAll('.additional-rows select, .additional-rows input').forEach(el => el.value = '');
         }
-    
+
         function updateMobOptions() {
             var mobType = document.getElementById('mobType').value;
             
@@ -265,26 +427,28 @@
 
             //CONDICIONES
             
-            if (mobType === ' creeper') {
+            if (mobType === 'creeper') {
                 creeperChargedRow.style.display = 'table-row';
-            } else if (mobType === ' spawnskin') {
+            } else if (mobType === 'spawnskin') {
                 spawnskinOptions.style.display = 'table-row';
                 aggroRow.style.display = 'table-row';
                 armorRow.style.display = 'table-row';
                 defaultDropsRow.style.display = 'none';
-            } else if (mobType === ' pigman' || mobType === ' enderman') {
+            } else if (mobType === 'pigman' || mobType === 'enderman') {
                 handItemRow.style.display = 'table-row';
-            } else if (mobType === ' zombie') {
+            } else if (mobType === 'zombie') {
                 armorRow.style.display = 'table-row'; 
-            } else if (mobType === ' bat') {
+            } else if (mobType === 'bat') {
                 defaultDropsRow.style.display = 'none';
             }
             
-
-            var animalMobs = [' cow', ' sheep', ' mooshroom', ' pig', ' rabbit', ' wolf', ' cowctus', ' chicken'];
+            var animalMobs = ['cow', 'sheep', 'mooshroom', 'pig', 'rabbit', 'wolf', 'cowctus', 'chicken'];
             if (animalMobs.includes(mobType)) {
                 babyRow.style.display = 'table-row';
             }
+
+            // Actualizar los Loot Tags
+            updateConditionals();
         }
 
         function generateCommand() {
@@ -302,26 +466,60 @@
             var aggro = document.getElementById('aggro').value;
             var charged = document.getElementById('charged').value;
             var baby = document.getElementById('baby').value;
+            var additional1 = document.getElementById('additional1').value;
+            var additional2 = document.getElementById('additional2').value;
+            var additional3 = document.getElementById('additional3').value;
+            var additional4 = document.getElementById('additional4').value;
+            var additional5 = document.getElementById('additional5').value;
+            var additional6 = document.getElementById('additional6').value;
+            var additional7 = document.getElementById('additional7').value;
+            var additional9 = document.getElementById('additional9').value;
+            var additional10 = document.getElementById('additional10').value;
+            var additional11 = document.getElementById('additional11').value;
+            var additional12 = document.getElementById('additional12').value;
 
-            var command = `/summon${mobType}`;
+            var command = `/summon ${mobType}`;
             if (quantity > 0) command += ` ${quantity}`;
             command += ` ~${posX} ~${posY} {`;
 
             if (name) command += `name:"${name}", `;
             if (health) command += `health:${health}, `;
-            if (holding && (mobType === ' pigman' || mobType === ' enderman')) command += `holding:"${holding}", `;
-            if (armor && (mobType === ' zombie' || mobType === ' spawnskin')) command += `armor:[{id:"${armor}"}], `;
+            if (holding && (mobType === 'pigman' || mobType === 'enderman')) command += `holding:"${holding}", `;
+            if (armor && (mobType === 'zombie' || mobType === 'spawnskin')) command += `armor:[{id:"${armor}"}], `;
             if (defaultDrops !== "") command += `defaultDrops:${defaultDrops === 'true' ? 1 : 0}, `;
-            if (drops) command += `Drops:[${drops}], `;
-            if (skin && mobType === ' spawnskin') command += `skin:"${skin}", `;
-            if (aggro && mobType === ' spawnskin') command += `aggro:"${aggro}", `;
-            if (charged !== "") command += `charged:${charged}, `;
-            if (baby !== "" && [' cow', ' sheep', ' mooshroom', ' pig', ' chicken', ' rabbit', ' wolf', ' cowctus'].includes(mobType)) command += `baby:${baby}, `;
 
-            command = command.replace(/, $/, ""); 
+            if (drops === '1') {
+                command += `drops:[{`;
+                if (additional1) command += `item:{id:"${additional1}"}, `;
+                if (additional2) command += `quantity:${additional2}, `;
+                if (additional3) command += `bonus:${additional3}, `;
+                if (additional4) command += `lootBonus:${additional4}, `;
+                if (additional5) command += `chance:${additional5}, `;
+                if (additional6) command += `variant:"${additional6}", `;
+                if (additional7) command += `sheared:${additional7 === 'true' ? 1 : 0}, `;
+                if (additional9) command += `isBaby:${additional9 === 'true' ? 1 : 0}, `;
+                if (additional10) command += `color:"${additional10}", `;
+                if (additional11) command += `onFire:${additional11 === 'true' ? 1 : 0}, `;
+                if (additional12) command += `size:${additional12}, `;
+                command = command.replace(/, $/, "");
+                command += `}], `;
+            }
+
+            if (skin && mobType === 'spawnskin') command += `skin:"${skin}", `;
+            if (aggro && mobType === 'spawnskin') command += `aggro:"${aggro}", `;
+            if (charged !== "") command += `charged:${charged}, `;
+            if (baby !== "" && ['cow', 'sheep', 'mooshroom', 'pig', 'chicken', 'rabbit', 'wolf', 'cowctus'].includes(mobType)) command += `baby:${baby}, `;
+
+            command = command.replace(/, $/, "");
             command += "}";
 
             document.getElementById('outputCommand').textContent = command;
+        }
+
+        function clearFields() {
+            document.querySelectorAll('input, select').forEach(el => el.value = '');
+            document.querySelectorAll('.additional-rows').forEach(row => row.style.display = 'none');
+            document.getElementById('output').textContent = '';
         }
 
         function copyCommand() {
