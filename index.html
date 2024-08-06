@@ -157,7 +157,7 @@
                    <option value="backdrop_wool">Wool Backdrop</option>
                    <option value="yellow_flower">Yellow Flower</option>
                 </select>
-            </td>       
+            </td>  
         </tr>
         <tr id="armorRow" style="display: none;">
             <td>Armadura:</td>
@@ -200,7 +200,13 @@
         </tr>
         <tr id="babyRow" style="display: none;">
             <td>Bebé:</td>
-            <td><input type="number" id="baby" onchange="handleBabyChange()"></td>
+            <td>
+                <select id="baby" onchange="handleBabyChange()">
+                    <option value="">--Seleccionar--</option>
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td>Loot Tags:</td>
@@ -229,7 +235,7 @@
         </tr>
         <tr id="additionalRows2" class="additional-rows" style="display: none;">
             <td>Cantidad:</td>
-            <td><input type="number" id="additional2"></td>
+            <td><input type="number" id="additional2" max="10000"></td>
         </tr>
         <tr id="additionalRows3" class="additional-rows" style="display: none;">
             <td>Bonus:</td>
@@ -244,7 +250,7 @@
             <td><input type="number" id="additional5"></td>
         </tr>
         <tr id="additionalRows6" class="additional-rows" style="display: none;">
-            <td>¿Tiene variante?:</td>
+            <td>Variante:</td>
             <td>
                 <select id="additional6">
                     <option value="">--Seleccionar--</option>
@@ -257,7 +263,7 @@
         <tr id="additionalRows7" class="additional-rows" style="display: none;">
             <td>¿Está esquilada?:</td>
             <td>
-                <select id="additional7">
+                <select id="additional7" onchange="handleShearedChange()">
                     <option value="">--Seleccionar--</option>
                     <option value="true">Sí</option>
                     <option value="false">No</option>
@@ -267,7 +273,7 @@
         <tr id="additionalRows9" class="additional-rows" style="display: none;">
             <td>¿Es bebé?:</td>
             <td>
-                <select id="additional9">
+                <select id="additional9" onchange="handleBabyChange()">
                     <option value="">--Seleccionar--</option>
                     <option value="true">Sí</option>
                     <option value="false">No</option>
@@ -275,9 +281,9 @@
             </td>
         </tr>
         <tr id="additionalRows10" class="additional-rows" style="display: none;">
-            <td>¿Tiene color?:</td>
+            <td>Color:</td>
             <td>
-                <select id="additional10">
+                <select id="additional10" onchange="handleColorChange()">
                     <option value="">--Seleccionar--</option>
                     <option value="red">Red</option>
                     <option value="green">Green</option>
@@ -378,12 +384,33 @@
             const sheared = document.getElementById('additional7');
             const isBaby = document.getElementById('additional9');
 
-            if (mobType === 'sheep' && baby > 0) {
+            if (mobType === 'sheep' && baby === 'true') {
+                sheared.value = '';
                 sheared.disabled = true;
-                isBaby.disabled = true;
             } else {
                 sheared.disabled = false;
-                isBaby.disabled = false;
+            }
+        }
+
+        function handleShearedChange() {
+            const sheared = document.getElementById('additional7').value;
+            const color = document.getElementById('additional10');
+            if (sheared === 'true') {
+                color.value = '';
+                color.disabled = true;
+            } else {
+                color.disabled = false;
+            }
+        }
+
+        function handleColorChange() {
+            const color = document.getElementById('additional10').value;
+            const sheared = document.getElementById('additional7');
+            if (color !== '') {
+                sheared.value = '';
+                sheared.disabled = true;
+            } else {
+                sheared.disabled = false;
             }
         }
         
@@ -402,6 +429,7 @@
             document.getElementById('charged').value = '';
             document.getElementById('baby').value = '';
             document.querySelectorAll('.additional-rows select, .additional-rows input').forEach(el => el.value = '');
+            document.querySelectorAll('.additional-rows select, .additional-rows input').forEach(el => el.disabled = false);
         }
 
         function updateMobOptions() {
@@ -425,8 +453,6 @@
             babyRow.style.display = 'none';
             defaultDropsRow.style.display = 'table-row';
 
-            //CONDICIONES
-            
             if (mobType === 'creeper') {
                 creeperChargedRow.style.display = 'table-row';
             } else if (mobType === 'spawnskin') {
@@ -496,8 +522,8 @@
                 if (additional4) command += `lootBonus:${additional4}, `;
                 if (additional5) command += `chance:${additional5}, `;
                 if (additional6) command += `variant:"${additional6}", `;
-                if (additional7) command += `sheared:${additional7 === 'true' ? 1 : 0}, `;
-                if (additional9) command += `isBaby:${additional9 === 'true' ? 1 : 0}, `;
+                if (additional7 && !document.getElementById('additional7').disabled) command += `sheared:${additional7 === 'true' ? 1 : 0}, `;
+                if (additional9 && !document.getElementById('additional9').disabled) command += `isBaby:${additional9 === 'true' ? 1 : 0}, `;
                 if (additional10) command += `color:"${additional10}", `;
                 if (additional11) command += `onFire:${additional11 === 'true' ? 1 : 0}, `;
                 if (additional12) command += `size:${additional12}, `;
