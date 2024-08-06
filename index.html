@@ -129,12 +129,30 @@
             <td><input type="number" id="quantity" max="20"></td>
         </tr>
         <tr>
-            <td>Posición X:</td>
+            <td>Posición:</td>
+            <td>
+                <select id="positionType" onchange="updatePositionFields()">
+                    <option value="">--Seleccionar--</option>
+                    <option value="relative">Relativa</option>
+                    <option value="absolute">Absoluta</option>
+                </select>
+            </td>
+        </tr>
+        <tr class="relative-pos" style="display:none;">
+            <td>Posición ~X:</td>
             <td><input type="number" id="posX"></td>
         </tr>
-        <tr>
-            <td>Posición Y:</td>
+        <tr class="relative-pos" style="display:none;">
+            <td>Posición ~Y:</td>
             <td><input type="number" id="posY"></td>
+        </tr>
+        <tr class="absolute-pos" style="display:none;">
+            <td>Posición X:</td>
+            <td><input type="number" id="absPosX"></td>
+        </tr>
+        <tr class="absolute-pos" style="display:none;">
+            <td>Posición Y:</td>
+            <td><input type="number" id="absPosY"></td>
         </tr>
         <tr>
             <td>Nombre:</td>
@@ -329,6 +347,21 @@
     <pre id="outputCommand">/summon </pre>
     
     <script>
+        function updatePositionFields() {
+            const positionType = document.getElementById('positionType').value;
+            const relativeFields = document.querySelectorAll('.relative-pos');
+            const absoluteFields = document.querySelectorAll('.absolute-pos');
+            
+            relativeFields.forEach(row => row.style.display = 'none');
+            absoluteFields.forEach(row => row.style.display = 'none');
+
+            if (positionType === 'relative') {
+                relativeFields.forEach(row => row.style.display = 'table-row');
+            } else if (positionType === 'absolute') {
+                absoluteFields.forEach(row => row.style.display = 'table-row');
+            }
+        }
+    
         function updateConditionals() {
             const drops = document.getElementById('drops').value;
             const mobType = document.getElementById('mobType').value;
@@ -375,6 +408,14 @@
 
             if (value > 20) {
                 quantityInput.value = 20;
+            }
+        });
+        document.getElementById('additional2').addEventListener('input', function() {
+            var quantityInput = document.getElementById('additional2');
+            var value = parseInt(quantityInput.value, 10);
+
+            if (value > 10000) {
+                quantityInput.value = 10000;
             }
         });
 
@@ -506,7 +547,14 @@
 
             var command = `/summon ${mobType}`;
             if (quantity > 0) command += ` ${quantity}`;
-            command += ` ~${posX} ~${posY} {`;
+
+            if (document.getElementById('positionType').value === 'relative') {
+                command += ` ~${posX} ~${posY}`;
+            } else if (document.getElementById('positionType').value === 'absolute') {
+                command += ` ${absPosX} ${absPosY}`;
+            }
+            
+            command += ` {`;
 
             if (name) command += `name:"${name}", `;
             if (health) command += `health:${health}, `;
