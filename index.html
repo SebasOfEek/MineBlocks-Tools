@@ -253,11 +253,11 @@
         </tr>
         <tr id="additionalRows2" class="additional-rows" style="display: none;">
             <td>Cantidad:</td>
-            <td><input type="number" id="additional2" max="10000"></td>
+            <td><input type="number" id="additional2" max="1000"></td>
         </tr>
         <tr id="additionalRows3" class="additional-rows" style="display: none;">
             <td>Bonus:</td>
-            <td><input type="text" id="additional3"></td>
+            <td><input type="number" id="additional3"></td>
         </tr>
         <tr id="additionalRows4" class="additional-rows" style="display: none;">
             <td>Loot Bonus:</td>
@@ -345,7 +345,7 @@
         </tr>
     </table>
     <pre id="outputCommand">/summon </pre>
-    
+
     <script>
         function updatePositionFields() {
             const positionType = document.getElementById('positionType').value;
@@ -361,7 +361,7 @@
                 absoluteFields.forEach(row => row.style.display = 'table-row');
             }
         }
-    
+
         function updateConditionals() {
             const drops = document.getElementById('drops').value;
             const mobType = document.getElementById('mobType').value;
@@ -414,8 +414,8 @@
             var quantityInput = document.getElementById('additional2');
             var value = parseInt(quantityInput.value, 10);
 
-            if (value > 10000) {
-                quantityInput.value = 10000;
+            if (value > 1000) {
+                quantityInput.value = 1000;
             }
         });
 
@@ -436,22 +436,29 @@
         function handleShearedChange() {
             const sheared = document.getElementById('additional7').value;
             const color = document.getElementById('additional10');
+            const baby = document.getElementById('additional9');
+            
             if (sheared === 'true') {
                 color.value = '';
                 color.disabled = true;
+                baby.disabled = true;
             } else {
                 color.disabled = false;
+                baby.disabled = false;
             }
         }
 
         function handleColorChange() {
             const color = document.getElementById('additional10').value;
             const sheared = document.getElementById('additional7');
+            const baby = document.getElementById('additional9');
+
             if (color !== '') {
                 sheared.value = '';
                 sheared.disabled = true;
             } else {
                 sheared.disabled = false;
+                baby.disabled = false;
             }
         }
         
@@ -459,6 +466,8 @@
             document.getElementById('quantity').value = '';
             document.getElementById('posX').value = '';
             document.getElementById('posY').value = '';
+            document.getElementById('absPosX').value = '';
+            document.getElementById('absPosY').value = '';
             document.getElementById('name').value = '';
             document.getElementById('health').value = '';
             document.getElementById('holding').value = '';
@@ -523,6 +532,8 @@
             var quantity = document.getElementById('quantity').value || 1;
             var posX = document.getElementById('posX').value;
             var posY = document.getElementById('posY').value;
+            var absPosX = document.getElementById('absPosX').value;
+            var absPosY = document.getElementById('absPosY').value;
             var name = document.getElementById('name').value;
             var health = document.getElementById('health').value;
             var holding = document.getElementById('holding').value;
@@ -549,9 +560,9 @@
             if (quantity > 0) command += ` ${quantity}`;
 
             if (document.getElementById('positionType').value === 'relative') {
-                command += ` ~${posX} ~${posY}`;
+                command += ` ~${posX || ""} ~${posY || ""}`;
             } else if (document.getElementById('positionType').value === 'absolute') {
-                command += ` ${absPosX} ${absPosY}`;
+                command += ` ${absPosX || ""} ${absPosY || ""}`;
             }
             
             command += ` {`;
@@ -560,7 +571,7 @@
             if (health) command += `health:${health}, `;
             if (holding && (mobType === 'pigman' || mobType === 'enderman')) command += `holding:"${holding}", `;
             if (armor && (mobType === 'zombie' || mobType === 'spawnskin')) command += `armor:[{id:"${armor}"}], `;
-            if (defaultDrops !== "") command += `defaultDrops:${defaultDrops === 'true' ? 1 : 0}, `;
+            if (defaultDrops !== "") command += `defaultDrops:${defaultDrops === 'true' ? true : false}, `;
 
             if (drops === '1') {
                 command += `drops:[{`;
@@ -573,7 +584,7 @@
                 if (additional7 && !document.getElementById('additional7').disabled) command += `sheared:${additional7 === 'true' ? 1 : 0}, `;
                 if (additional9 && !document.getElementById('additional9').disabled) command += `isBaby:${additional9 === 'true' ? 1 : 0}, `;
                 if (additional10) command += `color:"${additional10}", `;
-                if (additional11) command += `onFire:${additional11 === 'true' ? 1 : 0}, `;
+                if (additional11) command += `onFire:${additional11 === 'true' ? true : false}, `;
                 if (additional12) command += `size:${additional12}, `;
                 command = command.replace(/, $/, "");
                 command += `}], `;
