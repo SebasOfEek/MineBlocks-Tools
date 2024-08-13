@@ -401,7 +401,7 @@
                     document.getElementById('additionalRows7').style.display = 'table-row';
                 }
 
-                if (mobType === 'wolf' || mobType === 'sheep') {
+                if (mobType === 'sheep') {
                     document.getElementById('additionalRows10').style.display = 'table-row';
                 }
 
@@ -534,6 +534,10 @@
 
             // Actualizar los Loot Tags
             updateConditionals();
+
+            // Contraer la sección de Posición cuando se cambia el tipo de mob
+            document.getElementById('positionType').value = '';
+            updatePositionFields();
         }
 
         function generateCommand() {
