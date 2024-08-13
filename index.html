@@ -224,10 +224,14 @@
             <td>
                 <select id="baby" onchange="handleBabyChange()">
                     <option value="">--Seleccionar--</option>
-                    <option value="true">Sí</option>
-                    <option value="false">No</option>
+                    <option value="time">Tiempo</option>
+                    <option value="true">Siempre</option>
                 </select>
             </td>
+        </tr>
+        <tr id="babyTimeRow" style="display: none;">
+            <td>Bebé (segundos):</td>
+            <td><input type="number" id="babyTime" min="1"></td>
         </tr>
         <tr>
             <td>Loot Tags:</td>
@@ -441,6 +445,17 @@
                 sheared.disabled = false;
             }
         }
+        
+        function handleBabyChange() {
+            const baby = document.getElementById('baby').value;
+            const babyTimeRow = document.getElementById('babyTimeRow');
+
+            if (baby === 'time') {
+                babyTimeRow.style.display = 'table-row';
+            } else {
+                babyTimeRow.style.display = 'none';
+            }
+        }
 
         function handleShearedChange() {
             const sheared = document.getElementById('additional7').value;
@@ -487,6 +502,7 @@
             document.getElementById('aggro').value = '';
             document.getElementById('charged').value = '';
             document.getElementById('baby').value = '';
+            document.getElementById('babyTime').value = '';
             document.querySelectorAll('.additional-rows select, .additional-rows input').forEach(el => el.value = '');
             document.querySelectorAll('.additional-rows select, .additional-rows input').forEach(el => el.disabled = false);
         }
@@ -557,6 +573,7 @@
             var aggro = document.getElementById('aggro').value;
             var charged = document.getElementById('charged').value;
             var baby = document.getElementById('baby').value;
+            var babyTime = document.getElementById('babyTime').value;
             var additional1 = document.getElementById('additional1').value;
             var additional2 = document.getElementById('additional2').value;
             var additional3 = document.getElementById('additional3').value;
@@ -606,8 +623,9 @@
             if (skin && mobType === 'spawnskin') command += `skin:"${skin}", `;
             if (aggro && mobType === 'spawnskin') command += `aggro:"${aggro}", `;
             if (charged !== "") command += `charged:${charged}, `;
-            if (baby !== "" && ['cow', 'sheep', 'mooshroom', 'pig', 'chicken', 'rabbit', 'wolf', 'cowctus'].includes(mobType)) command += `baby:${baby}, `;
-
+            if (baby === "true" && ['cow', 'sheep', 'mooshroom', 'pig', 'chicken', 'rabbit', 'wolf', 'cowctus'].includes(mobType)) command += `baby:true, `;
+            if (baby === "time" && babyTime) command += `babyTime:${babyTime}, `;
+            
             command = command.replace(/, $/, "");
             command += "}";
 
