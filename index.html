@@ -88,6 +88,10 @@
             margin-left: 5px;
             position: relative;
         }
+        .position-group {
+            display: flex;
+            gap: 10px;
+        }
     </style>
 </head>
 <body>
@@ -138,21 +142,20 @@
                 </select>
             </td>
         </tr>
-        <tr class="relative-pos" style="display:none;">
-            <td>Posición ~X:</td>
-            <td><input type="number" id="posX"></td>
+        
+        <tr class="relative-pos position-group" style="display:none;">
+            <td>Posición Relativa:</td>
+            <td>
+                <input type="number" id="posX" placeholder="Pos~X" style="width: 45%; display: inline-block; margin-right: 5%;">
+                <input type="number" id="posY" placeholder="Pos~Y" style="width: 45%; display: inline-block;">
+            </td>
         </tr>
-        <tr class="relative-pos" style="display:none;">
-            <td>Posición ~Y:</td>
-            <td><input type="number" id="posY"></td>
-        </tr>
-        <tr class="absolute-pos" style="display:none;">
-            <td>Posición X:</td>
-            <td><input type="number" id="absPosX"></td>
-        </tr>
-        <tr class="absolute-pos" style="display:none;">
-            <td>Posición Y:</td>
-            <td><input type="number" id="absPosY"></td>
+        <tr class="absolute-pos position-group" style="display:none;">
+            <td>Posición Absoluta:</td>
+            <td>
+                <input type="number" id="absPosX" placeholder="Pos X" style="width: 45%; display: inline-block; margin-right: 5%;">
+                <input type="number" id="absPosY" placeholder="Pos Y" style="width: 45%; display: inline-block;">
+            </td>
         </tr>
         <tr>
             <td>Nombre:</td>
@@ -335,7 +338,13 @@
         </tr>
         <tr id="additionalRows12" class="additional-rows" style="display: none;">
             <td>Tamaño:</td>
-            <td><input type="text" id="additional12"></td>
+            <td>
+                <select id="additional12">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td colspan="2">
@@ -514,7 +523,7 @@
                 handItemRow.style.display = 'table-row';
             } else if (mobType === 'zombie') {
                 armorRow.style.display = 'table-row'; 
-            } else if (mobType === 'bat') {
+            } else if (mobType === 'bat' || mobType === 'wolf') {
                 defaultDropsRow.style.display = 'none';
             }
             
@@ -571,7 +580,7 @@
             if (health) command += `health:${health}, `;
             if (holding && (mobType === 'pigman' || mobType === 'enderman')) command += `holding:"${holding}", `;
             if (armor && (mobType === 'zombie' || mobType === 'spawnskin')) command += `armor:[{id:"${armor}"}], `;
-            if (defaultDrops !== "") command += `defaultDrops:${defaultDrops === 'true' ? true : false}, `;
+            if (defaultDrops !== "" && mobType !== 'wolf') command += `defaultDrops:${defaultDrops === 'true' ? true : false}, `;
 
             if (drops === '1') {
                 command += `drops:[{`;
@@ -583,7 +592,7 @@
                 if (additional6) command += `variant:"${additional6}", `;
                 if (additional7 && !document.getElementById('additional7').disabled) command += `sheared:${additional7 === 'true' ? 1 : 0}, `;
                 if (additional9 && !document.getElementById('additional9').disabled) command += `isBaby:${additional9 === 'true' ? 1 : 0}, `;
-                if (additional10) command += `color:"${additional10}", `;
+                if (additional10 && mobType !== 'wolf') command += `color:"${additional10}", `;
                 if (additional11) command += `onFire:${additional11 === 'true' ? true : false}, `;
                 if (additional12) command += `size:${additional12}, `;
                 command = command.replace(/, $/, "");
