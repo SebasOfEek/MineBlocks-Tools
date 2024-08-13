@@ -62,7 +62,7 @@
             position: absolute;
             bottom: 100%;
             left: 50%;
-            transform: translateX(10%) translateY(50px);
+            transform: translateX(-50%);
             background-color: #333;
             color: #fff;
             padding: 8px;
@@ -74,9 +74,6 @@
             width: 250px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
             text-align: center;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            overflow-x: auto;
         }
         td:hover .tooltip {
             display: block;
@@ -182,7 +179,7 @@
         </tr>
         <tr id="armorRow" style="display: none;">
             <td>Armadura:</td>
-            <td><input type="text" id="armor" placeholder="Próximamente disponible" disabled></td>
+            <td><input type="text" id="armor" placeholder="Fuera de servicio" disabled></td>
         </tr>
         <tr id="defaultDropsRow">
             <td>Drops por defecto:</td>
@@ -272,7 +269,7 @@
         </tr>
         <tr id="additionalRows5" class="additional-rows" style="display: none;">
             <td>Oportunidad:</td>
-            <td><input type="number" id="additional5"></td>
+            <td><input type="text" id="additional5" placeholder="Fuera de servicio" disabled></td>
         </tr>
         <tr id="additionalRows6" class="additional-rows" style="display: none;">
             <td>Variante:</td>
@@ -287,13 +284,7 @@
         </tr>
         <tr id="additionalRows7" class="additional-rows" style="display: none;">
             <td>¿Está esquilada?:</td>
-            <td>
-                <select id="additional7" onchange="handleShearedChange()">
-                    <option value="">--Seleccionar--</option>
-                    <option value="true">Sí</option>
-                    <option value="false">No</option>
-                </select>
-            </td>
+            <td><input type="text" id="additional7" placeholder="Fuera de servicio" disabled></td>
         </tr>
         <tr id="additionalRows9" class="additional-rows" style="display: none;">
             <td>¿Es bebé?:</td>
@@ -434,20 +425,6 @@
 
         function handleBabyChange() {
             const baby = document.getElementById('baby').value;
-            const mobType = document.getElementById('mobType').value;
-            const sheared = document.getElementById('additional7');
-            const isBaby = document.getElementById('additional9');
-
-            if (mobType === 'sheep' && baby === 'true') {
-                sheared.value = '';
-                sheared.disabled = true;
-            } else {
-                sheared.disabled = false;
-            }
-        }
-        
-        function handleBabyChange() {
-            const baby = document.getElementById('baby').value;
             const babyTimeRow = document.getElementById('babyTimeRow');
 
             if (baby === 'time') {
@@ -518,6 +495,7 @@
             var handItemRow = document.getElementById('handItemRow');
             var armorRow = document.getElementById('armorRow');
             var babyRow = document.getElementById('babyRow');
+            var babyTimeRow = document.getElementById('babyTimeRow');
             var defaultDropsRow = document.getElementById('defaultDropsRow');
 
             creeperChargedRow.style.display = 'none';
@@ -526,6 +504,7 @@
             handItemRow.style.display = 'none';
             armorRow.style.display = 'none';
             babyRow.style.display = 'none';
+            babyTimeRow.style.display = 'none';
             defaultDropsRow.style.display = 'table-row';
 
             if (mobType === 'creeper') {
@@ -558,6 +537,11 @@
 
         function generateCommand() {
             var mobType = document.getElementById('mobType').value;
+            if (!mobType) {
+                alert("Por favor, seleccione un tipo de mob.");
+                return;
+            }
+
             var quantity = document.getElementById('quantity').value || 1;
             var posX = document.getElementById('posX').value;
             var posY = document.getElementById('posY').value;
@@ -624,7 +608,7 @@
             if (aggro && mobType === 'spawnskin') command += `aggro:"${aggro}", `;
             if (charged !== "") command += `charged:${charged}, `;
             if (baby === "true" && ['cow', 'sheep', 'mooshroom', 'pig', 'chicken', 'rabbit', 'wolf', 'cowctus'].includes(mobType)) command += `baby:true, `;
-            if (baby === "time" && babyTime) command += `babyTime:${babyTime}, `;
+            if (baby === "time" && babyTime) command += `baby:${babyTime}, `;
             
             command = command.replace(/, $/, "");
             command += "}";
