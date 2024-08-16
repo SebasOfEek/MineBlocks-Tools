@@ -298,7 +298,7 @@
         </tr>
         <tr id="additionalRows2" class="additional-rows" style="display: none;">
             <td>Cantidad:</td>
-            <td><input type="number" id="additional2" max="1000"></td>
+            <td><input type="number" id="additional2"></td>
         </tr>
         <tr id="additionalRows3" class="additional-rows" style="display: none;">
             <td>Bonus:</td>
@@ -310,7 +310,7 @@
         </tr>
         <tr id="additionalRows5" class="additional-rows" style="display: none;">
             <td>Oportunidad:</td>
-            <td><input type="text" id="additional5" placeholder="Proximamente Disponible..." disabled></td>
+            <td><input type="text" id="additional5" placeholder="Proximamente Disponible..."></td>
         </tr>
         <tr id="additionalRows6" class="additional-rows" style="display: none;">
             <td>Variante:</td>
@@ -393,6 +393,37 @@
     <pre id="outputCommand">/summon </pre>
 
     <script>
+    
+    function loadLanguageData(callback) {
+    fetch('traductor.json')
+        .then(response => response.json())
+        .then(data => {
+            callback(data);
+        })
+        .catch(error => console.error('Error al cargar el archivo JSON:', error));
+}
+
+function toggleLanguage() {
+    loadLanguageData(function(translations) {
+        let elementsToTranslate = {
+            'mobType': 'mobTypeSelect',
+            'submitBtn': 'submitButton'
+            // Añade más elementos aquí según sea necesario
+        };
+
+        if (currentLanguage === 'es') {
+            currentLanguage = 'en';
+        } else {
+            currentLanguage = 'es';
+        }
+
+        for (let elementId in elementsToTranslate) {
+            document.getElementById(elementId).textContent = translations[currentLanguage][elementsToTranslate[elementId]];
+        }
+    });
+}
+
+    
         let lootItems = [];
 
         function updatePositionFields() {
