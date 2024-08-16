@@ -137,7 +137,7 @@
     <button onclick="toggleLanguage()">Cambiar Idioma</button>
     <table>
         <tr>
-            <td>Tipo de Mob:</td>
+            <td id="mobTypeLabel">Tipo de Mob:</td>
             <td>
                 <select id="mobType" onchange="updateMobOptions()">
                     <option value="">--Seleccionar--</option>
@@ -169,11 +169,11 @@
             </td>
         </tr>
         <tr>
-            <td>Cantidad:</td>
+            <td id="quantityLabel">Cantidad:</td>
             <td><input type="number" id="quantity" max="20"></td>
         </tr>
         <tr>
-            <td>Posición:</td>
+            <td id="positionLabel">Posición:</td>
             <td>
                 <select id="positionType" onchange="updatePositionFields()">
                     <option value="">--Seleccionar--</option>
@@ -394,14 +394,13 @@
     <pre id="outputCommand">/summon </pre>
 
     <script>
-    
-    document.addEventListener('DOMContentLoaded', function() {
-    // Establece el idioma inicial según el selector o cualquier otra lógica
-    document.getElementById('languageSelector').value = 'es';  // Español por defecto
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Carga el idioma inicial al cargar la página
     toggleLanguage();
 });
-    
-    function loadLanguageData(callback) {
+
+function loadLanguageData(callback) {
     fetch('traductor.json')
         .then(response => response.json())
         .then(data => {
@@ -413,24 +412,32 @@
 function toggleLanguage() {
     loadLanguageData(function(translations) {
         let elementsToTranslate = {
-            'mobType': 'mobTypeSelect',
-            'submitBtn': 'submitButton',
-            'ItemText' : 'ItemMano' 
-            // Añade más elementos aquí según sea necesario
+            'mobTypeLabel': 'mobTypeLabel',
+            'quantityLabel': 'quantityLabel',
+            'positionLabel': 'positionLabel',
+            'nameLabel': 'nameLabel',
+            'healthLabel': 'healthLabel',
+            'ItemText': 'itemText',
+            'DropsText': 'dropsText',
+            'addLootButton': 'addLootButton',
+            'generateCommandButton': 'generateCommandButton',
+            'copyCommandButton': 'copyCommandButton'
         };
 
         if (currentLanguage === 'es') {
             currentLanguage = 'en';
+            document.querySelector('button[onclick="toggleLanguage()"]').textContent = 'Change Language';
         } else {
             currentLanguage = 'es';
+            document.querySelector('button[onclick="toggleLanguage()"]').textContent = 'Cambiar Idioma';
         }
 
         for (let elementId in elementsToTranslate) {
-            document.getElementById(elementId).textContent = translations[currentLanguage][elementsToTranslate[elementId]];
+            const translationKey = elementsToTranslate[elementId];
+            document.getElementById(elementId).textContent = translations[currentLanguage][translationKey];
         }
     });
 }
-
     
         let lootItems = [];
 
