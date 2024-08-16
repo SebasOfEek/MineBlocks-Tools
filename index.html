@@ -134,6 +134,7 @@
     </style>
 </head>
 <body>
+    <button onclick="toggleLanguage()">Cambiar Idioma</button>
     <table>
         <tr>
             <td>Tipo de Mob:</td>
@@ -393,6 +394,12 @@
     <pre id="outputCommand">/summon </pre>
 
     <script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+    // Establece el idioma inicial según el selector o cualquier otra lógica
+    document.getElementById('languageSelector').value = 'es';  // Español por defecto
+    toggleLanguage();
+});
     
     function loadLanguageData(callback) {
     fetch('traductor.json')
