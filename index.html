@@ -220,7 +220,7 @@
         </tr>
         <tr id="armorRow" style="display: none;">
             <td>Armadura:</td>
-            <td><input type="text" id="armor" placeholder="Fuera de servicio" disabled></td>
+            <td><input type="text" id="armor" placeholder="Proximamente Disponible..." disabled></td>
         </tr>
         <tr id="defaultDropsRow">
             <td>Drops por defecto:</td>
@@ -310,7 +310,7 @@
         </tr>
         <tr id="additionalRows5" class="additional-rows" style="display: none;">
             <td>Oportunidad:</td>
-            <td><input type="text" id="additional5" placeholder="Fuera de servicio" disabled></td>
+            <td><input type="text" id="additional5" placeholder="Proximamente Disponible..." disabled></td>
         </tr>
         <tr id="additionalRows6" class="additional-rows" style="display: none;">
             <td>Variante:</td>
@@ -438,6 +438,7 @@
 
                 if (mobType === 'sheep') {
                     document.getElementById('additionalRows7').style.display = 'table-row';
+                    additional7.disabled = true;
                 }
 
                 if (mobType === 'sheep') {
@@ -457,6 +458,10 @@
             if (value > 20) {
                 quantityInput.value = 20;
             }
+            
+            if (value < 1) {
+                quantityInput.value = 1;
+            }
         });
         document.getElementById('additional2').addEventListener('input', function() {
             var quantityInput = document.getElementById('additional2');
@@ -464,6 +469,34 @@
 
             if (value > 1000) {
                 quantityInput.value = 1000;
+            }
+            
+            if (value < 1) {
+                quantityInput.value = 1;
+            }
+        });
+        document.getElementById('additional3').addEventListener('input', function() {
+            var quantityInput = document.getElementById('additional3');
+            var value = parseInt(quantityInput.value, 10);
+
+            if (value > 1000) {
+                quantityInput.value = 1000;
+            }
+            
+            if (value < 1) {
+                quantityInput.value = 1;
+            }
+        });
+        document.getElementById('additional4').addEventListener('input', function() {
+            var quantityInput = document.getElementById('additional4');
+            var value = parseInt(quantityInput.value, 10);
+
+            if (value > 1000) {
+                quantityInput.value = 1000;
+            }
+            
+            if (value < 1) {
+                quantityInput.value = 1;
             }
         });
 
@@ -513,6 +546,7 @@
                 sheared.disabled = false;
                 baby.disabled = false;
             }
+            
         }
         
         function resetFields() {
