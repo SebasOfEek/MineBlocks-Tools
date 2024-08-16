@@ -205,7 +205,7 @@
             <td><input type="number" id="health" min="1"></td>
         </tr>
         <tr id="handItemRow" style="display: none;">
-            <td>Item en mano:</td>
+            <td id="ItemText">Item en mano:</td>
             <td>
                <select id="holding">
                    <option value="">--Seleccionar--</option>
@@ -224,7 +224,7 @@
             <td><input type="text" id="armor" placeholder="Proximamente Disponible..." disabled></td>
         </tr>
         <tr id="defaultDropsRow">
-            <td>Drops por defecto:</td>
+            <td id ="DropsText">Drops por defecto:</td>
             <td>
                 <select id="defaultDrops">
                     <option value="">--Seleccionar--</option>
@@ -414,7 +414,8 @@ function toggleLanguage() {
     loadLanguageData(function(translations) {
         let elementsToTranslate = {
             'mobType': 'mobTypeSelect',
-            'submitBtn': 'submitButton'
+            'submitBtn': 'submitButton',
+            'ItemText' : 'ItemMano' 
             // Añade más elementos aquí según sea necesario
         };
 
