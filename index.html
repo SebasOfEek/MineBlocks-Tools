@@ -9,7 +9,7 @@
             max-width: 600px;
             margin: 20px auto;
             padding: 20px;
-            background-color: rgba(138, 160, 153, 0.5);
+            background-color: #e5e8eb;
             box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
             border-radius: 10px;
         }
@@ -715,7 +715,7 @@
             lootItems.forEach((item, index) => {
                 var div = document.createElement('div');
                 div.className = "loot-item";
-                div.textContent = `Ítem: ${getReadableName(item.id)}, Cantidad: ${item.quantity}`;
+                div.textContent = `Ítem: ${getReadableName(item.id)}`;
                 var removeBtn = document.createElement('button');
                 removeBtn.textContent = "🗑️";
                 removeBtn.className = "remove-loot";
