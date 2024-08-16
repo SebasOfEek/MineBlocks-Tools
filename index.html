@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
-            background-color: white;
+           background-color: white;
+           font-family: 'Arial', sans-serif;
         }
         table {
             width: 100%;
@@ -57,7 +58,7 @@
             white-space: pre-wrap;
             word-wrap: break-word;
             overflow-x: auto;
-            max-width: 480px;
+            max-width: 580px;
             margin: auto;
             margin-top: 12px;
         }
@@ -357,7 +358,6 @@
                     <option value="lightgray">Lightgray</option>
                     <option value="gray">Gray</option>
                     <option value="black">Black</option>
-                    <option value="rainbow">Rainbow</option>
                 </select>
             </td>
         </tr>
@@ -592,6 +592,9 @@
             // Contraer la sección de Posición cuando se cambia el tipo de mob
             document.getElementById('positionType').value = '';
             updatePositionFields();
+            
+            // Reset command output
+            document.getElementById('outputCommand').textContent = '/summon ';
         }
 
         function generateCommand() {
@@ -747,7 +750,7 @@
             var babyTime = document.getElementById('babyTime').value;
             return name || health || holding || armor || defaultDrops || drops || skin || aggro || charged || baby || babyTime;
         }
-
+funct
         function copyCommand() {
             var command = document.getElementById('outputCommand').textContent;
             navigator.clipboard.writeText(command).then(() => {
