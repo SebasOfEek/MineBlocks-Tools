@@ -467,8 +467,8 @@
             var quantityInput = document.getElementById('additional2');
             var value = parseInt(quantityInput.value, 10);
 
-            if (value > 1000) {
-                quantityInput.value = 1000;
+            if (value > 10000) {
+                quantityInput.value = 10000;
             }
             
             if (value < 1) {
@@ -479,8 +479,8 @@
             var quantityInput = document.getElementById('additional3');
             var value = parseInt(quantityInput.value, 10);
 
-            if (value > 1000) {
-                quantityInput.value = 1000;
+            if (value > 10000) {
+                quantityInput.value = 10000;
             }
             
             if (value < 1) {
@@ -491,8 +491,32 @@
             var quantityInput = document.getElementById('additional4');
             var value = parseInt(quantityInput.value, 10);
 
-            if (value > 1000) {
-                quantityInput.value = 1000;
+            if (value > 10000) {
+                quantityInput.value = 10000;
+            }
+            
+            if (value < 1) {
+                quantityInput.value = 1;
+            }
+        });
+        document.getElementById('health').addEventListener('input', function() {
+            var quantityInput = document.getElementById('health');
+            var value = parseInt(quantityInput.value, 10);
+
+            if (value > 100000) {
+                quantityInput.value = 100000;
+            }
+            
+            if (value < 1) {
+                quantityInput.value = 1;
+            }
+        });
+        document.getElementById('babyTime').addEventListener('input', function() {
+            var quantityInput = document.getElementById('babyTime');
+            var value = parseInt(quantityInput.value, 10);
+
+            if (value > 86400) {
+                quantityInput.value = 86400;
             }
             
             if (value < 1) {
