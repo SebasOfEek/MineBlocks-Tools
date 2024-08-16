@@ -1,1 +1,13 @@
+{
+    "es": {
+        "mobTypeSelect": "--Seleccionar--",
+        "someOtherText": "Algún otro texto en español",
+        "submitButton": "Enviar"
+    },
+    "en": {
+        "mobTypeSelect": "--Select--",
+        "someOtherText": "Some other text in English",
+        "submitButton": "Submit"
+    }
+}
 
