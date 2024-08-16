@@ -6,8 +6,8 @@
     <style>
         table {
             width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
+            max-width: 600px;
+            margin: 20px auto;
             padding: 20px;
             background-color: rgba(138, 160, 153, 0.5);
             box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
@@ -34,7 +34,6 @@
             border-radius: 5px;
             cursor: pointer;
             margin: 0.5%;
-            margin-top: -5px;
             transition: background-color 0.3s;
         }
         button:hover {
@@ -92,7 +91,8 @@
         }
         .loot-list {
             margin-top: 10px;
-            border-top: 1px solid #ccc;
+            margin-right: 9px;
+            border-top: 1px solid #ced4da;
             padding-top: 10px;
         }
         .loot-item {
@@ -100,9 +100,11 @@
             justify-content: space-between;
             align-items: center;
             padding: 5px;
+            padding-right: 10px;
             background-color: #f1f1f1;
             border-radius: 5px;
             margin-bottom: 5px;
+            margin-left: 1px;
         }
         .remove-loot {
             background: none;
@@ -352,6 +354,7 @@
                     <option value="lightgray">Lightgray</option>
                     <option value="gray">Gray</option>
                     <option value="black">Black</option>
+                    <option value="rainbow">Rainbow</option>
                 </select>
             </td>
         </tr>
@@ -377,7 +380,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                <button class="add-loot" onclick="addLoot()" style="display:none;">Agregar Loot</button>
+                <button class="add-loot" onclick="addLoot()">Agregar Loot</button>
                 <div class="loot-list" id="lootList"></div>
                 <button onclick="generateCommand()">Generar Comando</button>
                 <button id="copyButton" onclick="copyCommand()">Copiar Comando</button>
@@ -388,15 +391,6 @@
 
     <script>
         let lootItems = [];
-        const itemNames = {
-            "stairs_wooden_planks": "Wooden Planks Stairs",
-            "pressure_plate_wooden": "Wooden Pressure Plate",
-            "wooden_shovel": "Wooden Shovel",
-            "wooden_sword": "Wooden Sword",
-            "wool": "Wool",
-            "backdrop_wool": "Wool Backdrop",
-            "yellow_flower": "Yellow Flower"
-        };
 
         function updatePositionFields() {
             const positionType = document.getElementById('positionType').value;
@@ -450,11 +444,6 @@
                 if (mobType === 'slime' || mobType === 'magmacube') {
                     document.getElementById('additionalRows12').style.display = 'table-row';
                 }
-                
-                // Show add loot button when drops are enabled
-                document.querySelector('.add-loot').style.display = 'inline-block';
-            } else {
-                document.querySelector('.add-loot').style.display = 'none';
             }
         }
 
@@ -478,7 +467,7 @@
         function handleBabyChange() {
             const baby = document.getElementById('baby').value;
             const babyTimeRow = document.getElementById('babyTimeRow');
-            const sheared = document.getElementById('additional7');
+            const shearedInput = document.getElementById('additional7');
 
             if (baby === 'time') {
                 babyTimeRow.style.display = 'table-row';
@@ -486,12 +475,11 @@
                 babyTimeRow.style.display = 'none';
             }
 
-            // Lock sheared field if sheep is a baby
-            if (baby === 'true' && document.getElementById('mobType').value === 'sheep') {
-                sheared.disabled = true;
-                sheared.value = '0';
+            if (document.getElementById('mobType').value === 'sheep' && baby === 'true') {
+                shearedInput.value = '';
+                shearedInput.disabled = true;
             } else {
-                sheared.disabled = false;
+                shearedInput.disabled = false;
             }
         }
 
@@ -601,9 +589,6 @@
             // Contraer la sección de Posición cuando se cambia el tipo de mob
             document.getElementById('positionType').value = '';
             updatePositionFields();
-
-            // Reset command output
-            document.getElementById('outputCommand').textContent = '/summon ';
         }
 
         function generateCommand() {
@@ -729,8 +714,8 @@
             lootList.innerHTML = "";
             lootItems.forEach((item, index) => {
                 var div = document.createElement('div');
-                div.className = 'loot-item';
-                div.textContent = `Ítem: ${itemNames[item.id]}`;
+                div.className = "loot-item";
+                div.textContent = `Ítem: ${getReadableName(item.id)}, Cantidad: ${item.quantity}`;
                 var removeBtn = document.createElement('button');
                 removeBtn.textContent = "🗑️";
                 removeBtn.className = "remove-loot";
@@ -771,6 +756,19 @@
                     copyButton.classList.remove('success');
                 }, 2000);
             });
+        }
+
+        function getReadableName(id) {
+            const mapping = {
+                'stairs_wooden_planks': 'Wooden Planks Stairs',
+                'pressure_plate_wooden': 'Wooden Pressure Plate',
+                'wooden_shovel': 'Wooden Shovel',
+                'wooden_sword': 'Wooden Sword',
+                'wool': 'Wool',
+                'backdrop_wool': 'Wool Backdrop',
+                'yellow_flower': 'Yellow Flower',
+            };
+            return mapping[id] || id;
         }
     </script>
 </body>
