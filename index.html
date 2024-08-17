@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <style>
 body {
     background-color: white;
@@ -295,10 +295,10 @@ button.add-loot {
 <body>
 <nav class="menu">
     <ul>
-        <li><button id="IdiomaText" onclick="toggleLanguage()"><i class="fas fa-globe"></i> Cambiar Idioma</button></li>
-        <li><a href="https://discord.com/users/sebasofeek" target="_blank"><i class="fab fa-discord"></i> Discord</a></li>
-        <li><a href="https://x.com/SebasOfEek" target="_blank"><i class="fab fa-twitter"></i> X</a></li>
-        <li><button id="RefreshText" onclick="resetFields()"><i class="fas fa-sync-alt"></i> Refrescar Casillas</button></li>
+        <li><button id="IdiomaText" onclick="toggleLanguage()"><i class="material-icons">language</i> Cambiar Idioma</button></li>
+        <li><a href="https://discord.com/users/sebasofeek" target="_blank"><i class="material-icons">chat</i> Discord</a></li>
+        <li><a href="https://twitter.com" target="_blank"><i class="material-icons">public</i> X</a></li>
+        <li><button id="RefreshText" onclick="resetFields()"><i class="material-icons">refresh</i> Refrescar Casillas</button></li>
     </ul>
 </nav>
     <div id="alertContainer" class="alert"></div>
@@ -562,7 +562,7 @@ button.add-loot {
 
     <script>
     
-    additional5.disabled = true;
+    
     
         let lootItems = [];
         let currentLanguage = 'es'; // Idioma por defecto
