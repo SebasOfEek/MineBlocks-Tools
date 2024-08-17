@@ -31,7 +31,7 @@
         padding: 10px;
         margin: 5px 0;
         border: 1px solid #ccc;
-        border-radius: 5px;
+        border-radius: px;
         box-sizing: border-box;
     }
 
@@ -193,15 +193,16 @@
 
     .menu ul {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         list-style: none;
         padding: 0;
         margin: 0;
+        overflow: hidden;
     }
 
     .menu ul li {
-        margin: 0 20px;
+        flex: 1;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -214,34 +215,41 @@
         background: none;
         border: none;
         cursor: pointer;
-        font-size: 16px;
+        font-size: 16px;    
         padding: 10px 20px;
         border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
         display: flex;
+        justify-content: center;
         align-items: center;
-        transition: background-color 0.3s ease, transform 0.2s ease;
         width: 100%;
-        overflow: hidden; 
+        text-align: center;
+        margin: 4px;
+        margin-top: 0;
+        margin-bottom: 0;
+        
     }
 
     .menu ul li a:hover,
     .menu ul li button:hover {
         background-color: #17a2b8;
         transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
     .menu ul li i {
-        margin-right: 10px;
+        margin-right: 13px;
+        font-size: 20px; /* Aumenta el tamaño del ícono */
     }
 </style>
 </head>
 <body>
 <nav class="menu">
     <ul>
-        <li><button onclick="toggleLanguage()"><i class="fas fa-language"></i> Cambiar Idioma</button></li>
+        <li><button id="IdiomaText" onclick="toggleLanguage()"><i class="fas fa-language"></i> Cambiar Idioma</button></li>
         <li><a href="https://discord.com/users/sebasofeek" target="_blank"><i class="fab fa-discord"></i> Discord</a></li>
         <li><a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i> X</a></li>
-        <li><button onclick="resetFields()"><i class="fas fa-sync-alt"></i> Refrescar Casillas</button></li>
+        <li><button id="RefreshText" onclick="resetFields()"><i class="fas fa-sync-alt"></i> Refrescar Casillas</button></li>
     </ul>
 </nav>
     <div id="alertContainer" class="alert"></div>
@@ -506,8 +514,30 @@
     <script>
         let lootItems = [];
         let currentLanguage = 'es'; // Idioma por defecto
+        
+        function resetFields() {
+    // Resetea todos los inputs
+    const inputs = document.querySelectorAll('input, select');
+    inputs.forEach(input => {
+        if (input.type === 'checkbox' || input.type === 'radio') {
+            input.checked = false;
+        } else {
+            input.value = '';
+        }
+    });
 
-            function showAlert(message) {
+    // Ocultar cualquier alerta que esté visible
+    const alerts = document.querySelectorAll('.alert');
+    alerts.forEach(alert => alert.classList.remove('show'));
+
+    // Limpia cualquier contenido en los divs de loot
+    const lootList = document.getElementById('lootList');
+    if (lootList) {
+        lootList.innerHTML = '';
+    }
+}
+
+        function showAlert(message) {
         const alertContainer = document.getElementById('alertContainer');
         alertContainer.textContent = message;
         alertContainer.classList.add('show');
@@ -989,6 +1019,8 @@ funct
                 document.getElementById('SizeText').innerText = 'Size:';
                 document.getElementById('copyButton').innerText = 'Copy Command';
                 document.getElementById('AddLootText').innerText = 'Add Loot';
+                document.getElementById('IdiomaText').innerText = 'Change Language';
+                document.getElementById('RefreshText').innerText = 'Refresh Boxes';
                 document.getElementById('CommandSummonText').innerText = 'Generate command';
                 document.getElementById('positionType').options[0].text = '--Select--';
                 document.getElementById('positionType').options[1].text = 'Relative';
@@ -1039,6 +1071,8 @@ funct
                 document.getElementById('copyButton').innerText = 'Copiar Comando';
                 document.getElementById('AddLootText').innerText = 'Agregar Loot';
                 document.getElementById('CommandSummonText').innerText = 'Generar Comando';
+                document.getElementById('IdiomaText').innerText = 'Cambiar Idioma';
+                document.getElementById('RefreshText').innerText = 'Refrescar Casillas';
                 document.getElementById('positionType').options[0].text = '--Seleccionar--';
                 document.getElementById('positionType').options[1].text = 'Relativo';
                 document.getElementById('positionType').options[2].text = 'Absoluto';
