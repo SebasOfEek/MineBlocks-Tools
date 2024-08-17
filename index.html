@@ -20,7 +20,7 @@ table {
     box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
     border-radius: 10px;
     box-sizing: border-box;
-    border-collapse: collapse; /* Asegura que las celdas estén bien alineadas */
+    border-collapse: collapse;
 }
 
 td {
@@ -292,11 +292,15 @@ button.add-loot {
     font-size: 20px; /* Aumenta el tamaño del ícono */
 }
 
+.menu-icon {
+    display: none; /* Oculta el ícono por defecto */
+}
+
 @media (max-width: 600px) {
     .menu {
         max-width: 100%;
         padding: 0;
-        background-color: #333; /* Fondo del menú hamburguesa */
+        background-color: #333;
         box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
         border-radius: 5px;
     }
