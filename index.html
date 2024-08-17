@@ -634,7 +634,7 @@ button.add-loot {
     <script>    
     
         let lootItems = [];
-        let currentLanguage = 'es'; // Idioma por defecto
+        let currentLanguage = 'es';
         
         function toggleMobileMenu() {
     const menu = document.querySelector('.menu');
@@ -648,18 +648,23 @@ function resetFields() {
             input.checked = false;
         } else {
             input.value = '';
+            document.getElementById('outputCommand').textContent = '/summon ';
         }
     });
 
-    // Contraer las casillas desplegables
+    // Contraer todas las casillas desplegables.
     const positionGroups = document.querySelectorAll('.position-group');
     positionGroups.forEach(group => group.style.display = 'none');
 
-    // Limpia cualquier contenido en los divs de loot
+    // Limpia cualquier contenido en los divs de loot.
     const lootList = document.getElementById('lootList');
     if (lootList) {
         lootList.innerHTML = '';
     }
+
+    // Ocultar todas las filas adicionales
+    const additionalRows = document.querySelectorAll('.additional-rows');
+    additionalRows.forEach(row => row.style.display = 'none');
 }
 
 function showAlert(messageKey) {
@@ -691,7 +696,7 @@ function showAlert(messageKey) {
     }, 3000);
 }
 
-    
+//
         function updatePositionFields() {
             const positionType = document.getElementById('positionType').value;
             const relativeFields = document.querySelectorAll('.relative-pos');
@@ -869,6 +874,16 @@ function showAlert(messageKey) {
             
         }
         
+function updateMobOptions() {
+    var mobType = document.getElementById('mobType').value;
+    
+    if (lootItems.length > 0 || checkDataTags()) {
+        if (!confirm("Cambiar de mob eliminará los datos actuales. ¿Continuar?")) {
+            return;
+        }
+    }
+    resetFields();
+        
         function resetFields() {
             document.getElementById('quantity').value = '';
             document.getElementById('posX').value = '';
@@ -891,16 +906,6 @@ function showAlert(messageKey) {
             lootItems = [];
             displayLootItems();
         }
-
-        function updateMobOptions() {
-            var mobType = document.getElementById('mobType').value;
-            
-            if (lootItems.length > 0 || checkDataTags()) {
-                if (!confirm("Cambiar de mob eliminará los datos actuales. ¿Continuar?")) {
-                    return;
-                }
-            }
-            resetFields();
 
             var creeperChargedRow = document.getElementById('creeperChargedRow');
             var spawnskinOptions = document.getElementById('spawnskinOptions');
