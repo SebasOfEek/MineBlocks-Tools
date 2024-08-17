@@ -662,19 +662,35 @@ function resetFields() {
     }
 }
 
-        function showAlert(message) {
-        const alertContainer = document.getElementById('alertContainer');
-        alertContainer.textContent = message;
-        alertContainer.classList.add('show');
+function showAlert(messageKey) {
+    const messages = {
+        es: {
+            AddLoot: "Por favor, seleccione un ítem",
+            AddLootCase: "Este ítem ya ha sido agregado.",
+            commandGenerated: "Por favor, seleccione un tipo de mob.",
+            
+        },
+        en: {
+            AddLoot: "Please select an item.",
+            AddLootCase: "This item has already been added.",
+            commandGenerated: "Please select a mob type",
+        }
+    };
 
+    const message = messages[currentLanguage][messageKey];
+    const alertContainer = document.getElementById('alertContainer');
+    alertContainer.textContent = message;
+    alertContainer.classList.add('show');
+
+    setTimeout(() => {
+        alertContainer.classList.remove('show');
+        alertContainer.classList.add('hide');
         setTimeout(() => {
-            alertContainer.classList.remove('show');
-            alertContainer.classList.add('hide');
-            setTimeout(() => {
-                alertContainer.classList.remove('hide');
-            }, 300);
-        }, 3000);
-    }
+            alertContainer.classList.remove('hide');
+        }, 300);
+    }, 3000);
+}
+
     
         function updatePositionFields() {
             const positionType = document.getElementById('positionType').value;
@@ -823,7 +839,7 @@ function resetFields() {
                 shearedInput.disabled = false;
             }
         }
-
+/*
         function handleShearedChange() {
             const sheared = document.getElementById('additional7').value;
             const color = document.getElementById('additional10');
@@ -838,7 +854,7 @@ function resetFields() {
                 baby.disabled = false;
             }
         }
-
+*/
         function handleColorChange() {
             const color = document.getElementById('additional10').value;
             const sheared = document.getElementById('additional7');
@@ -848,7 +864,6 @@ function resetFields() {
                 sheared.value = '';
                 sheared.disabled = true;
             } else {
-                sheared.disabled = false;
                 baby.disabled = false;
             }
             
@@ -939,7 +954,7 @@ function resetFields() {
         function generateCommand() {
             var mobType = document.getElementById('mobType').value;
             if (!mobType) {
-                showAlert("Por favor, seleccione un tipo de mob.");
+                showAlert("commandGenerated");
                 return;
             }
 
@@ -1014,11 +1029,11 @@ function resetFields() {
         function addLoot() {
             var additional1 = document.getElementById('additional1').value;
             if (!additional1) {
-                showAlert("Por favor, seleccione un ítem.");
+                showAlert("AddLoot");
                 return;
             }
             if (lootItems.some(item => item.id === additional1)) {
-                showAlert("Este ítem ya ha sido agregado.");
+                showAlert("AddLootCase");
                 return;
             }
             var additional2 = document.getElementById('additional2').value;
