@@ -292,37 +292,80 @@ button.add-loot {
     font-size: 20px; /* Aumenta el tamaño del ícono */
 }
 
-/* Media Query para pantallas pequeñas (teléfonos móviles) */
 @media (max-width: 600px) {
     .menu {
         max-width: 100%;
+        padding: 0;
+        background-color: #333; /* Fondo del menú hamburguesa */
+        box-shadow: none;
     }
 
-    .menu ul {
-        flex-direction: column; /* Coloca los elementos en una columna */
-        align-items: stretch; /* Asegura que los elementos ocupen todo el ancho disponible */
+    .menu-icon {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        color: white;
+        background-color: #495057;
+        font-size: 18px;
+        cursor: pointer;
+        user-select: none;
     }
 
-    .menu ul li {
-        width: 100%; /* Asegura que cada elemento del menú ocupe el 100% del ancho */
+    .menu-icon::before {
+        content: '☰'; /* Icono de hamburguesa */
+        margin-right: 10px;
+        font-size: 24px;
     }
 
-    .menu ul li a,
-    .menu ul li button {
-        font-size: 18px; /* Aumenta un poco el tamaño de la fuente para pantallas más pequeñas */
-        padding: 15px 10px; /* Más espacio alrededor del texto */
-        margin: 2px 0; /* Espacio reducido entre los botones */
+    .menu ul.menu-list {
+        display: none; /* Ocultamos el menú inicialmente */
+        flex-direction: column;
+        background-color: #495057;
+        margin: 0;
+        padding: 10px 0;
     }
 
-    .menu ul li i {
-        margin-right: 8px; /* Reduce el espacio entre el icono y el texto */
+    .menu ul.menu-list li {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        padding: 10px 0;
+        border-top: 1px solid #444;
+    }
+
+    .menu ul.menu-list li:first-child {
+        border-top: none;
+    }
+
+    .menu ul.menu-list li a,
+    .menu ul.menu-list li button {
+        font-size: 16px;
+        padding: 15px;
+        color: white;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        text-align: center;
+    }
+
+    .menu ul.menu-list li a:hover,
+    .menu ul.menu-list li button:hover {
+        background-color: #17a2b8;
+        color: white;
+    }
+
+    .menu.show .menu-list {
+        display: flex; /* Mostrar el menú cuando esté activo */
     }
 }
 </style>
 </head>
 <body>
 <nav class="menu">
-    <ul>
+    <div class="menu-icon" onclick="toggleMobileMenu()">☰ Menú</div>
+    <ul class="menu-list">
         <li><button id="IdiomaText" onclick="toggleLanguage()"><i class="bi bi-translate"></i> Cambiar Idioma</button></li>
         <li><a href="https://discord.com/users/sebasofeek" target="_blank"><i class="bi bi-discord"></i> Discord</a></li>
         <li><a href="https://twitter.com" target="_blank"><i class="bi bi-twitter"></i> X</a></li>
@@ -588,12 +631,15 @@ button.add-loot {
     </table>
     <pre id="outputCommand">/summon </pre>
 
-    <script>
-    
-    
+    <script>    
     
         let lootItems = [];
         let currentLanguage = 'es'; // Idioma por defecto
+        
+        function toggleMobileMenu() {
+    const menu = document.querySelector('.menu');
+    menu.classList.toggle('show');
+}
         
 function resetFields() {
     const inputs = document.querySelectorAll('input, select');
