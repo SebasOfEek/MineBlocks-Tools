@@ -227,7 +227,6 @@ button.add-loot {
     visibility: hidden;
     transform: translate(-50%, -60%);
 }
-
 .menu {
     position: sticky;
     top: 0;
@@ -249,6 +248,7 @@ button.add-loot {
     padding: 0;
     margin: 0;
     overflow: hidden;
+    flex-wrap: wrap; /* Permitir que los elementos se envuelvan en líneas nuevas si es necesario */
 }
 
 .menu ul li {
@@ -256,6 +256,7 @@ button.add-loot {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 5px 0;
 }
 
 .menu ul li a,
@@ -291,6 +292,32 @@ button.add-loot {
     font-size: 20px; /* Aumenta el tamaño del ícono */
 }
 
+/* Media Query para pantallas pequeñas (teléfonos móviles) */
+@media (max-width: 600px) {
+    .menu {
+        max-width: 100%;
+    }
+
+    .menu ul {
+        flex-direction: column; /* Coloca los elementos en una columna */
+        align-items: stretch; /* Asegura que los elementos ocupen todo el ancho disponible */
+    }
+
+    .menu ul li {
+        width: 100%; /* Asegura que cada elemento del menú ocupe el 100% del ancho */
+    }
+
+    .menu ul li a,
+    .menu ul li button {
+        font-size: 18px; /* Aumenta un poco el tamaño de la fuente para pantallas más pequeñas */
+        padding: 15px 10px; /* Más espacio alrededor del texto */
+        margin: 2px 0; /* Espacio reducido entre los botones */
+    }
+
+    .menu ul li i {
+        margin-right: 8px; /* Reduce el espacio entre el icono y el texto */
+    }
+}
 </style>
 </head>
 <body>
