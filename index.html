@@ -3,141 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-           background-color: white;
-           font-family: 'Arial', sans-serif;
-        }
-        table {
-            width: 100%;
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #e5e8eb;
-            box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
-            border-radius: 10px;
-        }
-        td {
-            padding: 10px;
-            position: relative;
-        }
-        input, select {
-            width: calc(100% - 22px);
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        button {
-            width: 48%;
-            padding: 10px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 0.5%;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        button.success {
-            background-color: #28a745;
-        }
-        button.success:hover {
-            background-color: #218838;
-        }
-        pre {
-            background-color: #f8f9fa;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            overflow-x: auto;
-            max-width: 580px;
-            margin: auto;
-            margin-top: 12px;
-        }
-        .tooltip {
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #333;
-            color: #fff;
-            padding: 8px;
-            border-radius: 5px;
-            white-space: nowrap;
-            display: none;
-            font-size: 14px;
-            z-index: 10;
-            width: 250px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-            text-align: center;
-        }
-        td:hover .tooltip {
-            display: block;
-        }
-        .question-mark {
-            cursor: pointer;
-            font-weight: bold;
-            color: #007BFF;
-            margin-left: 5px;
-            position: relative;
-        }
-        .position-group {
-            display: flex;
-            gap: 10px;
-        }
-        .loot-list {
-            margin-top: 10px;
-            margin-right: 9px;
-            border-top: 1px solid #ced4da;
-            padding-top: 10px;
-        }
-        .loot-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 5px;
-            padding-right: 10px;
-            background-color: #f1f1f1;
-            border-radius: 5px;
-            margin-bottom: 5px;
-            margin-left: 1px;
-        }
-        .remove-loot {
-            background: none;
-            border: none;
-            font-size: 1.2em;
-            color: #ff0000;
-            cursor: pointer;
-        }
-        button.add-loot {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 9px;
-            margin: 9px 0;
-            margin-bottom: -20px;
-            margin-left: 1px;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 98%;
-            text-align: center;
-            transition: background-color 0.3s;
-        }
-    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<style>
+    /* Estilo General */
+    body {
+        background-color: white;
+        font-family: 'Arial', sans-serif;
+    }
+
+    table {
+        width: 100%;
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #e5e8eb;
+        box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+    }
+
+    td {
+        padding: 10px;
+        position: relative;
+    }
+
+    input, select {
+        width: calc(100% - 22px);
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    button {
+        width: 48%;
+        padding: 10px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 0.5%;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+    }
+
+    button.success {
+        background-color: #28a745;
+    }
+
+    button.success:hover {
+        background-color: #218838;
+    }
+
+    pre {
+        background-color: #f8f9fa;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-x: auto;
+        max-width: 580px;
+        margin: auto;
+        margin-top: 12px;
+    }
+
+    .tooltip {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #333;
+        color: #fff;
+        padding: 8px;
+        border-radius: 5px;
+        white-space: nowrap;
+        display: none;
+        font-size: 14px;
+        z-index: 10;
+        width: 250px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        text-align: center;
+    }
+
+    td:hover .tooltip {
+        display: block;
+    }
+
+    .question-mark {
+        cursor: pointer;
+        font-weight: bold;
+        color: #007BFF;
+        margin-left: 5px;
+        position: relative;
+    }
+
+    .position-group {
+        display: flex;
+        gap: 10px;
+    }
+
+    .loot-list {
+        margin-top: 10px;
+        margin-right: 9px;
+        border-top: 1px solid #ced4da;
+        padding-top: 10px;
+    }
+
+    .loot-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px;
+        padding-right: 10px;
+        background-color: #f1f1f1;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        margin-left: 1px;
+    }
+
+    .remove-loot {
+        background: none;
+        border: none;
+        font-size: 1.2em;
+        color: #ff0000;
+        cursor: pointer;
+    }
+
+    button.add-loot {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 9px;
+        margin: 9px 0;
+        margin-bottom: -20px;
+        margin-left: 1px;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 98%;
+        text-align: center;
+        transition: background-color 0.3s;
+    }
+
+    .alert {
+        position: fixed;
+        top: 5%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+        background-color: #ffdddd;
+        color: #d8000c;
+        border: 1px solid #d8000c;
+        border-radius: 8px;
+        padding: 1em 2em;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease, visibility 0.5s;
+    }
+
+    .alert.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .alert.hide {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .menu {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        max-width: 600px;
+        margin: auto;
+        background-color: #495057;
+        padding: 10px 0;
+        box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
+        margin-bottom: 20px;
+        border-radius: 5px;
+    }
+
+    .menu ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu ul li {
+        margin: 0 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .menu ul li a,
+    .menu ul li button {
+        color: white;
+        text-decoration: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        width: 100%;
+        overflow: hidden; 
+    }
+
+    .menu ul li a:hover,
+    .menu ul li button:hover {
+        background-color: #17a2b8;
+        transform: translateY(-2px);
+    }
+
+    .menu ul li i {
+        margin-right: 10px;
+    }
+</style>
 </head>
 <body>
-    <button onclick="toggleLanguage()">Cambiar Idioma</button>
+<nav class="menu">
+    <ul>
+        <li><button onclick="toggleLanguage()"><i class="fas fa-language"></i> Cambiar Idioma</button></li>
+        <li><a href="https://discord.com/users/sebasofeek" target="_blank"><i class="fab fa-discord"></i> Discord</a></li>
+        <li><a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i> X</a></li>
+        <li><button onclick="resetFields()"><i class="fas fa-sync-alt"></i> Refrescar Casillas</button></li>
+    </ul>
+</nav>
+    <div id="alertContainer" class="alert"></div>
     <table>
         <tr>
-            <td id="mobTypeLabel">Tipo de Mob:</td>
+            <td id="TypeMobText">Tipo de Mob:</td>
             <td>
                 <select id="mobType" onchange="updateMobOptions()">
                     <option value="">--Seleccionar--</option>
@@ -169,11 +279,11 @@
             </td>
         </tr>
         <tr>
-            <td id="quantityLabel">Cantidad:</td>
+            <td id="QuantityText">Cantidad:</td>
             <td><input type="number" id="quantity" max="20"></td>
         </tr>
         <tr>
-            <td id="positionLabel">Posición:</td>
+            <td id="PositionText">Posición:</td>
             <td>
                 <select id="positionType" onchange="updatePositionFields()">
                     <option value="">--Seleccionar--</option>
@@ -183,29 +293,29 @@
             </td>
         </tr>
         <tr class="relative-pos position-group" style="display:none;">
-            <td>Posición Relativa:</td>
+            <td id="PositionRelText">Posición Relativa:</td>
             <td>
                 <input type="number" id="posX" placeholder="Pos~X" style="width: 45%; display: inline-block; margin-right: 5%;">
                 <input type="number" id="posY" placeholder="Pos~Y" style="width: 45%; display: inline-block;">
             </td>
         </tr>
         <tr class="absolute-pos position-group" style="display:none;">
-            <td>Posición Absoluta:</td>
+            <td id="PositionAbsText">Posición Absoluta:</td>
             <td>
                 <input type="number" id="absPosX" placeholder="Pos X" style="width: 45%; display: inline-block; margin-right: 5%;">
                 <input type="number" id="absPosY" placeholder="Pos Y" style="width: 45%; display: inline-block;">
             </td>
         </tr>
         <tr>
-            <td>Nombre:</td>
+            <td id="NameText">Nombre:</td>
             <td><input type="text" id="name"></td>
         </tr>
         <tr>
-            <td>Salud:</td>
+            <td id="HealthText">Salud:</td>
             <td><input type="number" id="health" min="1"></td>
         </tr>
         <tr id="handItemRow" style="display: none;">
-            <td id="ItemText">Item en mano:</td>
+            <td id="ItemHandText">Item en mano:</td>
             <td>
                <select id="holding">
                    <option value="">--Seleccionar--</option>
@@ -220,11 +330,11 @@
             </td>  
         </tr>
         <tr id="armorRow" style="display: none;">
-            <td>Armadura:</td>
+            <td id="ArmorText">Armadura:</td>
             <td><input type="text" id="armor" placeholder="Proximamente Disponible..." disabled></td>
         </tr>
         <tr id="defaultDropsRow">
-            <td id ="DropsText">Drops por defecto:</td>
+            <td id="DropDText">Drops por defecto:</td>
             <td>
                 <select id="defaultDrops">
                     <option value="">--Seleccionar--</option>
@@ -234,7 +344,7 @@
             </td>
         </tr>
         <tr id="creeperChargedRow" style="display: none;">
-            <td>Creeper Cargado:</td>
+            <td id="CreeperCharText">Creeper Cargado:</td>
             <td>
                 <select id="charged">
                     <option value="">--Seleccionar--</option>
@@ -244,11 +354,11 @@
             </td>
         </tr>
         <tr id="spawnskinOptions" style="display: none;">
-            <td>ID de la Skin:</td>
+            <td id="IDText">ID de la Skin:</td>
             <td><input type="text" id="skin"></td>
         </tr>
         <tr id="aggroRow" style="display: none;">
-            <td>Hostilidad:</td>
+            <td id="AggroText">Hostilidad:</td>
             <td>
                 <select id="aggro">
                     <option value="">--Seleccionar--</option>
@@ -259,7 +369,7 @@
             </td>
         </tr>
         <tr id="babyRow" style="display: none;">
-            <td>Bebé:</td>
+            <td id="BabyText">Bebé:</td>
             <td>
                 <select id="baby" onchange="handleBabyChange()">
                     <option value="">--Seleccionar--</option>
@@ -269,7 +379,7 @@
             </td>
         </tr>
         <tr id="babyTimeRow" style="display: none;">
-            <td>Bebé (segundos):</td>
+            <td id="BabySText">Bebé (segundos):</td>
             <td><input type="number" id="babyTime" min="1"></td>
         </tr>
         <tr>
@@ -298,8 +408,8 @@
             </td>  
         </tr>
         <tr id="additionalRows2" class="additional-rows" style="display: none;">
-            <td>Cantidad:</td>
-            <td><input type="number" id="additional2"></td>
+            <td id="QuantitySText">Cantidad:</td>
+            <td><input type="number" id="additional2" max="1000"></td>
         </tr>
         <tr id="additionalRows3" class="additional-rows" style="display: none;">
             <td>Bonus:</td>
@@ -310,11 +420,11 @@
             <td><input type="number" id="additional4"></td>
         </tr>
         <tr id="additionalRows5" class="additional-rows" style="display: none;">
-            <td>Oportunidad:</td>
-            <td><input type="text" id="additional5" placeholder="Proximamente Disponible..."></td>
+            <td id="ChanceText">Oportunidad:</td>
+            <td><input type="text" id="additional5" placeholder="Proximamente Disponible..." disabled></td>
         </tr>
         <tr id="additionalRows6" class="additional-rows" style="display: none;">
-            <td>Variante:</td>
+            <td id="VarianteText">Variante:</td>
             <td>
                 <select id="additional6">
                     <option value="">--Seleccionar--</option>
@@ -325,11 +435,11 @@
             </td>
         </tr>
         <tr id="additionalRows7" class="additional-rows" style="display: none;">
-            <td>¿Está esquilada?:</td>
+            <td id="ShearedText">¿Está esquilada?:</td>
             <td><input type="text" id="additional7" placeholder="Fuera de servicio" disabled></td>
         </tr>
         <tr id="additionalRows9" class="additional-rows" style="display: none;">
-            <td>¿Es bebé?:</td>
+            <td id="isBabyText">¿Es bebé?:</td>
             <td>
                 <select id="additional9" onchange="handleBabyChange()">
                     <option value="">--Seleccionar--</option>
@@ -363,7 +473,7 @@
             </td>
         </tr>
         <tr id="additionalRows11" class="additional-rows" style="display: none;">
-            <td>¿Está en llamas?:</td>
+            <td id="onFireText">¿Está en llamas?:</td>
             <td>
                 <select id="additional11">
                     <option value="">--Seleccionar--</option>
@@ -373,7 +483,7 @@
             </td>
         </tr>
         <tr id="additionalRows12" class="additional-rows" style="display: none;">
-            <td>Tamaño:</td>
+            <td id="SizeText">Tamaño:</td>
             <td>
                 <select id="additional12">
                     <option value="1">1</option>
@@ -384,9 +494,9 @@
         </tr>
         <tr>
             <td colspan="2">
-                <button class="add-loot" onclick="addLoot()">Agregar Loot</button>
+                <button id="AddLootText" class="add-loot" onclick="addLoot()">Agregar Loot</button>
                 <div class="loot-list" id="lootList"></div>
-                <button onclick="generateCommand()">Generar Comando</button>
+                <button id="CommandSummonText" onclick="generateCommand()">Generar Comando</button>
                 <button id="copyButton" onclick="copyCommand()">Copiar Comando</button>
             </td>
         </tr>
@@ -394,52 +504,22 @@
     <pre id="outputCommand">/summon </pre>
 
     <script>
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Carga el idioma inicial al cargar la página
-    toggleLanguage();
-});
-
-function loadLanguageData(callback) {
-    fetch('traductor.json')
-        .then(response => response.json())
-        .then(data => {
-            callback(data);
-        })
-        .catch(error => console.error('Error al cargar el archivo JSON:', error));
-}
-
-function toggleLanguage() {
-    loadLanguageData(function(translations) {
-        let elementsToTranslate = {
-            'mobTypeLabel': 'mobTypeLabel',
-            'quantityLabel': 'quantityLabel',
-            'positionLabel': 'positionLabel',
-            'nameLabel': 'nameLabel',
-            'healthLabel': 'healthLabel',
-            'ItemText': 'itemText',
-            'DropsText': 'dropsText',
-            'addLootButton': 'addLootButton',
-            'generateCommandButton': 'generateCommandButton',
-            'copyCommandButton': 'copyCommandButton'
-        };
-
-        if (currentLanguage === 'es') {
-            currentLanguage = 'en';
-            document.querySelector('button[onclick="toggleLanguage()"]').textContent = 'Change Language';
-        } else {
-            currentLanguage = 'es';
-            document.querySelector('button[onclick="toggleLanguage()"]').textContent = 'Cambiar Idioma';
-        }
-
-        for (let elementId in elementsToTranslate) {
-            const translationKey = elementsToTranslate[elementId];
-            document.getElementById(elementId).textContent = translations[currentLanguage][translationKey];
-        }
-    });
-}
-    
         let lootItems = [];
+        let currentLanguage = 'es'; // Idioma por defecto
+
+            function showAlert(message) {
+        const alertContainer = document.getElementById('alertContainer');
+        alertContainer.textContent = message;
+        alertContainer.classList.add('show');
+
+        setTimeout(() => {
+            alertContainer.classList.remove('show');
+            alertContainer.classList.add('hide');
+            setTimeout(() => {
+                alertContainer.classList.remove('hide');
+            }, 300);
+        }, 3000);
+    }
 
         function updatePositionFields() {
             const positionType = document.getElementById('positionType').value;
@@ -704,7 +784,7 @@ function toggleLanguage() {
         function generateCommand() {
             var mobType = document.getElementById('mobType').value;
             if (!mobType) {
-                alert("Por favor, seleccione un tipo de mob.");
+                showAlert("Por favor, seleccione un tipo de mob.");
                 return;
             }
 
@@ -779,7 +859,7 @@ function toggleLanguage() {
         function addLoot() {
             var additional1 = document.getElementById('additional1').value;
             if (!additional1) {
-                alert("Por favor, seleccione un ítem.");
+                showAlert("Por favor, seleccione un ítem.");
                 return;
             }
             if (lootItems.some(item => item.id === additional1)) {
@@ -879,6 +959,108 @@ funct
                 'yellow_flower': 'Yellow Flower',
             };
             return mapping[id] || id;
+        }
+        
+        function toggleLanguage() {
+            if (currentLanguage === 'es') {
+                currentLanguage = 'en';
+                document.getElementById('mobType').options[0].text = '--Select--';
+                document.getElementById('TypeMobText').innerText = 'Mob Type:';
+                document.getElementById('QuantityText').innerText = 'Quantity:';
+                document.getElementById('PositionText').innerText = 'Position:';
+                document.getElementById('PositionRelText').innerText = 'Relative Position:';
+                document.getElementById('PositionAbsText').innerText = 'Absolute Position:';
+                document.getElementById('NameText').innerText = 'Name:';
+                document.getElementById('HealthText').innerText = 'Health:';
+                document.getElementById('ItemHandText').innerText = 'Items in Hand:';
+                document.getElementById('ArmorText').innerText = 'Armor:';
+                document.getElementById('DropDText').innerText = 'Default Drops:';
+                document.getElementById('CreeperCharText').innerText = 'Creeper Charged:';
+                document.getElementById('IDText').innerText = 'Skin ID:';
+                document.getElementById('AggroText').innerText = 'Behavior:';
+                document.getElementById('BabyText').innerText = 'Baby:';
+                document.getElementById('BabySText').innerText = 'Baby (Seconds)';
+                document.getElementById('QuantitySText').innerText = 'Quantity:';
+                document.getElementById('ChanceText').innerText = 'Chance:';
+                document.getElementById('VarianteText').innerText = 'Variant:';
+                document.getElementById('ShearedText').innerText = '¿Is it Sheared?';
+                document.getElementById('isBabyText').innerText = '¿Is it baby?';
+                document.getElementById('onFireText').innerText = '¿Is it on fire?';
+                document.getElementById('SizeText').innerText = 'Size:';
+                document.getElementById('copyButton').innerText = 'Copy Command';
+                document.getElementById('AddLootText').innerText = 'Add Loot';
+                document.getElementById('CommandSummonText').innerText = 'Generate command';
+                document.getElementById('positionType').options[0].text = '--Select--';
+                document.getElementById('positionType').options[1].text = 'Relative';
+                document.getElementById('positionType').options[2].text = 'Absolute';
+                document.getElementById('holding').options[0].text = '--Select--';
+                document.getElementById('defaultDrops').options[0].text = '--Select--';
+                document.getElementById('defaultDrops').options[1].text = 'Yes';
+                document.getElementById('charged').options[0].text = '--Select--';
+                document.getElementById('charged').options[1].text = 'Yes';
+                document.getElementById('aggro').options[0].text = '--Select--';
+                document.getElementById('baby').options[0].text = '--Select--';
+                document.getElementById('baby').options[1].text = 'Time';
+                document.getElementById('baby').options[2].text = 'Forever';
+                document.getElementById('drops').options[0].text = '--Select--';
+                document.getElementById('drops').options[1].text = 'Yes';
+                document.getElementById('additional1').options[0].text = '--Select--';
+                document.getElementById('additional6').options[0].text = '--Select--';
+                document.getElementById('additional9').options[0].text = '--Select--';
+                document.getElementById('additional9').options[1].text = 'Yes';
+                document.getElementById('additional10').options[0].text = '--Select--';
+                document.getElementById('additional11').options[0].text = '--Select--';
+                document.getElementById('additional11').options[1].text = 'Yes';
+            } else {
+                currentLanguage = 'es';
+                document.getElementById('mobType').options[0].text = '--Seleccionar--';
+                document.getElementById('TypeMobText').innerText = 'Tipo de Mob:';
+                document.getElementById('QuantityText').innerText = 'Cantidad:';
+                document.getElementById('PositionText').innerText = 'Posición:';
+                document.getElementById('PositionRelText').innerText = 'Posición Relativa:';
+                document.getElementById('PositionAbsText').innerText = 'Posición Absoluta:';
+                document.getElementById('NameText').innerText = 'Nombre:';
+                document.getElementById('HealthText').innerText = 'Salud:';
+                document.getElementById('ItemHandText').innerText = 'Item en mano:';
+                document.getElementById('ArmorText').innerText = 'Armadura:';
+                document.getElementById('DropDText').innerText = 'Drops por defecto:';
+                document.getElementById('CreeperCharText').innerText = 'Creeper Cargado:';
+                document.getElementById('IDText').innerText = 'ID de la Skin:';
+                document.getElementById('AggroText').innerText = 'Comportamiento:';
+                document.getElementById('BabyText').innerText = 'Bebé:';
+                document.getElementById('BabySText').innerText = 'Bebé (Segundos)';
+                document.getElementById('QuantitySText').innerText = 'Cantidad:';
+                document.getElementById('ChanceText').innerText = 'Probabilidad:';
+                document.getElementById('VarianteText').innerText = 'Variante:';
+                document.getElementById('ShearedText').innerText = '¿Está esquilada?';
+                document.getElementById('isBabyText').innerText = '¿Es bebé?';
+                document.getElementById('onFireText').innerText = '¿Está en fuego?';
+                document.getElementById('SizeText').innerText = 'Tamaño:';
+                document.getElementById('copyButton').innerText = 'Copiar Comando';
+                document.getElementById('AddLootText').innerText = 'Agregar Loot';
+                document.getElementById('CommandSummonText').innerText = 'Generar Comando';
+                document.getElementById('positionType').options[0].text = '--Seleccionar--';
+                document.getElementById('positionType').options[1].text = 'Relativo';
+                document.getElementById('positionType').options[2].text = 'Absoluto';
+                document.getElementById('holding').options[0].text = '--Seleccionar--';
+                document.getElementById('defaultDrops').options[0].text = '--Seleccionar--';
+                document.getElementById('defaultDrops').options[1].text = 'Si';
+                document.getElementById('charged').options[0].text = '--Seleccionar--';
+                document.getElementById('charged').options[1].text = 'Si';
+                document.getElementById('aggro').options[0].text = '--Seleccionar--';
+                document.getElementById('baby').options[0].text = '--Seleccionar--';
+                document.getElementById('baby').options[1].text = 'Tiempo';
+                document.getElementById('baby').options[2].text = 'Siempre';
+                document.getElementById('drops').options[0].text = '--Seleccionar--';
+                document.getElementById('drops').options[1].text = 'Si';
+                document.getElementById('additional1').options[0].text = '--Seleccionar--';
+                document.getElementById('additional6').options[0].text = '--Seleccionar--';
+                document.getElementById('additional9').options[0].text = '--Seleccionar--';
+                document.getElementById('additional9').options[1].text = 'Si';
+                document.getElementById('additional10').options[0].text = '--Seleccionar--';
+                document.getElementById('additional11').options[0].text = '--Seleccionar--';
+                document.getElementById('additional11').options[1].text = 'Si';
+            }
         }
     </script>
 </body>
