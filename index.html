@@ -5,248 +5,297 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <style>
-    /* Estilo General */
-    body {
-        background-color: white;
-        font-family: 'Arial', sans-serif;
-    }
+body {
+    background-color: white;
+    font-family: 'Arial', sans-serif;
+}
 
-    table {
-        width: 100%;
-        max-width: 600px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #e5e8eb;
-        box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
-        border-radius: 10px;
-    }
+table {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #e5e8eb;
+    box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-sizing: border-box;
+    border-collapse: collapse; /* Asegura que las celdas estén bien alineadas */
+}
 
-    td {
-        padding: 10px;
-        position: relative;
-    }
+td {
+    padding: 12px 15px 12px 10px; /* Más espacio en el lado derecho */
+    box-sizing: border-box;
+    vertical-align: middle; /* Centra el contenido verticalmente */
+    text-align: left; /* Alineación de texto a la izquierda */
+}
 
-    input, select {
-        width: calc(100% - 22px);
-        padding: 10px;
-        margin: 5px 0;
-        border: 1px solid #ccc;
-        border-radius: px;
-        box-sizing: border-box;
-    }
+input, select {
+    width: calc(100% - 12px); /* Ajusta el ancho para considerar el espacio adicional */
+    padding: 12px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Valor asignado para un borde redondeado */
+    box-sizing: border-box;
+}
 
-    button {
-        width: 48%;
-        padding: 10px;
-        background-color: #007BFF;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin: 0.5%;
-        transition: background-color 0.3s, transform 0.2s;
-    }
 
-    button:hover {
-        background-color: #0056b3;
-        transform: translateY(-2px);
-    }
+button {
+    width: 48%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0.5%;
+    transition: background-color 0.3s, transform 0.2s;
+}
 
-    button.success {
-        background-color: #28a745;
-    }
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
 
-    button.success:hover {
-        background-color: #218838;
-    }
+button.success {
+    background-color: #28a745;
+}
 
-    pre {
-        background-color: #f8f9fa;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
-        white-space: pre-wrap;
-        word-wrap: break-word;
-        overflow-x: auto;
-        max-width: 580px;
-        margin: auto;
-        margin-top: 12px;
-    }
+button.success:hover {
+    background-color: #218838;
+}
 
-    .tooltip {
-        position: absolute;
-        bottom: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: #333;
-        color: #fff;
-        padding: 8px;
-        border-radius: 5px;
-        white-space: nowrap;
-        display: none;
-        font-size: 14px;
-        z-index: 10;
-        width: 250px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-        text-align: center;
-    }
+button.add-loot {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 9px;
+    margin: 9px 0;
+    margin-bottom: -20px;
+    margin-left: 1px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 98%;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s; /* Se añade la animación */
+}
 
-    td:hover .tooltip {
-        display: block;
-    }
+button.add-loot:hover {
+    background-color: #218838;
+    transform: translateY(-2px); /* Mismo efecto que en los otros botones */
+}
 
-    .question-mark {
-        cursor: pointer;
-        font-weight: bold;
-        color: #007BFF;
-        margin-left: 5px;
-        position: relative;
-    }
+pre {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-x: auto;
+    max-width: 580px;
+    margin: auto;
+    margin-top: 12px;
+}
 
-    .position-group {
-        display: flex;
-        gap: 10px;
-    }
+.tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 8px;
+    border-radius: 5px;
+    white-space: nowrap;
+    display: none;
+    font-size: 14px;
+    z-index: 10;
+    width: 250px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
 
-    .loot-list {
-        margin-top: 10px;
-        margin-right: 9px;
-        border-top: 1px solid #ced4da;
-        padding-top: 10px;
-    }
+td:hover .tooltip {
+    display: block;
+}
 
-    .loot-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 5px;
-        padding-right: 10px;
-        background-color: #f1f1f1;
-        border-radius: 5px;
-        margin-bottom: 5px;
-        margin-left: 1px;
-    }
+.question-mark {
+    cursor: pointer;
+    font-weight: bold;
+    color: #007BFF;
+    margin-left: 5px;
+    position: relative;
+}
 
-    .remove-loot {
-        background: none;
-        border: none;
-        font-size: 1.2em;
-        color: #ff0000;
-        cursor: pointer;
-    }
+.position-group {
+    display: flex;
+    gap: 10px;
+}
 
-    button.add-loot {
-        background-color: #28a745;
-        color: white;
-        border: none;
-        padding: 9px;
-        margin: 9px 0;
-        margin-bottom: -20px;
-        margin-left: 1px;
-        border-radius: 5px;
-        cursor: pointer;
-        width: 98%;
-        text-align: center;
-        transition: background-color 0.3s;
-    }
+.loot-list {
+    margin-top: 10px;
+    margin-right: 9px;
+    border-top: 1px solid #ced4da;
+    padding-top: 10px;
+}
 
-    .alert {
-        position: fixed;
-        top: 5%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 9999;
-        background-color: #ffdddd;
-        color: #d8000c;
-        border: 1px solid #d8000c;
-        border-radius: 8px;
-        padding: 1em 2em;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+.loot-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    padding-right: 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    margin-left: 1px;
+}
+
+.remove-loot {
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    color: #ff0000;
+    cursor: pointer;
+}
+
+button.add-loot {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 9px;
+    margin: 9px 0;
+    margin-bottom: -20px;
+    margin-left: 1px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 98%;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-10px); }
+    40%, 80% { transform: translateX(10px); }
+}
+
+@keyframes smooth-shake {
+    0%, 100% { transform: translate(-50%, -50%); }
+    20%, 60% { transform: translate(-52%, -50%); }
+    40%, 80% { transform: translate(-48%, -50%); }
+}
+
+@keyframes fade-in-slide-down {
+    0% {
         opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.5s ease, visibility 0.5s;
+        transform: translate(-50%, -60%);
     }
-
-    .alert.show {
+    100% {
         opacity: 1;
-        visibility: visible;
+        transform: translate(-50%, -50%);
     }
+}
 
-    .alert.hide {
-        opacity: 0;
-        visibility: hidden;
-    }
+.alert {
+    position: fixed;
+    top: 16%; /* Centrado vertical */
+    left: 50%; /* Centrado horizontal */
+    transform: translate(-50%, -50%); /* Ajuste para centrar el contenedor */
+    z-index: 9999;
+    background-color: #ffdddd;
+    color: #d8000c;
+    border: 1px solid #d8000c;
+    border-radius: 8px;
+    padding: 1em 2em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s, transform 0.5s ease;
+}
 
-    .menu {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        max-width: 600px;
-        margin: auto;
-        background-color: #495057;
-        padding: 10px 0;
-        box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
-        margin-bottom: 20px;
-        border-radius: 5px;
-    }
+.alert.show {
+    opacity: 1;
+    visibility: visible;
+    animation: fade-in-slide-down 0.5s ease forwards, smooth-shake 0.8s ease;
+}
 
-    .menu ul {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        overflow: hidden;
-    }
+.alert.hide {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -60%);
+}
 
-    .menu ul li {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+.menu {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    max-width: 600px;
+    margin: auto;
+    background-color: #495057;
+    padding: 10px 0;
+    box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
 
-    .menu ul li a,
-    .menu ul li button {
-        color: white;
-        text-decoration: none;
-        background: none;
-        border: none;
-        cursor: pointer;
-        font-size: 16px;    
-        padding: 10px 20px;
-        border-radius: 5px;
-        transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        text-align: center;
-        margin: 4px;
-        margin-top: 0;
-        margin-bottom: 0;
-        
-    }
+.menu ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
 
-    .menu ul li a:hover,
-    .menu ul li button:hover {
-        background-color: #17a2b8;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
+.menu ul li {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-    .menu ul li i {
-        margin-right: 13px;
-        font-size: 20px; /* Aumenta el tamaño del ícono */
-    }
+.menu ul li a,
+.menu ul li button {
+    color: white;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    margin: 4px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.menu ul li a:hover,
+.menu ul li button:hover {
+    background-color: #17a2b8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.menu ul li i {
+    margin-right: 13px;
+    font-size: 20px; /* Aumenta el tamaño del ícono */
+}
+
 </style>
 </head>
 <body>
 <nav class="menu">
     <ul>
-        <li><button id="IdiomaText" onclick="toggleLanguage()"><i class="fas fa-language"></i> Cambiar Idioma</button></li>
+        <li><button id="IdiomaText" onclick="toggleLanguage()"><i class="fas fa-globe"></i> Cambiar Idioma</button></li>
         <li><a href="https://discord.com/users/sebasofeek" target="_blank"><i class="fab fa-discord"></i> Discord</a></li>
         <li><a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i> X</a></li>
         <li><button id="RefreshText" onclick="resetFields()"><i class="fas fa-sync-alt"></i> Refrescar Casillas</button></li>
@@ -512,11 +561,13 @@
     <pre id="outputCommand">/summon </pre>
 
     <script>
+    
+    
+    
         let lootItems = [];
         let currentLanguage = 'es'; // Idioma por defecto
         
-        function resetFields() {
-    // Resetea todos los inputs
+function resetFields() {
     const inputs = document.querySelectorAll('input, select');
     inputs.forEach(input => {
         if (input.type === 'checkbox' || input.type === 'radio') {
@@ -526,9 +577,9 @@
         }
     });
 
-    // Ocultar cualquier alerta que esté visible
-    const alerts = document.querySelectorAll('.alert');
-    alerts.forEach(alert => alert.classList.remove('show'));
+    // Contraer las casillas desplegables
+    const positionGroups = document.querySelectorAll('.position-group');
+    positionGroups.forEach(group => group.style.display = 'none');
 
     // Limpia cualquier contenido en los divs de loot
     const lootList = document.getElementById('lootList');
@@ -550,7 +601,7 @@
             }, 300);
         }, 3000);
     }
-
+    
         function updatePositionFields() {
             const positionType = document.getElementById('positionType').value;
             const relativeFields = document.querySelectorAll('.relative-pos');
@@ -893,7 +944,7 @@
                 return;
             }
             if (lootItems.some(item => item.id === additional1)) {
-                alert("Este ítem ya ha sido agregado.");
+                showAlert("Este ítem ya ha sido agregado.");
                 return;
             }
             var additional2 = document.getElementById('additional2').value;
@@ -1018,9 +1069,9 @@ funct
                 document.getElementById('onFireText').innerText = '¿Is it on fire?';
                 document.getElementById('SizeText').innerText = 'Size:';
                 document.getElementById('copyButton').innerText = 'Copy Command';
-                document.getElementById('AddLootText').innerText = 'Add Loot';
-                document.getElementById('IdiomaText').innerText = 'Change Language';
-                document.getElementById('RefreshText').innerText = 'Refresh Boxes';
+                document.getElementById('AddLootText').innerText = 'Add Loot'; 
+                document.getElementById('RefreshText').innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Boxes';
+                document.getElementById('IdiomaText').innerHTML = '<i class="fas fa-globe"></i> Change Language';
                 document.getElementById('CommandSummonText').innerText = 'Generate command';
                 document.getElementById('positionType').options[0].text = '--Select--';
                 document.getElementById('positionType').options[1].text = 'Relative';
@@ -1071,8 +1122,8 @@ funct
                 document.getElementById('copyButton').innerText = 'Copiar Comando';
                 document.getElementById('AddLootText').innerText = 'Agregar Loot';
                 document.getElementById('CommandSummonText').innerText = 'Generar Comando';
-                document.getElementById('IdiomaText').innerText = 'Cambiar Idioma';
-                document.getElementById('RefreshText').innerText = 'Refrescar Casillas';
+                document.getElementById('RefreshText').innerHTML = '<i class="fas fa-sync-alt"></i> Refrescar Casillas';
+                document.getElementById('IdiomaText').innerHTML = '<i class="fas fa-globe"></i> Cambiar Idioma';
                 document.getElementById('positionType').options[0].text = '--Seleccionar--';
                 document.getElementById('positionType').options[1].text = 'Relativo';
                 document.getElementById('positionType').options[2].text = 'Absoluto';
