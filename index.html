@@ -364,7 +364,7 @@ button.add-loot {
 </head>
 <body>
 <nav class="menu">
-    <div class="menu-icon" onclick="toggleMobileMenu()">☰ Menú</div>
+    <div id="MenuText" class="menu-icon" onclick="toggleMobileMenu()">☰ Menú</div>
     <ul class="menu-list">
         <li><button id="IdiomaText" onclick="toggleLanguage()"><i class="bi bi-translate"></i> Cambiar Idioma</button></li>
         <li><a href="https://discord.com/users/sebasofeek" target="_blank"><i class="bi bi-discord"></i> Discord</a></li>
@@ -549,7 +549,7 @@ button.add-loot {
         </tr>
         <tr id="additionalRows5" class="additional-rows" style="display: none;">
             <td id="ChanceText">Oportunidad:</td>
-            <td><input type="text" id="additional5" placeholder="Proximamente Disponible..." disabled></td>
+            <td><input type="text" id="additional5" placeholder="Proximamente Disponible..."></td>
         </tr>
         <tr id="additionalRows6" class="additional-rows" style="display: none;">
             <td id="VarianteText">Variante:</td>
@@ -614,6 +614,7 @@ button.add-loot {
             <td id="SizeText">Tamaño:</td>
             <td>
                 <select id="additional12">
+                    <option value="">--Seleccionar--</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -876,12 +877,7 @@ function showAlert(messageKey) {
         
 function updateMobOptions() {
     var mobType = document.getElementById('mobType').value;
-    
-    if (lootItems.length > 0 || checkDataTags()) {
-        if (!confirm("Cambiar de mob eliminará los datos actuales. ¿Continuar?")) {
-            return;
-        }
-    }
+
     resetFields();
         
         function resetFields() {
@@ -1188,6 +1184,10 @@ funct
                 document.getElementById('additional10').options[0].text = '--Select--';
                 document.getElementById('additional11').options[0].text = '--Select--';
                 document.getElementById('additional11').options[1].text = 'Yes';
+                document.getElementById('additional12').options[0].text = '--Select--';
+                document.getElementById('additional12').options[1].text = 'Yes';
+                document.getElementById('armor').placeholder = 'Coming Soon...';
+                document.getElementById('additional5').placeholder = 'Coming Soon...';
             } else {
                 currentLanguage = 'es';
                 document.getElementById('mobType').options[0].text = '--Seleccionar--';
@@ -1207,7 +1207,7 @@ funct
                 document.getElementById('BabyText').innerText = 'Bebé:';
                 document.getElementById('BabySText').innerText = 'Bebé (Segundos)';
                 document.getElementById('QuantitySText').innerText = 'Cantidad:';
-                document.getElementById('ChanceText').innerText = 'Probabilidad:';
+                document.getElementById('ChanceText').innerText = 'Oportunidad:';
                 document.getElementById('VarianteText').innerText = 'Variante:';
                 document.getElementById('ShearedText').innerText = '¿Está esquilada?';
                 document.getElementById('isBabyText').innerText = '¿Es bebé?';
@@ -1239,6 +1239,10 @@ funct
                 document.getElementById('additional10').options[0].text = '--Seleccionar--';
                 document.getElementById('additional11').options[0].text = '--Seleccionar--';
                 document.getElementById('additional11').options[1].text = 'Si';
+                document.getElementById('additional12').options[0].text = '--Seleccionar--';
+                document.getElementById('additional12').options[1].text = 'Si';
+                document.getElementById('armor').placeholder = 'Próximamente Disponible...';
+                document.getElementById('additional5').placeholder = 'Próximamente Disponible...';
             }
         }
     </script>
