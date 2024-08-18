@@ -369,7 +369,7 @@ button.add-loot {
     <ul class="menu-list">
         <li><button id="IdiomaText" onclick="toggleLanguage()"><i class="bi bi-translate"></i> Cambiar Idioma</button></li>
         <li><a href="https://discord.com/users/sebasofeek" target="_blank"><i class="bi bi-discord"></i> Discord</a></li>
-        <li><a href="/home"><i class="bi bi-house"></i> Inicio</a></li>
+        <li><a href="/home" id="HomeText"><i class="bi bi-house"></i> Inicio</a></li>
         <li><button id="RefreshText" onclick="resetFields()"><i class="bi bi-arrow-clockwise"></i> Refrescar Casillas</button></li>
     </ul>
 </nav>
@@ -1163,6 +1163,7 @@ funct
                 document.getElementById('AddLootText').innerText = 'Add Loot'; 
                 document.getElementById('RefreshText').innerHTML = '<i class="bi bi-arrow-clockwise"></i> Refresh Boxes';
                 document.getElementById('IdiomaText').innerHTML = '<i class="bi bi-translate"></i> Change Language';
+                document.getElementById('HomeText').innerHTML = '<i class="bi bi-house"></i> Home';
                 document.getElementById('CommandSummonText').innerText = 'Generate command';
                 document.getElementById('positionType').options[0].text = '--Select--';
                 document.getElementById('positionType').options[1].text = 'Relative';
@@ -1220,6 +1221,7 @@ funct
                 document.getElementById('CommandSummonText').innerText = 'Generar Comando';
                 document.getElementById('RefreshText').innerHTML = '<i class="bi bi-arrow-clockwise"></i> Refrescar Casillas';
                 document.getElementById('IdiomaText').innerHTML = '<i class="bi bi-translate"></i> Cambiar Idioma';
+                document.getElementById('HomeText').innerHTML = '<i class="bi bi-house"></i> Inicio';
                 document.getElementById('positionType').options[0].text = '--Seleccionar--';
                 document.getElementById('positionType').options[1].text = 'Relativo';
                 document.getElementById('positionType').options[2].text = 'Absoluto';
