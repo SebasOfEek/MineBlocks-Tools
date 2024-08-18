@@ -458,10 +458,73 @@ button.add-loot {
                 </select>
             </td>  
         </tr>
-        <tr id="armorRow" style="display: none;">
-            <td id="ArmorText">Armadura:</td>
-            <td><input type="text" id="armor" placeholder="Proximamente Disponible..." disabled></td>
-        </tr>
+<tr id="armorRow" style="display: none;">
+    <td id="ArmorText">Armadura:</td>
+    <td>
+        <select id="armor" onchange="toggleArmorOptions()">
+            <option value="">--Seleccionar--</option>
+            <option value="yes">Sí</option>
+            <option value="no">No</option>
+        </select>
+    </td>
+</tr>
+
+<!-- Casillas para seleccionar las piezas de la armadura -->
+<tr id="helmetRow" style="display: none;">
+    <td>Casco:</td>
+    <td>
+        <select id="helmetSelect">
+            <option value="">--Seleccionar--</option>
+            <option value="leather_cap">Casco de Cuero</option>
+            <option value="iron_helmet">Casco de Hierro</option>
+            <option value="gold_helmet">Casco de Oro</option>
+            <option value="diamond_helmet">Casco de Diamante</option>
+            <option value="dragon_scale_helmet">Casco de Escama de Dragón</option>
+        </select>
+    </td>
+</tr>
+
+<tr id="chestplateRow" style="display: none;">
+    <td>Pechera:</td>
+    <td>
+        <select id="chestplateSelect">
+            <option value="">--Seleccionar--</option>
+            <option value="leather_tunic">Pechera de Cuero</option>
+            <option value="iron_chestplate">Pechera de Hierro</option>
+            <option value="gold_chestplate">Pechera de Oro</option>
+            <option value="diamond_chestplate">Pechera de Diamante</option>
+            <option value="dragon_scale_chestplate">Pechera de Escama de Dragón</option>
+        </select>
+    </td>
+</tr>
+
+<tr id="leggingsRow" style="display: none;">
+    <td>Pantalones:</td>
+    <td>
+        <select id="leggingsSelect">
+            <option value="">--Seleccionar--</option>
+            <option value="leather_pants">Pantalones de Cuero</option>
+            <option value="iron_leggings">Pantalones de Hierro</option>
+            <option value="gold_leggings">Pantalones de Oro</option>
+            <option value="diamond_leggings">Pantalones de Diamante</option>
+            <option value="dragon_scale_leggings">Pantalones de Escama de Dragón</option>
+        </select>
+    </td>
+</tr>
+
+<tr id="bootsRow" style="display: none;">
+    <td>Botas:</td>
+    <td>
+        <select id="bootsSelect">
+            <option value="">--Seleccionar--</option>
+            <option value="leather_boots">Botas de Cuero</option>
+            <option value="iron_boots">Botas de Hierro</option>
+            <option value="gold_boots">Botas de Oro</option>
+            <option value="diamond_boots">Botas de Diamante</option>
+            <option value="dragon_scale_boots">Botas de Escama de Dragón</option>
+        </select>
+    </td>
+</tr>
         <tr id="defaultDropsRow">
             <td id="DropDText">Drops por defecto:</td>
             <td>
@@ -642,6 +705,27 @@ button.add-loot {
     const menu = document.querySelector('.menu');
     menu.classList.toggle('show');
 }
+
+function toggleArmorOptions() {
+    const armorSelection = document.getElementById('armor').value;
+    
+    const helmetRow = document.getElementById('helmetRow');
+    const chestplateRow = document.getElementById('chestplateRow');
+    const leggingsRow = document.getElementById('leggingsRow');
+    const bootsRow = document.getElementById('bootsRow');
+
+    if (armorSelection === 'yes') {
+        helmetRow.style.display = 'table-row';
+        chestplateRow.style.display = 'table-row';
+        leggingsRow.style.display = 'table-row';
+        bootsRow.style.display = 'table-row';
+    } else {
+        helmetRow.style.display = 'none';
+        chestplateRow.style.display = 'none';
+        leggingsRow.style.display = 'none';
+        bootsRow.style.display = 'none';
+    }
+}
         
 function resetFields() {
     const inputs = document.querySelectorAll('input, select');
@@ -653,6 +737,9 @@ function resetFields() {
             document.getElementById('outputCommand').textContent = '/summon ';
         }
     });
+
+    // Ocultar las opciones de armadura
+    toggleArmorOptions(); // Aseguramos que las opciones de armadura se oculten
 
     // Contraer todas las casillas desplegables.
     const positionGroups = document.querySelectorAll('.position-group');
@@ -949,6 +1036,9 @@ function updateMobOptions() {
             document.getElementById('positionType').value = '';
             updatePositionFields();
             
+            // Ocultar las opciones de armadura
+            toggleArmorOptions();
+            
             // Reset command output
             document.getElementById('outputCommand').textContent = '/summon ';
         }
@@ -976,6 +1066,15 @@ function updateMobOptions() {
             var charged = document.getElementById('charged').value;
             var baby = document.getElementById('baby').value;
             var babyTime = document.getElementById('babyTime').value;
+            
+            // Obtener los valores de las casillas de armadura
+            var helmet = document.getElementById('helmetSelect').value || '{}';
+            var chestplate = document.getElementById('chestplateSelect').value || '{}';
+            var leggings = document.getElementById('leggingsSelect').value || '{}';
+            var boots = document.getElementById('bootsSelect').value || '{}';
+
+            // Construir la lista de armadura
+            var armorList = `[${helmet === '{}' ? helmet : `"${helmet}"`}, ${chestplate === '{}' ? chestplate : `"${chestplate}"`}, ${leggings === '{}' ? leggings : `"${leggings}"`}, ${boots === '{}' ? boots : `"${boots}"`}]`;
 
             var command = `/summon ${mobType}`;
             if (quantity > 0) command += ` ${quantity}`;
@@ -993,7 +1092,7 @@ function updateMobOptions() {
             if (name) command += `name:"${name}", `;
             if (health) command += `health:${health}, `;
             if (holding && (mobType === 'pigman' || mobType === 'enderman')) command += `holding:"${holding}", `;
-            if (armor && (mobType === 'zombie' || mobType === 'spawnskin')) command += `armor:[{id:"${armor}"}], `;
+            if (armorList !== '[{}, {}, {}, {}]') command += `armor:${armorList}, `;
             if (defaultDrops !== "" && mobType !== 'wolf') command += `defaultDrops:${defaultDrops === 'true' ? true : false}, `;
 
             if (drops === '1' && lootItems.length > 0) {
