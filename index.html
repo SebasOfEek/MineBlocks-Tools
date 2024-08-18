@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
 <style>
 body {
@@ -368,7 +369,7 @@ button.add-loot {
     <ul class="menu-list">
         <li><button id="IdiomaText" onclick="toggleLanguage()"><i class="bi bi-translate"></i> Cambiar Idioma</button></li>
         <li><a href="https://discord.com/users/sebasofeek" target="_blank"><i class="bi bi-discord"></i> Discord</a></li>
-        <li><a href="https://twitter.com" target="_blank"><i class="bi bi-twitter"></i> X</a></li>
+        <li><a href="https://twitter.com" target="_blank"><img src="x-logo-hd.png" id="logoX"> X</a></li>
         <li><button id="RefreshText" onclick="resetFields()"><i class="bi bi-arrow-clockwise"></i> Refrescar Casillas</button></li>
     </ul>
 </nav>
@@ -1188,6 +1189,7 @@ funct
                 document.getElementById('additional12').options[1].text = 'Yes';
                 document.getElementById('armor').placeholder = 'Coming Soon...';
                 document.getElementById('additional5').placeholder = 'Coming Soon...';
+                document.getElementById('MenuText').innerText = '☰ Menu';
             } else {
                 currentLanguage = 'es';
                 document.getElementById('mobType').options[0].text = '--Seleccionar--';
@@ -1243,6 +1245,7 @@ funct
                 document.getElementById('additional12').options[1].text = 'Si';
                 document.getElementById('armor').placeholder = 'Próximamente Disponible...';
                 document.getElementById('additional5').placeholder = 'Próximamente Disponible...';
+                document.getElementById('MenuText').innerText = '☰ Menú';
             }
         }
     </script>
