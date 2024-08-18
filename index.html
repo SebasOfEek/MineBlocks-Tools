@@ -737,6 +737,17 @@ function resetFields() {
             document.getElementById('outputCommand').textContent = '/summon ';
         }
     });
+    
+    // Mostrar solo las casillas que deben ser visibles por defecto
+    document.getElementById('positionType').value = '';
+    updatePositionFields();
+    document.getElementById('defaultDropsRow').style.display = 'table-row';
+    
+    // Ocultar casillas adicionales
+    const rowsToHide = ['creeperChargedRow', 'spawnskinOptions', 'aggroRow', 'handItemRow', 'armorRow', 'babyRow', 'babyTimeRow', 'helmetRow', 'chestplateRow', 'leggingsRow', 'bootsRow'];
+    rowsToHide.forEach(rowId => {
+        document.getElementById(rowId).style.display = 'none';
+    });
 
     // Ocultar las opciones de armadura
     toggleArmorOptions(); // Aseguramos que las opciones de armadura se oculten
