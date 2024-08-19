@@ -289,6 +289,13 @@ button.add-loot {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Efecto de brillo en los botones al ser presionados en PC */
+.menu ul li a:active,
+.menu ul li button:active {
+    box-shadow: 0 0 25px rgba(23, 162, 184, 0.6);
+    transform: scale(0.98);
+}
+
 .menu ul li i {
     margin-right: 13px;
     font-size: 20px; /* Aumenta el tamaño del ícono */
@@ -297,7 +304,6 @@ button.add-loot {
 .menu-icon {
     display: none; /* Oculta el ícono por defecto */
 }
-
 @media (max-width: 600px) {
     .menu {
         max-width: 100%;
