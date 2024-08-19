@@ -471,7 +471,7 @@ button.add-loot {
 
 <!-- Casillas para seleccionar las piezas de la armadura -->
 <tr id="helmetRow" style="display: none;">
-    <td>Casco:</td>
+    <td id="HelmetText">Casco:</td>
     <td>
         <select id="helmetSelect">
             <option value="">--Seleccionar--</option>
@@ -485,7 +485,7 @@ button.add-loot {
 </tr>
 
 <tr id="chestplateRow" style="display: none;">
-    <td>Pechera:</td>
+    <td id="ChestplateText">Pechera:</td>
     <td>
         <select id="chestplateSelect">
             <option value="">--Seleccionar--</option>
@@ -499,7 +499,7 @@ button.add-loot {
 </tr>
 
 <tr id="leggingsRow" style="display: none;">
-    <td>Pantalones:</td>
+    <td id="LeggingsText">Pantalones:</td>
     <td>
         <select id="leggingsSelect">
             <option value="">--Seleccionar--</option>
@@ -513,7 +513,7 @@ button.add-loot {
 </tr>
 
 <tr id="bootsRow" style="display: none;">
-    <td>Botas:</td>
+    <td id="BootsText">Botas:</td>
     <td>
         <select id="bootsSelect">
             <option value="">--Seleccionar--</option>
@@ -1301,6 +1301,40 @@ funct
                 document.getElementById('armor').placeholder = 'Coming Soon...';
                 document.getElementById('additional5').placeholder = 'Coming Soon...';
                 document.getElementById('MenuText').innerText = '☰ Menu';
+                document.getElementById('armor').options[0].text = '--Select--';
+                document.getElementById('armor').options[1].text = 'Yes';
+                //Casco
+                document.getElementById('HelmetText').innerText = 'Helmet';
+                document.getElementById('helmetSelect').options[0].text = '--Select--';
+                document.getElementById('helmetSelect').options[1].text = 'Leather Cap';
+                document.getElementById('helmetSelect').options[2].text = 'Iron Helmet';
+                document.getElementById('helmetSelect').options[3].text = 'Gold Helmet';
+                document.getElementById('helmetSelect').options[4].text = 'Diamond Helmet';
+                document.getElementById('helmetSelect').options[5].text = 'Dragon Scale Helmet';
+                //Pechera
+                document.getElementById('ChestplateText').innerText = 'Chestplate';
+                document.getElementById('chestplateSelect').options[0].text = '--Select--';
+                document.getElementById('chestplateSelect').options[1].text = 'Leather Chestplate';
+                document.getElementById('chestplateSelect').options[2].text = 'Iron Chestplate';
+                document.getElementById('chestplateSelect').options[3].text = 'Gold Chestplate';
+                document.getElementById('chestplateSelect').options[4].text = 'Diamond Chestplate';
+                document.getElementById('chestplateSelect').options[5].text = 'Dragon Scale Chestplate';
+                //Pantalones
+                document.getElementById('LeggingsText').innerText = 'Leggingss';
+                document.getElementById('leggingsSelect').options[0].text = '--Select--';
+                document.getElementById('leggingsSelect').options[1].text = 'Leather Leggings';
+                document.getElementById('leggingsSelect').options[2].text = 'Iron Leggings';
+                document.getElementById('leggingsSelect').options[3].text = 'Gold leggings';
+                document.getElementById('leggingsSelect').options[4].text = 'Diamond Leggings';
+                document.getElementById('leggingsSelect').options[5].text = 'Dragon Scale Leggings';
+                //Botas
+                document.getElementById('BootsText').innerText = 'Boots';
+                document.getElementById('bootsSelect').options[0].text = '--Select--';
+                document.getElementById('bootsSelect').options[1].text = 'Leather Boots';
+                document.getElementById('bootsSelect').options[2].text = 'Iron Boots';
+                document.getElementById('bootsSelect').options[3].text = 'Gold Boots';
+                document.getElementById('bootsSelect').options[4].text = 'Diamond Boots';
+                document.getElementById('bootsSelect').options[5].text = 'Dragon Scale Boots';
             } else {
                 currentLanguage = 'es';
                 document.getElementById('mobType').options[0].text = '--Seleccionar--';
@@ -1358,6 +1392,40 @@ funct
                 document.getElementById('armor').placeholder = 'Próximamente Disponible...';
                 document.getElementById('additional5').placeholder = 'Próximamente Disponible...';
                 document.getElementById('MenuText').innerText = '☰ Menú';
+                document.getElementById('armor').options[0].text = '--Seleccionar--';
+                document.getElementById('armor').options[1].text = 'Si';
+                //Casco
+                document.getElementById('HelmetText').innerText = 'Casco';
+                document.getElementById('helmetSelect').options[0].text = '--Seleccionar--';
+                document.getElementById('helmetSelect').options[1].text = 'Casco de Cuero';
+                document.getElementById('helmetSelect').options[2].text = 'Casco de Hierro';
+                document.getElementById('helmetSelect').options[3].text = 'Casco de Oro';
+                document.getElementById('helmetSelect').options[4].text = 'Casco de Diamante';
+                document.getElementById('helmetSelect').options[5].text = 'Casco de Escama de Dragón';
+                //Pechera
+                document.getElementById('ChestplateText').innerText = 'Pechera';
+                document.getElementById('chestplateSelect').options[0].text = '--Seleccionar--';
+                document.getElementById('chestplateSelect').options[1].text = 'Pechera de Cuero';
+                document.getElementById('chestplateSelect').options[2].text = 'Pechera de Hierro';
+                document.getElementById('chestplateSelect').options[3].text = 'Pechera de Oro';
+                document.getElementById('chestplateSelect').options[4].text = 'Pechera de Diamante';
+                document.getElementById('chestplateSelect').options[5].text = 'Pechera de Escama de Dragón';
+                //Pantalones
+                document.getElementById('LeggingsText').innerText = 'Pantalones';
+                document.getElementById('leggingsSelect').options[0].text = '--Seleccionar--';
+                document.getElementById('leggingsSelect').options[1].text = 'Pantalones de Cuero';
+                document.getElementById('leggingsSelect').options[2].text = 'Pantalones de Hierro';
+                document.getElementById('leggingsSelect').options[3].text = 'Pantalones de Oro';
+                document.getElementById('leggingsSelect').options[4].text = 'Pantalones de Diamante';
+                document.getElementById('leggingsSelect').options[5].text = 'Pantalones de Escama de Dragón';
+                //Botas
+                document.getElementById('BootsText').innerText = 'Botas';
+                document.getElementById('bootsSelect').options[0].text = '--Seleccionar--';
+                document.getElementById('bootsSelect').options[1].text = 'Botas de Cuero';
+                document.getElementById('bootsSelect').options[2].text = 'Botas de Hierro';
+                document.getElementById('bootsSelect').options[3].text = 'Botas de Oro';
+                document.getElementById('bootsSelect').options[4].text = 'Botas de Diamante';
+                document.getElementById('bootsSelect').options[5].text = 'Botas de Escama de Dragón';
             }
         }
     </script>
