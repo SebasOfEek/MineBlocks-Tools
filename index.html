@@ -368,6 +368,23 @@ button.add-loot {
         display: flex; /* Mostrar el menú cuando esté activo */
     }
 }
+
+@keyframes fadeInSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animated-row {
+    display: table-row;
+    opacity: 0;
+    animation: fadeInSlideDown 0.4s ease forwards;
+}
 </style>
 </head>
 <body>
@@ -764,7 +781,17 @@ document.querySelectorAll('.menu ul.menu-list li a, .menu ul.menu-list li button
     item.addEventListener('click', closeMobileMenu);
 });
 
-// Función para actualizar las casillas de armadura
+// Función para limpiar subcasillas
+function clearSubFields(containerId) {
+    const container = document.getElementById(containerId);
+    const inputs = container.querySelectorAll('input, select');
+    inputs.forEach(input => {
+        input.value = '';  // Resetear a valor predeterminado
+        input.checked = false; // Desmarcar cualquier checkbox/radio
+    });
+}
+
+// Función para alternar las opciones de armadura
 function toggleArmorOptions() {
     const armorSelection = document.getElementById('armor').value;
 
@@ -783,6 +810,12 @@ function toggleArmorOptions() {
         chestplateRow.style.display = 'none';
         leggingsRow.style.display = 'none';
         bootsRow.style.display = 'none';
+
+        // Limpiar los subcampos de armadura cuando se cierre
+        clearSubFields('helmetRow');
+        clearSubFields('chestplateRow');
+        clearSubFields('leggingsRow');
+        clearSubFields('bootsRow');
     }
 }
 
@@ -959,6 +992,15 @@ function updateMobOptions() {
         armorRow.style.display = 'table-row'; 
     } else if (mobType === 'bat' || mobType === 'wolf') {
         defaultDropsRow.style.display = 'none';
+    } else {
+        // Limpiar subcampos relevantes si el tipo de mob cambia
+        clearSubFields('creeperChargedRow');
+        clearSubFields('spawnskinOptions');
+        clearSubFields('aggroRow');
+        clearSubFields('handItemRow');
+        clearSubFields('armorRow');
+        clearSubFields('babyRow');
+        clearSubFields('babyTimeRow');
     }
 
     const animalMobs = ['cow', 'sheep', 'mooshroom', 'pig', 'rabbit', 'wolf', 'cowctus', 'chicken'];
@@ -996,7 +1038,7 @@ function generateCommand() {
     var name = document.getElementById('name').value;
     var health = document.getElementById('health').value;
     var holding = document.getElementById('holding').value;
-    var armor = document.getElementById('armor').value;
+    var armorSelection = document.getElementById('armor').value;
     var defaultDrops = document.getElementById('defaultDrops').value;
     var drops = document.getElementById('drops').value;
     var skin = document.getElementById('skin').value;
@@ -1030,7 +1072,7 @@ function generateCommand() {
     if (name) command += `name:"${name}", `;
     if (health) command += `health:${health}, `;
     if (holding && (mobType === 'pigman' || mobType === 'enderman')) command += `holding:"${holding}", `;
-    if (armorList !== '[{}, {}, {}, {}]') command += `armor:${armorList}, `;
+    if (armorSelection === 'yes' && armorList !== '[{}, {}, {}, {}]') command += `armor:${armorList}, `;
     if (defaultDrops !== "" && mobType !== 'wolf') command += `defaultDrops:${defaultDrops === 'true' ? true : false}, `;
 
     if (drops === '1' && lootItems.length > 0) {
@@ -1162,6 +1204,7 @@ function copyCommand() {
         }, 2000);
     });
 }
+
         
         function toggleLanguage() {
             if (currentLanguage === 'es') {
