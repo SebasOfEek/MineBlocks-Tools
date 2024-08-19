@@ -446,16 +446,7 @@ button.add-loot {
         <tr id="handItemRow" style="display: none;">
             <td id="ItemHandText">Item en mano:</td>
             <td>
-               <select id="holding">
-                   <option value="">--Seleccionar--</option>
-                   <option value="stairs_wooden_planks">Wooden Planks Stairs</option>
-                   <option value="pressure_plate_wooden">Wooden Pressure Plate</option>
-                   <option value="wooden_shovel">Wooden Shovel</option>
-                   <option value="wooden_sword">Wooden Sword</option>
-                   <option value="wool">Wool</option>
-                   <option value="backdrop_wool">Wool Backdrop</option>
-                   <option value="yellow_flower">Yellow Flower</option>
-                </select>
+               <select id="holding"></select>
             </td>  
         </tr>
 <tr id="armorRow" style="display: none;">
@@ -587,16 +578,7 @@ button.add-loot {
         <tr id="additionalRows" class="additional-rows" style="display: none;">
             <td>Drops items:</td>
             <td>
-                <select id="additional1">
-                    <option value="">--Seleccionar--</option>
-                    <option value="stairs_wooden_planks">Wooden Planks Stairs</option>
-                    <option value="pressure_plate_wooden">Wooden Pressure Plate</option>
-                    <option value="wooden_shovel">Wooden Shovel</option>
-                    <option value="wooden_sword">Wooden Sword</option>
-                    <option value="wool">Wool</option>
-                    <option value="backdrop_wool">Wool Backdrop</option>
-                    <option value="yellow_flower">Yellow Flower</option>
-                </select>
+                <select id="additional1"></select>
             </td>  
         </tr>
         <tr id="additionalRows2" class="additional-rows" style="display: none;">
@@ -697,88 +679,50 @@ button.add-loot {
     <pre id="outputCommand">/summon </pre>
 
     <script>    
-    
-        let lootItems = [];
-        let currentLanguage = 'es';
-        
-        function toggleMobileMenu() {
-    const menu = document.querySelector('.menu');
-    menu.classList.toggle('show');
+let lootItems = [];
+let currentLanguage = 'es';
+
+// Estructura de datos compartida para los ítems
+const itemMapping = {
+    'stairs_wooden_planks': 'Wooden Planks Stairs',
+    'pressure_plate_wooden': 'Wooden Pressure Plate',
+    'wooden_shovel': 'Wooden Shovel',
+    'wooden_sword': 'Wooden Sword',
+    'wool': 'Wool',
+    'backdrop_wool': 'Wool Backdrop',
+    'yellow_flower': 'Yellow Flower',
+    'yellow_flower_red': 'Yellow Red',
+    'yellow_flower_blue': 'Yellow Blue'
+};
+
+// Generar las opciones de los select
+const itemOptions = Object.entries(itemMapping).map(([id, name]) => 
+    `<option value="${id}">${name}</option>`
+).join('');
+
+// Insertar la lista de opciones en los select correspondientes
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('holding').innerHTML = `<option value="">--Seleccionar--</option>` + itemOptions;
+    document.getElementById('additional1').innerHTML = `<option value="">--Seleccionar--</option>` + itemOptions;
+});
+
+// Función para obtener el nombre legible basado en el ID
+function getReadableName(id) {
+    return itemMapping[id] || id;
 }
 
-function toggleArmorOptions() {
-    const armorSelection = document.getElementById('armor').value;
-    
-    const helmetRow = document.getElementById('helmetRow');
-    const chestplateRow = document.getElementById('chestplateRow');
-    const leggingsRow = document.getElementById('leggingsRow');
-    const bootsRow = document.getElementById('bootsRow');
-
-    if (armorSelection === 'yes') {
-        helmetRow.style.display = 'table-row';
-        chestplateRow.style.display = 'table-row';
-        leggingsRow.style.display = 'table-row';
-        bootsRow.style.display = 'table-row';
-    } else {
-        helmetRow.style.display = 'none';
-        chestplateRow.style.display = 'none';
-        leggingsRow.style.display = 'none';
-        bootsRow.style.display = 'none';
-    }
-}
-        
-function resetFields() {
-    const inputs = document.querySelectorAll('input, select');
-    inputs.forEach(input => {
-        if (input.type === 'checkbox' || input.type === 'radio') {
-            input.checked = false;
-        } else {
-            input.value = '';
-            document.getElementById('outputCommand').textContent = '/summon ';
-        }
-    });
-    
-    // Mostrar solo las casillas que deben ser visibles por defecto
-    document.getElementById('positionType').value = '';
-    updatePositionFields();
-    document.getElementById('defaultDropsRow').style.display = 'table-row';
-    
-    // Ocultar casillas adicionales
-    const rowsToHide = ['creeperChargedRow', 'spawnskinOptions', 'aggroRow', 'handItemRow', 'armorRow', 'babyRow', 'babyTimeRow', 'helmetRow', 'chestplateRow', 'leggingsRow', 'bootsRow'];
-    rowsToHide.forEach(rowId => {
-        document.getElementById(rowId).style.display = 'none';
-    });
-
-    // Ocultar las opciones de armadura
-    toggleArmorOptions(); // Aseguramos que las opciones de armadura se oculten
-
-    // Contraer todas las casillas desplegables.
-    const positionGroups = document.querySelectorAll('.position-group');
-    positionGroups.forEach(group => group.style.display = 'none');
-
-    // Limpia cualquier contenido en los divs de loot.
-    const lootList = document.getElementById('lootList');
-    if (lootList) {
-        lootList.innerHTML = '';
-    }
-
-    // Ocultar todas las filas adicionales
-    const additionalRows = document.querySelectorAll('.additional-rows');
-    additionalRows.forEach(row => row.style.display = 'none');
-}
-
+// Función para mostrar alertas con mensajes localizados
 function showAlert(messageKey) {
     const messages = {
         es: {
             AddLoot: "Por favor, seleccione un ítem",
             AddLootCase: "Este ítem ya ha sido agregado.",
             commandGenerated: "Por favor, seleccione un tipo de mob.",
-            
         },
         en: {
             AddLoot: "Please select an item.",
             AddLootCase: "This item has already been added.",
-            commandGenerated: "Please select a mob type",
+            commandGenerated: "Please select a mob type.",
         }
     };
 
@@ -796,452 +740,421 @@ function showAlert(messageKey) {
     }, 3000);
 }
 
-//
-        function updatePositionFields() {
-            const positionType = document.getElementById('positionType').value;
-            const relativeFields = document.querySelectorAll('.relative-pos');
-            const absoluteFields = document.querySelectorAll('.absolute-pos');
-            
-            relativeFields.forEach(row => row.style.display = 'none');
-            absoluteFields.forEach(row => row.style.display = 'none');
+// Función para alternar el menú móvil
+function toggleMobileMenu() {
+    const menu = document.querySelector('.menu');
+    menu.classList.toggle('show');
+}
 
-            if (positionType === 'relative') {
-                relativeFields.forEach(row => row.style.display = 'table-row');
-            } else if (positionType === 'absolute') {
-                absoluteFields.forEach(row => row.style.display = 'table-row');
-            }
+// Función para cerrar el menú móvil después de seleccionar una opción
+function closeMobileMenu() {
+    const menu = document.querySelector('.menu');
+    menu.classList.remove('show');
+}
+
+// Añadir el evento de cierre a cada enlace o botón del menú
+document.querySelectorAll('.menu ul.menu-list li a, .menu ul.menu-list li button').forEach(item => {
+    item.addEventListener('click', closeMobileMenu);
+});
+
+// Función para actualizar las casillas de armadura
+function toggleArmorOptions() {
+    const armorSelection = document.getElementById('armor').value;
+
+    const helmetRow = document.getElementById('helmetRow');
+    const chestplateRow = document.getElementById('chestplateRow');
+    const leggingsRow = document.getElementById('leggingsRow');
+    const bootsRow = document.getElementById('bootsRow');
+
+    if (armorSelection === 'yes') {
+        helmetRow.style.display = 'table-row';
+        chestplateRow.style.display = 'table-row';
+        leggingsRow.style.display = 'table-row';
+        bootsRow.style.display = 'table-row';
+    } else {
+        helmetRow.style.display = 'none';
+        chestplateRow.style.display = 'none';
+        leggingsRow.style.display = 'none';
+        bootsRow.style.display = 'none';
+    }
+}
+
+// Función para restablecer los campos del formulario
+function resetFields() {
+    const inputs = document.querySelectorAll('input, select');
+    inputs.forEach(input => {
+        if (input.type === 'checkbox' || input.type === 'radio') {
+            input.checked = false;
+        } else {
+            input.value = '';
+            document.getElementById('outputCommand').textContent = '/summon ';
+        }
+    });
+
+    // Mostrar solo las casillas que deben ser visibles por defecto
+    document.getElementById('positionType').value = '';
+    updatePositionFields();
+    document.getElementById('defaultDropsRow').style.display = 'table-row';
+
+    // Ocultar casillas adicionales
+    const rowsToHide = ['creeperChargedRow', 'spawnskinOptions', 'aggroRow', 'handItemRow', 'armorRow', 'babyRow', 'babyTimeRow', 'helmetRow', 'chestplateRow', 'leggingsRow', 'bootsRow'];
+    rowsToHide.forEach(rowId => {
+        document.getElementById(rowId).style.display = 'none';
+    });
+
+    // Ocultar las opciones de armadura
+    toggleArmorOptions(); // Asegura que las opciones de armadura se oculten
+
+    // Contraer todas las casillas desplegables.
+    const positionGroups = document.querySelectorAll('.position-group');
+    positionGroups.forEach(group => group.style.display = 'none');
+
+    // Limpia cualquier contenido en los divs de loot.
+    const lootList = document.getElementById('lootList');
+    if (lootList) {
+        lootList.innerHTML = '';
+    }
+
+    // Ocultar todas las filas adicionales
+    const additionalRows = document.querySelectorAll('.additional-rows');
+    additionalRows.forEach(row => row.style.display = 'none');
+}
+
+// Función para actualizar los campos de posición
+function updatePositionFields() {
+    const positionType = document.getElementById('positionType').value;
+    const relativeFields = document.querySelectorAll('.relative-pos');
+    const absoluteFields = document.querySelectorAll('.absolute-pos');
+
+    relativeFields.forEach(row => row.style.display = 'none');
+    absoluteFields.forEach(row => row.style.display = 'none');
+
+    if (positionType === 'relative') {
+        relativeFields.forEach(row => row.style.display = 'table-row');
+    } else if (positionType === 'absolute') {
+        absoluteFields.forEach(row => row.style.display = 'table-row');
+    }
+}
+
+// Función para actualizar las opciones basadas en las condiciones del mob
+function updateConditionals() {
+    const drops = document.getElementById('drops').value;
+    const mobType = document.getElementById('mobType').value;
+    const additionalRows = document.querySelectorAll('.additional-rows');
+
+    // Resetear la visibilidad de todas las filas adicionales
+    additionalRows.forEach(row => row.style.display = 'none');
+
+    if (drops === '1') {
+        document.getElementById('additionalRows').style.display = 'table-row';
+        document.getElementById('additionalRows2').style.display = 'table-row';
+        document.getElementById('additionalRows3').style.display = 'table-row';
+        document.getElementById('additionalRows4').style.display = 'table-row';
+        document.getElementById('additionalRows5').style.display = 'table-row';
+        document.getElementById('additionalRows11').style.display = 'table-row';
+
+        const animalMobs = ['cow', 'sheep', 'mooshroom', 'pig', 'rabbit', 'wolf', 'cowctus', 'chicken'];
+        const babyRow = document.getElementById('additionalRows9');
+        if (animalMobs.includes(mobType) && mobType !== 'squid' && mobType !== 'bat') {
+            babyRow.style.display = 'table-row';
         }
 
-        function updateConditionals() {
-            const drops = document.getElementById('drops').value;
-            const mobType = document.getElementById('mobType').value;
-            const additionalRows = document.querySelectorAll('.additional-rows');
-
-            // Resetear la visibilidad de todas las filas adicionales
-            additionalRows.forEach(row => row.style.display = 'none');
-
-            if (drops === '1') {
-                document.getElementById('additionalRows').style.display = 'table-row';
-                document.getElementById('additionalRows2').style.display = 'table-row';
-                document.getElementById('additionalRows3').style.display = 'table-row';
-                document.getElementById('additionalRows4').style.display = 'table-row';
-                document.getElementById('additionalRows5').style.display = 'table-row';
-                document.getElementById('additionalRows11').style.display = 'table-row';
-                
-                const animalMobs = ['cow', 'sheep', 'mooshroom', 'pig', 'rabbit', 'wolf', 'cowctus', 'chicken'];
-                const babyRow = document.getElementById('additionalRows9');
-                if (animalMobs.includes(mobType) && mobType !== 'squid' && mobType !== 'bat') {
-                    babyRow.style.display = 'table-row';
-                }
-
-                if (mobType === 'cow' || mobType === 'mooshroom' || mobType === 'cowctus') {
-                    document.getElementById('additionalRows6').style.display = 'table-row';
-                }
-
-                if (mobType === 'sheep') {
-                    document.getElementById('additionalRows7').style.display = 'table-row';
-                    additional7.disabled = true;
-                }
-
-                if (mobType === 'sheep') {
-                    document.getElementById('additionalRows10').style.display = 'table-row';
-                }
-
-                if (mobType === 'slime' || mobType === 'magmacube') {
-                    document.getElementById('additionalRows12').style.display = 'table-row';
-                }
-            }
+        if (mobType === 'cow' || mobType === 'mooshroom' || mobType === 'cowctus') {
+            document.getElementById('additionalRows6').style.display = 'table-row';
         }
 
-        document.getElementById('quantity').addEventListener('input', function() {
-            var quantityInput = document.getElementById('quantity');
-            var value = parseInt(quantityInput.value, 10);
-
-            if (value > 20) {
-                quantityInput.value = 20;
-            }
-            
-            if (value < 1) {
-                quantityInput.value = 1;
-            }
-        });
-        document.getElementById('additional2').addEventListener('input', function() {
-            var quantityInput = document.getElementById('additional2');
-            var value = parseInt(quantityInput.value, 10);
-
-            if (value > 10000) {
-                quantityInput.value = 10000;
-            }
-            
-            if (value < 1) {
-                quantityInput.value = 1;
-            }
-        });
-        document.getElementById('additional3').addEventListener('input', function() {
-            var quantityInput = document.getElementById('additional3');
-            var value = parseInt(quantityInput.value, 10);
-
-            if (value > 10000) {
-                quantityInput.value = 10000;
-            }
-            
-            if (value < 1) {
-                quantityInput.value = 1;
-            }
-        });
-        document.getElementById('additional4').addEventListener('input', function() {
-            var quantityInput = document.getElementById('additional4');
-            var value = parseInt(quantityInput.value, 10);
-
-            if (value > 10000) {
-                quantityInput.value = 10000;
-            }
-            
-            if (value < 1) {
-                quantityInput.value = 1;
-            }
-        });
-        document.getElementById('health').addEventListener('input', function() {
-            var quantityInput = document.getElementById('health');
-            var value = parseInt(quantityInput.value, 10);
-
-            if (value > 100000) {
-                quantityInput.value = 100000;
-            }
-            
-            if (value < 1) {
-                quantityInput.value = 1;
-            }
-        });
-        document.getElementById('babyTime').addEventListener('input', function() {
-            var quantityInput = document.getElementById('babyTime');
-            var value = parseInt(quantityInput.value, 10);
-
-            if (value > 86400) {
-                quantityInput.value = 86400;
-            }
-            
-            if (value < 1) {
-                quantityInput.value = 1;
-            }
-        });
-
-        function handleBabyChange() {
-            const baby = document.getElementById('baby').value;
-            const babyTimeRow = document.getElementById('babyTimeRow');
-            const shearedInput = document.getElementById('additional7');
-
-            if (baby === 'time') {
-                babyTimeRow.style.display = 'table-row';
-            } else {
-                babyTimeRow.style.display = 'none';
-            }
-
-            if (document.getElementById('mobType').value === 'sheep' && baby === 'true') {
-                shearedInput.value = '';
-                shearedInput.disabled = true;
-            } else {
-                shearedInput.disabled = false;
-            }
+        if (mobType === 'sheep') {
+            document.getElementById('additionalRows7').style.display = 'table-row';
+            document.getElementById('additionalRows10').style.display = 'table-row';
         }
-/*
-        function handleShearedChange() {
-            const sheared = document.getElementById('additional7').value;
-            const color = document.getElementById('additional10');
-            const baby = document.getElementById('additional9');
-            
-            if (sheared === 'true') {
-                color.value = '';
-                color.disabled = true;
-                baby.disabled = true;
-            } else {
-                color.disabled = false;
-                baby.disabled = false;
-            }
-        }
-*/
-        function handleColorChange() {
-            const color = document.getElementById('additional10').value;
-            const sheared = document.getElementById('additional7');
-            const baby = document.getElementById('additional9');
 
-            if (color !== '') {
-                sheared.value = '';
-                sheared.disabled = true;
-            } else {
-                baby.disabled = false;
-            }
-            
+        if (mobType === 'slime' || mobType === 'magmacube') {
+            document.getElementById('additionalRows12').style.display = 'table-row';
         }
-        
+    }
+}
+
+// Función para manejar los cambios en la opción "baby"
+function handleBabyChange() {
+    const baby = document.getElementById('baby').value;
+    const babyTimeRow = document.getElementById('babyTimeRow');
+    const shearedInput = document.getElementById('additional7');
+
+    if (baby === 'time') {
+        babyTimeRow.style.display = 'table-row';
+    } else {
+        babyTimeRow.style.display = 'none';
+    }
+
+    if (document.getElementById('mobType').value === 'sheep' && baby === 'true') {
+        shearedInput.value = '';
+        shearedInput.disabled = true;
+    } else {
+        shearedInput.disabled = false;
+    }
+}
+
+// Función para manejar los cambios en la opción "color"
+function handleColorChange() {
+    const color = document.getElementById('additional10').value;
+    const sheared = document.getElementById('additional7');
+    const baby = document.getElementById('additional9');
+
+    if (color !== '') {
+        sheared.value = '';
+        sheared.disabled = true;
+    } else {
+        sheared.disabled = false;
+    }
+}
+
+// Función para actualizar las opciones del mob
 function updateMobOptions() {
     var mobType = document.getElementById('mobType').value;
 
+    // Asegúrate de restablecer todos los campos y opciones antes de aplicar las nuevas opciones
     resetFields();
-        
-        function resetFields() {
-            document.getElementById('quantity').value = '';
-            document.getElementById('posX').value = '';
-            document.getElementById('posY').value = '';
-            document.getElementById('absPosX').value = '';
-            document.getElementById('absPosY').value = '';
-            document.getElementById('name').value = '';
-            document.getElementById('health').value = '';
-            document.getElementById('holding').value = '';
-            document.getElementById('armor').value = '';
-            document.getElementById('defaultDrops').value = '';
-            document.getElementById('drops').value = '';
-            document.getElementById('skin').value = '';
-            document.getElementById('aggro').value = '';
-            document.getElementById('charged').value = '';
-            document.getElementById('baby').value = '';
-            document.getElementById('babyTime').value = '';
-            document.querySelectorAll('.additional-rows select, .additional-rows input').forEach(el => el.value = '');
-            document.querySelectorAll('.additional-rows select, .additional-rows input').forEach(el => el.disabled = false);
-            lootItems = [];
-            displayLootItems();
-        }
 
-            var creeperChargedRow = document.getElementById('creeperChargedRow');
-            var spawnskinOptions = document.getElementById('spawnskinOptions');
-            var aggroRow = document.getElementById('aggroRow');
-            var handItemRow = document.getElementById('handItemRow');
-            var armorRow = document.getElementById('armorRow');
-            var babyRow = document.getElementById('babyRow');
-            var babyTimeRow = document.getElementById('babyTimeRow');
-            var defaultDropsRow = document.getElementById('defaultDropsRow');
+    // Actualiza la casilla de tipo de mob (si es necesario)
+    if (mobType) {
+        document.getElementById('mobType').value = mobType;
+    }
 
-            creeperChargedRow.style.display = 'none';
-            spawnskinOptions.style.display = 'none';
-            aggroRow.style.display = 'none';
-            handItemRow.style.display = 'none';
-            armorRow.style.display = 'none';
-            babyRow.style.display = 'none';
-            babyTimeRow.style.display = 'none';
-            defaultDropsRow.style.display = 'table-row';
+    // Actualizar la visibilidad de las filas según el tipo de mob
+    var creeperChargedRow = document.getElementById('creeperChargedRow');
+    var spawnskinOptions = document.getElementById('spawnskinOptions');
+    var aggroRow = document.getElementById('aggroRow');
+    var handItemRow = document.getElementById('handItemRow');
+    var armorRow = document.getElementById('armorRow');
+    var babyRow = document.getElementById('babyRow');
+    var babyTimeRow = document.getElementById('babyTimeRow');
+    var defaultDropsRow = document.getElementById('defaultDropsRow');
 
-            if (mobType === 'creeper') {
-                creeperChargedRow.style.display = 'table-row';
-            } else if (mobType === 'spawnskin') {
-                spawnskinOptions.style.display = 'table-row';
-                aggroRow.style.display = 'table-row';
-                armorRow.style.display = 'table-row';
-                defaultDropsRow.style.display = 'none';
-            } else if (mobType === 'pigman' || mobType === 'enderman') {
-                handItemRow.style.display = 'table-row';
-            } else if (mobType === 'zombie') {
-                armorRow.style.display = 'table-row'; 
-            } else if (mobType === 'bat' || mobType === 'wolf') {
-                defaultDropsRow.style.display = 'none';
-            }
-            
-            var animalMobs = ['cow', 'sheep', 'mooshroom', 'pig', 'rabbit', 'wolf', 'cowctus', 'chicken'];
-            if (animalMobs.includes(mobType)) {
-                babyRow.style.display = 'table-row';
-            }
+    creeperChargedRow.style.display = 'none';
+    spawnskinOptions.style.display = 'none';
+    aggroRow.style.display = 'none';
+    handItemRow.style.display = 'none';
+    armorRow.style.display = 'none';
+    babyRow.style.display = 'none';
+    babyTimeRow.style.display = 'none';
+    defaultDropsRow.style.display = 'table-row';
 
-            // Actualizar los Loot Tags
-            updateConditionals();
+    if (mobType === 'creeper') {
+        creeperChargedRow.style.display = 'table-row';
+    } else if (mobType === 'spawnskin') {
+        spawnskinOptions.style.display = 'table-row';
+        aggroRow.style.display = 'table-row';
+        armorRow.style.display = 'table-row';
+        defaultDropsRow.style.display = 'none';
+    } else if (mobType === 'pigman' || mobType === 'enderman') {
+        handItemRow.style.display = 'table-row';
+    } else if (mobType === 'zombie') {
+        armorRow.style.display = 'table-row'; 
+    } else if (mobType === 'bat' || mobType === 'wolf') {
+        defaultDropsRow.style.display = 'none';
+    }
 
-            // Contraer la sección de Posición cuando se cambia el tipo de mob
-            document.getElementById('positionType').value = '';
-            updatePositionFields();
-            
-            // Ocultar las opciones de armadura
-            toggleArmorOptions();
-            
-            // Reset command output
-            document.getElementById('outputCommand').textContent = '/summon ';
-        }
+    const animalMobs = ['cow', 'sheep', 'mooshroom', 'pig', 'rabbit', 'wolf', 'cowctus', 'chicken'];
+    if (animalMobs.includes(mobType)) {
+        babyRow.style.display = 'table-row';
+    }
 
-        function generateCommand() {
-            var mobType = document.getElementById('mobType').value;
-            if (!mobType) {
-                showAlert("commandGenerated");
-                return;
-            }
+    // Actualizar los Loot Tags y otras condiciones
+    updateConditionals();
 
-            var quantity = document.getElementById('quantity').value || 1;
-            var posX = document.getElementById('posX').value;
-            var posY = document.getElementById('posY').value;
-            var absPosX = document.getElementById('absPosX').value;
-            var absPosY = document.getElementById('absPosY').value;
-            var name = document.getElementById('name').value;
-            var health = document.getElementById('health').value;
-            var holding = document.getElementById('holding').value;
-            var armor = document.getElementById('armor').value;
-            var defaultDrops = document.getElementById('defaultDrops').value;
-            var drops = document.getElementById('drops').value;
-            var skin = document.getElementById('skin').value;
-            var aggro = document.getElementById('aggro').value;
-            var charged = document.getElementById('charged').value;
-            var baby = document.getElementById('baby').value;
-            var babyTime = document.getElementById('babyTime').value;
-            
-            // Obtener los valores de las casillas de armadura
-            var helmet = document.getElementById('helmetSelect').value || '{}';
-            var chestplate = document.getElementById('chestplateSelect').value || '{}';
-            var leggings = document.getElementById('leggingsSelect').value || '{}';
-            var boots = document.getElementById('bootsSelect').value || '{}';
+    // Contraer la sección de Posición cuando se cambia el tipo de mob
+    document.getElementById('positionType').value = '';
+    updatePositionFields();
 
-            // Construir la lista de armadura
-            var armorList = `[${helmet === '{}' ? helmet : `"${helmet}"`}, ${chestplate === '{}' ? chestplate : `"${chestplate}"`}, ${leggings === '{}' ? leggings : `"${leggings}"`}, ${boots === '{}' ? boots : `"${boots}"`}]`;
+    // Ocultar las opciones de armadura si no son aplicables
+    toggleArmorOptions();
 
-            var command = `/summon ${mobType}`;
-            if (quantity > 0) command += ` ${quantity}`;
+    // Resetear el comando de salida
+    document.getElementById('outputCommand').textContent = '/summon ';
+}
 
-            if (document.getElementById('positionType').value === 'relative') {
-                command += ` ~${posX || ""} ~${posY || ""}`;
-            } else if (document.getElementById('positionType').value === 'absolute') {
-                command += ` ${absPosX || ""} ${absPosY || ""}`;
-            } else if (checkDataTags()) {
-                command += ` ~ ~`;
-            }
-            
-            command += ` {`;
+// Función para generar el comando basado en las selecciones
+function generateCommand() {
+    var mobType = document.getElementById('mobType').value;
+    if (!mobType) {
+        showAlert("commandGenerated");
+        return;
+    }
 
-            if (name) command += `name:"${name}", `;
-            if (health) command += `health:${health}, `;
-            if (holding && (mobType === 'pigman' || mobType === 'enderman')) command += `holding:"${holding}", `;
-            if (armorList !== '[{}, {}, {}, {}]') command += `armor:${armorList}, `;
-            if (defaultDrops !== "" && mobType !== 'wolf') command += `defaultDrops:${defaultDrops === 'true' ? true : false}, `;
+    var quantity = document.getElementById('quantity').value || 1;
+    var posX = document.getElementById('posX').value;
+    var posY = document.getElementById('posY').value;
+    var absPosX = document.getElementById('absPosX').value;
+    var absPosY = document.getElementById('absPosY').value;
+    var name = document.getElementById('name').value;
+    var health = document.getElementById('health').value;
+    var holding = document.getElementById('holding').value;
+    var armor = document.getElementById('armor').value;
+    var defaultDrops = document.getElementById('defaultDrops').value;
+    var drops = document.getElementById('drops').value;
+    var skin = document.getElementById('skin').value;
+    var aggro = document.getElementById('aggro').value;
+    var charged = document.getElementById('charged').value;
+    var baby = document.getElementById('baby').value;
+    var babyTime = document.getElementById('babyTime').value;
 
-            if (drops === '1' && lootItems.length > 0) {
-                command += `drops:[`;
-                lootItems.forEach(item => {
-                    command += `{item:{id:"${item.id}"}`;
-                    if (item.quantity) command += `, quantity:${item.quantity}`;
-                    if (item.bonus) command += `, bonus:${item.bonus}`;
-                    if (item.lootBonus) command += `, lootBonus:${item.lootBonus}`;
-                    if (item.chance) command += `, chance:${item.chance}`;
-                    if (item.variant) command += `, variant:"${item.variant}"`;
-                    if (item.sheared && !item.sheared.disabled) command += `, sheared:${item.sheared}`;
-                    if (item.isBaby && !item.isBaby.disabled) command += `, isBaby:${item.isBaby}`;
-                    if (item.color && mobType !== 'wolf') command += `, color:"${item.color}"`;
-                    if (item.onFire) command += `, onFire:${item.onFire}`;
-                    if (item.size) command += `, size:${item.size}`;
-                    command += `}, `;
-                });
-                command = command.replace(/, $/, "");
-                command += `], `;
-            }
+    // Obtener los valores de las casillas de armadura
+    var helmet = document.getElementById('helmetSelect').value || '{}';
+    var chestplate = document.getElementById('chestplateSelect').value || '{}';
+    var leggings = document.getElementById('leggingsSelect').value || '{}';
+    var boots = document.getElementById('bootsSelect').value || '{}';
 
-            if (skin && mobType === 'spawnskin') command += `skin:"${skin}", `;
-            if (aggro && mobType === 'spawnskin') command += `aggro:"${aggro}", `;
-            if (charged !== "") command += `charged:${charged}, `;
-            if (baby === "true" && ['cow', 'sheep', 'mooshroom', 'pig', 'chicken', 'rabbit', 'wolf', 'cowctus'].includes(mobType)) command += `baby:true, `;
-            if (baby === "time" && babyTime) command += `baby:${babyTime}, `;
-            
-            command = command.replace(/, $/, "");
-            command += "}";
+    // Construir la lista de armadura
+    var armorList = `[${helmet === '{}' ? helmet : `"${helmet}"`}, ${chestplate === '{}' ? chestplate : `"${chestplate}"`}, ${leggings === '{}' ? leggings : `"${leggings}"`}, ${boots === '{}' ? boots : `"${boots}"`}]`;
 
-            document.getElementById('outputCommand').textContent = command;
-        }
+    var command = `/summon ${mobType}`;
+    if (quantity > 0) command += ` ${quantity}`;
 
-        function addLoot() {
-            var additional1 = document.getElementById('additional1').value;
-            if (!additional1) {
-                showAlert("AddLoot");
-                return;
-            }
-            if (lootItems.some(item => item.id === additional1)) {
-                showAlert("AddLootCase");
-                return;
-            }
-            var additional2 = document.getElementById('additional2').value;
-            var additional3 = document.getElementById('additional3').value;
-            var additional4 = document.getElementById('additional4').value;
-            var additional5 = document.getElementById('additional5').value;
-            var additional6 = document.getElementById('additional6').value;
-            var additional7 = document.getElementById('additional7').value;
-            var additional9 = document.getElementById('additional9').value;
-            var additional10 = document.getElementById('additional10').value;
-            var additional11 = document.getElementById('additional11').value;
-            var additional12 = document.getElementById('additional12').value;
+    if (document.getElementById('positionType').value === 'relative') {
+        command += ` ~${posX || ""} ~${posY || ""}`;
+    } else if (document.getElementById('positionType').value === 'absolute') {
+        command += ` ${absPosX || ""} ${absPosY || ""}`;
+    } else if (checkDataTags()) {
+        command += ` ~ ~`;
+    }
 
-            lootItems.push({
-                id: additional1,
-                quantity: additional2,
-                bonus: additional3,
-                lootBonus: additional4,
-                chance: additional5,
-                variant: additional6,
-                sheared: additional7,
-                isBaby: additional9,
-                color: additional10,
-                onFire: additional11,
-                size: additional12
-            });
+    command += ` {`;
 
-            displayLootItems();
-            resetLootInputs();
-        }
+    if (name) command += `name:"${name}", `;
+    if (health) command += `health:${health}, `;
+    if (holding && (mobType === 'pigman' || mobType === 'enderman')) command += `holding:"${holding}", `;
+    if (armorList !== '[{}, {}, {}, {}]') command += `armor:${armorList}, `;
+    if (defaultDrops !== "" && mobType !== 'wolf') command += `defaultDrops:${defaultDrops === 'true' ? true : false}, `;
 
-        function resetLootInputs() {
-            document.querySelectorAll('.additional-rows select, .additional-rows input').forEach(el => el.value = '');
-        }
+    if (drops === '1' && lootItems.length > 0) {
+        command += `drops:[`;
+        lootItems.forEach(item => {
+            command += `{item:{id:"${item.id}"}`;
+            if (item.quantity) command += `, quantity:${item.quantity}`;
+            if (item.bonus) command += `, bonus:${item.bonus}`;
+            if (item.lootBonus) command += `, lootBonus:${item.lootBonus}`;
+            if (item.chance) command += `, chance:${item.chance}`;
+            if (item.variant) command += `, variant:"${item.variant}"`;
+            if (item.sheared && !item.sheared.disabled) command += `, sheared:${item.sheared}`;
+            if (item.isBaby && !item.isBaby.disabled) command += `, isBaby:${item.isBaby}`;
+            if (item.color && mobType !== 'wolf') command += `, color:"${item.color}"`;
+            if (item.onFire) command += `, onFire:${item.onFire}`;
+            if (item.size) command += `, size:${item.size}`;
+            command += `}, `;
+        });
+        command = command.replace(/, $/, "");
+        command += `], `;
+    }
 
-        function displayLootItems() {
-            var lootList = document.getElementById('lootList');
-            lootList.innerHTML = "";
-            lootItems.forEach((item, index) => {
-                var div = document.createElement('div');
-                div.className = "loot-item";
-                div.textContent = `Ítem: ${getReadableName(item.id)}`;
-                var removeBtn = document.createElement('button');
-                removeBtn.textContent = "🗑️";
-                removeBtn.className = "remove-loot";
-                removeBtn.onclick = () => removeLoot(index);
-                div.appendChild(removeBtn);
-                lootList.appendChild(div);
-            });
-        }
+    if (skin && mobType === 'spawnskin') command += `skin:"${skin}", `;
+    if (aggro && mobType === 'spawnskin') command += `aggro:"${aggro}", `;
+    if (charged !== "") command += `charged:${charged}, `;
+    if (baby === "true" && ['cow', 'sheep', 'mooshroom', 'pig', 'chicken', 'rabbit', 'wolf', 'cowctus'].includes(mobType)) command += `baby:true, `;
+    if (baby === "time" && babyTime) command += `baby:${babyTime}, `;
 
-        function removeLoot(index) {
-            lootItems.splice(index, 1);
-            displayLootItems();
-        }
+    command = command.replace(/, $/, "");
+    command += "}";
 
-        function checkDataTags() {
-            var name = document.getElementById('name').value;
-            var health = document.getElementById('health').value;
-            var holding = document.getElementById('holding').value;
-            var armor = document.getElementById('armor').value;
-            var defaultDrops = document.getElementById('defaultDrops').value;
-            var drops = document.getElementById('drops').value;
-            var skin = document.getElementById('skin').value;
-            var aggro = document.getElementById('aggro').value;
-            var charged = document.getElementById('charged').value;
-            var baby = document.getElementById('baby').value;
-            var babyTime = document.getElementById('babyTime').value;
-            return name || health || holding || armor || defaultDrops || drops || skin || aggro || charged || baby || babyTime;
-        }
-funct
-        function copyCommand() {
-            var command = document.getElementById('outputCommand').textContent;
-            navigator.clipboard.writeText(command).then(() => {
-                var copyButton = document.getElementById('copyButton');
-                copyButton.textContent = 'Copiado';
-                copyButton.classList.add('success');
-                setTimeout(() => {
-                    copyButton.textContent = 'Copiar Comando';
-                    copyButton.classList.remove('success');
-                }, 2000);
-            });
-        }
+    document.getElementById('outputCommand').textContent = command;
+}
 
-        function getReadableName(id) {
-            const mapping = {
-                'stairs_wooden_planks': 'Wooden Planks Stairs',
-                'pressure_plate_wooden': 'Wooden Pressure Plate',
-                'wooden_shovel': 'Wooden Shovel',
-                'wooden_sword': 'Wooden Sword',
-                'wool': 'Wool',
-                'backdrop_wool': 'Wool Backdrop',
-                'yellow_flower': 'Yellow Flower',
-            };
-            return mapping[id] || id;
-        }
+// Función para añadir loot a la lista
+function addLoot() {
+    var additional1 = document.getElementById('additional1').value;
+    if (!additional1) {
+        showAlert("AddLoot");
+        return;
+    }
+    if (lootItems.some(item => item.id === additional1)) {
+        showAlert("AddLootCase");
+        return;
+    }
+    var additional2 = document.getElementById('additional2').value;
+    var additional3 = document.getElementById('additional3').value;
+    var additional4 = document.getElementById('additional4').value;
+    var additional5 = document.getElementById('additional5').value;
+    var additional6 = document.getElementById('additional6').value;
+    var additional7 = document.getElementById('additional7').value;
+    var additional9 = document.getElementById('additional9').value;
+    var additional10 = document.getElementById('additional10').value;
+    var additional11 = document.getElementById('additional11').value;
+    var additional12 = document.getElementById('additional12').value;
+
+    lootItems.push({
+        id: additional1,
+        quantity: additional2,
+        bonus: additional3,
+        lootBonus: additional4,
+        chance: additional5,
+        variant: additional6,
+        sheared: additional7,
+        isBaby: additional9,
+        color: additional10,
+        onFire: additional11,
+        size: additional12
+    });
+
+    displayLootItems();
+    resetLootInputs();
+}
+
+// Función para resetear los inputs de loot
+function resetLootInputs() {
+    document.querySelectorAll('.additional-rows select, .additional-rows input').forEach(el => el.value = '');
+}
+
+// Función para mostrar los items de loot en la interfaz
+function displayLootItems() {
+    var lootList = document.getElementById('lootList');
+    lootList.innerHTML = "";
+    lootItems.forEach((item, index) => {
+        var div = document.createElement('div');
+        div.className = "loot-item";
+        div.textContent = `Ítem: ${getReadableName(item.id)}`;
+        var removeBtn = document.createElement('button');
+        removeBtn.textContent = "🗑️";
+        removeBtn.className = "remove-loot";
+        removeBtn.onclick = () => removeLoot(index);
+        div.appendChild(removeBtn);
+        lootList.appendChild(div);
+    });
+}
+
+// Función para eliminar un item de la lista de loot
+function removeLoot(index) {
+    lootItems.splice(index, 1);
+    displayLootItems();
+}
+
+// Función para comprobar si hay etiquetas de datos para el mob
+function checkDataTags() {
+    var name = document.getElementById('name').value;
+    var health = document.getElementById('health').value;
+    var holding = document.getElementById('holding').value;
+    var armor = document.getElementById('armor').value;
+    var defaultDrops = document.getElementById('defaultDrops').value;
+    var drops = document.getElementById('drops').value;
+    var skin = document.getElementById('skin').value;
+    var aggro = document.getElementById('aggro').value;
+    var charged = document.getElementById('charged').value;
+    var baby = document.getElementById('baby').value;
+    var babyTime = document.getElementById('babyTime').value;
+    return name || health || holding || armor || defaultDrops || drops || skin || aggro || charged || baby || babyTime;
+}
+
+// Función para copiar el comando generado al portapapeles
+function copyCommand() {
+    var command = document.getElementById('outputCommand').textContent;
+    navigator.clipboard.writeText(command).then(() => {
+        var copyButton = document.getElementById('copyButton');
+        copyButton.textContent = 'Copiado';
+        copyButton.classList.add('success');
+        setTimeout(() => {
+            copyButton.textContent = 'Copiar Comando';
+            copyButton.classList.remove('success');
+        }, 2000);
+    });
+}
         
         function toggleLanguage() {
             if (currentLanguage === 'es') {
