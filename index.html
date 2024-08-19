@@ -708,15 +708,44 @@ let currentLanguage = 'es';
 
 // Estructura de datos compartida para los ítems
 const itemMapping = {
-    'stairs_wooden_planks': 'Wooden Planks Stairs',
-    'pressure_plate_wooden': 'Wooden Pressure Plate',
-    'wooden_shovel': 'Wooden Shovel',
-    'wooden_sword': 'Wooden Sword',
-    'wool': 'Wool',
-    'backdrop_wool': 'Wool Backdrop',
-    'yellow_flower': 'Yellow Flower',
-    'yellow_flower_red': 'Yellow Red',
-    'yellow_flower_blue': 'Yellow Blue'
+    'acid': 'Acid',
+    'rail_activator': 'Activator Minecart Rail',
+    'afro': 'Afro',
+    'air': 'Air',
+    'anvil': 'Anvil',
+    'apple': 'Apple',
+    'apple_juice': 'Apple Juice',
+    'leaves_apple': 'Apple in Leaves',
+    'arrow': 'Arrow',
+    'potato_baked': 'Baked Potato',
+    'balloon': 'Balloon',
+    'bamboo': 'Bamboo',
+    'bamboo_block': 'Bamboo Block',
+    'stairs_bamboo': 'Bamboo Stairs',
+    'slab_bamboo': 'Bamboo Slab',
+    'bamboo_door': 'Bamboo Door',
+    'barrier': 'Barrier',
+    'bed': 'Bed',
+    'bedrock': 'Bedrock',
+    'slab_bedrock': 'Bedrock Slab',
+    'stairs_bedrock': 'Bedrock Stairs',
+    'beet_soup': 'Beet Soup',
+    'beetroot': 'Beetroot',
+    'beetroot_seed': 'Beetroot Seed',
+    'blaze_powder': 'Blaze Powder',
+    'blaze_rod': 'Blaze Rod',
+    'bone': 'Bone',
+    'bone_block': 'Bone Block',
+    'bone_meal': 'Bone Meal',
+    'bone_shuriken': 'Bone Shuriken',
+    'book': 'Book',
+    'bookshelf': 'Bookshelf',
+    'backdrop_bookshelf': 'Bookshelf Backdrop',
+    'bottle_of_enchanting': 'Bottle of Enchanting',
+    'bow': 'Bow',
+    'bowl': 'Bowl',
+    'bread': 'Bread',
+    'brewing_stand': 'Brewing Stand'
 };
 
 // Generar las opciones de los select
@@ -954,6 +983,8 @@ function updateMobOptions() {
 
     // Asegúrate de restablecer todos los campos y opciones antes de aplicar las nuevas opciones
     resetFields();
+    
+    lootItems = [];
 
     // Actualiza la casilla de tipo de mob (si es necesario)
     if (mobType) {
