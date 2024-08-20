@@ -327,11 +327,16 @@ button.add-loot {
     }
 
     .menu ul.menu-list {
-        display: none; /* Ocultamos el menú inicialmente */
+        display: flex;
         flex-direction: column;
         background-color: #495057;
         margin: 0;
-        padding: 10px 0;
+        padding: 0;
+        opacity: 0;
+        transform: translateY(-20px); /* Desplazamiento inicial */
+        transition: opacity 0.3s ease, transform 0.3s ease; /* Transiciones para suavidad */
+        height: 0; /* Oculta el contenido al inicio */
+        overflow: hidden; /* Evita desbordamiento visual */
     }
 
     .menu ul.menu-list li {
@@ -365,26 +370,13 @@ button.add-loot {
     }
 
     .menu.show .menu-list {
-        display: flex; /* Mostrar el menú cuando esté activo */
-    }
-}
-
-@keyframes fadeInSlideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0); /* Retorno a la posición original */
+        height: auto; /* Ajusta la altura automáticamente para el contenido */
     }
 }
 
-.animated-row {
-    display: table-row;
-    opacity: 0;
-    animation: fadeInSlideDown 0.4s ease forwards;
-}
+
 </style>
 </head>
 <body>
@@ -1252,6 +1244,80 @@ function updateConditionals() {
         }
     }
 }
+
+        document.getElementById('quantity').addEventListener('input', function() {
+            var quantityInput = document.getElementById('quantity');
+            var value = parseInt(quantityInput.value, 10);
+
+            if (value > 20) {
+                quantityInput.value = 20;
+            }
+            
+            if (value < 1) {
+                quantityInput.value = 1;
+            }
+        });
+        document.getElementById('additional2').addEventListener('input', function() {
+            var quantityInput = document.getElementById('additional2');
+            var value = parseInt(quantityInput.value, 10);
+
+            if (value > 10000) {
+                quantityInput.value = 10000;
+            }
+            
+            if (value < 1) {
+                quantityInput.value = 1;
+            }
+        });
+        document.getElementById('additional3').addEventListener('input', function() {
+            var quantityInput = document.getElementById('additional3');
+            var value = parseInt(quantityInput.value, 10);
+
+            if (value > 10000) {
+                quantityInput.value = 10000;
+            }
+            
+            if (value < 1) {
+                quantityInput.value = 1;
+            }
+        });
+        document.getElementById('additional4').addEventListener('input', function() {
+            var quantityInput = document.getElementById('additional4');
+            var value = parseInt(quantityInput.value, 10);
+
+            if (value > 10000) {
+                quantityInput.value = 10000;
+            }
+            
+            if (value < 1) {
+                quantityInput.value = 1;
+            }
+        });
+        document.getElementById('health').addEventListener('input', function() {
+            var quantityInput = document.getElementById('health');
+            var value = parseInt(quantityInput.value, 10);
+
+            if (value > 100000) {
+                quantityInput.value = 100000;
+            }
+            
+            if (value < 1) {
+                quantityInput.value = 1;
+            }
+        });
+        document.getElementById('babyTime').addEventListener('input', function() {
+            var quantityInput = document.getElementById('babyTime');
+            var value = parseInt(quantityInput.value, 10);
+
+            if (value > 86400) {
+                quantityInput.value = 86400;
+            }
+            
+            if (value < 1) {
+                quantityInput.value = 1;
+            }
+        });
+
 
 // Función para manejar los cambios en la opción "baby"
 function handleBabyChange() {
