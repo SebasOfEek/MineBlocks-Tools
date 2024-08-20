@@ -626,7 +626,7 @@ button.add-loot {
         </tr>
         <tr id="additionalRows7" class="additional-rows" style="display: none;">
             <td id="ShearedText">¿Está esquilada?:</td>
-            <td><input type="text" id="additional7" placeholder="Fuera de servicio" disabled></td>
+            <td><input type="text" id="additional7" placeholder="Fuera de Servicio" disabled></td>
         </tr>
         <tr id="additionalRows9" class="additional-rows" style="display: none;">
             <td id="isBabyText">¿Es bebé?:</td>
@@ -1675,6 +1675,7 @@ function copyCommand() {
                 document.getElementById('MenuText').innerText = '☰ Menu';
                 document.getElementById('armor').options[0].text = '--Select--';
                 document.getElementById('armor').options[1].text = 'Yes';
+                document.getElementById('additional7').placeholder = 'Out of Service';
                 //Casco
                 document.getElementById('HelmetText').innerText = 'Helmet';
                 document.getElementById('helmetSelect').options[0].text = '--Select--';
@@ -1766,6 +1767,7 @@ function copyCommand() {
                 document.getElementById('MenuText').innerText = '☰ Menú';
                 document.getElementById('armor').options[0].text = '--Seleccionar--';
                 document.getElementById('armor').options[1].text = 'Si';
+                document.getElementById('additional7').placeholder = 'Fuera de Servicio';
                 //Casco
                 document.getElementById('HelmetText').innerText = 'Casco';
                 document.getElementById('helmetSelect').options[0].text = '--Seleccionar--';
