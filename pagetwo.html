@@ -46,6 +46,35 @@
             margin: 0;
             background-color: #f0f0f0;
             font-family: Arial, sans-serif;
+            position: relative;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .back-button svg {
+            width: 24px;
+            height: 24px;
+            stroke: #888888;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: stroke 0.3s;
+        }
+
+        .back-button:hover svg {
+            stroke: #333333;
+            transform: scale(1.1);
         }
 
         .message {
@@ -63,6 +92,11 @@
     </style>
 </head>
 <body>
+    <a href="index.html" class="back-button" aria-label="Volver al inicio">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M15 18L9 12L15 6" />
+        </svg>
+    </a>
     <div class="message">Próximamente Disponible...</div>
 </body>
 </html>
