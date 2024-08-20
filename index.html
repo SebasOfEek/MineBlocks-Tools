@@ -1399,6 +1399,8 @@ function updateMobOptions() {
         armorRow.style.display = 'table-row'; 
     } else if (mobType === 'bat' || mobType === 'wolf') {
         defaultDropsRow.style.display = 'none';
+    } else if (mobType === 'sheep') {
+         document.getElementById('shearedCheckbox').disabled = true;
     } else {
         // Limpiar subcampos relevantes si el tipo de mob cambia
         clearSubFields('creeperChargedRow');
