@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pregunta</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Para evitar scrolls innecesarios cuando las partículas se mueven */
+        }
+
+        #container {
+            text-align: center;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        #message, #response {
+            margin-top: 20px;
+            color: #000; /* Color negro para el texto */
+            font-size: 24px; /* Tamaño de fuente más grande para mejor visibilidad */
+            font-weight: bold;
+        }
+
+        #response {
+            color: #FF69B4; /* Color rosado para el mensaje de respuesta */
+            font-size: 36px; /* Tamaño de fuente más grande */
+            position: relative;
+            display: inline-block;
+            animation: pulse 1.5s infinite; /* Animación de pulsación */
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: #FF69B4; /* Color rosado para las partículas */
+            opacity: 0.8;
+            pointer-events: none;
+            width: 10px;
+            height: 10px;
+            animation: float 4s infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100px); }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <p id="message">¿Yo te gusto?</p>
+        <button id="noButton">No</button>
+        <button id="yesButton">Sí</button>
+        <p id="response"></p>
+    </div>
+    <script>
+        document.getElementById('noButton').addEventListener('click', function() {
+            const button = this;
+            const x = Math.random() * (window.innerWidth - button.offsetWidth);
+            const y = Math.random() * (window.innerHeight - button.offsetHeight);
+            button.style.position = 'absolute';
+            button.style.left = x + 'px';
+            button.style.top = y + 'px';
+        });
+
+        document.getElementById('yesButton').addEventListener('click', function() {
+            const confirmMessage = confirm("¿Advertencia, segura que quieres saber esto?");
+            if (confirmMessage) {
+                const responseElement = document.getElementById('response');
+                responseElement.innerText = "Tú también me gustas pero mucho más";
+
+                // Crear partículas de amor
+                for (let i = 0; i < 50; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    particle.style.width = `${Math.random() * 10 + 5}px`;
+                    particle.style.height = particle.style.width;
+                    particle.style.left = `${Math.random() * responseElement.offsetWidth}px`;
+                    particle.style.top = `${Math.random() * responseElement.offsetHeight}px`;
+                    responseElement.appendChild(particle);
+
+                    // Animación de las partículas
+                    setTimeout(() => {
+                        particle.style.transform = `translateY(-200px)`;
+                        particle.style.opacity = '0';
+                    }, 100);
+                }
+
+                // Mantener partículas activas
+                setInterval(() => {
+                    for (let i = 0; i < 10; i++) {
+                        const particle = document.createElement('div');
+                        particle.classList.add('particle');
+                        particle.style.width = `${Math.random() * 10 + 5}px`;
+                        particle.style.height = particle.style.width;
+                        particle.style.left = `${Math.random() * responseElement.offsetWidth}px`;
+                        particle.style.top = `${Math.random() * responseElement.offsetHeight}px`;
+                        responseElement.appendChild(particle);
+
+                        setTimeout(() => {
+                            particle.style.transform = `translateY(-200px)`;
+                            particle.style.opacity = '0';
+                        }, 100);
+
+                        setTimeout(() => {
+                            particle.remove();
+                        }, 4000);
+                    }
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>
