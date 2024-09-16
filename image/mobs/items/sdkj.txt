@@ -1,0 +1,2639 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="icon" href="MBLogo.ico" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
+
+<style>
+body {
+    background-color: white;
+    font-family: 'Arial', sans-serif;
+}
+
+table {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #e5e8eb;
+    box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-sizing: border-box;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 12px 15px 12px 10px;
+    vertical-align: middle;
+    text-align: left;
+}
+
+/* Ajuste de input y select dentro de td */
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Asegura que el padding no expanda el tamaño del elemento */
+}
+
+/* Estilo general del contenedor select2 */
+.select2-container--default {
+    width: calc(100% - 2px);
+    margin: 0; 
+    padding: 0; 
+    display: block; 
+    box-sizing: border-box;
+}
+
+/* Ajuste del select dentro de select2 */
+.select2-selection--single {
+    height: 40px !important; /* Altura optimizada */
+    padding: 0; /* Sin padding interno */
+    outline: none; /* Evita el contorno al enfocar */
+    display: flex; /* Flexibilidad para alinear el contenido */
+    align-items: center; /* Centrado vertical */
+}
+
+/* Estilo del texto dentro del select2 para asegurar que se muestre completamente */
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    white-space: nowrap; /* Evitar saltos de línea */
+    overflow: hidden; /* Ocultar overflow de texto */
+    text-overflow: clip !important; /* Puntos suspensivos si el texto es muy largo */
+    padding: 0 10px; /* Padding lateral para no pegar el texto a los bordes */
+    font-size: 14px; /* Tamaño de fuente consistente */
+    color: #000; /* Color de texto oscuro para mejor contraste */
+    line-height: 35px; 
+}
+
+/* Ajuste de la flecha del select para alinear y estilizar */
+.select2-selection__arrow {
+    height: 100% !important; /* Ajuste a la altura total */
+    position: absolute; /* Posicionamiento absoluto para no afectar el texto */
+    top: 0;
+    right: 1px; /* Ligeramente hacia dentro para evitar desbordamiento */
+    width: 20px ; /* Ancho controlado de la flecha */
+    display: flex;
+    align-items: center; /* Centrado vertical de la flecha */
+    justify-content: center; /* Centrado horizontal de la flecha */
+}
+
+/* Asegura que el contenedor select2 ocupe todo el ancho de td correctamente */
+td .select2-container {
+    width: 100%!important; /* Asegura el 100% del espacio dentro de td, con !important para sobreescribir estilos */
+}
+
+/* Estilo para el cuadro de búsqueda dentro del select2 */
+.select2-container--default .select2-search--dropdown {
+    border-radius: 5px !important; /* Bordes redondeados */
+    padding: 5px 8px; /* Espaciado interno */
+    background-color: #f9f9f9; /* Color de fondo del cuadro de búsqueda */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Estilo del campo de entrada de búsqueda */
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    outline: none; /* Elimina el contorno de enfoque */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding: 8px; /* Espaciado interno del campo de búsqueda */
+    font-size: 14px; /* Tamaño de la fuente */
+    color: #333; /* Color del texto */
+    box-sizing: border-box; /* Incluye padding en el ancho total */
+}
+
+/* Estilo de la barra de búsqueda cuando está enfocada */
+.select2-container--default .select2-search--dropdown .select2-search__field:focus {
+    border: 1px solid #007BFF; /* Borde azul al enfocar */
+    background-color: #fff; /* Fondo blanco al enfocar */
+    box-shadow: 0 0 3px rgba(0, 123, 255, 0.5); /* Sombra azul sutil al enfocar */
+}
+
+/* Estilo para la lista de opciones de búsqueda */
+.select2-container--default .select2-results__options {
+    max-height: 230px !important; /* Altura máxima para la lista de resultados */
+    overflow-y: auto; /* Habilita el desplazamiento vertical si el contenido excede la altura */
+    padding: 0px; /* Espaciado interno */
+}
+
+/* Estilo para las opciones de búsqueda */
+.select2-container--default .select2-results__option {
+    padding: 8px 10px; /* Espaciado interno de las opciones */
+    font-size: 14px; /* Tamaño de fuente de las opciones */
+    color: #000000; /* Color del texto de las opciones */
+}
+
+/* Estilo para las opciones seleccionadas en la búsqueda */
+.select2-container--default .select2-results__option--selected {
+    background-color: #0059ff;
+    color: #fff;
+}
+
+/* Estilo para las opciones al pasar el ratón sobre ellas */
+.select2-container--default .select2-results__option--highlighted {
+    background-color: #e9ecef; 
+}
+
+.select2-container--default .select2-dropdown {
+    z-index: 999; 
+}
+
+.menu {
+    z-index: 1000;
+}
+
+button {
+    width: 48%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0.5%;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+button.success {
+    background-color: #28a745;
+}
+
+button.success:hover {
+    background-color: #218838;
+}
+
+button.add-loot {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 9px;
+    margin: 9px 0;
+    margin-bottom: -20px;
+    margin-left: 1px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 98%;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s; /* Se añade la animación */
+}
+
+button.add-loot:hover {
+    background-color: #218838;
+    transform: translateY(-2px); /* Mismo efecto que en los otros botones */
+}
+
+pre {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-x: auto;
+    max-width: 580px;
+    margin: auto;
+    margin-top: 12px;
+}
+
+.tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 8px;
+    border-radius: 5px;
+    white-space: nowrap;
+    display: none;
+    font-size: 14px;
+    z-index: 10;
+    width: 250px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+td:hover .tooltip {
+    display: block;
+}
+
+.question-mark {
+    cursor: pointer;
+    font-weight: bold;
+    color: #007BFF;
+    margin-left: 5px;
+    position: relative;
+}
+
+.position-group {
+    display: flex;
+    gap: 10px;
+}
+
+.loot-list {
+    margin-top: 10px;
+    margin-right: 9px;
+    border-top: 1px solid #ced4da;
+    padding-top: 10px;
+}
+
+.loot-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    padding-right: 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    margin-left: 1px;
+}
+
+.remove-loot {
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    color: #ff0000;
+    cursor: pointer;
+}
+
+button.add-loot {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 9px;
+    margin: 9px 0;
+    margin-bottom: -20px;
+    margin-left: 1px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 98%;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-10px); }
+    40%, 80% { transform: translateX(10px); }
+}
+
+@keyframes smooth-shake {
+    0%, 100% { transform: translate(-50%, -50%); }
+    20%, 60% { transform: translate(-52%, -50%); }
+    40%, 80% { transform: translate(-48%, -50%); }
+}
+
+@keyframes fade-in-slide-down {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.alert {
+    position: fixed;
+    top: 16%; /* Centrado vertical */
+    left: 50%; /* Centrado horizontal */
+    transform: translate(-50%, -50%); /* Ajuste para centrar el contenedor */
+    z-index: 9999;
+    background-color: #ffdddd;
+    color: #d8000c;
+    border: 1px solid #d8000c;
+    border-radius: 8px;
+    padding: 1em 2em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s, transform 0.5s ease;
+    text-align: center;
+}
+
+.alert.show {
+    opacity: 1;
+    visibility: visible;
+    animation: fade-in-slide-down 0.5s ease forwards, smooth-shake 0.8s ease;
+}
+
+.alert.hide {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -60%);
+}
+.menu {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    max-width: 600px;
+    margin: auto;
+    background-color: #495057;
+    padding: 10px 0;
+    box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.menu ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    flex-wrap: wrap; /* Permitir que los elementos se envuelvan en líneas nuevas si es necesario */
+}
+
+.menu ul li {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.menu ul li a,
+.menu ul li button {
+    color: white;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    margin: 4px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.menu ul li a:hover,
+.menu ul li button:hover {
+    background-color: #17a2b8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Efecto de brillo en los botones al ser presionados en PC */
+.menu ul li a:active,
+.menu ul li button:active {
+    box-shadow: 0 0 25px rgba(23, 162, 184, 0.6);
+    transform: scale(0.98);
+}
+
+.menu ul li i {
+    margin-right: 13px;
+    font-size: 20px; /* Aumenta el tamaño del ícono */
+}
+
+.menu-icon {
+    display: none; /* Oculta el ícono por defecto */
+}
+@media (max-width: 600px) {
+    .menu {
+        max-width: 100%;
+        padding: 0;
+        background-color: #333;
+        box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
+        border-radius: 5px;
+    }
+
+    .menu-icon {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        color: white;
+        background-color: #495057;
+        font-size: 20px;
+        cursor: pointer;
+        user-select: none;
+        border-radius: 7px;
+    }
+
+    .menu ul.menu-list {
+        display: flex;
+        flex-direction: column;
+        background-color: #495057;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
+        transform: translateY(-20px); /* Desplazamiento inicial */
+        transition: opacity 0.3s ease, transform 0.3s ease; /* Transiciones para suavidad */
+        height: 0; /* Oculta el contenido al inicio */
+        overflow: hidden; /* Evita desbordamiento visual */
+    }
+
+    .menu ul.menu-list li {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        padding: 10px 0;
+        border-top: 1px solid #444;
+    }
+
+    .menu ul.menu-list li:first-child {
+        border-top: none;
+    }
+
+    .menu ul.menu-list li a,
+    .menu ul.menu-list li button {
+        font-size: 16px;
+        padding: 15px;
+        color: white;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        text-align: center;
+    }
+
+    .menu ul.menu-list li a:hover,
+    .menu ul.menu-list li button:hover {
+        background-color: #17a2b8;
+        color: white;
+    }
+
+    .menu.show .menu-list {
+        opacity: 1;
+        transform: translateY(0); /* Retorno a la posición original */
+        height: auto; /* Ajusta la altura automáticamente para el contenido */
+    }
+}
+
+/*Modo Oscuro*/
+
+        body.dark-mode {
+            background-color: #333738;
+            color: white;
+        }
+
+        body.dark-mode table {
+            background-color: #333;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
+        }
+
+        body.dark-mode td {
+            color: white;
+        }
+
+        body.dark-mode pre {
+            background-color: #444;
+            color: white;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
+            border: 1px solid #333738;
+        }
+
+        body.dark-mode .menu {
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
+        }
+
+        body.dark-mode .menu ul li a,
+        body.dark-mode .menu ul li button {
+            color: white;
+        }
+        
+        body.dark-mode .select2-container--default .select2-results__option {
+            color: black; /* Cambia el color del texto de las opciones a negro */
+        }
+
+        /* Cambiar colores en modo oscuro */
+        body.dark-mode .toggle-mode {
+            color: white;
+        }
+        
+        body.dark-mode .bi-sun {
+            transform: rotate(-45deg);
+        }
+        
+        body.dark-mode .loot-item {
+            color: #000; /* Asegúrate de que el texto sea negro en modo oscuro */
+        }
+        
+        body.dark-mode input[disabled]::placeholder {
+            color: #aaa; /* Color del placeholder que contraste en modo oscuro */
+        }
+        
+        /* Estilo para el botón de modo oscuro */
+        .toggle-mode {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: #333;
+            transition: transform 0.3s ease, color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .toggle-mode:focus {
+            outline: none;
+        }
+        
+        .toggle-mode i {
+            transition: transform 0.3s ease;
+            margin-right: 8px;
+        }
+        
+        .toggle-mode:hover i {
+            transform: rotate(45deg);
+        }
+        
+        .menu-list {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .menu-list li {
+            margin: 0 15px;
+        }
+        
+        .menu-list .separator {
+            width: 1px;
+            background-color: #ccc;
+            height: 24px;
+            margin: 0 10px;
+            align-self: center;
+        }
+
+/* Animación para el ícono de refrescar */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Aplicar la animación de rotación al ícono en hover */
+#RefreshText:hover i {
+    animation: rotate 1s linear infinite;
+}
+
+/* Cambiar colores en modo oscuro */
+body.dark-mode .toggle-mode {
+    color: white;
+}
+
+/* Animación sutil para el ícono del sol en modo oscuro */
+body.dark-mode .bi-sun {
+    transition: transform 0.3s ease;
+}
+
+body.dark-mode .toggle-mode:hover .bi-sun {
+    transform: rotate(10deg); /* Rotación sutil del ícono del sol */
+}
+
+/* Asegurar que el select de imágenes tiene un diseño especial */
+.select-with-images img {
+    border-radius: 20%; /* Bordes redondeados */
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3); /* Sombra ligera */
+    width: 30px; /* Ancho de las imágenes */
+    height: 30px; /* Altura de las imágenes */
+    object-fit: cover; /* Asegurar que la imagen se ajuste al contenedor */
+    margin-right: 8px; /* Espaciado entre imagen y texto */
+    vertical-align: middle; /* Alineación vertical centrada */
+}
+
+.select2-results__option img {
+    border-radius: 20%; /* Bordes redondeados */
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para las imágenes en el dropdown */
+    width: 30px; /* Tamaño consistente en el menú desplegable */
+    height: 30px;
+    object-fit: cover;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered img {
+            border-radius: 20%; /* Bordes redondeados */
+            box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3); /* Sombra ligera */
+            width: 30px; /* Ancho de las imágenes */
+            height: 30px; /* Altura de las imágenes */
+            object-fit: cover; /* Asegurar que la imagen se ajuste al contenedor */
+            margin-right: 8px; /* Espaciado entre imagen y texto */
+            vertical-align: middle;
+        }
+
+</style>
+</head>
+<body>
+    <nav class="menu">
+        <div id="MenuText" class="menu-icon" onclick="toggleMobileMenu()">☰ Menú</div>
+        <ul class="menu-list">
+            <li>
+                <button id="toggle-mode" class="toggle-mode">
+                    <i class="bi bi-moon"></i>
+                    <span id="modeText">Modo Oscuro</span> <!-- Texto al lado del ícono -->
+                </button>
+            </li>
+            <li><button id="IdiomaText" onclick="toggleLanguage()"><i class="bi bi-translate"></i> Cambiar Idioma</button></li>
+            <li><a href="https://discord.com/users/sebasofeek" target="_blank"><i class="bi bi-discord"></i> Discord</a></li>
+            <li><a href="pagetwo.html" id="HomeText"><i class="bi bi-house"></i> Inicio</a></li>
+            <li><button id="RefreshText" onclick="resetFields()"><i class="bi bi-arrow-clockwise"></i> Refrescar Casillas</button></li>
+        </ul>
+    </nav>
+    <div id="alertContainer" class="alert"></div>
+    <table>
+        <tr>
+            <td id="TypeMobText">Tipo de Mob:</td>
+            <td>
+                <select id="mobType" onchange="updateMobOptions()" class="select-with-images">
+                    <option value="">--Seleccionar--</option>
+                    <option value="zombie" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/Zombie2.png?raw=true">Zombie</option>
+                    <option value="spawnskin" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/Player_head.png?raw=true">Spawnskin</option>
+                    <option value="skeleton" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/Skeleton1.png?raw=true">Esqueleto</option>
+                    <option value="creeper" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/CreeperHead.png?raw=true">Creeper</option>
+                    <option value="spider" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/Spider1.png?raw=true">Araña</option>
+                    <option value="enderman" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/EndermanHead.png?raw=true">Enderman</option>
+                    <option value="blaze" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/BlazeHead.png?raw=true">Blaze</option>
+                    <option value="ghast" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/GhastHead.png?raw=true">Ghast</option>
+                    <option value="magmacube" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/Magma.png?raw=true">Cubo de Magma</option>
+                    <option value="slime" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/Slime.png?raw=true">Slime</option>
+                    <option value="enderdragon" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/EnderDragonHead.png?raw=true">Dragón de Ender</option>
+                    <option value="nethereye" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/Nethereye.png?raw=true">Nethereye</option>
+                    <option value="cow" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/CowHead.png?raw=true">Vaca</option>
+                    <option value="sheep" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/SheepHead.png?raw=true">Oveja</option>
+                    <option value="mooshroom" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/MoshroomHead.png?raw=true">Vaca Seta</option>
+                    <option value="pig" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/PigHead.png?raw=true">Cerdo</option>
+                    <option value="squid" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/SquidHead.png?raw=true">Calamar</option>
+                    <option value="bat" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/BatHead.png?raw=true">Murciélago</option>
+                    <option value="chicken" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/ChickenHead.png?raw=true">Pollo</option>
+                    <option value="rabbit" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/RabbitHead.png?raw=true">Conejo</option>
+                    <option value="wolf" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/WolfHead.png?raw=true">Lobo</option>
+                    <option value="pigman" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/PigmanHead.png?raw=true">Zombie Pigman</option>
+                    <option value="snowgolem" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/SnowgolemHead.png?raw=true">Golem de Nieve</option>
+                    <option value="cowctus" data-image="https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/CactuscowHead.png?raw=true">Vaca Cactus</option>
+                </select>
+            </td>
+        </tr>        <tr>
+            <td id="QuantityText">Cantidad:</td>
+            <td><input type="number" id="quantity" max="20"></td>
+        </tr>
+        <tr>
+            <td id="PositionText">Posición:</td>
+            <td>
+                <select id="positionType" onchange="updatePositionFields()">
+                    <option value="">--Seleccionar--</option>
+                    <option value="relative">Relativa</option>
+                    <option value="absolute">Absoluta</option>
+                </select>
+            </td>
+        </tr>
+        <tr class="relative-pos position-group" style="display:none;">
+            <td id="PositionRelText">Posición Relativa:</td>
+            <td>
+                <input type="number" id="posX" placeholder="Pos~X" style="width: 45%; display: inline-block; margin-right: 5%;">
+                <input type="number" id="posY" placeholder="Pos~Y" style="width: 45%; display: inline-block;">
+            </td>
+        </tr>
+        <tr class="absolute-pos position-group" style="display:none;">
+            <td id="PositionAbsText">Posición Absoluta:</td>
+            <td>
+                <input type="number" id="absPosX" placeholder="Pos X" style="width: 45%; display: inline-block; margin-right: 5%;">
+                <input type="number" id="absPosY" placeholder="Pos Y" style="width: 45%; display: inline-block;">
+            </td>
+        </tr>
+        <tr>
+            <td id="NameText">Nombre:</td>
+            <td><input type="text" id="name"></td>
+        </tr>
+        <tr>
+            <td id="HealthText">Salud:</td>
+            <td><input type="number" id="health" min="1"></td>
+        </tr>
+        <tr id="handItemRow" style="display: none;">
+            <td id="ItemHandText">Item en mano:</td>
+            <td>
+               <select id="holding"></select>
+            </td>  
+        </tr>
+<tr id="armorRow" style="display: none;">
+    <td id="ArmorText">Armadura:</td>
+    <td>
+        <select id="armor" onchange="toggleArmorOptions()">
+            <option value="">--Seleccionar--</option>
+            <option value="yes">Sí</option>
+            <option value="no">No</option>
+        </select>
+    </td>
+</tr>
+
+<!-- Casillas para seleccionar las piezas de la armadura -->
+<tr id="helmetRow" style="display: none;">
+    <td id="HelmetText">Casco:</td>
+    <td>
+        <select id="helmetSelect">
+            <option value="">--Seleccionar--</option>
+            <option value="leather_cap">Casco de Cuero</option>
+            <option value="iron_helmet">Casco de Hierro</option>
+            <option value="gold_helmet">Casco de Oro</option>
+            <option value="diamond_helmet">Casco de Diamante</option>
+            <option value="dragon_scale_helmet">Casco de Escama de Dragón</option>
+        </select>
+    </td>
+</tr>
+
+<tr id="chestplateRow" style="display: none;">
+    <td id="ChestplateText">Pechera:</td>
+    <td>
+        <select id="chestplateSelect">
+            <option value="">--Seleccionar--</option>
+            <option value="leather_tunic">Pechera de Cuero</option>
+            <option value="iron_chestplate">Pechera de Hierro</option>
+            <option value="gold_chestplate">Pechera de Oro</option>
+            <option value="diamond_chestplate">Pechera de Diamante</option>
+            <option value="dragon_scale_chestplate">Pechera de Escama de Dragón</option>
+        </select>
+    </td>
+</tr>
+
+<tr id="leggingsRow" style="display: none;">
+    <td id="LeggingsText">Pantalones:</td>
+    <td>
+        <select id="leggingsSelect">
+            <option value="">--Seleccionar--</option>
+            <option value="leather_pants">Pantalones de Cuero</option>
+            <option value="iron_leggings">Pantalones de Hierro</option>
+            <option value="gold_leggings">Pantalones de Oro</option>
+            <option value="diamond_leggings">Pantalones de Diamante</option>
+            <option value="dragon_scale_leggings">Pantalones de Escama de Dragón</option>
+        </select>
+    </td>
+</tr>
+
+<tr id="bootsRow" style="display: none;">
+    <td id="BootsText">Botas:</td>
+    <td>
+        <select id="bootsSelect">
+            <option value="">--Seleccionar--</option>
+            <option value="leather_boots">Botas de Cuero</option>
+            <option value="iron_boots">Botas de Hierro</option>
+            <option value="gold_boots">Botas de Oro</option>
+            <option value="diamond_boots">Botas de Diamante</option>
+            <option value="dragon_scale_boots">Botas de Escama de Dragón</option>
+        </select>
+    </td>
+</tr>
+        <tr id="defaultDropsRow">
+            <td id="DropDText">Drops por defecto:</td>
+            <td>
+                <select id="defaultDrops">
+                    <option value="">--Seleccionar--</option>
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="creeperChargedRow" style="display: none;">
+            <td id="CreeperCharText">Creeper Cargado:</td>
+            <td>
+                <select id="charged">
+                    <option value="">--Seleccionar--</option>
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="spawnskinOptions" style="display: none;">
+            <td id="IDText">ID de la Skin:</td>
+            <td><input type="text" id="skin"></td>
+        </tr>
+        <tr id="aggroRow" style="display: none;">
+            <td id="AggroText">Hostilidad:</td>
+            <td>
+                <select id="aggro">
+                    <option value="">--Seleccionar--</option>
+                    <option value="hostile">Hostile</option>
+                    <option value="neutral">Neutral</option>
+                    <option value="passive">Passive</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="babyRow" style="display: none;">
+            <td id="BabyText">Bebé:</td>
+            <td>
+                <select id="baby" onchange="handleBabyChange()">
+                    <option value="">--Seleccionar--</option>
+                    <option value="time">Tiempo</option>
+                    <option value="true">Siempre</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="babyTimeRow" style="display: none;">
+            <td id="BabySText">Bebé (segundos):</td>
+            <td><input type="number" id="babyTime" min="1"></td>
+        </tr>
+        <tr>
+            <td>Loot Tags:</td>
+            <td>
+                <select id="drops" onchange="updateConditionals()">
+                    <option value="">--Seleccionar--</option>
+                    <option value="1">Sí</option>
+                    <option value="2">No</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="additionalRows" class="additional-rows" style="display: none;">
+            <td>Drops items:</td>
+            <td>
+                <select id="additional1"></select>
+            </td>  
+        </tr>
+        <tr id="additionalRows2" class="additional-rows" style="display: none;">
+            <td id="QuantitySText">Cantidad:</td>
+            <td><input type="number" id="additional2" max="1000"></td>
+        </tr>
+        <tr id="additionalRows3" class="additional-rows" style="display: none;">
+            <td>Bonus:</td>
+            <td><input type="number" id="additional3"></td>
+        </tr>
+        <tr id="additionalRows4" class="additional-rows" style="display: none;">
+            <td>Loot Bonus:</td>
+            <td><input type="number" id="additional4"></td>
+        </tr>
+        <tr id="additionalRows5" class="additional-rows" style="display: none;">
+            <td id="ChanceText">Oportunidad:</td>
+            <td><input type="text" id="additional5" placeholder="Proximamente Disponible..." disabled></td>
+        </tr>
+        <tr id="additionalRows6" class="additional-rows" style="display: none;">
+            <td id="VarianteText">Variante:</td>
+            <td>
+                <select id="additional6">
+                    <option value="">--Seleccionar--</option>
+                    <option value="mooshroom">Mooshroom</option>
+                    <option value="cowctus">Cactus Cow</option>
+                    <option value="normal">Normal</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="additionalRows7" class="additional-rows" style="display: none;">
+            <td id="ShearedText">¿Está esquilada?:</td>
+            <td><input type="text" id="additional7" placeholder="Fuera de Servicio" disabled></td>
+        </tr>
+        <tr id="additionalRows9" class="additional-rows" style="display: none;">
+            <td id="isBabyText">¿Es bebé?:</td>
+            <td>
+                <select id="additional9" onchange="handleBabyChange()">
+                    <option value="">--Seleccionar--</option>
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="additionalRows10" class="additional-rows" style="display: none;">
+            <td>Color:</td>
+            <td>
+                <select id="additional10" onchange="handleColorChange()">
+                    <option value="">--Seleccionar--</option>
+                    <option value="red">Red</option>
+                    <option value="green">Green</option>
+                    <option value="blue">Blue</option>
+                    <option value="brown">Brown</option>
+                    <option value="cyan">Cyan</option>
+                    <option value="lightblue">Lightblue</option>
+                    <option value="lightgreen">Lightgreen</option>
+                    <option value="magenta">Magenta</option>
+                    <option value="orange">Orange</option>
+                    <option value="pink">Pink</option>
+                    <option value="purple">Purple</option>
+                    <option value="white">White</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="lightgray">Lightgray</option>
+                    <option value="gray">Gray</option>
+                    <option value="black">Black</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="additionalRows11" class="additional-rows" style="display: none;">
+            <td id="onFireText">¿Está en llamas?:</td>
+            <td>
+                <select id="additional11">
+                    <option value="">--Seleccionar--</option>
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="additionalRows12" class="additional-rows" style="display: none;">
+            <td id="SizeText">Tamaño:</td>
+            <td>
+                <select id="additional12">
+                    <option value="">--Seleccionar--</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button id="AddLootText" class="add-loot" onclick="addLoot()">Agregar Loot</button>
+                <div class="loot-list" id="lootList"></div>
+                <button id="CommandSummonText" onclick="generateCommand()">Generar Comando</button>
+                <button id="copyButton" onclick="copyCommand()">Copiar Comando</button>
+            </td>
+        </tr>
+    </table>
+    <pre id="outputCommand">/summon </pre>
+
+    <script> 
+$(document).ready(function() {
+    function formatOption(option) {
+        if (!option.id) return option.text;  // Si no hay ID, retorna solo el texto.
+
+        // Obtén la URL de la imagen desde el atributo data-image.
+        var imageUrl = $(option.element).data('image');
+        if (imageUrl) {
+            // Si la URL de la imagen está presente, retorna el HTML que incluye la imagen y el texto.
+            return $('<span><img src="' + imageUrl + '" style="width: 20px; height: 20px; margin-right: 10px;" />' + option.text + '</span>');
+        }
+
+        return option.text;  // Si no hay imagen, retorna solo el texto.
+    }
+
+    // Inicializa Select2 con el formato personalizado para las imágenes.
+    $('.select-with-images').select2({
+        templateResult: formatOption,  // Cómo se muestran las opciones en el dropdown.
+        templateSelection: formatOption,  // Cómo se muestra la opción seleccionada.
+        minimumResultsForSearch: Infinity  // Si no quieres que se muestre la barra de búsqueda.
+    });
+});
+    
+let lootItems = [];
+let currentLanguage = 'es';
+
+// Estructura de datos compartida para los ítems
+const itemMapping = {
+    'acid': 'Acid',
+    'rail_activator': 'Activator Minecart Rail',
+    'afro': 'Afro',
+    'air': 'Air',
+    'anvil': 'Anvil',
+    'apple': 'Apple',
+    'apple_juice': 'Apple Juice',
+    'leaves_apple': 'Apple in Leaves',
+    'arrow': 'Arrow',
+    'potato_baked': 'Baked Potato',
+    'balloon': 'Balloon',
+    'bamboo': 'Bamboo',
+    'bamboo_block': 'Bamboo Block',
+    'backdrop_bamboo': 'Bamboo Backdrop',
+    'stairs_bamboo': 'Bamboo Stairs',
+    'slab_bamboo': 'Bamboo Slab',
+    'bamboo_door': 'Bamboo Door',
+    'barrier': 'Barrier',
+    'bed': 'Bed',
+    'bedrock': 'Bedrock',
+    'slab_bedrock': 'Bedrock Slab',
+    'stairs_bedrock': 'Bedrock Stairs',
+    'beet_soup': 'Beet Soup',
+    'beetroot': 'Beetroot',
+    'beetroot_seed': 'Beetroot Seed',
+    'blaze_powder': 'Blaze Powder',
+    'blaze_rod': 'Blaze Rod',
+    'bone': 'Bone',
+    'bone_block': 'Bone Block',
+    'bone_meal': 'Bone Meal',
+    'bone_shuriken': 'Bone Shuriken',
+    'book': 'Book',
+    'bookshelf': 'Bookshelf',
+    'backdrop_bookshelf': 'Bookshelf Backdrop',
+    'bottle_of_enchanting': 'Bottle of Enchanting',
+    'bow': 'Bow',
+    'bowl': 'Bowl',
+    'bread': 'Bread',
+    'brewing_stand': 'Brewing Stand',
+    'brick': 'Brick',
+    'backdrop_brick': 'Brick Backdrop',
+    'slab_brick': 'Brick Slab',
+    'stairs_brick': 'Brick Stairs',
+    'bricks': 'Bricks',
+    'brown_mushroom': 'Brown Mushroom',
+    'brown_mushroom_cap': 'Brown Mushroom Cap',
+    'brown_mushroom_stem': 'Brown Mushroom Stem',
+    'bucket_acid': 'Bucket of Acid',
+    'bucket_lava': 'Bucket of Lava',
+    'bucket_milk': 'Bucket of Milk',
+    'bucket_water': 'Bucket of Water',
+    'button': 'Button',
+    'cactus': 'Cactus',
+    'cactus_cake': 'Cactus Cake',
+    'cake': 'Cake',
+    'apple_candy': 'Candy Apple',
+    'candy_cane': 'Candy Cane',
+    'caramel': 'Caramel',
+    'carpet': 'Carpet',
+    'carrot': 'Carrot',
+    'carrot_on_a_stick': 'Carrot on a Stick',
+    'cauldron': 'Cauldron',
+    'charcoal': 'Charcoal',
+    'chest': 'Chest',
+    'chicken_nugget': 'Chicken Nugget',
+    'clay': 'Clay',
+    'clay_block': 'Clay Block',
+    'clock': 'Clock',
+    'clownfish': 'Clownfish',
+    'coal': 'Coal',
+    'coal_block': 'Coal Block',
+    'coal_ore': 'Coal Ore',
+    'coarse_dirt': 'Coarse Dirt',
+    'cobblestone': 'Cobblestone',
+    'backdrop_cobblestone': 'Cobblestone Backdrop',
+    'slab_cobblestone': 'Cobblestone Slab',
+    'stairs_cobblestone': 'Cobblestone Stairs',
+    'cobweb': 'Cobweb',
+    'cocoa_bean': 'Cocoa Bean',
+    'command_book': 'Command Book',
+    'compass': 'Compass',
+    'composter': 'Composter',
+    'bacon_cooked': 'Cooked Bacon',
+    'chicken_cooked': 'Cooked Chicken',
+    'cooked_egg': 'Cooked Egg',
+    'fish_cooked': 'Cooked Fish',
+    'cooked_mutton': 'Cooked Mutton',
+    'porkchop_cooked': 'Cooked Porkchop',
+    'rabbit_cooked': 'Cooked Rabbit',
+    'salmon_cooked': 'Cooked Salmon',
+    'cookie': 'Cookie',
+    'coral': 'Coral',
+    'coral_lantern': 'Coral Lantern',
+    'crafting_table': 'Crafting Table',
+    'dead_bush': 'Desert Shrub',
+    'rail_detector': 'Detector Minecart Rail',
+    'diamond': 'Diamond',
+    'diamond_axe': 'Diamond Axe',
+    'diamond_block': 'Diamond Block',
+    'diamond_boots': 'Diamond Boots',
+    'diamond_chestplate': 'Diamond Chestplate',
+    'diamond_helmet': 'Diamond Helmet',
+    'diamond_hoe': 'Diamond Hoe',
+    'diamond_leggings': 'Diamond Leggings',
+    'diamond_ore': 'Diamond Ore',
+    'diamond_pickaxe': 'Diamond Pickaxe',
+    'diamond_shovel': 'Diamond Shovel',
+    'slab_diamond': 'Diamond Slab',
+    'stairs_diamond': 'Diamond Stairs',
+    'diamond_sword': 'Diamond Sword',
+    'dirt': 'Dirt',
+    'backdrop_dirt': 'Dirt Backdrop',
+    'dispenser': 'Dispenser',
+    'dragon_scale': 'Dragon Scale',
+    'dragon_scale_block': 'Dragon Scale Block',
+    'dragon_scale_boots': 'Dragon Scale Boots',
+    'dragon_scale_chestplate': 'Dragon Scale Chestplate',
+    'dragon_scale_helmet': 'Dragon Scale Helmet',
+    'dragon_scale_leggings': 'Dragon Scale Leggings',
+    'dropper': 'Dropper',
+    'dye': 'Dye',
+    'egg': 'Egg',
+    'bucket_empty': 'Empty Bucket',
+    'enchantment_table': 'Enchantment Table',
+    'ender_chest': 'Ender Chest',
+    'ender_dragon_egg': 'Ender Dragon Egg',
+    'ender_gem': 'Ender Gem',
+    'ender_gem_ore': 'Ender Gem Ore',
+    'ender_pearl': 'Ender Pearl',
+    'enderstone': 'Enderstone',
+    'eye_of_ender': 'Eye of Ender',
+    'farmland': 'Farmland',
+    'feather': 'Feather',
+    'fermented_spider_eye': 'Fermented Spider Eye',
+    'egg_fire': 'Fire Egg',
+    'fishing_rod': 'Fishing Rod',
+    'flint': 'Flint',
+    'flint_and_steel': 'Flint and Steel',
+    'furnace': 'Furnace',
+    'frosted_ice': 'Frosted Ice',
+    'ghast_tear': 'Ghast Tear',
+    'glass': 'Glass',
+    'backdrop_glass': 'Glass Backdrop',
+    'glass_shard': 'Glass Shard',
+    'glistering_melon': 'Glistering Melon',
+    'glow_stone': 'Glow Stone',
+    'glowstone_dust': 'Glowstone Dust',
+    'gold_block': 'Gold Block',
+    'gold_boots': 'Gold Boots',
+    'gold_chestplate': 'Gold Chestplate',
+    'gold_helmet': 'Gold Helmet',
+    'gold_ingot': 'Gold Ingot',
+    'gold_leggings': 'Gold Leggings',
+    'gold_nugget': 'Gold Nugget',
+    'gold_ore': 'Gold Ore',
+    'gold_soil': 'Gold Soil',
+    'slab_gold': 'Gold Slab',
+    'stairs_gold': 'Gold Stairs',
+    'golden_apple': 'Golden Apple',
+    'golden_apple_seed': 'Golden Apple Seed',
+    'leaves_golden_apple': 'Golden Apple in Leaves',
+    'golden_axe': 'Golden Axe',
+    'carrot_golden': 'Golden Carrot',
+    'golden_hoe': 'Golden Hoe',
+    'golden_pickaxe': 'Golden Pickaxe',
+    'golden_shovel': 'Golden Shovel',
+    'golden_sword': 'Golden Sword',
+    'grass': 'Grass',
+    'gravel': 'Gravel',
+    'gunpowder': 'Gunpowder',
+    'hay_bale': 'Hay Bale',
+    'healing_crystal': 'Healing Crystal',
+    'ice': 'Ice',
+    'ice_cream': 'Ice Cream',
+    'ink_sac': 'Ink Sac',
+    'iron_axe': 'Iron Axe',
+    'iron_bars': 'Iron Bars',
+    'iron_block': 'Iron Block',
+    'iron_boots': 'Iron Boots',
+    'iron_chestplate': 'Iron Chestplate',
+    'iron_door': 'Iron Door',
+    'iron_helmet': 'Iron Helmet',
+    'iron_hoe': 'Iron Hoe',
+    'iron_ingot': 'Iron Ingot',
+    'iron_leggings': 'Iron Leggings',
+    'iron_ore': 'Iron Ore',
+    'iron_nugget': 'Iron Nugget',
+    'iron_pickaxe': 'Iron Pickaxe',
+    'iron_shovel': 'Iron Shovel',
+    'slab_iron': 'Iron Slab',
+    'stairs_iron': 'Iron Stairs',
+    'iron_sword': 'Iron Sword',
+    'jack_o_lantern': 'Jack-o-Lantern',
+    'ladder': 'Ladder',
+    'lapis': 'Lapis Lazuli',
+    'lapis_lazuli_block': 'Lapis Lazuli Block',
+    'lapis_ore': 'Lapis Lazuli Ore',
+    'lava': 'Lava',
+    'leather': 'Leather',
+    'leather_boots': 'Leather Boots',
+    'leather_cap': 'Leather Cap',
+    'leather_pants': 'Leather Pants',
+    'leather_tunic': 'Leather Tunic',
+    'leaves': 'Leaves',
+    'lemon': 'Lemon',
+    'lemon_block': 'Lemon Block',
+    'leaves_lemon': 'Lemon in Leaves',
+    'lemonade': 'Lemonade',
+    'lever': 'Lever',
+    'lilypad': 'Lily Pad',
+    'long_grass': 'Long Grass',
+    'magma_cream': 'Magma Cream',
+    'magma_block': 'Magma Block',
+    'melon': 'Melon',
+    'melon_block': 'Melon Block',
+    'melon_seed': 'Melon Seed',
+    'minecart': 'Minecart',
+    'minecart_furnace': 'Minecart Furnace',
+    'minecart_chest': 'Minecart Chest',
+    'rail': 'Minecart Rail',
+    'monster_spawner': 'Monster Spawner',
+    'moss': 'Moss',
+    'moss_stone': 'Moss Stone',
+    'mycelium': 'Mycelium',
+    'mustache': 'Mustache',
+    'name_tag': 'Name Tag',
+    'nether_brick': 'Nether Brick',
+    'backdrop_nether_brick': 'Nether Brick Backdrop',
+    'nether_fence': 'Nether Brick Fence',
+    'nether_fence_gate': 'Nether Brick Fence Gate',
+    'slab_nether_brick': 'Nether Brick Slab',
+    'stairs_nether_brick': 'Nether Brick Stairs',
+    'nether_bricks': 'Nether Bricks',
+    'nether_wart': 'Nether Wart',
+    'nether_wart_block': 'Nether Wart Block',
+    'netherrack': 'Netherrack',
+    'note_block': 'Note Block',
+    'obsidian': 'Obsidian',
+    'backdrop_obsidian': 'Obsidian Backdrop',
+    'slab_obsidian': 'Obsidian Slab',
+    'stairs_obsidian': 'Obsidian Stairs',
+    'odd_rock': 'Odd Rock',
+    'odd_rock_ore': 'Odd Rock Ore',
+    'odd_torch': 'Odd Torch',
+    'orange': 'Orange',
+    'orange_juice': 'Orange Juice',
+    'leaves_orange': 'Orange in Leaves',
+    'paper': 'Paper',
+    'party_hat': 'Party Hat',
+    'piston': 'Piston',
+    'poisonous_potato': 'Poisonous Potato',
+    'portal_frame': 'Portal Frame',
+    'portal_stone': 'Portal Stone',
+    'potato': 'Potato',
+    'potion': 'Potion',
+    'rail_powered': 'Powered Minecart Rail',
+    'pressure_plate': 'Pressure Plate',
+    'pufferfish': 'Pufferfish',
+    'pumpkin': 'Pumpkin',
+    'pumpkin_pie': 'Pumpkin Pie',
+    'pumpkin_seed': 'Pumpkin Seed',
+    'rabbit_hide': 'Rabbit Hide',
+    'rabbit_stew': 'Rabbit Stew',
+    'rabbits_foot': 'Rabbit\'s Foot',
+    'raft': 'Raft',
+    'bacon': 'Raw Bacon',
+    'beef': 'Raw Beef',
+    'chicken': 'Raw Chicken',
+    'fish': 'Raw Fish',
+    'mutton': 'Raw Mutton',
+    'porkchop': 'Raw Porkchop',
+    'rabbit': 'Raw Rabbit',
+    'salmon': 'Raw Salmon',
+    'red_flower': 'Red Flower',
+    'red_mushroom': 'Red Mushroom',
+    'red_mushroom_cap': 'Red Mushroom Cap',
+    'red_mushroom_stem': 'Red Mushroom Stem',
+    'nether_bricks_red': 'Red Nether Bricks',
+    'redstone': 'Redstone Dust',
+    'redstone_lamp': 'Redstone Lamp',
+    'redstone_ore': 'Redstone Ore',
+    'redstone_torch': 'Redstone Torch',
+    'rope': 'Rope',
+    'rotten_flesh': 'Rotten Flesh',
+    'saddle': 'Saddle',
+    'sand': 'Sand',
+    'sandstone': 'Sandstone',
+    'santa_hat': 'Santa Hat',
+    'sapling': 'Sapling',
+    'seaweed': 'Seaweed',
+    'seeds': 'Seeds',
+    'shades': 'Shades',
+    'shear': 'Shear',
+    'shrub': 'Shrub',
+    'sign': 'Sign',
+    'slime_block': 'Slime Block',
+    'slimeball': 'Slimeball',
+    'snow': 'Snow',
+    'snow_ball': 'Snow Ball',
+    'snow_block': 'Snow Block',
+    'soul_sand': 'Soul Sand',
+    'soup': 'Soup',
+    'spawn_egg': 'Spawn Egg',
+    'spear': 'Spear',
+    'spider_eye': 'Spider Eye',
+    'steak': 'Steak',
+    'stick': 'Stick',
+    'piston_sticky': 'Sticky Piston',
+    'stone': 'Stone',
+    'stone_axe': 'Stone Axe',
+    'backdrop_stone': 'Stone Backdrop',
+    'stone_brick': 'Stone Brick',
+    'backdrop_stone_brick': 'Stone Brick Backdrop',
+    'slab_stone_brick': 'Stone Brick Slab',
+    'stairs_stone_brick': 'Stone Brick Stairs',
+    'stone_hoe': 'Stone Hoe',
+    'stone_pickaxe': 'Stone Pickaxe',
+    'stone_shovel': 'Stone Shovel',
+    'slab_stone': 'Stone Slab',
+    'stairs_stone': 'Stone Stairs',
+    'stone_sword': 'Stone Sword',
+    'string': 'String',
+    'sugar': 'Sugar',
+    'sugarcane': 'Sugarcane',
+    'tnt': 'TNT',
+    'minecart_tnt': 'TNT Minecart',
+    'topaz': 'Topaz',
+    'topaz_block': 'Topaz Block',
+    'topaz_ore': 'Topaz Ore',
+    'torch': 'Torch',
+    'trap_door': 'Trap Door',
+    'tree_wood': 'Tree Wood',
+    'water': 'Water',
+    'wheat': 'Wheat',
+    'wood': 'Wood',
+    'wooden_axe': 'Wooden Axe',
+    'wooden_door': 'Wooden Door',
+    'fence': 'Wooden Fence',
+    'fence_gate': 'Wooden Fence Gate',
+    'wooden_hoe': 'Wooden Hoe',
+    'wooden_pickaxe': 'Wooden Pickaxe',
+    'wooden_planks': 'Wooden Planks',
+    'backdrop_wooden_planks': 'Wooden Planks Backdrop',
+    'slab_wooden_planks': 'Wooden Planks Slab',
+    'stairs_wooden_planks': 'Wooden Planks Stairs',
+    'pressure_plate_wooden': 'Wooden Pressure Plate',
+    'wooden_shovel': 'Wooden Shovel',
+    'wooden_sword': 'Wooden Sword',
+    'wool': 'Wool',
+    'backdrop_wool': 'Wool Backdrop',
+    'yellow_flower': 'Yellow Flower',
+};
+
+// Generar las opciones de los select
+const itemOptions = Object.entries(itemMapping).map(([id, name]) => 
+    `<option value="${id}">${name}</option>`
+).join('');
+
+// Insertar la lista de opciones en los select correspondientes
+document.addEventListener('DOMContentLoaded', () => {
+    const holdingSelect = document.getElementById('holding');
+    const additionalSelect = document.getElementById('additional1');
+
+    holdingSelect.innerHTML = `<option value="">--Seleccionar--</option>` + itemOptions;
+    additionalSelect.innerHTML = `<option value="">--Seleccionar--</option>` + itemOptions;
+
+    // Inicializar Select2 en los selectores
+    $(holdingSelect).select2({
+    });
+    $(additionalSelect).select2({
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const holdingSelect = document.getElementById('holding');
+    const additionalSelect = document.getElementById('additional1');
+
+    // Inicializar Select2 en los selectores con un solo placeholder
+    $(holdingSelect).select2({
+    });
+    $(additionalSelect).select2({
+    });
+
+    updateItemSelects();
+});
+
+document.getElementById('toggle-mode').addEventListener('click', function() {
+    // Alternar la clase 'dark-mode' en el body
+    document.body.classList.toggle('dark-mode');
+
+    // Seleccionar el ícono y el texto del modo
+    const icon = this.querySelector('i');
+    const modeText = document.getElementById('modeText');
+
+    // Cambiar ícono y texto según el modo actual
+    if (document.body.classList.contains('dark-mode')) {
+        icon.classList.remove('bi-moon');
+        icon.classList.add('bi-sun');
+        modeText.innerText = currentLanguage === 'es' ? 'Modo Claro' : 'Light Mode';
+    } else {
+        icon.classList.remove('bi-sun');
+        icon.classList.add('bi-moon');
+        modeText.innerText = currentLanguage === 'es' ? 'Modo Oscuro' : 'Dark Mode';
+    }
+});
+
+
+
+function updateItemSelects() {
+    const holdingSelect = document.getElementById('holding');
+    const additionalSelect = document.getElementById('additional1');
+    const currentTranslations = translations[currentLanguage];
+
+    // Guardar la selección actual
+    const currentHoldingValue = holdingSelect.value;
+    const currentAdditionalValue = additionalSelect.value;
+
+    // Actualizar las opciones sin duplicar placeholders
+    holdingSelect.innerHTML = `<option value="">${currentTranslations.selectPlaceholder}</option>` + itemOptions;
+    additionalSelect.innerHTML = `<option value="">${currentTranslations.selectPlaceholder}</option>` + itemOptions;
+
+    // Restaurar la selección previa
+    holdingSelect.value = currentHoldingValue;
+    additionalSelect.value = currentAdditionalValue;
+
+    // Refrescar select2 para reflejar los cambios
+    $(holdingSelect).trigger('change.select2');
+    $(additionalSelect).trigger('change.select2');
+}
+
+// Función para obtener el nombre legible basado en el ID
+function getReadableName(id) {
+    return itemMapping[id] || id;
+}
+
+// Función para mostrar alertas con mensajes localizados
+function showAlert(messageKey) {
+    const messages = {
+        es: {
+            AddLoot: "Por favor, seleccione un ítem",
+            AddLootCase: "Este ítem ya ha sido agregado.",
+            commandGenerated: "Por favor, seleccione un tipo de mob.",
+        },
+        en: {
+            AddLoot: "Please select an item.",
+            AddLootCase: "This item has already been added.",
+            commandGenerated: "Please select a mob type.",
+        }
+    };
+
+    const message = messages[currentLanguage][messageKey];
+    const alertContainer = document.getElementById('alertContainer');
+    alertContainer.textContent = message;
+    alertContainer.classList.add('show');
+
+    setTimeout(() => {
+        alertContainer.classList.remove('show');
+        alertContainer.classList.add('hide');
+        setTimeout(() => {
+            alertContainer.classList.remove('hide');
+        }, 300);
+    }, 3000);
+}
+
+// Función para alternar el menú móvil
+function toggleMobileMenu() {
+    const menu = document.querySelector('.menu');
+    menu.classList.toggle('show');
+}
+
+// Función para cerrar el menú móvil después de seleccionar una opción
+function closeMobileMenu() {
+    const menu = document.querySelector('.menu');
+    menu.classList.remove('show');
+}
+
+// Añadir el evento de cierre a cada enlace o botón del menú
+document.querySelectorAll('.menu ul.menu-list li a, .menu ul.menu-list li button').forEach(item => {
+    item.addEventListener('click', closeMobileMenu);
+});
+
+// Función para limpiar subcasillas
+function clearSubFields(containerId) {
+    const container = document.getElementById(containerId);
+    const inputs = container.querySelectorAll('input, select');
+    inputs.forEach(input => {
+        input.value = '';  // Resetear a valor predeterminado
+        input.checked = false; // Desmarcar cualquier checkbox/radio
+    });
+}
+
+// Función para alternar las opciones de armadura
+function toggleArmorOptions() {
+    const armorSelection = document.getElementById('armor').value;
+
+    const helmetRow = document.getElementById('helmetRow');
+    const chestplateRow = document.getElementById('chestplateRow');
+    const leggingsRow = document.getElementById('leggingsRow');
+    const bootsRow = document.getElementById('bootsRow');
+
+    if (armorSelection === 'yes') {
+        helmetRow.style.display = 'table-row';
+        chestplateRow.style.display = 'table-row';
+        leggingsRow.style.display = 'table-row';
+        bootsRow.style.display = 'table-row';
+    } else {
+        helmetRow.style.display = 'none';
+        chestplateRow.style.display = 'none';
+        leggingsRow.style.display = 'none';
+        bootsRow.style.display = 'none';
+
+        // Limpiar los subcampos de armadura cuando se cierre
+        clearSubFields('helmetRow');
+        clearSubFields('chestplateRow');
+        clearSubFields('leggingsRow');
+        clearSubFields('bootsRow');
+    }
+}
+
+// Función para restablecer los campos del formulario
+function resetFields() {
+    lootItems = [];
+    
+    updateItemSelects();
+    const inputs = document.querySelectorAll('input, select');
+    inputs.forEach(input => {
+        if (input.type === 'checkbox' || input.type === 'radio') {
+            input.checked = false;
+        } else {
+            input.value = '';
+            document.getElementById('outputCommand').textContent = '/summon ';
+        }
+    });
+
+    // Mostrar solo las casillas que deben ser visibles por defecto
+    document.getElementById('positionType').value = '';
+    updatePositionFields();
+    document.getElementById('defaultDropsRow').style.display = 'table-row';
+
+    // Ocultar casillas adicionales
+    const rowsToHide = ['creeperChargedRow', 'spawnskinOptions', 'aggroRow', 'handItemRow', 'armorRow', 'babyRow', 'babyTimeRow', 'helmetRow', 'chestplateRow', 'leggingsRow', 'bootsRow'];
+    rowsToHide.forEach(rowId => {
+        document.getElementById(rowId).style.display = 'none';
+    });
+
+    // Ocultar las opciones de armadura
+    toggleArmorOptions(); // Asegura que las opciones de armadura se oculten
+
+    // Contraer todas las casillas desplegables.
+    const positionGroups = document.querySelectorAll('.position-group');
+    positionGroups.forEach(group => group.style.display = 'none');
+
+    // Limpia cualquier contenido en los divs de loot.
+    const lootList = document.getElementById('lootList');
+    if (lootList) {
+        lootList.innerHTML = '';
+    }
+
+    // Ocultar todas las filas adicionales
+    const additionalRows = document.querySelectorAll('.additional-rows');
+    additionalRows.forEach(row => row.style.display = 'none');
+}
+
+// Función para actualizar los campos de posición
+function updatePositionFields() {
+    const positionType = document.getElementById('positionType').value;
+    const relativeFields = document.querySelectorAll('.relative-pos');
+    const absoluteFields = document.querySelectorAll('.absolute-pos');
+
+    relativeFields.forEach(row => row.style.display = 'none');
+    absoluteFields.forEach(row => row.style.display = 'none');
+
+    if (positionType === 'relative') {
+        relativeFields.forEach(row => row.style.display = 'table-row');
+    } else if (positionType === 'absolute') {
+        absoluteFields.forEach(row => row.style.display = 'table-row');
+    }
+}
+
+// Función para actualizar las opciones basadas en las condiciones del mob
+function updateConditionals() {
+    const drops = document.getElementById('drops').value;
+    const mobType = document.getElementById('mobType').value;
+    const additionalRows = document.querySelectorAll('.additional-rows');
+
+    // Resetear la visibilidad de todas las filas adicionales
+    additionalRows.forEach(row => row.style.display = 'none');
+
+    if (drops === '1') {
+        document.getElementById('additionalRows').style.display = 'table-row';
+        document.getElementById('additionalRows2').style.display = 'table-row';
+        document.getElementById('additionalRows3').style.display = 'table-row';
+        document.getElementById('additionalRows4').style.display = 'table-row';
+        document.getElementById('additionalRows5').style.display = 'table-row';
+        document.getElementById('additionalRows11').style.display = 'table-row';
+
+        const animalMobs = ['cow', 'sheep', 'mooshroom', 'pig', 'rabbit', 'wolf', 'cowctus', 'chicken'];
+        const babyRow = document.getElementById('additionalRows9');
+        if (animalMobs.includes(mobType) && mobType !== 'squid' && mobType !== 'bat') {
+            babyRow.style.display = 'table-row';
+        }
+
+        if (mobType === 'cow' || mobType === 'mooshroom' || mobType === 'cowctus') {
+            document.getElementById('additionalRows6').style.display = 'table-row';
+        }
+
+        if (mobType === 'sheep') {
+            document.getElementById('additionalRows7').style.display = 'table-row';
+            document.getElementById('additionalRows10').style.display = 'table-row';
+        }
+
+        if (mobType === 'slime' || mobType === 'magmacube') {
+            document.getElementById('additionalRows12').style.display = 'table-row';
+        }
+    }
+}
+
+        document.getElementById('quantity').addEventListener('input', function() {
+            var quantityInput = document.getElementById('quantity');
+            var value = parseInt(quantityInput.value, 10);
+
+            if (value > 20) {
+                quantityInput.value = 20;
+            }
+            
+            if (value < 1) {
+                quantityInput.value = 1;
+            }
+        });
+        document.getElementById('additional2').addEventListener('input', function() {
+            var quantityInput = document.getElementById('additional2');
+            var value = parseInt(quantityInput.value, 10);
+
+            if (value > 10000) {
+                quantityInput.value = 10000;
+            }
+            
+            if (value < 1) {
+                quantityInput.value = 1;
+            }
+        });
+        document.getElementById('additional3').addEventListener('input', function() {
+            var quantityInput = document.getElementById('additional3');
+            var value = parseInt(quantityInput.value, 10);
+
+            if (value > 10000) {
+                quantityInput.value = 10000;
+            }
+            
+            if (value < 1) {
+                quantityInput.value = 1;
+            }
+        });
+        document.getElementById('additional4').addEventListener('input', function() {
+            var quantityInput = document.getElementById('additional4');
+            var value = parseInt(quantityInput.value, 10);
+
+            if (value > 10000) {
+                quantityInput.value = 10000;
+            }
+            
+            if (value < 1) {
+                quantityInput.value = 1;
+            }
+        });
+        document.getElementById('health').addEventListener('input', function() {
+            var quantityInput = document.getElementById('health');
+            var value = parseInt(quantityInput.value, 10);
+
+            if (value > 100000) {
+                quantityInput.value = 100000;
+            }
+            
+            if (value < 1) {
+                quantityInput.value = 1;
+            }
+        });
+        document.getElementById('babyTime').addEventListener('input', function() {
+            var quantityInput = document.getElementById('babyTime');
+            var value = parseInt(quantityInput.value, 10);
+
+            if (value > 86400) {
+                quantityInput.value = 86400;
+            }
+            
+            if (value < 1) {
+                quantityInput.value = 1;
+            }
+        });
+
+
+// Función para manejar los cambios en la opción "baby"
+function handleBabyChange() {
+    const baby = document.getElementById('baby').value;
+    const babyTimeRow = document.getElementById('babyTimeRow');
+    const shearedInput = document.getElementById('additional7');
+
+    if (baby === 'time') {
+        babyTimeRow.style.display = 'table-row';
+    } else {
+        babyTimeRow.style.display = 'none';
+    }
+
+    if (document.getElementById('mobType').value === 'sheep' && baby === 'true') {
+        shearedInput.value = '';
+        shearedInput.disabled = true;
+    } else {
+        shearedInput.disabled = false;
+    }
+}
+
+// Función para manejar los cambios en la opción "color"
+function handleColorChange() {
+    const color = document.getElementById('additional10').value;
+    const sheared = document.getElementById('additional7');
+    const baby = document.getElementById('additional9');
+
+    if (color !== '') {
+        sheared.value = '';
+        sheared.disabled = true;
+    } else {
+        sheared.disabled = false;
+    }
+}
+
+// Función para actualizar las opciones del mob
+function updateMobOptions() {
+    var mobType = document.getElementById('mobType').value;
+
+    // Asegúrate de restablecer todos los campos y opciones antes de aplicar las nuevas opciones
+    resetFields();
+    updateItemSelects();
+    lootItems = [];
+
+    // Actualiza la casilla de tipo de mob (si es necesario)
+    if (mobType) {
+        document.getElementById('mobType').value = mobType;
+    }
+
+    // Actualizar la visibilidad de las filas según el tipo de mob
+    var creeperChargedRow = document.getElementById('creeperChargedRow');
+    var spawnskinOptions = document.getElementById('spawnskinOptions');
+    var aggroRow = document.getElementById('aggroRow');
+    var handItemRow = document.getElementById('handItemRow');
+    var armorRow = document.getElementById('armorRow');
+    var babyRow = document.getElementById('babyRow');
+    var babyTimeRow = document.getElementById('babyTimeRow');
+    var defaultDropsRow = document.getElementById('defaultDropsRow');
+
+    creeperChargedRow.style.display = 'none';
+    spawnskinOptions.style.display = 'none';
+    aggroRow.style.display = 'none';
+    handItemRow.style.display = 'none';
+    armorRow.style.display = 'none';
+    babyRow.style.display = 'none';
+    babyTimeRow.style.display = 'none';
+    defaultDropsRow.style.display = 'table-row';
+
+    if (mobType === 'creeper') {
+        creeperChargedRow.style.display = 'table-row';
+    } else if (mobType === 'spawnskin') {
+        spawnskinOptions.style.display = 'table-row';
+        aggroRow.style.display = 'table-row';
+        armorRow.style.display = 'table-row';
+        defaultDropsRow.style.display = 'none';
+    } else if (mobType === 'pigman' || mobType === 'enderman') {
+        handItemRow.style.display = 'table-row';
+    } else if (mobType === 'zombie') {
+        armorRow.style.display = 'table-row'; 
+    } else if (mobType === 'bat' || mobType === 'wolf') {
+        defaultDropsRow.style.display = 'none';
+    } else if (mobType === 'sheep') {
+         document.getElementById('shearedCheckbox').disabled = true;
+    } else {
+        // Limpiar subcampos relevantes si el tipo de mob cambia
+        clearSubFields('creeperChargedRow');
+        clearSubFields('spawnskinOptions');
+        clearSubFields('aggroRow');
+        clearSubFields('handItemRow');
+        clearSubFields('armorRow');
+        clearSubFields('babyRow');
+        clearSubFields('babyTimeRow');
+    }
+
+    const animalMobs = ['cow', 'sheep', 'mooshroom', 'pig', 'rabbit', 'wolf', 'cowctus', 'chicken'];
+    if (animalMobs.includes(mobType)) {
+        babyRow.style.display = 'table-row';
+    }
+
+    // Actualizar los Loot Tags y otras condiciones
+    updateConditionals();
+
+    // Contraer la sección de Posición cuando se cambia el tipo de mob
+    document.getElementById('positionType').value = '';
+    updatePositionFields();
+
+    // Ocultar las opciones de armadura si no son aplicables
+    toggleArmorOptions();
+
+    // Resetear el comando de salida
+    document.getElementById('outputCommand').textContent = '/summon ';
+}
+
+// Función para generar el comando basado en las selecciones
+function generateCommand() {
+    var mobType = document.getElementById('mobType').value;
+    if (!mobType) {
+        showAlert("commandGenerated");
+        return;
+    }
+
+    var quantity = document.getElementById('quantity').value || 1;
+    var posX = document.getElementById('posX').value;
+    var posY = document.getElementById('posY').value;
+    var absPosX = document.getElementById('absPosX').value;
+    var absPosY = document.getElementById('absPosY').value;
+    var name = document.getElementById('name').value;
+    var health = document.getElementById('health').value;
+    var holding = document.getElementById('holding').value;
+    var armorSelection = document.getElementById('armor').value;
+    var defaultDrops = document.getElementById('defaultDrops').value;
+    var drops = document.getElementById('drops').value;
+    var skin = document.getElementById('skin').value;
+    var aggro = document.getElementById('aggro').value;
+    var charged = document.getElementById('charged').value;
+    var baby = document.getElementById('baby').value;
+    var babyTime = document.getElementById('babyTime').value;
+
+    // Obtener los valores de las casillas de armadura
+    var helmet = document.getElementById('helmetSelect').value || '{}';
+    var chestplate = document.getElementById('chestplateSelect').value || '{}';
+    var leggings = document.getElementById('leggingsSelect').value || '{}';
+    var boots = document.getElementById('bootsSelect').value || '{}';
+
+    // Construir la lista de armadura
+    var armorList = `[${helmet === '{}' ? helmet : `"${helmet}"`}, ${chestplate === '{}' ? chestplate : `"${chestplate}"`}, ${leggings === '{}' ? leggings : `"${leggings}"`}, ${boots === '{}' ? boots : `"${boots}"`}]`;
+
+    var command = `/summon ${mobType}`;
+    if (quantity > 0) command += ` ${quantity}`;
+
+    if (document.getElementById('positionType').value === 'relative') {
+        command += ` ~${posX || ""} ~${posY || ""}`;
+    } else if (document.getElementById('positionType').value === 'absolute') {
+        command += ` ${absPosX || ""} ${absPosY || ""}`;
+    } else if (checkDataTags()) {
+        command += ` ~ ~`;
+    }
+
+    command += ` {`;
+
+    if (name) command += `name:"${name}", `;
+    if (health) command += `health:${health}, `;
+    if (holding && (mobType === 'pigman' || mobType === 'enderman')) command += `holding:"${holding}", `;
+    if (armorSelection === 'yes' && armorList !== '[{}, {}, {}, {}]') command += `armor:${armorList}, `;
+    if (defaultDrops !== "" && mobType !== 'wolf') command += `defaultDrops:${defaultDrops === 'true' ? true : false}, `;
+
+    if (drops === '1' && lootItems.length > 0) {
+        command += `drops:[`;
+        lootItems.forEach(item => {
+            command += `{item:{id:"${item.id}"}`;
+            if (item.quantity) command += `, quantity:${item.quantity}`;
+            if (item.bonus) command += `, bonus:${item.bonus}`;
+            if (item.lootBonus) command += `, lootBonus:${item.lootBonus}`;
+            if (item.chance) command += `, chance:${item.chance}`;
+            if (item.variant) command += `, variant:"${item.variant}"`;
+            if (item.sheared && !item.sheared.disabled) command += `, sheared:${item.sheared}`;
+            if (item.isBaby && !item.isBaby.disabled) command += `, isBaby:${item.isBaby}`;
+            if (item.color && mobType !== 'wolf') command += `, color:"${item.color}"`;
+            if (item.onFire) command += `, onFire:${item.onFire}`;
+            if (item.size) command += `, size:${item.size}`;
+            command += `}, `;
+        });
+        command = command.replace(/, $/, "");
+        command += `], `;
+    }
+
+    if (skin && mobType === 'spawnskin') command += `skin:"${skin}", `;
+    if (aggro && mobType === 'spawnskin') command += `aggro:"${aggro}", `;
+    if (charged !== "") command += `charged:${charged}, `;
+    if (baby === "true" && ['cow', 'sheep', 'mooshroom', 'pig', 'chicken', 'rabbit', 'wolf', 'cowctus'].includes(mobType)) command += `baby:true, `;
+    if (baby === "time" && babyTime) command += `baby:${babyTime}, `;
+
+    command = command.replace(/, $/, "");
+    command += "}";
+
+    document.getElementById('outputCommand').textContent = command;
+}
+
+// Función para añadir loot a la lista
+function addLoot() {
+    var additional1 = document.getElementById('additional1').value;
+    if (!additional1) {
+        showAlert("AddLoot");
+        return;
+    }
+    if (lootItems.some(item => item.id === additional1)) {
+        showAlert("AddLootCase");
+        return;
+    }
+    var additional2 = document.getElementById('additional2').value;
+    var additional3 = document.getElementById('additional3').value;
+    var additional4 = document.getElementById('additional4').value;
+    var additional5 = document.getElementById('additional5').value;
+    var additional6 = document.getElementById('additional6').value;
+    var additional7 = document.getElementById('additional7').value;
+    var additional9 = document.getElementById('additional9').value;
+    var additional10 = document.getElementById('additional10').value;
+    var additional11 = document.getElementById('additional11').value;
+    var additional12 = document.getElementById('additional12').value;
+
+    lootItems.push({
+        id: additional1,
+        quantity: additional2,
+        bonus: additional3,
+        lootBonus: additional4,
+        chance: additional5,
+        variant: additional6,
+        sheared: additional7,
+        isBaby: additional9,
+        color: additional10,
+        onFire: additional11,
+        size: additional12
+    });
+
+    displayLootItems();
+    resetLootInputs();
+    updateItemSelects();
+}
+
+// Función para resetear los inputs de loot
+function resetLootInputs() {
+    document.querySelectorAll('.additional-rows select, .additional-rows input').forEach(el => el.value = '');
+}
+
+// Función para mostrar los items de loot en la interfaz
+function displayLootItems() {
+    var lootList = document.getElementById('lootList');
+    lootList.innerHTML = "";
+    lootItems.forEach((item, index) => {
+        var div = document.createElement('div');
+        div.className = "loot-item";
+        div.textContent = `Ítem: ${getReadableName(item.id)}`;
+        var removeBtn = document.createElement('button');
+        removeBtn.textContent = "🗑️";
+        removeBtn.className = "remove-loot";
+        removeBtn.onclick = () => removeLoot(index);
+        div.appendChild(removeBtn);
+        lootList.appendChild(div);
+    });
+}
+
+// Función para eliminar un item de la lista de loot
+function removeLoot(index) {
+    lootItems.splice(index, 1);
+    displayLootItems();
+}
+
+// Función para comprobar si hay etiquetas de datos para el mob
+function checkDataTags() {
+    var name = document.getElementById('name').value;
+    var health = document.getElementById('health').value;
+    var holding = document.getElementById('holding').value;
+    var armor = document.getElementById('armor').value;
+    var defaultDrops = document.getElementById('defaultDrops').value;
+    var drops = document.getElementById('drops').value;
+    var skin = document.getElementById('skin').value;
+    var aggro = document.getElementById('aggro').value;
+    var charged = document.getElementById('charged').value;
+    var baby = document.getElementById('baby').value;
+    var babyTime = document.getElementById('babyTime').value;
+    return name || health || holding || armor || defaultDrops || drops || skin || aggro || charged || baby || babyTime;
+}
+
+// Función para copiar el comando generado al portapapeles
+function copyCommand() {
+    var command = document.getElementById('outputCommand').textContent;
+    navigator.clipboard.writeText(command).then(() => {
+        var copyButton = document.getElementById('copyButton');
+        copyButton.textContent = 'Copiado';
+        copyButton.classList.add('success');
+        setTimeout(() => {
+            copyButton.textContent = 'Copiar Comando';
+            copyButton.classList.remove('success');
+        }, 2000);
+    });
+}
+        
+        const translations = {
+    es: {
+        selectPlaceholder: '--Seleccionar--',
+        // Puedes añadir más traducciones aquí si es necesario
+    },
+    en: {
+        selectPlaceholder: '--Select--',
+        // Puedes añadir más traducciones aquí si es necesario
+    }
+};
+        
+function toggleLanguage() {
+    const currentTranslations = translations[currentLanguage];
+
+    if (currentLanguage === 'es') {
+        currentLanguage = 'en';
+
+        document.getElementById('modeText').innerText = document.body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+
+        // Cambiar textos y atributos data-image para el select
+        updateOptionWithImage('mobType', 0, '--Select--', '');
+        updateOptionWithImage('mobType', 1, 'Zombie', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/Zombie2.png?raw=true');
+        updateOptionWithImage('mobType', 2, 'Spawnskin', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/Player_head.png?raw=true');
+        updateOptionWithImage('mobType', 3, 'Skeleton', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/Skeleton1.png?raw=true');
+        updateOptionWithImage('mobType', 4, 'Creeper', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/CreeperHead.png?raw=true');
+        updateOptionWithImage('mobType', 5, 'Spider', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/Spider1.png?raw=true');
+        updateOptionWithImage('mobType', 6, 'Enderman', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/EndermanHead.png?raw=true');
+        updateOptionWithImage('mobType', 7, 'Blaze', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/BlazeHead.png?raw=true');
+        updateOptionWithImage('mobType', 8, 'Ghast', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/GhastHead.png?raw=true');
+        updateOptionWithImage('mobType', 9, 'Magma Cube', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/Magma.png?raw=true');
+        updateOptionWithImage('mobType', 10, 'Slime', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/Slime.png?raw=true');
+        updateOptionWithImage('mobType', 11, 'Ender Dragon', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/EnderDragonHead.png?raw=true');
+        updateOptionWithImage('mobType', 12, 'Nethereye', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/Nethereye.png?raw=true');
+        updateOptionWithImage('mobType', 13, 'Cow', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/CowHead.png?raw=true');
+        updateOptionWithImage('mobType', 14, 'Sheep', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/SheepHead.png?raw=true');
+        updateOptionWithImage('mobType', 15, 'Mooshroom', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/MoshroomHead.png?raw=true');
+        updateOptionWithImage('mobType', 16, 'Pig', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/PigHead.png?raw=true');
+        updateOptionWithImage('mobType', 17, 'Squid', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/SquidHead.png?raw=true');
+        updateOptionWithImage('mobType', 18, 'Bat', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/BatHead.png?raw=true');
+        updateOptionWithImage('mobType', 19, 'Chicken', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/ChickenHead.png?raw=true');
+        updateOptionWithImage('mobType', 20, 'Rabbit', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/RabbitHead.png?raw=true');
+        updateOptionWithImage('mobType', 21, 'Wolf', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/WolfHead.png?raw=true');
+        updateOptionWithImage('mobType', 22, 'Zombie Pigman', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/PigmanHead.png?raw=true');
+        updateOptionWithImage('mobType', 23, 'Snow Golem', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/SnowgolemHead.png?raw=true');
+        updateOptionWithImage('mobType', 24, 'Cactus Cow', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/CactuscowHead.png?raw=true');
+        // Puedes seguir añadiendo más opciones aquí
+
+        $('#mobType').select2('destroy'); // Destruir select2 para reflejar cambios
+        $('#mobType').select2({
+            templateResult: formatOption, // Mostrar imágenes en el dropdown
+            templateSelection: formatOption // Mostrar imagen en la opción seleccionada
+        });
+
+        // Actualización de otros textos
+        document.getElementById('TypeMobText').innerText = 'Mob Type:';
+        document.getElementById('QuantityText').innerText = 'Quantity:';
+        document.getElementById('PositionText').innerText = 'Position:';
+        document.getElementById('PositionRelText').innerText = 'Relative Position:';
+        document.getElementById('PositionAbsText').innerText = 'Absolute Position:';
+        document.getElementById('NameText').innerText = 'Name:';
+        document.getElementById('HealthText').innerText = 'Health:';
+        document.getElementById('ItemHandText').innerText = 'Items in Hand:';
+        document.getElementById('ArmorText').innerText = 'Armor:';
+        document.getElementById('DropDText').innerText = 'Default Drops:';
+        document.getElementById('CreeperCharText').innerText = 'Creeper Charged:';
+        document.getElementById('IDText').innerText = 'Skin ID:';
+        document.getElementById('AggroText').innerText = 'Behavior:';
+        document.getElementById('BabyText').innerText = 'Baby:';
+        document.getElementById('BabySText').innerText = 'Baby (Seconds)';
+        document.getElementById('QuantitySText').innerText = 'Quantity:';
+        document.getElementById('ChanceText').innerText = 'Chance:';
+        document.getElementById('VarianteText').innerText = 'Variant:';
+        document.getElementById('ShearedText').innerText = '¿Is it Sheared?';
+        document.getElementById('isBabyText').innerText = '¿Is it baby?';
+        document.getElementById('onFireText').innerText = '¿Is it on fire?';
+        document.getElementById('SizeText').innerText = 'Size:';
+        document.getElementById('copyButton').innerText = 'Copy Command';
+        document.getElementById('AddLootText').innerText = 'Add Loot';
+        document.getElementById('RefreshText').innerHTML = '<i class="bi bi-arrow-clockwise"></i> Refresh Boxes';
+        document.getElementById('IdiomaText').innerHTML = '<i class="bi bi-translate"></i> Change Language';
+        document.getElementById('HomeText').innerHTML = '<i class="bi bi-house"></i> Home';
+        document.getElementById('CommandSummonText').innerText = 'Generate command';
+        document.getElementById('positionType').options[0].text = '--Select--';
+        document.getElementById('positionType').options[1].text = 'Relative';
+        document.getElementById('positionType').options[2].text = 'Absolute';
+        document.getElementById('holding').options[0].text = '--Select--';
+        document.getElementById('defaultDrops').options[0].text = '--Select--';
+        document.getElementById('defaultDrops').options[1].text = 'Yes';
+        document.getElementById('charged').options[0].text = '--Select--';
+        document.getElementById('charged').options[1].text = 'Yes';
+        document.getElementById('aggro').options[0].text = '--Select--';
+        document.getElementById('baby').options[0].text = '--Select--';
+        document.getElementById('baby').options[1].text = 'Time';
+        document.getElementById('baby').options[2].text = 'Forever';
+        document.getElementById('drops').options[0].text = '--Select--';
+        document.getElementById('drops').options[1].text = 'Yes';
+        document.getElementById('additional1').options[0].text = '--Select--';
+        document.getElementById('additional6').options[0].text = '--Select--';
+        document.getElementById('additional9').options[0].text = '--Select--';
+        document.getElementById('additional9').options[1].text = 'Yes';
+        document.getElementById('additional10').options[0].text = '--Select--';
+        document.getElementById('additional11').options[0].text = '--Select--';
+        document.getElementById('additional11').options[1].text = 'Yes';
+        document.getElementById('additional12').options[0].text = '--Select--';
+        document.getElementById('armor').placeholder = 'Coming Soon...';
+        document.getElementById('additional5').placeholder = 'Coming Soon...';
+        document.getElementById('MenuText').innerText = '☰ Menu';
+        document.getElementById('armor').options[0].text = '--Select--';
+        document.getElementById('armor').options[1].text = 'Yes';
+        document.getElementById('additional7').placeholder = 'Out of Service';
+        //Casco
+        document.getElementById('HelmetText').innerText = 'Helmet';
+        document.getElementById('helmetSelect').options[0].text = '--Select--';
+        document.getElementById('helmetSelect').options[1].text = 'Leather Cap';
+        document.getElementById('helmetSelect').options[2].text = 'Iron Helmet';
+        document.getElementById('helmetSelect').options[3].text = 'Gold Helmet';
+        document.getElementById('helmetSelect').options[4].text = 'Diamond Helmet';
+        document.getElementById('helmetSelect').options[5].text = 'Dragon Scale Helmet';
+        //Pechera
+        document.getElementById('ChestplateText').innerText = 'Chestplate';
+        document.getElementById('chestplateSelect').options[0].text = '--Select--';
+        document.getElementById('chestplateSelect').options[1].text = 'Leather Tunic';
+        document.getElementById('chestplateSelect').options[2].text = 'Iron Chestplate';
+        document.getElementById('chestplateSelect').options[3].text = 'Gold Chestplate';
+        document.getElementById('chestplateSelect').options[4].text = 'Diamond Chestplate';
+        document.getElementById('chestplateSelect').options[5].text = 'Dragon Scale Chestplate';
+        //Pantalones
+        document.getElementById('LeggingsText').innerText = 'Leggingss';
+        document.getElementById('leggingsSelect').options[0].text = '--Select--';
+        document.getElementById('leggingsSelect').options[1].text = 'Leather Pants';
+        document.getElementById('leggingsSelect').options[2].text = 'Iron Leggings';
+        document.getElementById('leggingsSelect').options[3].text = 'Gold leggings';
+        document.getElementById('leggingsSelect').options[4].text = 'Diamond Leggings';
+        document.getElementById('leggingsSelect').options[5].text = 'Dragon Scale Leggings';
+        //Botas
+        document.getElementById('BootsText').innerText = 'Boots';
+        document.getElementById('bootsSelect').options[0].text = '--Select--';
+        document.getElementById('bootsSelect').options[1].text = 'Leather Boots';
+        document.getElementById('bootsSelect').options[2].text = 'Iron Boots';
+        document.getElementById('bootsSelect').options[3].text = 'Gold Boots';
+        document.getElementById('bootsSelect').options[4].text = 'Diamond Boots';
+        document.getElementById('bootsSelect').options[5].text = 'Dragon Scale Boots';
+    } else {
+        currentLanguage = 'es';
+
+        document.getElementById('modeText').innerText = document.body.classList.contains('dark-mode') ? 'Modo Claro' : 'Modo Oscuro';
+
+        // Cambiar textos y atributos data-image para el select
+        updateOptionWithImage('mobType', 0, '--Seleccionar--', '');
+        updateOptionWithImage('mobType', 1, 'Zombie', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/Zombie2.png?raw=true');
+        updateOptionWithImage('mobType', 2, 'Spawnskin', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/Player_head.png?raw=true');
+        updateOptionWithImage('mobType', 3, 'Esqueleto', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/Skeleton1.png?raw=true');
+        updateOptionWithImage('mobType', 4, 'Creeper', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/CreeperHead.png?raw=true');
+        updateOptionWithImage('mobType', 5, 'Araña', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/Spider1.png?raw=true');
+        updateOptionWithImage('mobType', 6, 'Enderman', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/EndermanHead.png?raw=true');
+        updateOptionWithImage('mobType', 7, 'Blaze', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/BlazeHead.png?raw=true');
+        updateOptionWithImage('mobType', 8, 'Ghast', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/GhastHead.png?raw=true');
+        updateOptionWithImage('mobType', 9, 'Cubo de Magma', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/Magma.png?raw=true');
+        updateOptionWithImage('mobType', 10, 'Slime', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/Slime.png?raw=true');
+        updateOptionWithImage('mobType', 11, 'Dragón de Ender', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/EnderDragonHead.png?raw=true');
+        updateOptionWithImage('mobType', 12, 'Nethereye', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/Nethereye.png?raw=true');
+        updateOptionWithImage('mobType', 13, 'Vaca', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/CowHead.png?raw=true');
+        updateOptionWithImage('mobType', 14, 'Oveja', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/SheepHead.png?raw=true');
+        updateOptionWithImage('mobType', 15, 'Vaca Seta', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/MoshroomHead.png?raw=true');
+        updateOptionWithImage('mobType', 16, 'Cerdo', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/PigHead.png?raw=true');
+        updateOptionWithImage('mobType', 17, 'Calamar', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/SquidHead.png?raw=true');
+        updateOptionWithImage('mobType', 18, 'Murciélago', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/BatHead.png?raw=true');
+        updateOptionWithImage('mobType', 19, 'Pollo', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/ChickenHead.png?raw=true');
+        updateOptionWithImage('mobType', 20, 'Conejo', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/RabbitHead.png?raw=true');
+        updateOptionWithImage('mobType', 21, 'Lobo', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/WolfHead.png?raw=true');
+        updateOptionWithImage('mobType', 22, 'Zombie Pigman', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/PigmanHead.png?raw=true');
+        updateOptionWithImage('mobType', 23, 'Golem de Nieve', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/SnowgolemHead.png?raw=true');
+        updateOptionWithImage('mobType', 24, 'Vaca Cactus', 'https://github.com/SebasOfEek/MineBlocksCommand/blob/main/image/mobs/CactuscowHead.png?raw=true');
+
+        // Puedes seguir añadiendo más opciones aquí
+
+        $('#mobType').select2('destroy'); // Destruir select2 para reflejar cambios
+        $('#mobType').select2({
+            templateResult: formatOption, // Mostrar imágenes en el dropdown
+            templateSelection: formatOption // Mostrar imagen en la opción seleccionada
+        });
+
+        // Actualización de otros textos
+        document.getElementById('TypeMobText').innerText = 'Tipo de Mob:';
+        document.getElementById('QuantityText').innerText = 'Cantidad:';
+        document.getElementById('PositionText').innerText = 'Posición:';
+        document.getElementById('PositionRelText').innerText = 'Posición Relativa:';
+        document.getElementById('PositionAbsText').innerText = 'Posición Absoluta:';
+        document.getElementById('NameText').innerText = 'Nombre:';
+        document.getElementById('HealthText').innerText = 'Salud:';
+        document.getElementById('ItemHandText').innerText = 'Item en mano:';
+        document.getElementById('ArmorText').innerText = 'Armadura:';
+        document.getElementById('DropDText').innerText = 'Drops por defecto:';
+        document.getElementById('CreeperCharText').innerText = 'Creeper Cargado:';
+        document.getElementById('IDText').innerText = 'ID de la Skin:';
+        document.getElementById('AggroText').innerText = 'Comportamiento:';
+        document.getElementById('BabyText').innerText = 'Bebé:';
+        document.getElementById('BabySText').innerText = 'Bebé (Segundos)';
+        document.getElementById('QuantitySText').innerText = 'Cantidad:';
+        document.getElementById('ChanceText').innerText = 'Oportunidad:';
+        document.getElementById('VarianteText').innerText = 'Variante:';
+        document.getElementById('ShearedText').innerText = '¿Está esquilada?';
+        document.getElementById('isBabyText').innerText = '¿Es bebé?';
+        document.getElementById('onFireText').innerText = '¿Está en fuego?';
+        document.getElementById('SizeText').innerText = 'Tamaño:';
+        document.getElementById('copyButton').innerText = 'Copiar Comando';
+        document.getElementById('AddLootText').innerText = 'Agregar Loot';
+        document.getElementById('RefreshText').innerHTML = '<i class="bi bi-arrow-clockwise"></i> Refrescar Casillas';
+        document.getElementById('IdiomaText').innerHTML = '<i class="bi bi-translate"></i> Cambiar Idioma';
+        document.getElementById('HomeText').innerHTML = '<i class="bi bi-house"></i> Inicio';
+        document.getElementById('CommandSummonText').innerText = 'Generar Comando';
+        document.getElementById('positionType').options[0].text = '--Seleccionar--';
+        document.getElementById('positionType').options[1].text = 'Relativo';
+        document.getElementById('positionType').options[2].text = 'Absoluto';
+        document.getElementById('holding').options[0].text = '--Seleccionar--';
+        document.getElementById('defaultDrops').options[0].text = '--Seleccionar--';
+        document.getElementById('defaultDrops').options[1].text = 'Si';
+        document.getElementById('charged').options[0].text = '--Seleccionar--';
+        document.getElementById('charged').options[1].text = 'Si';
+        document.getElementById('aggro').options[0].text = '--Seleccionar--';
+        document.getElementById('baby').options[0].text = '--Seleccionar--';
+        document.getElementById('baby').options[1].text = 'Tiempo';
+        document.getElementById('baby').options[2].text = 'Siempre';
+        document.getElementById('drops').options[0].text = '--Seleccionar--';
+        document.getElementById('drops').options[1].text = 'Si';
+        document.getElementById('additional1').options[0].text = '--Seleccionar--';
+        document.getElementById('additional6').options[0].text = '--Seleccionar--';
+        document.getElementById('additional9').options[0].text = '--Seleccionar--';
+        document.getElementById('additional9').options[1].text = 'Si';
+        document.getElementById('additional10').options[0].text = '--Seleccionar--';
+        document.getElementById('additional11').options[0].text = '--Seleccionar--';
+        document.getElementById('additional11').options[1].text = 'Si';
+        document.getElementById('additional12').options[0].text = '--Seleccionar--';
+        document.getElementById('armor').placeholder = 'Próximamente Disponible...';
+        document.getElementById('additional5').placeholder = 'Próximamente Disponible...';
+        document.getElementById('MenuText').innerText = '☰ Menú';
+        document.getElementById('armor').options[0].text = '--Seleccionar--';
+        document.getElementById('armor').options[1].text = 'Si';
+        document.getElementById('additional7').placeholder = 'Fuera de Servicio';
+        //Casco
+        document.getElementById('HelmetText').innerText = 'Casco';
+        document.getElementById('helmetSelect').options[0].text = '--Seleccionar--';
+        document.getElementById('helmetSelect').options[1].text = 'Casco de Cuero';
+        document.getElementById('helmetSelect').options[2].text = 'Casco de Hierro';
+        document.getElementById('helmetSelect').options[3].text = 'Casco de Oro';
+        document.getElementById('helmetSelect').options[4].text = 'Casco de Diamante';
+        document.getElementById('helmetSelect').options[5].text = 'Casco de Escama de Dragón';
+        //Pechera
+        document.getElementById('ChestplateText').innerText = 'Pechera';
+        document.getElementById('chestplateSelect').options[0].text = '--Seleccionar--';
+        document.getElementById('chestplateSelect').options[1].text = 'Pechera de Cuero';
+        document.getElementById('chestplateSelect').options[2].text = 'Pechera de Hierro';
+        document.getElementById('chestplateSelect').options[3].text = 'Pechera de Oro';
+        document.getElementById('chestplateSelect').options[4].text = 'Pechera de Diamante';
+        document.getElementById('chestplateSelect').options[5].text = 'Pechera de Escama de Dragón';
+        //Pantalones
+        document.getElementById('LeggingsText').innerText = 'Pantalones';
+        document.getElementById('leggingsSelect').options[0].text = '--Seleccionar--';
+        document.getElementById('leggingsSelect').options[1].text = 'Pantalones de Cuero';
+        document.getElementById('leggingsSelect').options[2].text = 'Pantalones de Hierro';
+        document.getElementById('leggingsSelect').options[3].text = 'Pantalones de Oro';
+        document.getElementById('leggingsSelect').options[4].text = 'Pantalones de Diamante';
+        document.getElementById('leggingsSelect').options[5].text = 'Pantalones de Escama de Dragón';
+        //Botas
+        document.getElementById('BootsText').innerText = 'Botas';
+        document.getElementById('bootsSelect').options[0].text = '--Seleccionar--';
+        document.getElementById('bootsSelect').options[1].text = 'Botas de Cuero';
+        document.getElementById('bootsSelect').options[2].text = 'Botas de Hierro';
+        document.getElementById('bootsSelect').options[3].text = 'Botas de Oro';
+        document.getElementById('bootsSelect').options[4].text = 'Botas de Diamante';
+        document.getElementById('bootsSelect').options[5].text = 'Botas de Escama de Dragón';
+    }
+
+    updateItemSelects();
+}
+
+function updateOptionWithImage(selectId, optionIndex, newText, newImageUrl) {
+    const selectElement = document.getElementById(selectId);
+    const optionElement = selectElement.options[optionIndex];
+
+    optionElement.text = newText; 
+    if (newImageUrl) {
+        optionElement.setAttribute('data-image', newImageUrl);  
+    } else {
+        optionElement.removeAttribute('data-image');  
+    }
+}
+
+function formatOption(option) {
+    if (!option.id) return option.text;  
+
+    var imageUrl = $(option.element).data('image'); 
+    if (imageUrl) {
+        return $('<span><img src="' + imageUrl + '" style="width: 20px; height: 20px; margin-right: 10px;" />' + option.text + '</span>');
+    }
+
+    return option.text;
+}   
+    </script>
+</body>
+</html>
+
+
+
+
+const itemMapping = {
+    'acid': { en: 'Acid', es: 'Ácido' },
+    'rail_activator': { en: 'Activator Minecart Rail', es: 'Riel Activador de Vagoneta' },
+    'afro': { en: 'Afro', es: 'Afro' },
+    'air': { en: 'Air', es: 'Aire' },
+    'anvil': { en: 'Anvil', es: 'Yunque' },
+    'apple': { en: 'Apple', es: 'Manzana' },
+    'apple_juice': { en: 'Apple Juice', es: 'Jugo de Manzana' },
+    'leaves_apple': { en: 'Apple in Leaves', es: 'Manzana en Hojas' },
+    'arrow': { en: 'Arrow', es: 'Flecha' },
+    'potato_baked': { en: 'Baked Potato', es: 'Papa Horneada' },
+    'balloon': { en: 'Balloon', es: 'Globo' },
+    'bamboo': { en: 'Bamboo', es: 'Bambú' },
+    'bamboo_block': { en: 'Bamboo Block', es: 'Bloque de Bambú' },
+    'backdrop_bamboo': { en: 'Bamboo Backdrop', es: 'Fondo de Bambú' },
+    'stairs_bamboo': { en: 'Bamboo Stairs', es: 'Escaleras de Bambú' },
+    'slab_bamboo': { en: 'Bamboo Slab', es: 'Loseta de Bambú' },
+    'bamboo_door': { en: 'Bamboo Door', es: 'Puerta de Bambú' },
+    'barrier': { en: 'Barrier', es: 'Barrera' },
+    'bed': { en: 'Bed', es: 'Cama' },
+    'bedrock': { en: 'Bedrock', es: 'Roca Madre' },
+    'slab_bedrock': { en: 'Bedrock Slab', es: 'Loseta de Roca Madre' },
+    'stairs_bedrock': { en: 'Bedrock Stairs', es: 'Escaleras de Roca Madre' },
+    'beet_soup': { en: 'Beet Soup', es: 'Sopa de Remolacha' },
+    'beetroot': { en: 'Beetroot', es: 'Remolacha' },
+    'beetroot_seed': { en: 'Beetroot Seed', es: 'Semilla de Remolacha' },
+    'blaze_powder': { en: 'Blaze Powder', es: 'Polvo de Blaze' },
+    'blaze_rod': { en: 'Blaze Rod', es: 'Varilla de Blaze' },
+    'bone': { en: 'Bone', es: 'Hueso' },
+    'bone_block': { en: 'Bone Block', es: 'Bloque de Hueso' },
+    'bone_meal': { en: 'Bone Meal', es: 'Harina de Hueso' },
+    'bone_shuriken': { en: 'Bone Shuriken', es: 'Shuriken de Hueso' },
+    'book': { en: 'Book', es: 'Libro' },
+    'bookshelf': { en: 'Bookshelf', es: 'Librero' },
+    'backdrop_bookshelf': { en: 'Bookshelf Backdrop', es: 'Fondo de Librero' },
+    'bottle_of_enchanting': { en: 'Bottle of Enchanting', es: 'Botella de Encantamientos' },
+    'bow': { en: 'Bow', es: 'Arco' },
+    'bowl': { en: 'Bowl', es: 'Cuenco' },
+    'bread': { en: 'Bread', es: 'Pan' },
+    'brewing_stand': { en: 'Brewing Stand', es: 'Soporte de Pociones' },
+    'brick': { en: 'Brick', es: 'Ladrillo' },
+    'backdrop_brick': { en: 'Brick Backdrop', es: 'Fondo de Ladrillo' },
+    'slab_brick': { en: 'Brick Slab', es: 'Loseta de Ladrillo' },
+    'stairs_brick': { en: 'Brick Stairs', es: 'Escaleras de Ladrillo' },
+    'bricks': { en: 'Bricks', es: 'Ladrillos' },
+    'brown_mushroom': { en: 'Brown Mushroom', es: 'Hongo Marrón' },
+    'brown_mushroom_cap': { en: 'Brown Mushroom Cap', es: 'Sombrero de Hongo Marrón' },
+    'brown_mushroom_stem': { en: 'Brown Mushroom Stem', es: 'Tallo de Hongo Marrón' },
+    'bucket_acid': { en: 'Bucket of Acid', es: 'Cubo de Ácido' },
+    'bucket_lava': { en: 'Bucket of Lava', es: 'Cubo de Lava' },
+    'bucket_milk': { en: 'Bucket of Milk', es: 'Cubo de Leche' },
+    'bucket_water': { en: 'Bucket of Water', es: 'Cubo de Agua' },
+    'button': { en: 'Button', es: 'Botón' },
+    'cactus': { en: 'Cactus', es: 'Cactus' },
+    'cactus_cake': { en: 'Cactus Cake', es: 'Pastel de Cactus' },
+    'cake': { en: 'Cake', es: 'Pastel' },
+    'apple_candy': { en: 'Candy Apple', es: 'Manzana de Caramelo' },
+    'candy_cane': { en: 'Candy Cane', es: 'Bastón de Caramelo' },
+    'caramel': { en: 'Caramel', es: 'Caramelo' },
+    'carpet': { en: 'Carpet', es: 'Alfombra' },
+    'carrot': { en: 'Carrot', es: 'Zanahoria' },
+    'carrot_on_a_stick': { en: 'Carrot on a Stick', es: 'Zanahoria en un Palo' },
+    'cauldron': { en: 'Cauldron', es: 'Caldero' },
+    'charcoal': { en: 'Charcoal', es: 'Carbón Vegetal' },
+    'chest': { en: 'Chest', es: 'Cofre' },
+    'chicken_nugget': { en: 'Chicken Nugget', es: 'Nugget de Pollo' },
+    'clay': { en: 'Clay', es: 'Arcilla' },
+    'clay_block': { en: 'Clay Block', es: 'Bloque de Arcilla' },
+    'clock': { en: 'Clock', es: 'Reloj' },
+    'clownfish': { en: 'Clownfish', es: 'Pez Payaso' },
+    'coal': { en: 'Coal', es: 'Carbón' },
+    'coal_block': { en: 'Coal Block', es: 'Bloque de Carbón' },
+    'coal_ore': { en: 'Coal Ore', es: 'Mena de Carbón' },
+    'coarse_dirt': { en: 'Coarse Dirt', es: 'Tierra Gruesa' },
+    'cobblestone': { en: 'Cobblestone', es: 'Piedra' },
+    'backdrop_cobblestone': { en: 'Cobblestone Backdrop', es: 'Fondo de Piedra' },
+    'slab_cobblestone': { en: 'Cobblestone Slab', es: 'Loseta de Piedra' },
+    'stairs_cobblestone': { en: 'Cobblestone Stairs', es: 'Escaleras de Piedra' },
+    'cobweb': { en: 'Cobweb', es: 'Telaraña' },
+    'cocoa_bean': { en: 'Cocoa Bean', es: 'Frijol de Cacao' },
+    'command_book': { en: 'Command Book', es: 'Libro de Comandos' },
+    'compass': { en: 'Compass', es: 'Brújula' },
+    'composter': { en: 'Composter', es: 'Compostador' },
+    'bacon_cooked': { en: 'Cooked Bacon', es: 'Tocino Cocido' },
+    'chicken_cooked': { en: 'Cooked Chicken', es: 'Pollo Cocido' },
+    'cooked_egg': { en: 'Cooked Egg', es: 'Huevo Cocido' },
+    'fish_cooked': { en: 'Cooked Fish', es: 'Pescado Cocido' },
+    'cooked_mutton': { en: 'Cooked Mutton', es: 'Carne de Cordero Cocida' },
+    'porkchop_cooked': { en: 'Cooked Porkchop', es: 'Chuleta de Cerdo Cocida' },
+    'rabbit_cooked': { en: 'Cooked Rabbit', es: 'Conejo Cocido' },
+    'salmon_cooked': { en: 'Cooked Salmon', es: 'Salmón Cocido' },
+    'cookie': { en: 'Cookie', es: 'Galleta' },
+    'coral': { en: 'Coral', es: 'Coral' },
+    'coral_lantern': { en: 'Coral Lantern', es: 'Linterna de Coral' },
+    'crafting_table': { en: 'Crafting Table', es: 'Mesa de Trabajo' },
+    'dead_bush': { en: 'Desert Shrub', es: 'Arbusto Muerto' },
+    'rail_detector': { en: 'Detector Minecart Rail', es: 'Riel Detector de Vagoneta' },
+    'diamond': { en: 'Diamond', es: 'Diamante' },
+    'diamond_axe': { en: 'Diamond Axe', es: 'Hacha de Diamante' },
+    'diamond_block': { en: 'Diamond Block', es: 'Bloque de Diamante' },
+    'diamond_boots': { en: 'Diamond Boots', es: 'Botas de Diamante' },
+    'diamond_chestplate': { en: 'Diamond Chestplate', es: 'Peto de Diamante' },
+    'diamond_helmet': { en: 'Diamond Helmet', es: 'Casco de Diamante' },
+    'diamond_hoe': { en: 'Diamond Hoe', es: 'Azada de Diamante' },
+    'diamond_leggings': { en: 'Diamond Leggings', es: 'Leotardos de Diamante' },
+    'diamond_ore': { en: 'Diamond Ore', es: 'Mena de Diamante' },
+    'diamond_pickaxe': { en: 'Diamond Pickaxe', es: 'Pico de Diamante' },
+    'diamond_shovel': { en: 'Diamond Shovel', es: 'Pala de Diamante' },
+    'slab_diamond': { en: 'Diamond Slab', es: 'Loseta de Diamante' },
+    'stairs_diamond': { en: 'Diamond Stairs', es: 'Escaleras de Diamante' },
+    'diamond_sword': { en: 'Diamond Sword', es: 'Espada de Diamante' },
+    'dirt': { en: 'Dirt', es: 'Tierra' },
+    'backdrop_dirt': { en: 'Dirt Backdrop', es: 'Fondo de Tierra' },
+    'dispenser': { en: 'Dispenser', es: 'Dispensador' },
+    'dragon_scale': { en: 'Dragon Scale', es: 'Escama de Dragón' },
+    'dragon_scale_block': { en: 'Dragon Scale Block', es: 'Bloque de Escamas de Dragón' },
+    'dragon_scale_boots': { en: 'Dragon Scale Boots', es: 'Botas de Escamas de Dragón' },
+    'dragon_scale_chestplate': { en: 'Dragon Scale Chestplate', es: 'Peto de Escamas de Dragón' },
+    'dragon_scale_helmet': { en: 'Dragon Scale Helmet', es: 'Casco de Escamas de Dragón' },
+    'dragon_scale_leggings': { en: 'Dragon Scale Leggings', es: 'Leotardos de Escamas de Dragón' },
+    'dropper': { en: 'Dropper', es: 'Soltador' },
+    'dye': { en: 'Dye', es: 'Tinte' },
+    'egg': { en: 'Egg', es: 'Huevo' },
+    'bucket_empty': { en: 'Empty Bucket', es: 'Cubo Vacío' },
+    'enchantment_table': { en: 'Enchantment Table', es: 'Mesa de Encantamientos' },
+    'ender_chest': { en: 'Ender Chest', es: 'Cofre de Ender' },
+    'ender_dragon_egg': { en: 'Ender Dragon Egg', es: 'Huevo de Dragón de Ender' },
+    'ender_gem': { en: 'Ender Gem', es: 'Gema de Ender' },
+    'ender_gem_ore': { en: 'Ender Gem Ore', es: 'Mena de Gema de Ender' },
+    'ender_pearl': { en: 'Ender Pearl', es: 'Perla de Ender' },
+    'enderstone': { en: 'Enderstone', es: 'Piedra de Ender' },
+    'eye_of_ender': { en: 'Eye of Ender', es: 'Ojo de Ender' },
+    'farmland': { en: 'Farmland', es: 'Terreno de Cultivo' },
+    'feather': { en: 'Feather', es: 'Pluma' },
+    'fermented_spider_eye': { en: 'Fermented Spider Eye', es: 'Ojo de Araña Fermentado' },
+    'egg_fire': { en: 'Fire Egg', es: 'Huevo de Fuego' },
+    'fishing_rod': { en: 'Fishing Rod', es: 'Caña de Pescar' },
+    'flint': { en: 'Flint', es: 'Pedernal' },
+    'flint_and_steel': { en: 'Flint and Steel', es: 'Mechero' },
+    'furnace': { en: 'Furnace', es: 'Horno' },
+    'frosted_ice': { en: 'Frosted Ice', es: 'Hielo Escarchado' },
+    'ghast_tear': { en: 'Ghast Tear', es: 'Lágrima de Ghast' },
+    'glass': { en: 'Glass', es: 'Vidrio' },
+    'backdrop_glass': { en: 'Glass Backdrop', es: 'Fondo de Vidrio' },
+    'glass_shard': { en: 'Glass Shard', es: 'Fragmento de Vidrio' },
+    'glistering_melon': { en: 'Glistering Melon', es: 'Melón Reluciente' },
+    'glow_stone': { en: 'Glow Stone', es: 'Piedra Luminosa' },
+    'glowstone_dust': { en: 'Glowstone Dust', es: 'Polvo de Piedra Luminosa' },
+    'gold_block': { en: 'Gold Block', es: 'Bloque de Oro' },
+    'gold_boots': { en: 'Gold Boots', es: 'Botas de Oro' },
+    'gold_chestplate': { en: 'Gold Chestplate', es: 'Peto de Oro' },
+    'gold_helmet': { en: 'Gold Helmet', es: 'Casco de Oro' },
+    'gold_ingot': { en: 'Gold Ingot', es: 'Lingote de Oro' },
+    'gold_leggings': { en: 'Gold Leggings', es: 'Leotardos de Oro' },
+    'gold_nugget': { en: 'Gold Nugget', es: 'Pepita de Oro' },
+    'gold_ore': { en: 'Gold Ore', es: 'Mena de Oro' },
+    'gold_soil': { en: 'Gold Soil', es: 'Suelo de Oro' },
+    'slab_gold': { en: 'Gold Slab', es: 'Loseta de Oro' },
+    'stairs_gold': { en: 'Gold Stairs', es: 'Escaleras de Oro' },
+    'golden_apple': { en: 'Golden Apple', es: 'Manzana Dorada' },
+    'golden_apple_seed': { en: 'Golden Apple Seed', es: 'Semilla de Manzana Dorada' },
+    'leaves_golden_apple': { en: 'Golden Apple in Leaves', es: 'Manzana Dorada en Hojas' },
+    'golden_axe': { en: 'Golden Axe', es: 'Hacha de Oro' },
+    'carrot_golden': { en: 'Golden Carrot', es: 'Zanahoria Dorada' },
+    'golden_hoe': { en: 'Golden Hoe', es: 'Azada de Oro' },
+    'golden_pickaxe': { en: 'Golden Pickaxe', es: 'Pico de Oro' },
+    'golden_shovel': { en: 'Golden Shovel', es: 'Pala de Oro' },
+    'golden_sword': { en: 'Golden Sword', es: 'Espada de Oro' },
+    'grass': { en: 'Grass', es: 'Hierba' },
+    'gravel': { en: 'Gravel', es: 'Grava' },
+    'gunpowder': { en: 'Gunpowder', es: 'Pólvora' },
+    'hay_bale': { en: 'Hay Bale', es: 'Paca de Heno' },
+    'healing_crystal': { en: 'Healing Crystal', es: 'Cristal de Sanación' },
+    'ice': { en: 'Ice', es: 'Hielo' },
+    'ice_cream': { en: 'Ice Cream', es: 'Helado' },
+    'ink_sac': { en: 'Ink Sac', es: 'Bolsa de Tinta' },
+    'iron_axe': { en: 'Iron Axe', es: 'Hacha de Hierro' },
+    'iron_bars': { en: 'Iron Bars', es: 'Barras de Hierro' },
+    'iron_block': { en: 'Iron Block', es: 'Bloque de Hierro' },
+    'iron_boots': { en: 'Iron Boots', es: 'Botas de Hierro' },
+    'iron_chestplate': { en: 'Iron Chestplate', es: 'Peto de Hierro' },
+    'iron_door': { en: 'Iron Door', es: 'Puerta de Hierro' },
+    'iron_helmet': { en: 'Iron Helmet', es: 'Casco de Hierro' },
+    'iron_hoe': { en: 'Iron Hoe', es: 'Azada de Hierro' },
+    'iron_ingot': { en: 'Iron Ingot', es: 'Lingote de Hierro' },
+    'iron_leggings': { en: 'Iron Leggings', es: 'Leotardos de Hierro' },
+    'iron_ore': { en: 'Iron Ore', es: 'Mena de Hierro' },
+    'iron_nugget': { en: 'Iron Nugget', es: 'Pepita de Hierro' },
+    'iron_pickaxe': { en: 'Iron Pickaxe', es: 'Pico de Hierro' },
+    'iron_shovel': { en: 'Iron Shovel', es: 'Pala de Hierro' },
+    'slab_iron': { en: 'Iron Slab', es: 'Loseta de Hierro' },
+    'stairs_iron': { en: 'Iron Stairs', es: 'Escaleras de Hierro' },
+    'iron_sword': { en: 'Iron Sword', es: 'Espada de Hierro' },
+    'jack_o_lantern': { en: 'Jack-o-Lantern', es: 'Calabaza Iluminada' },
+    'ladder': { en: 'Ladder', es: 'Escalera' },
+    'lapis': { en: 'Lapis Lazuli', es: 'Lapislázuli' },
+    'lapis_lazuli_block': { en: 'Lapis Lazuli Block', es: 'Bloque de Lapislázuli' },
+    'lapis_ore': { en: 'Lapis Lazuli Ore', es: 'Mena de Lapislázuli' },
+    'lava': { en: 'Lava', es: 'Lava' },
+    'leather': { en: 'Leather', es: 'Cuero' },
+    'leather_boots': { en: 'Leather Boots', es: 'Botas de Cuero' },
+    'leather_cap': { en: 'Leather Cap', es: 'Gorra de Cuero' },
+    'leather_pants': { en: 'Leather Pants', es: 'Pantalones de Cuero' },
+    'leather_tunic': { en: 'Leather Tunic', es: 'Túnica de Cuero' },
+    'leaves': { en: 'Leaves', es: 'Hojas' },
+    'lemon': { en: 'Lemon', es: 'Limón' },
+    'lemon_block': { en: 'Lemon Block', es: 'Bloque de Limón' },
+    'leaves_lemon': { en: 'Lemon in Leaves', es: 'Limón en Hojas' },
+    'lemonade': { en: 'Lemonade', es: 'Limonada' },
+    'lever': { en: 'Lever', es: 'Palanca' },
+    'lilypad': { en: 'Lily Pad', es: 'Nenúfar' },
+    'long_grass': { en: 'Long Grass', es: 'Hierba Alta' },
+    'magma_cream': { en: 'Magma Cream', es: 'Crema de Magma' },
+    'magma_block': { en: 'Magma Block', es: 'Bloque de Magma' },
+    'melon': { en: 'Melon', es: 'Melón' },
+    'melon_block': { en: 'Melon Block', es: 'Bloque de Melón' },
+    'melon_seed': { en: 'Melon Seed', es: 'Semilla de Melón' },
+    'minecart': { en: 'Minecart', es: 'Vagoneta' },
+    'minecart_furnace': { en: 'Minecart Furnace', es: 'Vagoneta con Horno' },
+    'minecart_chest': { en: 'Minecart Chest', es: 'Vagoneta con Cofre' },
+    'rail': { en: 'Minecart Rail', es: 'Riel de Vagoneta' },
+    'monster_spawner': { en: 'Monster Spawner', es: 'Generador de Monstruos' },
+    'moss': { en: 'Moss', es: 'Musgo' },
+    'moss_stone': { en: 'Moss Stone', es: 'Piedra Musgosa' },
+    'mycelium': { en: 'Mycelium', es: 'Micelio' },
+    'mustache': { en: 'Mustache', es: 'Bigote' },
+    'name_tag': { en: 'Name Tag', es: 'Etiqueta' },
+    'nether_brick': { en: 'Nether Brick', es: 'Ladrillo del Nether' },
+    'backdrop_nether_brick': { en: 'Nether Brick Backdrop', es: 'Fondo de Ladrillo del Nether' },
+    'nether_fence': { en: 'Nether Brick Fence', es: 'Valla de Ladrillo del Nether' },
+    'nether_fence_gate': { en: 'Nether Brick Fence Gate', es: 'Puerta de Valla del Nether' },
+    'slab_nether_brick': { en: 'Nether Brick Slab', es: 'Loseta de Ladrillo del Nether' },
+    'stairs_nether_brick': { en: 'Nether Brick Stairs', es: 'Escaleras de Ladrillo del Nether' },
+    'nether_bricks': { en: 'Nether Bricks', es: 'Ladrillos del Nether' },
+    'nether_wart': { en: 'Nether Wart', es: 'Verruga del Nether' },
+    'nether_wart_block': { en: 'Nether Wart Block', es: 'Bloque de Verruga del Nether' },
+    'netherrack': { en: 'Netherrack', es: 'Netherrack' },
+    'note_block': { en: 'Note Block', es: 'Bloque de Notas' },
+    'obsidian': { en: 'Obsidian', es: 'Obsidiana' },
+    'backdrop_obsidian': { en: 'Obsidian Backdrop', es: 'Fondo de Obsidiana' },
+    'slab_obsidian': { en: 'Obsidian Slab', es: 'Loseta de Obsidiana' },
+    'stairs_obsidian': { en: 'Obsidian Stairs', es: 'Escaleras de Obsidiana' },
+    'odd_rock': { en: 'Odd Rock', es: 'Roca Extraña' },
+    'odd_rock_ore': { en: 'Odd Rock Ore', es: 'Mena de Roca Extraña' },
+    'odd_torch': { en: 'Odd Torch', es: 'Antorcha Extraña' },
+    'orange': { en: 'Orange', es: 'Naranja' },
+    'orange_juice': { en: 'Orange Juice', es: 'Jugo de Naranja' },
+    'leaves_orange': { en: 'Orange in Leaves', es: 'Naranja en Hojas' },
+    'paper': { en: 'Paper', es: 'Papel' },
+    'party_hat': { en: 'Party Hat', es: 'Sombrero de Fiesta' },
+    'piston': { en: 'Piston', es: 'Pistón' },
+    'poisonous_potato': { en: 'Poisonous Potato', es: 'Papa Venenosa' },
+    'portal_frame': { en: 'Portal Frame', es: 'Marco de Portal' },
+    'portal_stone': { en: 'Portal Stone', es: 'Piedra de Portal' },
+    'potato': { en: 'Potato', es: 'Papa' },
+    'potion': { en: 'Potion', es: 'Poción' },
+    'rail_powered': { en: 'Powered Minecart Rail', es: 'Riel Propulsado de Vagoneta' },
+    'pressure_plate': { en: 'Pressure Plate', es: 'Placa de Presión' },
+    'pufferfish': { en: 'Pufferfish', es: 'Pez Globo' },
+    'pumpkin': { en: 'Pumpkin', es: 'Calabaza' },
+    'pumpkin_pie': { en: 'Pumpkin Pie', es: 'Pastel de Calabaza' },
+    'pumpkin_seed': { en: 'Pumpkin Seed', es: 'Semilla de Calabaza' },
+    'rabbit_hide': { en: 'Rabbit Hide', es: 'Piel de Conejo' },
+    'rabbit_stew': { en: 'Rabbit Stew', es: 'Estofado de Conejo' },
+    'rabbits_foot': { en: 'Rabbit\'s Foot', es: 'Pata de Conejo' },
+    'raft': { en: 'Raft', es: 'Balsa' },
+    'bacon': { en: 'Raw Bacon', es: 'Tocino Crudo' },
+    'beef': { en: 'Raw Beef', es: 'Carne de Res Cruda' },
+    'chicken': { en: 'Raw Chicken', es: 'Pollo Crudo' },
+    'fish': { en: 'Raw Fish', es: 'Pescado Crudo' },
+    'mutton': { en: 'Raw Mutton', es: 'Carne de Cordero Cruda' },
+    'porkchop': { en: 'Raw Porkchop', es: 'Chuleta de Cerdo Cruda' },
+    'rabbit': { en: 'Raw Rabbit', es: 'Conejo Crudo' },
+    'salmon': { en: 'Raw Salmon', es: 'Salmón Crudo' },
+    'red_flower': { en: 'Red Flower', es: 'Flor Roja' },
+    'red_mushroom': { en: 'Red Mushroom', es: 'Hongo Rojo' },
+    'red_mushroom_cap': { en: 'Red Mushroom Cap', es: 'Sombrero de Hongo Rojo' },
+    'red_mushroom_stem': { en: 'Red Mushroom Stem', es: 'Tallo de Hongo Rojo' },
+    'nether_bricks_red': { en: 'Red Nether Bricks', es: 'Ladrillos Rojos del Nether' },
+    'redstone': { en: 'Redstone Dust', es: 'Polvo de Redstone' },
+    'redstone_lamp': { en: 'Redstone Lamp', es: 'Lámpara de Redstone' },
+    'redstone_ore': { en: 'Redstone Ore', es: 'Mena de Redstone' },
+    'redstone_torch': { en: 'Redstone Torch', es: 'Antorcha de Redstone' },
+    'rope': { en: 'Rope', es: 'Cuerda' },
+    'rotten_flesh': { en: 'Rotten Flesh', es: 'Carne Podrida' },
+    'saddle': { en: 'Saddle', es: 'Silla de Montar' },
+    'sand': { en: 'Sand', es: 'Arena' },
+    'sandstone': { en: 'Sandstone', es: 'Arenisca' },
+    'santa_hat': { en: 'Santa Hat', es: 'Sombrero de Santa' },
+    'sapling': { en: 'Sapling', es: 'Brote' },
+    'seaweed': { en: 'Seaweed', es: 'Alga Marina' },
+    'seeds': { en: 'Seeds', es: 'Semillas' },
+    'shades': { en: 'Shades', es: 'Gafas de Sol' },
+    'shear': { en: 'Shear', es: 'Tijeras' },
+    'shrub': { en: 'Shrub', es: 'Arbusto' },
+    'sign': { en: 'Sign', es: 'Cartel' },
+    'slime_block': { en: 'Slime Block', es: 'Bloque de Slime' },
+    'slimeball': { en: 'Slimeball', es: 'Bola de Slime' },
+    'snow': { en: 'Snow', es: 'Nieve' },
+    'snow_ball': { en: 'Snow Ball', es: 'Bola de Nieve' },
+    'snow_block': { en: 'Snow Block', es: 'Bloque de Nieve' },
+    'soul_sand': { en: 'Soul Sand', es: 'Arena de Almas' },
+    'soup': { en: 'Soup', es: 'Sopa' },
+    'spawn_egg': { en: 'Spawn Egg', es: 'Huevo de Generación' },
+    'spear': { en: 'Spear', es: 'Lanza' },
+    'spider_eye': { en: 'Spider Eye', es: 'Ojo de Araña' },
+    'steak': { en: 'Steak', es: 'Filete' },
+    'stick': { en: 'Stick', es: 'Palo' },
+    'piston_sticky': { en: 'Sticky Piston', es: 'Pistón Pegajoso' },
+    'stone': { en: 'Stone', es: 'Piedra' },
+    'stone_axe': { en: 'Stone Axe', es: 'Hacha de Piedra' },
+    'backdrop_stone': { en: 'Stone Backdrop', es: 'Fondo de Piedra' },
+    'stone_brick': { en: 'Stone Brick', es: 'Ladrillo de Piedra' },
+    'backdrop_stone_brick': { en: 'Stone Brick Backdrop', es: 'Fondo de Ladrillo de Piedra' },
+    'slab_stone_brick': { en: 'Stone Brick Slab', es: 'Loseta de Ladrillo de Piedra' },
+    'stairs_stone_brick': { en: 'Stone Brick Stairs', es: 'Escaleras de Ladrillo de Piedra' },
+    'stone_hoe': { en: 'Stone Hoe', es: 'Azada de Piedra' },
+    'stone_pickaxe': { en: 'Stone Pickaxe', es: 'Pico de Piedra' },
+    'stone_shovel': { en: 'Stone Shovel', es: 'Pala de Piedra' },
+    'slab_stone': { en: 'Stone Slab', es: 'Loseta de Piedra' },
+    'stairs_stone': { en: 'Stone Stairs', es: 'Escaleras de Piedra' },
+    'stone_sword': { en: 'Stone Sword', es: 'Espada de Piedra' },
+    'string': { en: 'String', es: 'Cuerda' },
+    'sugar': { en: 'Sugar', es: 'Azúcar' },
+    'sugarcane': { en: 'Sugarcane', es: 'Caña de Azúcar' },
+    'tnt': { en: 'TNT', es: 'TNT' },
+    'minecart_tnt': { en: 'TNT Minecart', es: 'Vagoneta con TNT' },
+    'topaz': { en: 'Topaz', es: 'Topacio' },
+    'topaz_block': { en: 'Topaz Block', es: 'Bloque de Topacio' },
+    'topaz_ore': { en: 'Topaz Ore', es: 'Mena de Topacio' },
+    'torch': { en: 'Torch', es: 'Antorcha' },
+    'trap_door': { en: 'Trap Door', es: 'Trampilla' },
+    'tree_wood': { en: 'Tree Wood', es: 'Madera de Árbol' },
+    'water': { en: 'Water', es: 'Agua' },
+    'wheat': { en: 'Wheat', es: 'Trigo' },
+    'wood': { en: 'Wood', es: 'Madera' },
+    'wooden_axe': { en: 'Wooden Axe', es: 'Hacha de Madera' },
+    'wooden_door': { en: 'Wooden Door', es: 'Puerta de Madera' },
+    'fence': { en: 'Wooden Fence', es: 'Valla de Madera' },
+    'fence_gate': { en: 'Wooden Fence Gate', es: 'Puerta de Valla de Madera' },
+    'wooden_hoe': { en: 'Wooden Hoe', es: 'Azada de Madera' },
+    'wooden_pickaxe': { en: 'Wooden Pickaxe', es: 'Pico de Madera' },
+    'wooden_planks': { en: 'Wooden Planks', es: 'Tablones de Madera' },
+    'backdrop_wooden_planks': { en: 'Wooden Planks Backdrop', es: 'Fondo de Tablones de Madera' },
+    'slab_wooden_planks': { en: 'Wooden Planks Slab', es: 'Loseta de Tablones de Madera' },
+    'stairs_wooden_planks': { en: 'Wooden Planks Stairs', es: 'Escaleras de Tablones de Madera' },
+    'pressure_plate_wooden': { en: 'Wooden Pressure Plate', es: 'Placa de Presión de Madera' },
+    'wooden_shovel': { en: 'Wooden Shovel', es: 'Pala de Madera' },
+    'wooden_sword': { en: 'Wooden Sword', es: 'Espada de Madera' },
+    'wool': { en: 'Wool', es: 'Lana' },
+    'backdrop_wool': { en: 'Wool Backdrop', es: 'Fondo de Lana' },
+    'yellow_flower': { en: 'Yellow Flower', es: 'Flor Amarilla' },
+};
