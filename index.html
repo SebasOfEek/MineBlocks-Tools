@@ -38,7 +38,7 @@ html, body {
 @media (max-width: 768px) {
     html {
         font-size: 14px; /* Reduce el tamaño de fuente base */
-        transform: scale(0.95); /* Escala general 95% */
+        transform: scale(0.95); /* Escala general 90% */
     }
 }
 
@@ -728,8 +728,6 @@ button.add-loot {
             opacity: 0.5;
         }
         
-/* Botón principal */
-/* Botón principal */
 .command-button {
     width: 48%;
     padding: 10px;
@@ -749,12 +747,13 @@ button.add-loot {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    color: white; /* Color del engranaje */
+    margin-left: 10px;
+    transition: color 0.2s, transform 0.3s ease; /* Añadir transición para la animación */
     position: absolute;
-    right: 10px; /* Siempre a la derecha del botón */
-    top: 50%; /* Centrado verticalmente */
-    transform: translateY(-50%);
-    transition: color 0.2s, transform 0.3s ease;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%); /* Centrar verticalmente */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
 }
 
 /* Animación de giro */
@@ -795,12 +794,38 @@ button.add-loot {
     display: block;
 }
 
+/* Flex para alinear los botones en fila */
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* Flex para alinear los botones en fila */
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* Flex para alinear los botones en fila */
+.buttons-container {
+    display: flex;
+    justify-content: center; /* Alinea los botones en el centro */
+    align-items: center;
+    margin-top: 10px;
+}
+
 .command-options {
     display: none;
     margin-top: 10px;
 }
 
-.command-options .option-button {
+.command-options .option-button, 
+.checkbox-container .option-button {
+    width: 100%;
     padding: 10px;
     background-color: #28a745;
     color: white;
@@ -810,15 +835,43 @@ button.add-loot {
     cursor: pointer;
 }
 
-.command-options .option-button:hover {
+.command-options .option-button:hover,
+.checkbox-container .option-button:hover {
     background-color: #218838;
 }
 
 .show-options {
-    display: block !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
 }
 
+/* Ajuste del botón pequeño con emoji */
+.emoji-button {
+    background: transparent;
+    border: none;
+    font-size: 24px; /* Tamaño del emoji */
+    cursor: pointer;
+    padding: 5px; /* Sin padding */
+    margin: 2; /* Sin margen */
+    width: auto; /* Ajustar el ancho automáticamente */
+}
 
+/* Estilo para las casillas que aparecen */
+.checkbox-container {
+    display: none;
+    margin-top: 10px;
+}
+
+.checkbox-container.show {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox-container label {
+    margin-right: 10px;
+}
 </style>
 </head>
 <body>
