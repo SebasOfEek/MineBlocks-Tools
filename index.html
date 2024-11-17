@@ -11,6 +11,45 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
 
 <style>
+
+/* Estilo base para toda la página */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%; /* Para usar flexbox o grid en el contenedor */
+    font-size: 16px; /* Tamaño base estándar */
+    transform: scale(1); /* Escala inicial */
+    transform-origin: top center; /* Centro horizontal como punto de escala */
+}
+
+/* Contenedor principal */
+.container {
+    width: 90%;
+    max-width: 1200px; /* Evita que crezca demasiado en pantallas grandes */
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para visualización */
+    text-align: center; /* Centrar el texto */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Escala general para pantallas pequeñas */
+@media (max-width: 768px) {
+    html {
+        font-size: 14px; /* Reduce el tamaño de fuente base */
+        transform: scale(0.9); /* Escala general 90% */
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 12px; /* Reduce más el tamaño de fuente base */
+        transform: scale(0.8); /* Escala general 80% */
+    }
+}
+
+
 body {
     background-color: white;
     font-family: 'Arial', sans-serif;
@@ -710,13 +749,12 @@ button.add-loot {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    margin-left: 10px;
-    transition: color 0.2s, transform 0.3s ease; /* Añadir transición para la animación */
+    color: white; /* Color del engranaje */
     position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%); /* Centrar verticalmente */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    right: 10px; /* Siempre a la derecha del botón */
+    top: 50%; /* Centrado verticalmente */
+    transform: translateY(-50%);
+    transition: color 0.2s, transform 0.3s ease;
 }
 
 /* Animación de giro */
