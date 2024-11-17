@@ -876,96 +876,95 @@ button.add-loot {
 </head>
 <body>
     <nav class="menu">
-        <div id="MenuText" class="menu-icon" onclick="toggleMobileMenu()">☰ Menú</div>
+        <div id="MenuText" class="menu-icon" onclick="toggleMobileMenu()">☰ Menu</div>
         <ul class="menu-list">
             <li>
                 <button id="toggle-mode" class="toggle-mode">
                     <i class="bi bi-moon"></i>
-                    <span id="modeText">Modo Oscuro</span> <!-- Texto al lado del ícono -->
+                    <span id="modeText">Dark Mode</span> 
                 </button>
             </li>
-            <li><button id="IdiomaText" onclick="toggleLanguage()"><i class="bi bi-translate"></i> Cambiar Idioma</button></li>
+            <li><button id="IdiomaText" onclick="toggleLanguage()"><i class="bi bi-translate"></i>Change Language</button></li>
             <li><a href="https://discord.com/users/sebasofeek" target="_blank"><i class="bi bi-discord"></i> Discord</a></li>
-            <li><a href="pagetwo.html" id="HomeText"><i class="bi bi-house"></i> Inicio</a></li>
-            <li><button id="RefreshText" onclick="resetFields()"><i class="bi bi-arrow-clockwise"></i> Refrescar Casillas</button></li>
+            <li><a href="pagetwo.html" id="HomeText"><i class="bi bi-house"></i> Home</a></li>
+            <li><button id="RefreshText" onclick="resetFields()"><i class="bi bi-arrow-clockwise"></i> Refresh Boxes</button></li>
         </ul>
     </nav>
     <div id="alertContainer" class="alert"></div>
-    <h1>English</h1>
     <table>
         <tr>
-            <td id="TypeMobText">Tipo de Mob:</td>
+            <td id="TypeMobText">Mob Type:</td>
             <td>
                 <select id="mobType" onchange="updateMobOptions()" class="select-with-images">
-                    <option value="">--Seleccionar--</option>
+                    <option value="">--Select--</option>
                     <option value="zombie" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898103/Zombie2_cmi8uo.png">Zombie</option>
                     <option value="spawnskin" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898066/Player_head_ak0iz8.png">Spawnskin</option>
-                    <option value="skeleton" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898059/Skeleton1_rcnbyh.png">Esqueleto</option>
+                    <option value="skeleton" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898059/Skeleton1_rcnbyh.png">Skeleton</option>
                     <option value="creeper" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898105/CreeperHead_wwk2om.png">Creeper</option>
-                    <option value="spider" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload//f_webp/v1726898063/Spider1_tseshs.png">Araña</option>
+                    <option value="spider" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload//f_webp/v1726898063/Spider1_tseshs.png">Spider</option>
                     <option value="enderman" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898083/EndermanHead_wzsopl.png">Enderman</option>
                     <option value="blaze" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898072/BlazeHead_gobfr5.png">Blaze</option>
                     <option value="ghast" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898093/GhastHead_l8codj.png">Ghast</option>
-                    <option value="magmacube" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898088/Magma_mtx4ol.png">Cubo de Magma</option>
+                    <option value="magmacube" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898088/Magma_mtx4ol.png">Magma Cube</option>
                     <option value="slime" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898061/Slime_l899it.png">Slime</option>
-                    <option value="enderdragon" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898096/EnderDragonHead_tpq93z.png">Dragón de Ender</option>
+                    <option value="enderdragon" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898096/EnderDragonHead_tpq93z.png">Ender Dragon</option>
                     <option value="nethereye" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898977/Nethereye_ykh9mm.png">Nethereye</option>
-                    <option value="cow" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898081/CowHead_z4cmpi.png">Vaca</option>
-                    <option value="sheep" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898055/SheepHead_heoidt.png">Oveja</option>
+                    <option value="cow" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898081/CowHead_z4cmpi.png">Cow</option>
+                    <option value="sheep" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898055/SheepHead_heoidt.png">Sheep</option>
                     <option value="mooshroom" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/v1726898090/MoshroomHead_ekdzm1.png">Vaca Seta</option>
-                    <option value="pig" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898099/PigHead_uzp55c.png">Cerdo</option>
-                    <option value="squid" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898101/SquidHead_b5b5hi.png">Calamar</option>
-                    <option value="bat" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898070/BatHead_bofwz5.png">Murciélago</option>
-                    <option value="chicken" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898079/ChickenHead_owuwv1.png">Pollo</option>
-                    <option value="rabbit" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898057/RabbitHead_aupj5f.png">Conejo</option>
-                    <option value="wolf" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898068/WolfHead_wrpweo.png">Lobo</option>
+                    <option value="pig" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898099/PigHead_uzp55c.png">Pig</option>
+                    <option value="squid" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898101/SquidHead_b5b5hi.png">Squid</option>
+                    <option value="bat" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898070/BatHead_bofwz5.png">Bat</option>
+                    <option value="chicken" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898079/ChickenHead_owuwv1.png">Chicken</option>
+                    <option value="rabbit" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898057/RabbitHead_aupj5f.png">Rabbit</option>
+                    <option value="wolf" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898068/WolfHead_wrpweo.png">Wolf</option>
                     <option value="pigman" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898053/PigmanHead_egvkzy.png">Zombie Pigman</option>
-                    <option value="snowgolem" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898094/SnowgolemHead_yk8xc4.png">Golem de Nieve</option>
-                    <option value="cowctus" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898075/CactuscowHead_igghuq.png">Vaca Cactus</option>
+                    <option value="snowgolem" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898094/SnowgolemHead_yk8xc4.png">Snow Golem</option>
+                    <option value="cowctus" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898075/CactuscowHead_igghuq.png">Cowctus</option>
                 </select>
             </td>
         </tr>
         <tr>
-            <td id="QuantityText">Cantidad:</td>
+            <td id="QuantityText">Quantity:</td>
             <td><input type="number" id="quantity" max="20"></td>
         </tr>
         <tr>
-            <td id="PositionText">Posición:</td>
+            <td id="PositionText">Position:</td>
             <td>
                 <select id="positionType" onchange="updatePositionFields()">
-                    <option value="">--Seleccionar--</option>
-                    <option value="relative">Relativa</option>
-                    <option value="absolute">Absoluta</option>
+                    <option value="">--Select--</option>
+                    <option value="relative">Relative</option>
+                    <option value="absolute">Absolute</option>
                 </select>
             </td>
         </tr>
         <tr class="relative-pos position-group" style="display:none;">
-            <td id="PositionRelText">Posición Relativa:</td>
+            <td id="PositionRelText">Relative Position:</td>
             <td>
                 <input type="number" id="posX" placeholder="Pos~X" style="width: 45%; display: inline-block; margin-right: 5%;">
                 <input type="number" id="posY" placeholder="Pos~Y" style="width: 45%; display: inline-block;">
             </td>
         </tr>
         <tr class="absolute-pos position-group" style="display:none;">
-            <td id="PositionAbsText">Posición Absoluta:</td>
+            <td id="PositionAbsText">Absolute Position:</td>
             <td>
                 <input type="number" id="absPosX" placeholder="Pos X" style="width: 45%; display: inline-block; margin-right: 5%;">
                 <input type="number" id="absPosY" placeholder="Pos Y" style="width: 45%; display: inline-block;">
             </td>
         </tr>
         <tr>
-            <td id="NameText">Nombre:</td>
+            <td id="NameText">Name:</td>
             <td><input type="text" id="name"></td>
         </tr>
         <tr>
-            <td id="HealthText">Salud:</td>
+            <td id="HealthText">Health:</td>
             <td><input type="number" id="health" min="1"></td>
         </tr>
         <tr id="handItemRow" style="display: none;">
-            <td id="ItemHandText">Item en mano:</td>
+            <td id="ItemHandText">Items in Hand:</td>
             <td>
                <select id="holding" class="select-with-images">
-               <option value="">--Seleccionar--</option>
+               <option value="">--Select--</option>
                <option value="acid" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683347/Acid_pojqsr.png">Acid</option>
                 <option value="rail_activator" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683347/Activator_rail_blkhzt.png">Activator Minecart Rail</option>
                 <option value="afro" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Afro_lqqcni.png">Afro</option>
@@ -1321,26 +1320,26 @@ button.add-loot {
             </td>  
         </tr>
         <tr id="armorRow" style="display: none;">
-            <td id="ArmorText">Armadura:</td>
+            <td id="ArmorText">Armor:</td>
             <td>
                 <select id="armor" onchange="toggleArmorOptions()">
-                    <option value="">--Seleccionar--</option>
-                    <option value="yes">Sí</option>
+                    <option value="">--Select--</option>
+                    <option value="yes">Yes</option>
                     <option value="no">No</option>
                 </select>
             </td>
         </tr>
 
 <tr id="helmetRow" style="display: none;">
-    <td id="HelmetText">Casco:</td>
+    <td id="HelmetText">Helmet:</td>
     <td>
         <select id="helmetSelect" class="select-with-images">
-            <option value="">--Seleccionar--</option>
-            <option value="leather_cap" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Cap_kc3wwv.png">Casco de Cuero</option>
-            <option value="iron_helmet" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896975/Iron_Helmet_pibqyq.png">Casco de Hierro</option>
-            <option value="gold_helmet" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Helmet_vehqkm.png">Casco de Oro</option>
-            <option value="diamond_helmet" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Helmet_ugg9vy.png">Casco de Diamante</option>
-            <option value="dragon_scale_helmet" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871796/Dragon_Scale_Helmet_raeklo.png">Casco de Escama de Dragón</option>
+            <option value="">--Select--</option>
+            <option value="leather_cap" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Cap_kc3wwv.png">Leather Cap</option>
+            <option value="iron_helmet" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896975/Iron_Helmet_pibqyq.png">Iron Helmet</option>
+            <option value="gold_helmet" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Helmet_vehqkm.png">Gold Helmet</option>
+            <option value="diamond_helmet" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Helmet_ugg9vy.png">Diamond Helmet</option>
+            <option value="dragon_scale_helmet" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871796/Dragon_Scale_Helmet_raeklo.png">Dragon Scale Helmet</option>
             <option value="jack_o_lantern" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688892/Jack-o_-Lantern_mrtj6r.png">Jack-o-Lantern</option>
             <option value="santa_hat" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Santa_Hat_jzj24t.png">Santa Hat</option>
             <option value="party_hat" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694191/Party_Hat_bjn9as.png">Party Hat</option>
@@ -1352,101 +1351,101 @@ button.add-loot {
 </tr>
 
 <tr id="chestplateRow" style="display: none;">
-    <td id="ChestplateText">Pechera:</td>
+    <td id="ChestplateText">Chestplate:</td>
     <td>
         <select id="chestplateSelect" class="select-with-images">
-            <option value="">--Seleccionar--</option>
-            <option value="leather_tunic" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Tunic_lk2z0j.png">Pechera de Cuero</option>
-            <option value="iron_chestplate" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896973/Iron_Chestplate_gfvdbm.png">Pechera de Hierro</option>
-            <option value="gold_chestplate" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Chestplate_j3to7v.png">Pechera de Oro</option>
-            <option value="diamond_chestplate" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Chestplate_rzyjxh.png">Pechera de Diamante</option>
-            <option value="dragon_scale_chestplate" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871795/Dragon_Scale_Chestplate_heemid.png">Pechera de Escama de Dragón</option>
+            <option value="">--Select--</option>
+            <option value="leather_tunic" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Tunic_lk2z0j.png">Leather Tunic</option>
+            <option value="iron_chestplate" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896973/Iron_Chestplate_gfvdbm.png">Iron Chesplate</option>
+            <option value="gold_chestplate" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Chestplate_j3to7v.png">Gold Chestplate</option>
+            <option value="diamond_chestplate" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Chestplate_rzyjxh.png">Diamond Chestplate</option>
+              <option value="dragon_scale_chestplate" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871795/Dragon_Scale_Chestplate_heemid.png">Dragon Scale Chestplate</option>
         </select>
     </td>
 </tr>
 
 <tr id="leggingsRow" style="display: none;">
-    <td id="LeggingsText">Pantalones:</td>
+    <td id="LeggingsText">Leggings:</td>
     <td>
         <select id="leggingsSelect" class="select-with-images">
-            <option value="">--Seleccionar--</option>
-            <option value="leather_pants" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Pants_dknwqd.png">Pantalones de Cuero</option>
-            <option value="iron_leggings" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896977/Iron_Leggings_ni8md1.png">Pantalones de Hierro</option>
-            <option value="gold_leggings" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876948/Gold_Leggings_qspwtb.png">Pantalones de Oro</option>
-            <option value="diamond_leggings" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Leggings_q4hf45.png">Pantalones de Diamante</option>
-            <option value="dragon_scale_leggings" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871796/Dragon_Scale_Leggings_zyhqa5.png">Pantalones de Escama de Dragón</option>
+            <option value="">--Select--</option>
+            <option value="leather_pants" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Pants_dknwqd.png">Leather Pants</option>
+            <option value="iron_leggings" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896977/Iron_Leggings_ni8md1.png">Iron Leggings</option>
+            <option value="gold_leggings" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876948/Gold_Leggings_qspwtb.png">Gold Leggings</option>
+            <option value="diamond_leggings" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Leggings_q4hf45.png">Diamond Leggings</option>
+            <option value="dragon_scale_leggings" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871796/Dragon_Scale_Leggings_zyhqa5.png">Dragon Scale Leggings</option>
         </select>
     </td>
 </tr>
 
 <tr id="bootsRow" style="display: none;">
-    <td id="BootsText">Botas:</td>
+    <td id="BootsText">Boots:</td>
     <td>
         <select id="bootsSelect" class="select-with-images">
-            <option value="">--Seleccionar--</option>
-            <option value="leather_boots" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Boots_zofh0b.png">Botas de Cuero</option>
-            <option value="iron_boots" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896972/Iron_Boots_z5f74c.png">Botas de Hierro</option>
-            <option value="gold_boots" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Boots_tkocg7.png">Botas de Oro</option>
-            <option value="diamond_boots" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/v1726844162/Diamond_Boots_ubkywn.png">Botas de Diamante</option>
-            <option value="dragon_scale_boots" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871795/Dragon_Scale_Boots_r3nxyz.png">Botas de Escama de Dragón</option>
+            <option value="">--Select--</option>
+            <option value="leather_boots" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Boots_zofh0b.png">Leather Boots</option>
+            <option value="iron_boots" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896972/Iron_Boots_z5f74c.png">Iron Boots</option>
+            <option value="gold_boots" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Boots_tkocg7.png">Gold Boots</option>
+            <option value="diamond_boots" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/v1726844162/Diamond_Boots_ubkywn.png">Diamond Boots</option>
+            <option value="dragon_scale_boots" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871795/Dragon_Scale_Boots_r3nxyz.png">Dragon Scale Boots</option>
         </select>
     </td>
 </tr>
         <tr id="defaultDropsRow">
-            <td id="DropDText">Drops por defecto:</td>
+            <td id="DropDText">Default Drops:</td>
             <td>
                 <select id="defaultDrops">
-                    <option value="">--Seleccionar--</option>
-                    <option value="true">Sí</option>
+                    <option value="">--Select--</option>
+                    <option value="true">Yes</option>
                     <option value="false">No</option>
                 </select>
             </td>
         </tr>
         <tr id="creeperChargedRow" style="display: none;">
-            <td id="CreeperCharText">Creeper Cargado:</td>
+            <td id="CreeperCharText">Charged Creeper:</td>
             <td>
                 <select id="charged">
-                    <option value="">--Seleccionar--</option>
-                    <option value="1">Sí</option>
+                    <option value="">--Select--</option>
+                    <option value="1">Yes</option>
                     <option value="0">No</option>
                 </select>
             </td>
         </tr>
         <tr id="spawnskinOptions" style="display: none;">
-            <td id="IDText">ID de la Skin:</td>
+            <td id="IDText">Skin ID:</td>
             <td><input type="text" id="skin"></td>
         </tr>
         <tr id="aggroRow" style="display: none;">
-            <td id="AggroText">Hostilidad:</td>
+            <td id="AggroText">Behavior:</td>
             <td>
                 <select id="aggro">
-                    <option value="">--Seleccionar--</option>
-                    <option value="hostile">Hostil</option>
+                    <option value="">--Select--</option>
+                    <option value="hostile">Hostile</option>
                     <option value="neutral">Neutral</option>
-                    <option value="passive">Pasivo</option>
+                    <option value="passive">Passive</option>
                 </select>
             </td>
         </tr>
         <tr id="babyRow" style="display: none;">
-            <td id="BabyText">Bebé:</td>
+            <td id="BabyText">Baby:</td>
             <td>
                 <select id="baby" onchange="handleBabyChange()">
-                    <option value="">--Seleccionar--</option>
-                    <option value="time">Tiempo</option>
-                    <option value="true">Siempre</option>
+                    <option value="">--Select--</option>
+                    <option value="time">Time</option>
+                    <option value="true">Forever</option>
                 </select>
             </td>
         </tr>
         <tr id="babyTimeRow" style="display: none;">
-            <td id="BabySText">Bebé (segundos):</td>
+            <td id="BabySText">Baby (Seconds):</td>
             <td><input type="number" id="babyTime" min="1"></td>
         </tr>
         <tr>
             <td>Loot Tags:</td>
             <td>
                 <select id="drops" onchange="updateConditionals()">
-                    <option value="">--Seleccionar--</option>
-                    <option value="1">Sí</option>
+                    <option value="">--Select--</option>
+                    <option value="1">Yes</option>
                     <option value="2">No</option>
                 </select>
             </td>
@@ -1455,7 +1454,7 @@ button.add-loot {
             <td>Drops items:</td>
             <td>
                 <select id="additional1" class="select-with-images">
-                <option value="" >--Seleccionar--</option>
+                <option value="" >--Select--</option>
                 <option value="acid" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683347/Acid_pojqsr.png">Acid</option>
                 <option value="rail_activator" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683347/Activator_rail_blkhzt.png">Activator Minecart Rail</option>
                 <option value="afro" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Afro_lqqcni.png">Afro</option>
@@ -1810,7 +1809,7 @@ button.add-loot {
             </select>
         </td>
         <tr id="additionalRows2" class="additional-rows" style="display: none;">
-            <td id="QuantitySText">Cantidad:</td>
+            <td id="QuantitySText">Quantity:</td>
             <td><input type="number" id="additional2" max="1000"></td>
         </tr>
         <tr id="additionalRows3" class="additional-rows" style="display: none;">
@@ -1822,30 +1821,30 @@ button.add-loot {
             <td><input type="number" id="additional4"></td>
         </tr>
         <tr id="additionalRows5" class="additional-rows" style="display: none;">
-            <td id="ChanceText">Oportunidad:</td>
-            <td><input type="text" id="additional5" placeholder="Proximamente Disponible..." disabled></td>
+            <td id="ChanceText">Chance:</td>
+            <td><input type="text" id="additional5" placeholder="Coming Soon..." disabled></td>
         </tr>
         <tr id="additionalRows6" class="additional-rows" style="display: none;">
-            <td id="VarianteText">Variante:</td>
+            <td id="VarianteText">Variant:</td>
             <td>
                 <select id="additional6" class="select-with-images">
-                    <option value="">--Seleccionar--</option>
+                    <option value="">--Select--</option>
                     <option value="mooshroom" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/v1726898090/MoshroomHead_ekdzm1.png">Mooshroom</option>
                     <option value="cowctus" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898075/CactuscowHead_igghuq.png">Cactus Cow</option>
-                    <option value="normal" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898081/CowHead_z4cmpi.png">Normal</option>
+                    <option value="normal" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898081/CowHead_z4cmpi.png">Normal Cow</option>
                 </select>
             </td>
         </tr>
         <tr id="additionalRows7" class="additional-rows" style="display: none;">
-            <td id="ShearedText">¿Está esquilada?:</td>
-            <td><input type="text" id="additional7" placeholder="Fuera de Servicio" disabled></td>
+            <td id="ShearedText">¿Is it Sheared?:</td>
+            <td><input type="text" id="additional7" placeholder="Out of service" disabled></td>
         </tr>
         <tr id="additionalRows9" class="additional-rows" style="display: none;">
-            <td id="isBabyText">¿Es bebé?:</td>
+            <td id="isBabyText">¿Is it baby?:</td>
             <td>
                 <select id="additional9" onchange="handleBabyChange()">
-                    <option value="">--Seleccionar--</option>
-                    <option value="true">Sí</option>
+                    <option value="">--Select--</option>
+                    <option value="true">Yes</option>
                     <option value="false">No</option>
                 </select>
             </td>
@@ -1854,64 +1853,61 @@ button.add-loot {
             <td>Color:</td>
             <td>
                 <select id="additional10" onchange="handleColorChange()" class="select-with-images">
-                    <option value="">--Seleccionar--</option>
-                    <option value="red"  data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Red_ow8fz1.png">Rojo</option>
-                    <option value="green" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Green_hojzk0.png">Verde</option>
-                    <option value="blue" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Blue_nfyfrs.png">Azul</option>
-                    <option value="brown" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Brown_n54tmt.png">Marrón</option>
-                    <option value="cyan" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Cyan_ietx4o.png">Cian</option>
-                    <option value="lightblue" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Light_Blue_jiivto.png">Azul claro</option>
-                    <option value="lightgreen" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Light_Green_xozy6s.png">Verde claro</option>
+                    <option value="">--Select--</option>
+                    <option value="red"  data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Red_ow8fz1.png">Red</option>
+                    <option value="green" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Green_hojzk0.png">Green</option>
+                    <option value="blue" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Blue_nfyfrs.png">Blue</option>
+                    <option value="brown" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Brown_n54tmt.png">Brown</option>
+                    <option value="cyan" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Cyan_ietx4o.png">Cyan</option>
+                    <option value="lightblue" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Light_Blue_jiivto.png">Light blue</option>
+                    <option value="lightgreen" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Light_Green_xozy6s.png">Light green</option>
                     <option value="magenta" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Magenta_wk1euz.png">Magenta</option>
-                    <option value="orange" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Orange_xkxwgg.png">Naranja</option>
-                    <option value="pink" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Pink_nilaad.png">Rosa</option>
-                    <option value="purple" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Purple_r0jjhk.png">Púrpura</option>
-                    <option value="white" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/White_hjvvrz.png">Blanco</option>
-                    <option value="yellow" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Yellow_dm8nsr.png">Amarillo</option>
-                    <option value="lightgray" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Light_Gray_hjjfrv.png">Gris claro</option>
-                    <option value="gray" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/v1726962877/Gray_fkir91.png">Gris</option>
-                    <option value="black" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Black_feewkv.png">Negro</option>
+                    <option value="orange" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Orange_xkxwgg.png">Orange</option>
+                    <option value="pink" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Pink_nilaad.png">Pink</option>
+                    <option value="purple" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Purple_r0jjhk.png">Purple</option>
+                    <option value="white" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/White_hjvvrz.png">White</option>
+                    <option value="yellow" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Yellow_dm8nsr.png">Yellow</option>
+                    <option value="lightgray" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Light_Gray_hjjfrv.png">Light grey</option>
+                    <option value="gray" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/v1726962877/Gray_fkir91.png">Grey</option>
+                    <option value="black" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Black_feewkv.png">Black</option>
                 </select>
             </td>
         </tr>
         <tr id="additionalRows11" class="additional-rows" style="display: none;">
-            <td id="onFireText">¿Está en llamas?:</td>
+            <td id="onFireText">¿Is it on fire?:</td>
             <td>
                 <select id="additional11">
-                    <option value="">--Seleccionar--</option>
-                    <option value="true">Sí</option>
+                    <option value="">--Select--</option>
+                    <option value="true">Yes</option>
                     <option value="false">No</option>
                 </select>
             </td>
         </tr>
         <tr id="additionalRows12" class="additional-rows" style="display: none;">
-            <td id="SizeText">Tamaño:</td>
+            <td id="SizeText">Size:</td>
             <td>
                 <select id="additional12">
-                    <option value="">--Seleccionar--</option>
-                    <option value="1">Pequeño</option>
-                    <option value="2">Mediano</option>
-                    <option value="3">Grande</option>
+                    <option value="">--Select--</option>
+                    <option value="1">Small</option>
+                    <option value="2">Medium</option>
+                    <option value="3">Big</option>
                 </select>
             </td>
         </tr>
 <td colspan="2">
-    <button id="AddLootText" class="add-loot" onclick="addLoot()">Agregar Loot</button>
+    <button id="AddLootText" class="add-loot" onclick="addLoot()">Add Loot</button>
     <div class="loot-list" id="lootList"></div>
     
-    <!-- Botón principal con engranaje dentro -->
     <button id="CommandSummonText" class="command-button" onclick="generateCommand()">
-        Generar Comando
-        <!-- Añadido correctamente el ícono de engranaje -->
+        Generate Command
         <span class="gear-button" onclick="toggleOptions(event)"><i class="bi bi-gear"></i></span>
     </button>
 
-    <button id="copyButton" onclick="copyCommand()">Copiar Comando</button>
+    <button id="copyButton" onclick="copyCommand()">Copy Command</button>
 
-    <!-- Opciones que aparecen al presionar el engranaje -->
     <div id="commandOptions" class="command-options">
         <button id="ManualText" class="option-button" onclick="selectOption('Manual')">Manual</button>
-        <button id="AutoText" class="option-button" onclick="selectOption('Automático')">Automático</button>
+        <button id="AutoText" class="option-button" onclick="selectOption('Automático')">Automatic</button>
     </div>
 </td>
     </table>
@@ -1919,18 +1915,15 @@ button.add-loot {
 
     <script> 
     $(document).ready(function() {
-    // Función para formatear cada opción del select
     function formatOption(option) {
-        if (!option.id) return option.text; // Si no hay ID, retorna solo el texto.
+        if (!option.id) return option.text; 
 
-        var placeholderImage = 'https://via.placeholder.com/64'; // Imagen temporal de 64x64
+        var placeholderImage = 'https://via.placeholder.com/64'; 
         var imageUrl = $(option.element).data('image');
 
-        // Retorna la opción con una imagen de placeholder que será remplazada más adelante
         return $('<span><img class="lazy-load" data-src="' + imageUrl + '" src="' + placeholderImage + '" style="width: 20px; height: 20px; margin-right: 10px;" onerror="this.onerror=null; this.src=\'https://via.placeholder.com/64\'" />' + option.text + '</span>');
     }
 
-    // Inicializa Select2 con el formato personalizado para las imágenes
     $('.select-with-images').select2({
         templateResult: formatOption,  // Formatea cómo se muestran las opciones en el dropdown
         templateSelection: formatOption,  // Formatea cómo se muestra la opción seleccionada
@@ -1980,7 +1973,7 @@ button.add-loot {
      });
     
      let lootItems = [];
-     let currentLanguage = 'es';
+     let currentLanguage = 'en';
      
      document.getElementById('toggle-mode').addEventListener('click', function() {
          document.body.classList.toggle('dark-mode');
