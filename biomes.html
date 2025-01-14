@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interfaz Mejorada</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #f5f5f5; /* Fondo gris */
+    }
+
+    #container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      flex-grow: 1;
+    }
+
+    #buttonContainer {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+      gap: 10px;
+      background-color: #f0f0f0;
+      border-bottom: 2px solid #ccc;
+    }
+
+    #contentContainer {
+      display: flex;
+      flex-grow: 1;
+      width: 100%;
+      box-sizing: border-box;
+      overflow: hidden; /* Evitar scroll innecesario en el contenedor principal */
+    }
+
+    #biomeListContainer {
+      flex: 0 0 20%;
+      background-color: #ffffff;
+      border-right: 2px solid #ccc;
+      overflow-y: auto;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    #biomeList {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .biome-item {
+      padding: 10px;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .biome-item:hover {
+      background-color: #eaeaea;
+    }
+
+    #canvasContainer {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f5f5f5;
+      padding: 10px; /* Separación horizontal */
+      box-sizing: border-box;
+    }
+
+    #canvas {
+      max-width: 100%;
+      max-height: 100%;
+      border: 1px solid #000;
+      image-rendering: pixelated;
+      width: 100%;
+      height: auto; /* Maintain aspect ratio */
+    }
+
+    /* Botones debajo del canvas */
+    #canvasButtons {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px; /* Separación entre el canvas y los botones */
+    }
+
+    button {
+      padding: 8px 15px;
+      font-size: 14px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:disabled {
+      background-color: #6c757d;
+      cursor: not-allowed;
+    }
+
+    button:hover:not(:disabled) {
+      background-color: #0056b3;
+    }
+
+    /* Estilos responsivos */
+    @media (max-width: 768px) {
+      #contentContainer {
+        flex-direction: column;
+        padding: 0;
+      }
+
+      #biomeListContainer {
+        order: 2;
+        flex: 0 0 auto;
+        width: 100%;
+        border-right: none;
+        border-top: 2px solid #ccc;
+        background-color: #ffffff;
+      }
+
+      #canvasContainer {
+        order: 1; /* Canvas arriba */
+        flex: 1;
+        width: 100%;
+        padding: 10px;
+      }
+
+      #canvasButtons {
+        align-items: center;
+        margin-top: 10px;
+      }
+    }
+
+    #propertiesOverlay {
+      display: none;
+    }
+
+    #worldProperties {
+      display: none;
+    }
+
+    .close-icon {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <!-- Contenedor de botones -->
+    <div id="buttonContainer">
+      <button id="loadButton">Cargar Mundo</button>
+      <button id="detectButton" disabled>Detectar Biomas</button>
+      <button id="propertiesButton">Propiedades</button>
+      <button id="resetZoomButton">&#x21bb;</button>
+      <button id="zoomOutButton">-</button>
+    </div>
+
+    <!-- Contenedor principal -->
+    <div id="contentContainer">
+      <!-- Lista de biomas -->
+      <div id="biomeListContainer">
+        <div id="biomeList"></div>
+        <div id="worldProperties"></div>
+      </div>
+
+      <!-- Canvas con botones debajo -->
+      <div id="canvasContainer">
+        <canvas id="canvas" width="800" height="500"></canvas> <!-- Set fixed width and height for canvas -->
+        <div id="canvasButtons">
+          <button id="saveButton">Test</button>
+          <button id="exportButton">Test</button>
+          <button id="analyzeButton">Test</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <input type="file" id="fileInput" style="display: none;">
+
+  <script>
+    // Get canvas
+    const canvas = document.getElementById("canvas");
+    const context = canvas.getContext("2d");
+
+    // Load blocks png
+    const blocks = new Image();
+    blocks.src = "https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks.png?raw=true";
+
+    // Load blocks tiles
+    const blockTile = {};
+
+    // Function to add a block to blockTile
+    function addBlock(id, x, y) {
+      blockTile[id] = [x * 16, y * 16];
+    }
+
+    // Building Blocks
+    addBlock('r', 1, 0);
+    addBlock('cs', 2, 0);
+    addBlock('sb', 4, 0);
+    addBlock('ms', 3, 0);
+    addBlock('ob', 5, 0);
+    addBlock('br', 0, 0);
+    addBlock('dt', 0, 6);
+    addBlock('cdt', 4, 6);
+    addBlock('farm', 2, 6);
+    addBlock('myc', 3, 6);
+    addBlock('gdt', 5, 6);
+    addBlock('wd', 0, 7);
+    addBlock('wd1', 0, 7);
+    addBlock('wp', 0, 8);
+    addBlock('b', 1, 28);
+    addBlock('clore', 3, 1);
+    addBlock('in', 2, 1);
+    addBlock('gd', 1, 1);
+    addBlock('dmore', 0, 1);
+    addBlock('rs', 4, 1);
+    addBlock('os', 5, 1);
+    addBlock('lap', 7, 1);
+    addBlock('to', 6, 1);
+    addBlock('egem', 3, 24);
+    addBlock('tob', 6, 2);
+    addBlock('ib', 2, 2);
+    addBlock('gb', 1, 2);
+    addBlock('db', 0, 2);
+    addBlock('lapb', 7, 2);
+    addBlock('clb', 3, 2);
+    addBlock('sd', 1, 22);
+    addBlock('ss', 0, 22);
+    addBlock('cy1', 2, 22);
+    addBlock('bricks', 3, 22);
+    addBlock('snowblock', 1, 11);
+    addBlock('ice', 2, 11);
+    addBlock('fice', 3, 11);
+    addBlock('gv', 6, 0);
+    addBlock('books', 4, 25);
+    addBlock('cloth', 0, 25);
+    addBlock('gs', 1, 25);
+    addBlock('portalstone', 4, 23);
+    addBlock('n', 0, 23);
+    addBlock('nb', 1, 23);
+    addBlock('rnb', 2, 23);
+    addBlock('glow', 7, 23);
+    addBlock('magma', 0, 38);
+    addBlock('nwb', 0, 0); //Falta en el PNG
+    addBlock('ssd', 3, 23); 
+    addBlock('boneb', 8, 23);
+    addBlock('es', 2, 24);
+    addBlock('pf', 0, 24);
+    addBlock('dsb', 5, 24);
+    addBlock('hcl', 4, 24);
+    addBlock('bbb', 3, 25);
+    
+    // Decoration
+    addBlock('craft', 7, 0); //
+    addBlock('oven', 7, 0); //
+    addBlock('chest', 3, 4); 
+    addBlock('echest', 7, 0); //
+    addBlock('cmp', 7, 0); //
+    addBlock('enchant', 7, 0); //
+    addBlock('anvil', 7, 0); //
+    addBlock('bed', 7, 0); //
+    addBlock('dr', 7, 0); //
+    addBlock('idr', 7, 0); //
+    addBlock('bbdr', 7, 0); //
+    addBlock('td1', 7, 0); //
+    addBlock('sign', 7, 0); //
+    addBlock('sl', 7, 0); //
+    addBlock('lv', 0, 10); 
+    addBlock('lv1', 1, 10);
+    addBlock('lv2', 2, 10);
+    addBlock('lv3', 3, 10);
+    addBlock('lv4', 4, 10);
+    addBlock('st', 7, 0); //
+    addBlock('ladder', 2, 3);
+    addBlock('fnc', 7, 0); //
+    addBlock('fncg', 7, 0); // 
+    addBlock('nfnc', 7, 0); //
+    addBlock('nfncg', 7, 0); //
+    addBlock('ibar', 7, 0); //
+    addBlock('th', 7, 0); //
+    addBlock('degg', 7, 0); //
+    addBlock('lgr', 0, 20);
+    addBlock('shrub', 1, 20); //Hacer la parte de cuando anda seco (Desierto)
+    addBlock('ds', 3, 20);
+    addBlock('fw1', 7, 20);
+    addBlock('fw2', 8, 20);
+    addBlock('ms1', 0, 21);
+    addBlock('ms2', 3, 21);
+    addBlock('msb1', 4, 21);
+    addBlock('msb2', 5, 21);
+    addBlock('msb3', 1, 21);
+    addBlock('msb4', 2, 21);
+    addBlock('bb', 4, 20);
+    addBlock('ct', 4, 22);
+    addBlock('sw', 4, 11);
+    addBlock('lp', 6, 11);
+    addBlock('coral', 5, 11);
+    addBlock('lant', 7, 0); //
+    addBlock('web', 9, 23);
+    addBlock('rp', 7, 0); //
+    addBlock('mobSpawner', 10, 23);
+    addBlock('ortorch', 7, 0); //
+    addBlock('carpet', 7, 0); //
+    addBlock('j', 0, 28);
+
+    // Camera
+    let cameraPostionX = 0;
+    let cameraPostionY = 0;
+    let speedMultiplier = 1;
+
+    // Preferences
+    let zoomLevel = 1;
+    const blockSize = 16; 
+    const fps = 60;
+
+    // Main loop
+    function canvasLoop() {
+      clear();
+      drawWorld();
+      requestAnimationFrame(canvasLoop);
+    }
+
+    // Rect
+    function fillRect(color, positionX, positionY, width, height) {
+      context.fillStyle = color;
+      context.fillRect(positionX, canvas.height - positionY, width, -height);
+    }
+
+    // Draw tile
+    function drawTile(image, tileX, tileY, tileWidth, tileHeight, positionX, positionY, width, height) {
+      context.drawImage(image, tileX, tileY, tileWidth, tileHeight, positionX, canvas.height - positionY, width, -height);
+    }
+
+    // Clear
+    function clear() {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // Draw world with biomes
+    function drawWorld() {
+      if (world) {
+        clear();
+        let a = 0;
+        while (a < 50) { // Adjust the number of blocks to render
+          let b = 0;
+          while (b < 37) { // Adjust the number of blocks to render
+            if (blockTile[world.scene1[a + cameraPostionX][b + cameraPostionY]]) {
+              drawBlock(a, b, world.scene1[a + cameraPostionX][b + cameraPostionY]);
+            }
+            b++;
+          }
+          a++;
+        }
+      }
+    }
+
+    // Draw block function
+    function drawBlock(positionX, positionY, id) {
+      const offsetX = (canvas.width - 800 * zoomLevel) / 2; // Center the world horizontally
+      const offsetY = (canvas.height - 500 * zoomLevel) / 2; // Center the world vertically
+      drawTile(blocks, blockTile[id][0], blockTile[id][1], 16, 16, offsetX + positionX * blockSize * zoomLevel, offsetY + positionY * blockSize * zoomLevel, blockSize * zoomLevel, blockSize * zoomLevel);
+    }
+
+    // Load file and create world object
+    let fileName;
+    let world;
+    let biomeList;
+    let blockJCoordinates = [];
+    document.getElementById("fileInput").addEventListener("change", fileInput);
+    function fileInput(event) {
+      const file = event.target.files[0];
+      if (file) {
+        fileName = file.name;
+        const reader = new FileReader();
+        reader.onload = getFile;
+        reader.readAsText(file);
+      }
+    }
+    function getFile(e) {
+      const file = e.target.result;
+      world = JSON.parse(decode(file));
+      biomeList = world.biomeList;
+      blockJCoordinates = findBlockCoordinates(world, 'j');
+      drawWorld(); // Ensure the world is drawn after loading
+      document.getElementById("detectButton").disabled = false;
+    }
+    function loadFile() {
+      document.getElementById("fileInput").click();
+    }
+
+    // Decode algorithm
+    function decode(encodedString) {
+      let decodedString = "";
+      for (let i = 0; i < encodedString.length; i++) {
+        const charCode = encodedString.charCodeAt(i) - (i * 5 % 33 + 1);
+        decodedString += String.fromCodePoint(charCode);
+      }
+      return decodedString;
+    }
+
+    document.getElementById("loadButton").addEventListener("click", loadFile);
+
+    // Draw biomes
+    function drawBiomes() {
+      if (!biomeList) return;
+      const biomes = detectBiomes(biomeList);
+      const biomeListDiv = document.getElementById('biomeList');
+      biomeListDiv.innerHTML = '';
+      biomes.forEach((biome, index) => {
+        const biomeItem = document.createElement('div');
+        biomeItem.className = 'biome-item';
+        biomeItem.textContent = `${biome.name} (${biome.startX - 1}, ${biome.endX - 1})`;
+        biomeListDiv.appendChild(biomeItem);
+      });
+      showProperties(); // Show properties after drawing biomes
+    }
+
+    // Detect biomes
+    function detectBiomes(biomeList) {
+      const biomes = [];
+      let currentBiome = null;
+      let startX = 1; 
+
+      for (let i = 1; i < biomeList.length - 1; i++) { 
+        const biome = biomeList[i];
+        if (currentBiome !== biome) {
+          if (currentBiome !== null) {
+            biomes.push({ name: currentBiome, startX, endX: i - 1 });
+          }
+          currentBiome = biome;
+          startX = i;
+        }
+      }
+      if (currentBiome !== null) {
+        biomes.push({ name: currentBiome, startX, endX: biomeList.length - 1 });
+      }
+      return biomes;
+    }
+
+    document.getElementById("detectButton").addEventListener("click", () => {
+      drawBiomes();
+    });
+
+    // Camera movement
+    document.addEventListener('keydown', (event) => {
+      if (!world) return;
+      const maxX = world.scene1.length - 50;
+      const maxY = world.scene1[0].length - 37; 
+      switch (event.key) {
+        case "ArrowUp":
+          cameraPostionY = Math.min(cameraPostionY + speedMultiplier, maxY);
+          break;
+        case "ArrowDown":
+          cameraPostionY = Math.max(cameraPostionY - speedMultiplier, 0);
+          break;
+        case "ArrowLeft":
+          cameraPostionX = Math.max(cameraPostionX - speedMultiplier, 0);
+          break;
+        case "ArrowRight":
+          cameraPostionX = Math.min(cameraPostionX + speedMultiplier, maxX);
+          break;
+        case "Shift":
+          speedMultiplier = 3;
+          break;
+      }
+    });
+
+    document.addEventListener('keyup', (event) => {
+      if (event.key === "Shift") {
+        speedMultiplier = 1;
+      }
+    });
+
+    requestAnimationFrame(canvasLoop);
+
+    // Zoom and reset buttons
+    document.getElementById("zoomOutButton").addEventListener("click", () => {
+      zoomLevel = Math.max(zoomLevel - 0.1, 0.5); // Limitar el zoom mínimo a 0.5x
+      drawWorld();
+    });
+
+    document.getElementById("resetZoomButton").addEventListener("click", () => {
+      zoomLevel = 1; // Reset zoom level to 1x
+      drawWorld();
+    });
+
+    // Display coordinates
+    const coordinatesDiv = document.getElementById("coordinates");
+    canvas.addEventListener("mousemove", (event) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      const blockX = Math.floor((x + cameraPostionX * blockSize) / (blockSize * zoomLevel));
+      const blockY = Math.floor((canvas.height - y + cameraPostionY * blockSize) / (blockSize * zoomLevel)); // Adjust y coordinate
+      coordinatesDiv.style.display = "block";
+      coordinatesDiv.textContent = `X: ${blockX}, Y: ${blockY}`;
+    });
+
+    canvas.addEventListener("mouseout", () => {
+      coordinatesDiv.style.display = "none";
+    });
+
+    canvas.addEventListener("click", (event) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      const blockX = Math.floor((x + cameraPostionX * blockSize) / (blockSize * zoomLevel));
+      const blockY = Math.floor((canvas.height - y + cameraPostionY * blockSize) / (blockSize * zoomLevel)); // Adjust y coordinate
+      const command = `/tp ${blockX} ${blockY}`;
+      navigator.clipboard.writeText(command).then(() => {
+        coordinatesDiv.textContent = "Copied!";
+        setTimeout(() => {
+          coordinatesDiv.style.display = "none";
+        }, 1000);
+      });
+    });
+
+    // Show properties in biome list
+    function showProperties() {
+      const worldProperties = document.getElementById("worldProperties");
+      const oreCounts = countOres(world);
+      worldProperties.innerHTML = `
+        <p>Menas de hierro: ${oreCounts.in}</p>
+        <p>Menas de diamante: ${oreCounts.dmore}</p>
+        <p>Menas de oro: ${oreCounts.gd}</p>
+        <p>Menas de carbón: ${oreCounts.clore}</p>
+        <p>Menas de redstone: ${oreCounts.rs}</p>
+        <p>Menas de odd rock: ${oreCounts.os}</p>
+        <p>Menas de topaz: ${oreCounts.to}</p>
+        <p>Menas de lapiz lazuli: ${oreCounts.lap}</p>
+        <p>Coordenadas del bloque 'j': ${JSON.stringify(blockJCoordinates)}</p>
+      `;
+    }
+
+    // Count ores in the world
+    function countOres(world) {
+      const oreCounts = {
+        in: 0,
+        dmore: 0,
+        gd: 0,
+        clore: 0,
+        rs: 0,
+        os: 0,
+        to: 0,
+        lap: 0,
+      };
+
+      if (!world || !world.scene1) return oreCounts;
+
+      for (let row of world.scene1) {
+        for (let block of row) {
+          if (oreCounts.hasOwnProperty(block)) {
+            oreCounts[block]++;
+          }
+        }
+      }
+
+      return oreCounts;
+    }
+
+    // Find coordinates of block 'j'
+    function findBlockCoordinates(world, blockType) {
+      const coordinates = [];
+
+      if (!world || !world.scene1) return coordinates;
+
+      for (let y = 0; y < world.scene1.length; y++) {
+        for (let x = 0; x < world.scene1[y].length; x++) {
+          if (world.scene1[y][x] === blockType) {
+            coordinates.push({ x, y });
+          }
+        }
+      }
+
+      return coordinates;
+    }
+  </script>
+</body>
+</html>
