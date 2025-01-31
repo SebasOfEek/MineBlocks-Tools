@@ -45,7 +45,7 @@
       }
 
       #biomeListContainer {
-        flex: 0 0 25%;
+        flex: 0 0 325px; 
         background-color: #ffffff;
         border-right: 2px solid #ccc;
         overflow-y: auto;
@@ -100,7 +100,7 @@
         display: flex;
         flex-direction: row;
         gap: 10px;
-        margin-top: 10px;
+        margin-top: -55px;
         position: relative;
         justify-content: center;
       }
@@ -125,7 +125,23 @@
         background-color: #0056b3;
       }
 
-      @media (max-width: 768px) {
+      @media (max-width: 800px) {
+        #canvasContainer {
+          padding: 0;
+          height: calc(80vh - 60px); 
+        }
+        #canvas {
+          width: 100%;
+          height: 100%;
+        }
+        #contentContainer {
+          height: 100vh; 
+        }
+
+        body {
+          font-size: 12px;
+        }
+
         #contentContainer {
           flex-direction: column;
           padding: 0;
@@ -147,23 +163,9 @@
           padding: 10px;
         }
 
-        #canvasButtons {
-          align-items: center;
-          margin-top: 10px;
-        }
-      }
-
-      @media (max-width: 800px) {
-        #canvasContainer {
-          padding: 0;
-          height: calc(80vh - 60px); 
-        }
-        #canvas {
-          width: 100%;
-          height: 100%;
-        }
-        #contentContainer {
-          height: 100vh; 
+        button {
+          padding: 6px 12px;
+          font-size: 12px;
         }
       }
 
@@ -678,8 +680,8 @@
         position: absolute;
         width: 16px;
         height: 16px;
-        top: 4.5px; 
-        left: 4.5px;
+        top: 6.5px;
+        left: 6.5px;
       }
 
       .chest-grid .slot {
@@ -689,6 +691,11 @@
         background-image: url('https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/casilla.png?raw=true');
         background-size: cover;
       }
+
+      .hidden {
+        display: none;
+      }
+      
     </style>
   </head>
   <body>
@@ -771,7 +778,7 @@
           <span class="label">Detectar Cofres</span>
         </button>
       </div>
-
+      
       <div id="contentContainer">
         <div id="biomeListContainer">
           <div id="biomeListHeader"></div>
@@ -1487,7 +1494,7 @@
         document.getElementById("biomeList").style.display = "none";
         document.getElementById("worldProperties").style.display = "none";
         document.getElementById("structureListContainer").style.display = "none";
-        document.getElementById("chestListContainer").style.display = "none"; // Hide chest list container
+        document.getElementById("chestListContainer").style.display = "none";
         document.getElementById("biomeListHeader").style.display = "none";
 
         const maxX = world.scene1.length - 1;
@@ -1496,7 +1503,7 @@
         document.getElementById("coordinateY").max = maxY;
         document.getElementById("coordinateX").placeholder = `X (0-${maxX})`;
         document.getElementById("coordinateY").placeholder = `Y (0-${maxY})`;
-        updateCoordinates(); // Update coordinates after loading the world
+        updateCoordinates();
       }
 
       // Decode algorithm
@@ -1593,22 +1600,26 @@
               blockPosition = "-48px -0px";
               break;
             case "mushrooms":
-              blockPosition = "-0px -320px";
+              blockPosition = "-164px -336px";
               break;
             case "water":
-              blockPosition = "-16px -544px";
+              blockPosition = "-0px -576px";
               break;
           }
           biomeItem.innerHTML = `
   <div style="display: flex; align-items: center; gap: 8px;">
-    <img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks.png?raw=true" 
-         style="width: 16px; height: 16px; object-fit: none; object-position: ${blockPosition};">
-    <span style="flex-grow: 1; text-align: left;">
+    <div style="
+      width: 16px;
+      height: 16px;
+      background-image: url('https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks1.png?raw=true');
+      background-size: auto;
+            case "mushrooms":
+          blockPosition = "-164px -336px";
+          break;
       ${biome.name} (${biome.startX}, ${biome.endX})
     </span>
   </div>
 `;
-
           biomeItem.addEventListener("click", () => {
             document
               .querySelectorAll(".biome-item")
@@ -1964,35 +1975,35 @@
         <div class="property-item collapsible">Reglas del juego <i class="material-icons collapsible-icon" style="margin-left:auto;">add</i></div>
         <div class="collapsible-content"><pre>${gameRules}</pre></div>
         <div class="divider"></div>
-        <div class="property-item"><img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -32px -16px;"> Menas de hierro: ${
+        <div class="property-item"><img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks1.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -32px -16px;"> Menas de hierro: ${
           oreCounts.in
         }</div>
-        <div class="property-item"><img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -48px -16px;"> Menas de carbón: ${
+        <div class="property-item"><img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks1.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -48px -16px;"> Menas de carbón: ${
           oreCounts.clore
         }</div>
-        <div class="property-item"><img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -64px -16px;"> Menas de redstone: ${
+        <div class="property-item"><img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks1.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -64px -16px;"> Menas de redstone: ${
           oreCounts.rs
         }</div>
-        <div class="property-item"><img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -112px -16px;"> Menas de lapiz lazuli: ${
+        <div class="property-item"><img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks1.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -112px -16px;"> Menas de lapiz lazuli: ${
           oreCounts.lap
         }</div>
-        <div class="property-item"><img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -16px -16px;"> Menas de oro: ${
+        <div class="property-item"><img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks1.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -16px -16px;"> Menas de oro: ${
           oreCounts.gd
         }</div>
-        <div class="property-item"><img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -0px -16px;"> Menas de diamante: ${
+        <div class="property-item"><img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks1.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -0px -16px;"> Menas de diamante: ${
           oreCounts.dmore
         }</div>
-        <div class="property-item"><img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -96px -16px;"> Menas de topaz: ${
+        <div class="property-item"><img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks1.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -96px -16px;"> Menas de topaz: ${
           oreCounts.to
         }</div>
-        <div class="property-item"><img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -80px -16px;"> Menas de odd rock: ${
+        <div class="property-item"><img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks1.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -80px -16px;"> Menas de odd rock: ${
           oreCounts.os
         }</div>
         <div class="property-item block-j-coord" data-coord="/tp ${blockJCoordinates
           .map((coord) => `${coord.x} ${coord.y}`)
           .join(
             ", "
-          )}"><img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -0px -448px;"> Bloque J: ${blockJCoords}</div>
+          )}"><img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks1.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -0px -448px;"> Bloque J: ${blockJCoords}</div>
       `;
 
         document.querySelectorAll(".collapsible").forEach((item) => {
@@ -2262,7 +2273,7 @@
               world.endPortal = [midpoint.x, midpoint.y];
             }
           }
-          strongholdItem.innerHTML = `<img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: 0px -384px;"> End portal: ${
+          strongholdItem.innerHTML = `<img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks1.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: 0px -384px;"> End portal: ${
             endPortalFound
               ? `(${world.endPortal[0]}, ${world.endPortal[1]})`
               : "No Encontrado"
@@ -2285,7 +2296,7 @@
           if (Number(coord.x) <= 130) {
             const dungeonItem = document.createElement("div");
             dungeonItem.className = "structure-item";
-            dungeonItem.innerHTML = `<img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -160px -368px;"> Spawner: (${coord.y}, ${coord.x})`;
+            dungeonItem.innerHTML = `<img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks1.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -160px -368px;"> Spawner: (${coord.y}, ${coord.x})`;
             dungeonItem.addEventListener("click", () => {
               document
                 .querySelectorAll(".structure-item")
@@ -2412,7 +2423,7 @@
           const x = coordinates[1];
           const y = coordinates[2];
           chestItem.innerHTML = `
-          <img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -48px -64px;">
+          <img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks1.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -48px -64px;">
           <span>Cofre en (${x}, ${y})</span>
         `;
           const chestContent = document.createElement("div");
@@ -2464,7 +2475,7 @@
           const chestItem = document.createElement("div");
           chestItem.className = "chest-item";
           chestItem.innerHTML = `
-          <img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -48px -64px;">
+          <img class="block-image" src="https://github.com/SebasOfEek/MineBlocks-Tools/blob/main/image/blocks1.png?raw=true" style="width: 16px; height: 16px; object-fit: none; object-position: -48px -64px;">
           <span>Cofre en (${chest.x}, ${chest.y})</span>
           <i class="material-icons collapsible-icon" style="margin-left:auto;">add</i>
         `;
