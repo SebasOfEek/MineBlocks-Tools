@@ -92,6 +92,7 @@ function updateSkinList() {
 function showSkinPreview(skinId) {
     var imageUrl = 'https://mineblocks.com/1/skins/images/' + skinId + '.png';
     $('#skin-preview').html('<img src="' + imageUrl + '" alt="Skin Preview" width="800">');
+    $('#skin-id').text('Skin ID: ' + skinId);
 }
 
 function updateProgressBar() {
@@ -136,6 +137,7 @@ function searchSkins(query) {
     } else {
         $('#skin-select').empty().append('<option>No skins found for that search.</option>');
         $('#skin-preview').html('');
+        $('#skin-id').text('');
         $('#all-skins').html('<div>No skins found for that search.</div>');
     }
 }
