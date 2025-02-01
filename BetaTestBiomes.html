@@ -1825,6 +1825,12 @@
       document.getElementById("upButton").addEventListener("mouseup", () => {
         moveUp = false;
       });
+      document.getElementById("upButton").addEventListener("touchstart", () => {
+        moveUp = true;
+      });
+      document.getElementById("upButton").addEventListener("touchend", () => {
+        moveUp = false;
+      });
 
       document
         .getElementById("downButton")
@@ -1832,6 +1838,12 @@
           moveDown = true;
         });
       document.getElementById("downButton").addEventListener("mouseup", () => {
+        moveDown = false;
+      });
+      document.getElementById("downButton").addEventListener("touchstart", () => {
+        moveDown = true;
+      });
+      document.getElementById("downButton").addEventListener("touchend", () => {
         moveDown = false;
       });
 
@@ -1843,6 +1855,12 @@
       document.getElementById("leftButton").addEventListener("mouseup", () => {
         moveLeft = false;
       });
+      document.getElementById("leftButton").addEventListener("touchstart", () => {
+        moveLeft = true;
+      });
+      document.getElementById("leftButton").addEventListener("touchend", () => {
+        moveLeft = false;
+      });
 
       document
         .getElementById("rightButton")
@@ -1850,6 +1868,12 @@
           moveRight = true;
         });
       document.getElementById("rightButton").addEventListener("mouseup", () => {
+        moveRight = false;
+      });
+      document.getElementById("rightButton").addEventListener("touchstart", () => {
+        moveRight = true;
+      });
+      document.getElementById("rightButton").addEventListener("touchend", () => {
         moveRight = false;
       });
 
