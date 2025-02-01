@@ -167,6 +167,24 @@
           padding: 6px 12px;
           font-size: 12px;
         }
+
+        .buttonContainer {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 10px;
+        }
+
+        .buttonContainer button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: calc(25% - 10px) !important;
+        }
+
+        .buttonContainer button .label {
+          font-size: 12px;
+        }
       }
 
       @media (max-width: 500px) {
@@ -177,7 +195,7 @@
           font-size: 16px;
         }
       }
-
+      
       #propertiesOverlay {
         display: none;
       }
