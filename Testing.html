@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MBSummon</title>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"rel="stylesheet"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: sans-serif;
+        background-color: #fff;
+      }
+
+      .container {
+        display: grid;
+        grid-template-columns: 25em 1fr 23em;
+        grid-template-rows: auto 15px 1fr auto;
+        height: 100vh;
+        gap: 0;
+        padding: 0px 20px 20px;
+      }
+
+      .menu {
+        grid-row: 1 / 5;
+        grid-column: 1 / 2;
+        background-color: #ccc;
+        border-radius: 12px;
+        margin: 35px 15px 17px;
+      }
+
+      .sidebar-right {
+        grid-row: 3 / 5;
+        grid-column: 3 / 4;
+        background-color: #ccc;
+        border-radius: 12px;
+        margin: 16px;
+      }
+
+      .topbar {
+        grid-column: 2 / 4;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 35px 24px 22px;
+        gap: 16px;
+        flex-wrap: nowrap;
+        min-width: 0;
+      }
+
+      .topbar-left {
+        display: flex;
+        gap: 16px;
+      }
+
+      .box {
+        background-color: #ccc;
+        border-radius: 10px;
+        height: 5em;
+        transition: background-color 0.3s ease;
+      }
+
+      .box.transparent {
+        background-color: transparent;
+      }
+
+      .box.small {
+        width: 5em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .box.small img {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 10px;
+      }
+
+      .box.medium {
+        width: 30em;
+      }
+
+      .box.large {
+        width: 160px;
+      }
+
+      .logo {
+        font-weight: bold;
+        font-size: 2.5rem;
+        color: #222;
+        flex: 1 1 auto;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .mob-select-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+
+      .select-with-images {
+        width: 100%;
+        max-width: 300px;
+        min-width: 150px;
+      }
+      .divider {
+        grid-column: 2 / 4;
+        height: 7px;
+        background-color: #ccc;
+        margin-left: 18px;
+        margin-right: 18px;
+        border-radius: 20px;
+      }
+
+      .main {
+        grid-column: 2 / 3;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        padding: 16px;
+      }
+
+      .card {
+        background-color: #ccc;
+        height: 80px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        font-weight: bold;
+      }
+
+      .card-icon {
+        display: none;
+      }
+
+      .footer {
+        grid-column: 2 / 3;
+        display: grid;
+        grid-template-columns: 4fr 1fr;
+        gap: 16px;
+        padding: 16px;
+      }
+
+      .footer-box {
+        background-color: #ccc;
+        border-radius: 12px;
+        height: 5em;
+      }
+
+      .select2-container--default .select2-selection--single {
+        height: 5em;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+      }
+
+      @media screen and (max-width: 1260px) {
+        .container {
+          grid-template-columns: 20em 1fr 18em;
+          padding: 0px 20px 20px;
+        }
+
+        .menu {
+          margin: 25px 10px 12px;
+        }
+
+        .sidebar-right {
+          margin: 12px;
+        }
+
+        .topbar {
+          padding: 25px 16px 16px;
+          gap: 12px;
+        }
+
+        .box.small {
+          width: 4em;
+          height: 4em;
+        }
+
+        .logo {
+          font-size: 2rem;
+        }
+
+        .main {
+          gap: 20px;
+          padding: 12px;
+        }
+
+        .card {
+          height: 100%;
+          font-size: 1.1rem;
+        }
+
+        .footer {
+          gap: 12px;
+          padding: 12px;
+        }
+
+        .footer-box {
+          height: 4em;
+        }
+
+        .select2-container--default .select2-selection--single {
+          height: 4em;
+        }
+      }
+
+      @media screen and (max-height: 880px) {
+        .container {
+          grid-template-rows: auto 12px 1fr auto;
+        }
+
+        .main {
+          gap: 15px;
+        }
+
+        .card {
+          height: 100%;
+        }
+      }
+
+      @media screen and (max-width: 1024px) {
+        .container {
+          grid-template-columns: 15em 1fr 15em;
+          padding: 0px 20px 20px;
+        }
+
+        .menu {
+          margin: 20px 8px 10px;
+        }
+
+        .sidebar-right {
+          margin: 10px;
+        }
+
+        .topbar {
+          padding: 20px 12px 12px;
+          gap: 10px;
+        }
+
+        .box.small {
+          width: 3.5em;
+          height: 3.5em;
+        }
+
+        .logo {
+          font-size: 1.8rem;
+        }
+
+        .main {
+          gap: 15px;
+          padding: 10px;
+        }
+
+        .card {
+          height: 100%;
+          font-size: 1rem;
+        }
+
+        .footer {
+          gap: 10px;
+          padding: 10px;
+        }
+
+        .footer-box {
+          height: 3.5em;
+        }
+
+        .select2-container--default .select2-selection--single {
+          height: 3.5em;
+        }
+      }
+
+      @media screen and (max-width: 900px) {
+        .container {
+          grid-template-columns: 1fr;
+          grid-template-rows: 7em auto auto 1fr auto;
+          padding: 10px;
+          position: relative;
+          padding-bottom: 120px;
+          min-height: 100vh;
+        }
+
+        .menu {
+          grid-row: 1;
+          grid-column: 1;
+          margin: 10px;
+          height: 6em;
+        }
+
+        .topbar {
+          grid-row: 2;
+          grid-column: 1;
+          padding: 20px 20px 15px;
+        }
+
+        .divider {
+          grid-row: 3;
+          grid-column: 1;
+          margin: 10px;
+        }
+
+        .main {
+          grid-row: 4;
+          grid-column: 1;
+          display: grid;
+          grid-template-columns: 1fr 4fr;
+          grid-auto-flow: dense;
+          gap: 10px 15px;
+          padding: 10px;
+        }
+
+        .card {
+          grid-column: 2;
+        }
+
+        .card-icon {
+          grid-column: 1;
+          display: flex;
+          background-color: #ccc;
+          height: 80px;
+          border-radius: 12px;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .sidebar-right {
+          display: none;
+        }
+
+        .footer {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background-color: white;
+          padding: 10px;
+          z-index: 100;
+          box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+          font-size: 1.6rem;
+        }
+
+        .box.small {
+          width: 3em;
+          height: 3em;
+        }
+
+        .select2-container--default .select2-selection--single {
+          height: 3em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="menu"></div>
+
+<div class="topbar">
+  <div class="mob-select-wrapper">
+    <div class="box small" id="mobImage"></div>
+    <select id="mobType" class="select-with-images" style="width: 300px">
+      <option value="">--Seleccionar--</option>
+      <option value="zombie" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898103/Zombie2_cmi8uo.png">Zombie</option>
+      <option value="spawnskin" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898066/Player_head_ak0iz8.png">Spawnskin</option>
+      <option value="skeleton" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898059/Skeleton1_rcnbyh.png">Esqueleto</option>
+    </select>
+  </div>
+  <div class="logo">MBSummon</div>
+</div>
+
+      <div class="divider"></div>
+
+      <div class="sidebar-right"></div>
+
+      <div class="main">
+        <div class="card"></div>
+        <div class="card-icon"></div>
+        <div class="card"></div>
+        <div class="card-icon"></div>
+        <div class="card"></div>
+        <div class="card-icon"></div>
+        <div class="card"></div>
+        <div class="card-icon"></div>
+        <div class="card"></div>
+        <div class="card-icon"></div>
+        <div class="card"></div>
+        <div class="card-icon"></div>
+        <div class="card"></div>
+        <div class="card-icon"></div>
+        <div class="card"></div>
+        <div class="card-icon"></div>
+        <div class="card"></div>
+        <div class="card-icon"></div>
+      </div>
+
+      <div class="footer">
+        <div class="footer-box"></div>
+        <div class="footer-box"></div>
+      </div>
+    </div>
+    <script>
+      function formatOption(option) {
+        if (!option.id) return option.text;
+        const img = $(option.element).data("image");
+        if (!img) return option.text;
+        return $(
+          `<span><img src="${img}" style="width: 25px; height: 25px; vertical-align: middle; margin-right: 10px;" />${option.text}</span>`
+        );
+      }
+
+      function formatSelection(option) {
+        if (!option.id) return option.text;
+        return option.text;
+      }
+
+      $(document).ready(function () {
+        $("#mobType")
+          .select2({
+            templateResult: formatOption,
+            templateSelection: formatSelection,
+            minimumResultsForSearch: -1,
+          })
+          .on("change", function () {
+            const selected = $(this).find(":selected");
+            const imageUrl = selected.data("image");
+            const mobImage = $("#mobImage");
+
+            if (imageUrl) {
+              mobImage.html(`<img src="${imageUrl}" alt="${selected.text()}">`);
+              mobImage.addClass("transparent");
+            } else {
+              mobImage.empty();
+              mobImage.removeClass("transparent");
+            }
+          });
+      });
+
+      function updateMobOptions() {
+        const selected = $("#mobType").val();
+        console.log("Mob seleccionado:", selected);
+      }
+    </script>
+  </body>
+</html>
