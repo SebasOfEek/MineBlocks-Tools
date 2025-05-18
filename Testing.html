@@ -34,7 +34,7 @@
         grid-row: 1 / 5;
         grid-column: 1 / 2;
         background-color: #ccc;
-        border-radius: 12px;
+        border-radius: 25px;
         margin: 35px 15px 17px;
       }
 
@@ -42,7 +42,7 @@
         grid-row: 3 / 5;
         grid-column: 3 / 4;
         background-color: #ccc;
-        border-radius: 12px;
+        border-radius: 25px;
         margin: 16px;
       }
 
@@ -51,7 +51,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 35px 24px 22px;
+        padding: 35px 24px 30px;
         gap: 16px;
         flex-wrap: nowrap;
         min-width: 0;
@@ -64,7 +64,7 @@
 
       .box {
         background-color: #ccc;
-        border-radius: 10px;
+        border-radius: 20px;
         height: 5em;
         transition: background-color 0.3s ease;
       }
@@ -108,7 +108,7 @@
       .mob-select-wrapper {
         display: flex;
         align-items: center;
-        gap: 16px;
+        gap: 30px;
         flex: 1 1 auto;
         min-width: 0;
       }
@@ -131,14 +131,14 @@
         grid-column: 2 / 3;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-        padding: 16px;
+        gap: 40px;
+        padding: 27px 16px 16px 16px;
       }
 
       .card {
         background-color: #ccc;
         height: 100%;
-        border-radius: 12px;
+        border-radius: 25px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -154,19 +154,27 @@
         grid-column: 2 / 3;
         display: grid;
         grid-template-columns: 4fr 1fr;
-        gap: 16px;
+        gap: 30px;
         padding: 16px;
       }
 
       .footer-box {
         background-color: #ccc;
-        border-radius: 12px;
+        border-radius: 25px;
         height: 5em;
+      }
+
+      .select2-container--default .select2-selection--single .select2-selection__arrow{
+        height: 50%;
+        position: absolute;
+        top: 20px;
+        right: 5px;
+        width: 20px;
       }
 
       .select2-container--default .select2-selection--single {
         height: 5em;
-        border-radius: 10px;
+        border-radius: 20px;
         display: flex;
         align-items: center;
         padding-left: 10px;
@@ -201,7 +209,7 @@
         }
 
         .main {
-          gap: 20px;
+          gap: 30px;
           padding: 12px;
         }
 
@@ -211,7 +219,6 @@
         }
 
         .footer {
-          gap: 12px;
           padding: 12px;
         }
 
@@ -230,7 +237,7 @@
         }
 
         .main {
-          gap: 15px;
+          gap: 30px;
         }
 
         .card {
@@ -267,7 +274,7 @@
         }
 
         .main {
-          gap: 15px;
+          gap: 25px;
           padding: 10px;
         }
 
@@ -277,7 +284,6 @@
         }
 
         .footer {
-          gap: 10px;
           padding: 10px;
         }
 
@@ -325,7 +331,7 @@
           display: grid;
           grid-template-columns: 1fr 4fr;
           grid-auto-flow: dense;
-          gap: 10px 15px;
+          gap: 15px 20px;
           padding: 10px;
         }
 
@@ -338,7 +344,7 @@
           display: flex;
           background-color: #ccc;
           height: 80px;
-          border-radius: 12px;
+          border-radius: 25px;
           align-items: center;
           justify-content: center;
         }
@@ -368,6 +374,18 @@
         }
 
         .select2-container--default .select2-selection--single {
+          height: 3em;
+          border-radius: 12px
+        }
+
+        .mob-select-wrapper{
+          gap: 20px;
+        }
+      }
+
+      @media screen and (max-width: 470px) {
+        .box.small{
+          width: 5em;
           height: 3em;
         }
       }
@@ -426,7 +444,7 @@
         const img = $(option.element).data("image");
         if (!img) return option.text;
         return $(
-          `<span><img src="${img}" style="width: 25px; height: 25px; vertical-align: middle; margin-right: 10px;" />${option.text}</span>`
+          `<span><img src="${img}" style="width: 25px; height: 25px; vertical-align: middle; margin-right: 10px; border-radius: 5px;" />${option.text}</span>`
         );
       }
 
