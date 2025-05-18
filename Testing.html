@@ -7,17 +7,20 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"rel="stylesheet"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <style>
       * {
         box-sizing: border-box;
       }
-
+      
       html,
       body {
         margin: 0;
         padding: 0;
         height: 100%;
-        font-family: sans-serif;
+        font-family: "Inter", sans-serif;
         background-color: #fff;
       }
 
@@ -36,6 +39,32 @@
         background-color: #ccc;
         border-radius: 25px;
         margin: 35px 15px 17px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .menu-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        text-align: center;
+        margin: 20px;
+        font-weight: 800;
+      }
+
+      .menu-button {
+        padding: 20px 12px;
+        border: none;
+        border-radius: 15px;
+        background-color: #fff;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .menu-button:hover {
+        background-color: #eee;
       }
 
       .sidebar-right {
@@ -43,7 +72,7 @@
         grid-column: 3 / 4;
         background-color: #ccc;
         border-radius: 25px;
-        margin: 16px;
+        margin: 27px 16px 16px;
       }
 
       .topbar {
@@ -103,6 +132,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        font-weight: 800;
       }
 
       .mob-select-wrapper {
@@ -164,6 +194,17 @@
         height: 5em;
       }
 
+      .menu {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .menu-button:hover {
+        background-color: #eee;
+      }
+
       .select2-container--default .select2-selection--single .select2-selection__arrow{
         height: 50%;
         position: absolute;
@@ -180,6 +221,14 @@
         padding-left: 10px;
       }
 
+      .select2-dropdown, select2-dropdown--below {
+        border-radius: 0 0 15px 15px;
+      }
+
+      .select2-results__option{
+        padding: 10px;
+      }
+
       @media screen and (max-width: 1260px) {
         .container {
           grid-template-columns: 20em 1fr 18em;
@@ -191,11 +240,11 @@
         }
 
         .sidebar-right {
-          margin: 12px;
+          margin: 20px 12px 12px;
         }
 
         .topbar {
-          padding: 25px 16px 16px;
+          padding: 25px 16px 25px;
           gap: 12px;
         }
 
@@ -210,7 +259,7 @@
 
         .main {
           gap: 30px;
-          padding: 12px;
+          padding: 20px 12px 12px;
         }
 
         .card {
@@ -252,11 +301,11 @@
         }
 
         .sidebar-right {
-          margin: 10px;
+          margin: 15px 10px 10px;
         }
 
         .topbar {
-          padding: 20px 12px 12px;
+          padding: 20px 12px 20px;
           gap: 10px;
         }
 
@@ -271,7 +320,7 @@
 
         .main {
           gap: 25px;
-          padding: 10px;
+          padding: 15px 14px 10px;
         }
 
         .card {
@@ -282,7 +331,7 @@
         .footer {
           padding: 10px;
         }
-        
+
         .select2-container--default .select2-selection--single {
           height: 3.5em;
         }
@@ -323,7 +372,7 @@
           display: grid;
           grid-template-columns: 1fr 4fr;
           grid-auto-flow: dense;
-          gap: 15px 20px;
+          gap: 20px 20px;
           padding: 10px;
         }
 
@@ -353,7 +402,7 @@
           background-color: white;
           padding: 10px;
           z-index: 100;
-          box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .logo {
@@ -385,7 +434,15 @@
   </head>
   <body>
     <div class="container">
-      <div class="menu"></div>
+      <div class="menu">
+        <div class="menu-title">Menú</div>
+        <button class="menu-button">Inicio</button>
+        <button class="menu-button">Idioma</button>
+        <button class="menu-button">Oscuro</button>
+        <button class="menu-button">Discord</button>
+        <button class="menu-button">Limpiar</button>
+        <button class="menu-button">Configuración</button>
+      </div>
 
 <div class="topbar">
   <div class="mob-select-wrapper">
