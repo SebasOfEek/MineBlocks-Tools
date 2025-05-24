@@ -10,494 +10,1635 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <style>
-      * {
-        box-sizing: border-box;
-      }
-      
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        font-family: "Inter", sans-serif;
-        background-color: #fff;
-      }
-
-      .container {
-        display: grid;
-        grid-template-columns: 25em 1fr 23em;
-        grid-template-rows: auto 15px 1fr auto;
-        height: 100vh;
-        gap: 0;
-        padding: 0px 20px 20px;
-      }
-
-      .menu {
-        grid-row: 1 / 5;
-        grid-column: 1 / 2;
-        background-color: #ccc;
-        border-radius: 25px;
-        margin: 35px 15px 17px;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-      }
-
-      .menu-title {
-        font-size: 2.5rem;
-        font-weight: bold;
-        text-align: center;
-        margin: 20px;
-        font-weight: 800;
-      }
-
-      .menu-button {
-        padding: 20px 12px;
-        border: none;
-        border-radius: 15px;
-        background-color: #fff;
-        font-size: 1.1rem;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-
-      .menu-button:hover {
-        background-color: #eee;
-      }
-
-      .sidebar-right {
-        grid-row: 3 / 5;
-        grid-column: 3 / 4;
-        background-color: #ccc;
-        border-radius: 25px;
-        margin: 27px 16px 16px;
-      }
-
-      .topbar {
-        grid-column: 2 / 4;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 35px 24px 30px;
-        gap: 16px;
-        flex-wrap: nowrap;
-        min-width: 0;
-      }
-
-      .topbar-left {
-        display: flex;
-        gap: 16px;
-      }
-
-      .box {
-        background-color: #ccc;
-        border-radius: 20px;
-        height: 5em;
-        transition: background-color 0.3s ease;
-      }
-
-      .box.transparent {
-        background-color: transparent;
-      }
-
-      .box.small {
-        width: 5em;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .box.small img {
-        max-width: 100%;
-        max-height: 100%;
-        border-radius: 10px;
-      }
-
-      .box.medium {
-        width: 30em;
-      }
-
-      .box.large {
-        width: 160px;
-      }
-
-      .logo {
-        font-weight: bold;
-        font-size: 2.5rem;
-        color: #222;
-        flex: 1 1 auto;
-        min-width: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        font-weight: 800;
-      }
-
-      .mob-select-wrapper {
-        display: flex;
-        align-items: center;
-        gap: 30px;
-        flex: 1 1 auto;
-        min-width: 0;
-      }
-
-      .select-with-images {
-        width: 100%;
-        max-width: 300px;
-        min-width: 150px;
-      }
-      .divider {
-        grid-column: 2 / 4;
-        height: 7px;
-        background-color: #ccc;
-        margin-left: 18px;
-        margin-right: 18px;
-        border-radius: 20px;
-      }
-
-      .main {
-        grid-column: 2 / 3;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 40px;
-        padding: 27px 16px 16px 16px;
-      }
-
-      .card {
-        background-color: #ccc;
-        height: 100%;
-        border-radius: 25px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.3rem;
-        font-weight: bold;
-      }
-
-      .card-icon {
-        display: none;
-      }
-
-      .footer {
-        grid-column: 2 / 3;
-        display: grid;
-        grid-template-columns: 4fr 1fr;
-        gap: 30px;
-        padding: 16px;
-      }
-
-      .footer-box {
-        background-color: #ccc;
-        border-radius: 25px;
-        height: 5em;
-      }
-
-      .menu {
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-      }
-
-      .menu-button:hover {
-        background-color: #eee;
-      }
-
-      .select2-container--default .select2-selection--single .select2-selection__arrow{
-        height: 50%;
-        position: absolute;
-        top: 20px;
-        right: 5px;
-        width: 20px;
-      }
-
-      .select2-container--default .select2-selection--single {
-        height: 5em;
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        padding-left: 10px;
-      }
-
-      .select2-dropdown, select2-dropdown--below {
-        border-radius: 0 0 15px 15px;
-      }
-
-      .select2-results__option{
-        padding: 10px;
-      }
-
-      @media screen and (max-width: 1260px) {
-        .container {
-          grid-template-columns: 20em 1fr 18em;
-          padding: 10px 20px 20px;
-        }
-
-        .menu {
-          margin: 25px 10px 12px;
-        }
-
-        .sidebar-right {
-          margin: 20px 12px 12px;
-        }
-
-        .topbar {
-          padding: 25px 16px 25px;
-          gap: 12px;
-        }
-
-        .box.small {
-          width: 4em;
-          height: 4em;
-        }
-
-        .logo {
-          font-size: 2rem;
-        }
-
-        .main {
-          gap: 30px;
-          padding: 20px 12px 12px;
-        }
-
-        .card {
-          height: 100%;
-          font-size: 1.1rem;
-        }
-
-        .footer {
-          padding: 12px;
-        }
-
-        .select2-container--default .select2-selection--single {
-          height: 4em;
-        }
-        
-        .menu-button{
-          padding: 15px 12px;
-        }
-      }
-
-      @media screen and (max-height: 880px) {
-        .container {
-          grid-template-rows: auto 12px 1fr auto;
-        }
-
-        .main {
-          gap: 30px;
-        }
-
-        .card {
-          height: 100%;
-        }
-      }
-
-      @media screen and (max-width: 1024px) {
-        .container {
-          grid-template-columns: 15em 1fr 15em;
-          padding: 10px 20px 20px;
-        }
-
-        .menu {
-          margin: 20px 8px 10px;
-        }
-
-        .sidebar-right {
-          margin: 15px 10px 10px;
-        }
-
-        .topbar {
-          padding: 20px 12px 20px;
-          gap: 10px;
-        }
-
-        .box.small {
-          width: 3.5em;
-          height: 3.5em;
-        }
-
-        .logo {
-          font-size: 1.8rem;
-        }
-
-        .main {
-          gap: 25px;
-          padding: 15px 14px 10px;
-        }
-
-        .card {
-          height: 100%;
-          font-size: 1rem;
-        }
-
-        .footer {
-          padding: 10px;
-        }
-
-        .select2-container--default .select2-selection--single {
-          height: 3.5em;
-        }
-      }
-
-      @media screen and (max-width: 900px) {
-        .container {
-          grid-template-columns: 1fr;
-          grid-template-rows: 7em auto auto 1fr auto;
-          padding: 10px;
-          position: relative;
-          padding-bottom: 120px;
-          min-height: 100vh;
-        }
-
-        .menu {
-          grid-row: 1;
-          grid-column: 1;
-          margin: 10px;
-          height: 6em;
-        }
-
-        .topbar {
-          grid-row: 2;
-          grid-column: 1;
-          padding: 20px 20px 15px;
-        }
-
-        .divider {
-          grid-row: 3;
-          grid-column: 1;
-          margin: 10px;
-        }
-
-        .main {
-          grid-row: 4;
-          grid-column: 1;
-          display: grid;
-          grid-template-columns: 1fr 4fr;
-          grid-auto-flow: dense;
-          gap: 20px 20px;
-          padding: 10px;
-        }
-
-        .card {
-          grid-column: 2;
-        }
-
-        .card-icon {
-          grid-column: 1;
-          display: flex;
-          background-color: #ccc;
-          height: 80px;
-          border-radius: 25px;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .sidebar-right {
-          display: none;
-        }
-
-        .footer {
-          position: fixed;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          background-color: white;
-          padding: 10px;
-          z-index: 100;
-          box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .logo {
-          font-size: 1.6rem;
-        }
-
-        .box.small {
-          width: 3em;
-          height: 3em;
-        }
-
-        .select2-container--default .select2-selection--single {
-          height: 3em;
-          border-radius: 12px
-        }
-
-        .mob-select-wrapper{
-          gap: 20px;
-        }
-      }
-
-      @media screen and (max-width: 470px) {
-        .box.small{
-          width: 5em;
-          height: 3em;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="Style.css">
   </head>
+<style>
+  * {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Inter", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow: hidden;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 25em 1fr 23em;
+  grid-template-rows: auto 15px 1fr auto;
+  height: 100vh;
+  gap: 0;
+  padding: 0px 20px 20px;
+}
+
+.menu {
+  grid-row: 1 / 5;
+  grid-column: 1 / 2;
+  background-color: var(--card-bg);
+  border-radius: 25px;
+  margin: 35px 15px 17px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.menu-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.menu-button {
+  padding: 8px;
+  border: none;
+  border-radius: 15px;
+  background-color: var(--menu-button-bg);
+  color: var(--text-color);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.menu-button:hover {
+  background-color: var(--menu-button-hover);
+  transform: scale(1.05);
+}
+
+.menu-button:active {
+  transform: scale(0.95);
+}
+
+.sidebar-right {
+  grid-row: 3 / 5;
+  grid-column: 3 / 4;
+  background-color: var(--card-bg);
+  border-radius: 25px;
+  margin: 27px 16px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.topbar {
+  grid-column: 2 / 4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 35px 24px 30px;
+  gap: 16px;
+  flex-wrap: nowrap;
+  min-width: 0;
+  background-color: var(--bg-color);
+}
+
+.topbar-left {
+  display: flex;
+  gap: 16px;
+}
+
+.box {
+  background-color: var(--card-bg);
+  border-radius: 20px;
+  height: 5em;
+  transition: background-color 0.3s ease;
+}
+
+.box.transparent {
+  background-color: transparent;
+}
+
+.box.small {
+  width: 5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box.small img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 10px;
+}
+
+.box.medium {
+  width: 30em;
+}
+
+.box.large {
+  width: 160px;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 2.5rem;
+  color: var(--text-color);
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 800;
+}
+
+.mob-select-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.select-with-images {
+  width: 100%;
+  max-width: 300px;
+  min-width: 150px;
+}
+.divider {
+  grid-column: 2 / 4;
+  height: 7px;
+  background-color: var(--card-bg);
+  margin-left: 18px;
+  margin-right: 18px;
+  border-radius: 20px;
+}
+
+.footer-divider {
+  display: none;
+  height: 7px;
+  background-color: var(--card-bg);
+  margin-left: 18px;
+  margin-right: 18px;
+  border-radius: 20px;
+}
+
+.main {
+  grid-column: 2 / 3;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  padding: 27px 16px 16px 16px;
+  overflow: hidden;
+}
+
+.card {
+  background-color: var(--card-bg);
+  height: 100%;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  transform: scale(1);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card i {
+  font-size: 1.8rem;
+  transition: all 0.3s ease;
+  color: var(--text-color);
+}
+
+.card span.card-text {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  position: absolute;
+  bottom: 15px;
+}
+
+.card:hover span.card-text {
+  opacity: 1;
+}
+
+.card:hover i {
+  transform: translateY(-10px);
+}
+
+.question-icon {
+  position: absolute;
+  top: 13px;
+  right: 13px;
+  width: 28px; 
+  height: 28px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px; 
+  color: #666;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 2;
+  transition: box-shadow 0.2s;
+}
+
+.question-icon::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: transparent;
+  z-index: 1;
+}
+
+.question-icon:active {
+  box-shadow: 0 0 0 4px #7dbbff55;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card:active {
+  transform: scale(0.95);
+}
+
+.card-icon {
+  display: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.footer {
+  grid-column: 2 / 3;
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  gap: 30px;
+  padding: 16px;
+  background-color: var(--bg-color);
+}
+
+.footer-box {
+  background-color: var(--card-bg);
+  border-radius: 25px;
+  height: 5em;
+  transform: scale(1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer-box:hover {
+  transform: scale(1.05);
+}
+
+.footer-box:active {
+  transform: scale(0.95);
+}
+.footer-box i {
+  font-size: 1.8rem;
+  color: var(--text-color);
+}
+
+.footer-box.copied {
+  background-color: #7dbbff;
+}
+
+.footer-box.copied i {
+  color: white;
+}
+
+.select2-container--default
+  .select2-selection--single
+  .select2-selection__arrow {
+  height: 50%;
+  position: absolute;
+  top: 20px;
+  right: 5px;
+  width: 20px;
+}
+
+.select2-container--default .select2-selection--single {
+  height: 4.8rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 0.4rem 1rem;
+  border: 1px solid #ccc;
+  font-size: 1.1rem;
+  color: var(--popup-text-color);
+  background-color: var(--input-bg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.select2-selection__rendered img {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 8px;
+  border-radius: 4px;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin: 5px;
+  width: calc(100% - 10px);
+}
+
+.select2-dropdown {
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #eee;
+}
+
+.select2-results__option {
+  padding: 12px;
+  transition: background-color 0.2s;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: #7dbbff;
+}
+
+.popup-button#itemStatusButton.saved {
+  background: #86efac;
+  color: #166534;
+}
+
+.popup-button#itemStatusButton.not-saved {
+  background: #fca5a5;
+  color: #991b1b;
+}
+
+.select2-dropdown {
+  animation: dropdownFade 0.2s ease-out;
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-header-bg {
+  display: none;
+  background-color: var(--bg-color);
+}
+
+.footer-box-big {
+  border: 1px solid #aaa !important;
+  background-color: none !important;
+  border-radius: 25px;
+  height: 5em;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.select2-container--default
+  .select2-results__option--highlighted.select2-results__option--selectable {
+  background-color: #c0ddfc;
+}
+
+.position-type-selector {
+  margin-bottom: 1.5rem;
+}
+
+.popup-select {
+  width: 100%;
+  height: 3rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1.1rem;
+  color: var(--popup-text-color);
+  background-color: var(--input-bg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.popup-select:focus {
+  outline: none;
+  border-color: var(--popup-header-bg);
+  box-shadow: var(--popup-focus-shadow);
+}
+
+.popup-toggle-button {
+  width: 100%;
+  height: 2.8rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1.1rem;
+  color: var(--popup-text-color);
+  background-color: var(--input-bg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.popup-toggle-button i {
+  font-size: 1.2rem;
+  transition: color 0.2s ease;
+}
+
+.popup-toggle-button .fa-toggle-on {
+  color: #86efac;
+}
+
+.popup-toggle-button .fa-toggle-off {
+  color: #fca5a5;
+}
+
+@media screen and (max-width: 1260px) {
+  .container {
+    grid-template-columns: 20em 1fr 18em;
+    padding: 10px 20px 20px;
+  }
+
+  .menu {
+    margin: 25px 10px 12px;
+  }
+
+  .sidebar-right {
+    margin: 20px 12px 12px;
+  }
+
+  .topbar {
+    padding: 25px 16px 25px;
+    gap: 12px;
+  }
+
+  .box.small {
+    width: 4em;
+    height: 4em;
+  }
+
+  .logo {
+    font-size: 2rem;
+  }
+
+  .main {
+    gap: 30px;
+    padding: 20px 12px 12px;
+  }
+
+  .card {
+    height: 100%;
+    font-size: 1.1rem;
+  }
+
+  .footer {
+    padding: 12px;
+  }
+
+  .select2-container--default .select2-selection--single {
+    height: 4em;
+  }
+}
+
+@media screen and (max-height: 880px) {
+  .container {
+    grid-template-rows: auto 12px 1fr auto;
+  }
+
+  .main {
+    gap: 30px;
+  }
+
+  .card {
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .container {
+    grid-template-columns: 15em 1fr 15em;
+    padding: 10px 20px 20px;
+  }
+
+  .menu {
+    margin: 20px 8px 10px;
+  }
+
+  .sidebar-right {
+    margin: 15px 10px 10px;
+  }
+
+  .topbar {
+    padding: 20px 12px 20px;
+    gap: 10px;
+  }
+
+  .box.small {
+    width: 3.5em;
+    height: 3.5em;
+  }
+
+  .logo {
+    font-size: 1.8rem;
+  }
+
+  .main {
+    gap: 25px;
+    padding: 15px 14px 10px;
+  }
+
+  .card {
+    height: 100%;
+    font-size: 1rem;
+  }
+
+  .footer {
+    padding: 10px;
+  }
+
+  .select2-container--default .select2-selection--single {
+    height: 3.5em;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .mobile-header-bg {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 178px;
+    background-color: var(--bg-color);
+    z-index: 997;
+    pointer-events: none;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto 1fr auto;
+    padding: 10px;
+    position: relative;
+    padding-bottom: 120px;
+    min-height: 100vh;
+  }
+
+  .menu {
+    gap: 3px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 98%;
+    background-color: #ccc;
+    z-index: 1000;
+    padding: 10px;
+    flex-direction: column;
+    align-items: stretch;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    max-height: 65px;
+    overflow: hidden;
+    background-color: var(--card-bg);
+  }
+
+  .menu.show-buttons {
+    max-height: 100%;
+    padding: 10px;
+  }
+
+  .menu-title {
+    display: block;
+    font-size: 2rem;
+    padding: 5px 0;
+    margin-bottom: 10px;
+  }
+
+  .menu-button {
+    display: none;
+    padding: 22px;
+    margin: 5px 0;
+    border-radius: 12px;
+    font-size: 1.1rem;
+  }
+
+  .menu.show-buttons .menu-button {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .topbar {
+    position: fixed;
+    top: 88px;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    background-color: var(--bg-color) !important;
+    padding: 15px 20px;
+  }
+
+  .divider {
+    position: fixed;
+    top: 171px;
+    left: 20px;
+    width: 94%;
+    z-index: 998;
+    margin: 0;
+    background-color: #ccc;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .footer-divider {
+    display: block;
+    position: fixed;
+    bottom: 100px;
+    left: 13px;
+    width: 94%;
+    z-index: 119;
+    margin: 0;
+    background-color: #ccc;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .main {
+    grid-row: 4;
+    grid-column: 1;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-auto-flow: dense;
+    gap: 20px 20px;
+    padding: 0em 10px 20px;
+    margin-top: 11.5em;
+    overflow-y: auto;
+    height: calc(65vh - 60px);
+    margin-bottom: 95px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .card {
+    grid-column: 2;
+  }
+
+  .card-icon {
+    grid-column: 1;
+    display: flex;
+    background-color: #ccc;
+    height: 80px;
+    border-radius: 25px;
+    align-items: center;
+    justify-content: center;
+    transform: scale(1);
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  }
+
+  .card-icon:hover {
+    transform: scale(1.05);
+  }
+
+  .card-icon:active {
+    transform: scale(0.95);
+  }
+
+  .sidebar-right {
+    display: none;
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-color) !important;
+    padding: 10px;
+    z-index: 100;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .logo {
+    font-size: 1.6rem;
+  }
+
+  .box.small {
+    width: 3em;
+    height: 3em;
+  }
+
+  .select2-container--default .select2-selection--single {
+    height: 3em;
+    border-radius: 12px;
+  }
+
+  .mob-select-wrapper {
+    gap: 20px;
+  }
+
+  .card i {
+    display: none;
+  }
+
+  .card span.card-text {
+    opacity: 1;
+    position: static;
+    font-size: 1.1rem;
+  }
+
+  .card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-icon i {
+    font-size: 1.8rem;
+    color: #222;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .box.small {
+    width: 5em;
+    height: 3em;
+  }
+}
+
+:root {
+  --bg-color: #fff;
+  --text-color: #222;
+  --card-bg: #ccc;
+  --menu-button-bg: #fff;
+  --menu-button-hover: #bbb;
+  --popup-bg: #fff;
+  --popup-header-bg: #333;
+  --popup-text-color: #333;
+  --popup-accent: #555;
+  --popup-border-radius: 1.5rem;
+  --popup-overlay-bg: rgba(0, 0, 0, 0.4);
+  --popup-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --popup-focus-shadow: 0 0 1 3px rgba(51, 51, 51, 0.2);
+  --input-bg: #f9f9f9;
+}
+
+[data-theme="dark"] {
+  --bg-color: #1a1a1a;
+  --text-color: #fff;
+  --card-bg: #333;
+  --menu-button-bg: #444;
+  --menu-button-hover: #555;
+  --popup-bg: #1a1a1a;
+  --popup-header-bg: #333;
+  --popup-text-color: #fff;
+  --popup-accent: #ccc;
+  --input-bg: #2a2a2a;
+
+  & .select2-container--default .select2-selection--single {
+    background-color: var(--card-bg);
+    border-color: #444;
+    color: var(--text-color);
+  }
+
+  & .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: var(--text-color);
+  }
+
+  & .select2-dropdown {
+    background-color: var(--card-bg);
+    border-color: #444;
+  }
+
+  & .select2-search__field {
+    background-color: var(--input-bg);
+    color: var(--text-color);
+  }
+
+  & .select2-results__option {
+    color: var(--text-color);
+  }
+
+  & .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: #444;
+    color: white;
+  }
+
+  & .popup-select {
+    background-color: var(--card-bg);
+    border-color: #444;
+    color: var(--text-color);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--card-bg);
+  border-radius: 5px;
+  border: 2px solid var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--menu-button-hover);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--card-bg) var(--bg-color);
+}
+
+.popup-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--popup-overlay-bg);
+  backdrop-filter: blur(4px);
+  z-index: 1001;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-window {
+  background: var(--popup-bg);
+  padding: 0;
+  border-radius: var(--popup-border-radius);
+  width: clamp(300px, 90%, 500px);
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: var(--popup-shadow);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.popup-overlay.show {
+  display: flex;
+}
+.popup-header {
+  background: var(--popup-header-bg);
+  padding: 1.5rem 2.5rem;
+  border-top-left-radius: var(--popup-border-radius);
+  border-top-right-radius: var(--popup-border-radius);
+}
+
+.popup-header h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.popup-overlay.show .popup-window {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.popup-input-group {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-end;
+  margin-bottom: 15px;
+}
+
+.popup-input-wrapper {
+  flex: 1;
+  margin-top: 10px;
+}
+
+.popup-input {
+  width: 100%;
+  height: 2.8rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1.1rem;
+  color: var(--popup-text-color);
+  background-color: var(--input-bg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.popup-input:focus {
+  outline: none;
+  border-color: var(--popup-header-bg);
+  box-shadow: var(--popup-focus-shadow);
+}
+
+.popup-button {
+  background: #fca5a5;
+  border: none;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #991b1b;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.popup-button#statusButton.saved {
+  background: #86efac;
+  color: #166534;
+}
+
+.popup-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+.popup-button:active {
+  transform: translateY(0);
+}
+
+.popup-button.save-button {
+  background: #7dbbff;
+  color: white;
+}
+
+.popup-button.save-button:hover {
+  background: #6aa8eb;
+}
+
+.popup-input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--popup-accent);
+  font-size: 1rem;
+}
+
+.popup-content {
+  padding: 2.5rem;
+  background: var(--popup-bg);
+}
+
+.popup-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-close:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.select2-container--default .select2-dropdown {
+  animation: selectDropdown 0.2s ease;
+  transform-origin: top;
+}
+
+@keyframes selectDropdown {
+  from {
+    opacity: 0;
+    transform: scaleY(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+.popup-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.label-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--popup-accent);
+}
+
+#itemSelect .select2-container .select2-selection--single {
+  height: 2.8rem;
+  border-radius: 8px;
+  background-color: var(--input-bg);
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#itemSelect .select2-container .select2-selection__rendered {
+  line-height: 2.5rem;
+  padding-left: 0.8rem;
+  color: var(--popup-text-color);
+}
+
+#itemSelect .select2-container .select2-selection__arrow {
+  height: 100%;
+  top: 0;
+  right: 8px;
+}
+
+#itemSelect .select2-container .select2-selection__rendered img {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 8px;
+  border-radius: 4px;
+}
+
+.popup-input-wrapper .select2-container .select2-selection--single {
+  height: 2.8em;
+  display: flex;
+  align-items: center;
+}
+
+.popup-input-wrapper .select2-container .select2-selection__rendered {
+  display: flex;
+  align-items: center;
+  padding-left: 0.5rem !important;
+}
+
+.popup-input-wrapper .select2-selection__rendered img {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+  margin-right: 10px;
+  margin-bottom: 4px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+</style>
   <body>
     <div class="container">
       <div class="menu">
         <div class="menu-title">Menú</div>
         <button class="menu-button">Inicio</button>
         <button class="menu-button">Idioma</button>
-        <button class="menu-button">Oscuro</button>
+        <button class="menu-button" id="themeButton">Oscuro</button>
         <button class="menu-button">Discord</button>
         <button class="menu-button">Limpiar</button>
         <button class="menu-button">Configuración</button>
       </div>
+      <div class="mobile-header-bg"></div>
 
-<div class="topbar">
-  <div class="mob-select-wrapper">
-    <div class="box small" id="mobImage"></div>
-    <select id="mobType" class="select-with-images" style="width: 300px">
-      <option value="">--Seleccionar--</option>
-      <option value="zombie" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898103/Zombie2_cmi8uo.png">Zombie</option>
-      <option value="spawnskin" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898066/Player_head_ak0iz8.png">Spawnskin</option>
-      <option value="skeleton" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898059/Skeleton1_rcnbyh.png">Esqueleto</option>
-    </select>
-  </div>
-  <div class="logo">MBSummon</div>
-</div>
+      <div class="topbar">
+        <div class="mob-select-wrapper">
+          <div class="box small" id="mobImage"></div>
+          <select id="mobType" class="select-with-images" style="width: 300px">
+          </select>
+        </div>
+        <div class="logo">MBSummon</div>
+      </div>
 
       <div class="divider"></div>
 
       <div class="sidebar-right"></div>
 
       <div class="main">
-        <div class="card"></div>
-        <div class="card-icon"></div>
-        <div class="card"></div>
-        <div class="card-icon"></div>
-        <div class="card"></div>
-        <div class="card-icon"></div>
-        <div class="card"></div>
-        <div class="card-icon"></div>
-        <div class="card"></div>
-        <div class="card-icon"></div>
-        <div class="card"></div>
-        <div class="card-icon"></div>
-        <div class="card"></div>
-        <div class="card-icon"></div>
-        <div class="card"></div>
-        <div class="card-icon"></div>
-        <div class="card"></div>
-        <div class="card-icon"></div>
+        <div class="card" id="card1">
+          <span class="question-icon">?</span>
+          <i class="fas fa-signature"></i>
+          <span class="card-text">Nombre</span>
+        </div>
+        <div class="card-icon">
+          <i class="fas fa-signature"></i>
+        </div>
+        <div class="card" id="card2">
+          <span class="question-icon">?</span>
+          <i class="fas fa-hashtag"></i>
+          <span class="card-text">Cantidad</span>
+        </div>
+        <div class="card-icon">
+          <i class="fas fa-hashtag"></i>
+        </div>
+        <div class="card" id="card3">
+          <span class="question-icon">?</span>
+          <i class="fas fa-location-dot"></i>
+          <span class="card-text">Posición</span>
+        </div>
+        <div class="card-icon">
+          <i class="fas fa-location-dot"></i>
+        </div>
+        <div class="card" id="card9">
+          <span class="question-icon">?</span>
+          <i class="fas fa-heart"></i>
+          <span class="card-text">Vida</span>
+        </div>
+        <div class="card-icon">
+          <i class="fas fa-heart"></i>
+        </div>
+        <div class="card" id="card4">
+          <span class="question-icon">?</span>
+          <i class="fas fa-hand-sparkles"></i>
+          <span class="card-text">Objeto equip.</span>
+        </div>
+        <div class="card-icon">
+          <i class="fas fa-hand-sparkles"></i>
+        </div>
+        <div class="card" id="card5">
+          <span class="question-icon">?</span>
+          <i class="fas fa-box"></i>
+          <span class="card-text">Loot predet.</span>
+        </div>
+        <div class="card-icon">
+          <i class="fas fa-box"></i>
+        </div>
+        <div class="card" id="card6">
+          <span class="question-icon">?</span>
+          <i class="fas fa-shield"></i>
+          <span class="card-text">Armadura</span>
+        </div>
+        <div class="card-icon">
+          <i class="fas fa-shield"></i>
+        </div>
+        <div class="card" id="card7">
+          <span class="question-icon">?</span>
+          <i class="fas fa-tags"></i>
+          <span class="card-text">Loot Tags</span>
+        </div>
+        <div class="card-icon">
+          <i class="fas fa-tags"></i>
+        </div>
+        <div class="card" id="cardAggressiveness">
+          <span class="question-icon">?</span>
+          <i class="fas fa-skull"></i>
+          <span class="card-text">Agresividad</span>
+        </div>
+        <div class="card-icon">
+          <i class="fas fa-skull"></i>
+        </div>
       </div>
 
+      <div class="popup-overlay" id="customPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2>Nombre del mob</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <div class="popup-input-group">
+              <div class="popup-input-wrapper">
+                <label for="mobName">Nombre personalizado:</label>
+                <input type="text" id="mobName" class="popup-input" placeholder="Ingresa un nombre...">
+              </div>
+              <button class="popup-button" id="statusButton">
+                <i class="fas fa-times status-icon not-saved"></i>
+              </button>
+              <button class="popup-button save-button" id="saveButton">
+                <i class="fas fa-save"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-overlay" id="helpPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2>Ayuda - Nombre del mob</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <p class="popup-description">
+              Esta opción te permite personalizar el nombre del mob que vas a invocar. El nombre que escribas aquí será visible flotando sobre el mob cuando lo invoques en el juego. Puedes usar códigos de formato usando el símbolo & seguido de un número.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-overlay" id="amountPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2>Cantidad de mobs</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <div class="popup-input-group">
+              <div class="popup-input-wrapper">
+                <label for="mobAmount">Cantidad a invocar:</label>
+                <input type="number" id="mobAmount" class="popup-input" placeholder="Ingresa una cantidad..." min="1" max="20" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+              </div>
+              <button class="popup-button" id="amountStatusButton">
+                <i class="fas fa-times status-icon not-saved"></i>
+              </button>
+              <button class="popup-button save-button" id="amountSaveButton">
+                <i class="fas fa-save"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-overlay" id="amountHelpPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2>Ayuda - Cantidad de mobs</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <p class="popup-description">
+              Esta opción te permite definir cuántos mobs quieres invocar a la vez. Por razones de rendimiento y equilibrio del juego, el límite máximo es de 20 mobs por invocación.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-overlay" id="positionPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2>Posición del mob</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <div class="popup-input-group">
+              <div class="popup-input-wrapper">
+                <label for="positionType">Tipo de posición:</label>
+                <select id="positionType" class="popup-select">
+                  <option value="">--Seleccionar tipo--</option>
+                  <option value="relative">Posición relativa</option>
+                  <option value="absolute">Posición absoluta</option>
+                </select>
+              </div>
+            </div>
+            <div class="popup-input-group">
+              <div class="popup-input-wrapper">
+                <label for="posX" id="labelPosX">Coordenada X:</label>
+                <input type="number" id="posX" class="popup-input" placeholder="Ingresa la coordenada X..." disabled>
+              </div>
+              <button class="popup-button" id="posXStatusButton">
+                <i class="fas fa-times status-icon not-saved"></i>
+              </button>
+              <button class="popup-button save-button" id="posXSaveButton">
+                <i class="fas fa-save"></i>
+              </button>
+            </div>
+            <div class="popup-input-group">
+              <div class="popup-input-wrapper">
+                <label for="posY" id="labelPosY">Coordenada Y:</label>
+                <input type="number" id="posY" class="popup-input" placeholder="Ingresa la coordenada Y..." disabled>
+              </div>
+              <button class="popup-button" id="posYStatusButton">
+                <i class="fas fa-times status-icon not-saved"></i>
+              </button>
+              <button class="popup-button save-button" id="posYSaveButton">
+                <i class="fas fa-save"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-overlay" id="positionHelpPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2>Ayuda - Posición del mob</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <p class="popup-description">
+              Esta opción te permite definir dónde aparecerá el mob. Puedes elegir entre posición relativa (respecto al jugador) o posición absoluta (coordenadas fijas del mundo). Ingresa los valores X e Y para determinar el punto exacto de aparición.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-overlay" id="itemPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2>Objeto equipado</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <div class="popup-input-group">
+              <div class="popup-input-wrapper">
+                <label for="itemSelect">Seleccionar objeto:</label>
+                <select id="itemSelect" class="select-with-images" style="width: 100%">
+                  <option value="">--Seleccionar objeto--</option>
+                </select>
+              </div>
+              <button class="popup-button" id="itemStatusButton">
+                <i class="fas fa-times status-icon not-saved"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-overlay" id="itemHelpPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2>Ayuda - Objeto equipado</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <p class="popup-description">
+              Esta opción te permite seleccionar el objeto que el mob tendrá equipado en su mano. El objeto seleccionado aparecerá en la mano del mob cuando sea invocado.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-overlay" id="healthPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2>Vida del mob</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <div class="popup-input-group">
+              <div class="popup-input-wrapper">
+                <label for="mobHealth">Cantidad de vida:</label>
+                <input type="number" id="mobHealth" class="popup-input" placeholder="Ingresa la vida..." min="1" max="100" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+              </div>
+              <button class="popup-button" id="healthStatusButton">
+                <i class="fas fa-times status-icon not-saved"></i>
+              </button>
+              <button class="popup-button save-button" id="healthSaveButton">
+                <i class="fas fa-save"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-overlay" id="healthHelpPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2>Ayuda - Vida del mob</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <p class="popup-description">
+              Esta opción te permite definir la cantidad de vida que tendrá el mob al aparecer. El valor debe estar entre 1 y 100 puntos de vida.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-overlay" id="lootPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2>Loot Predeterminado</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <div class="popup-input-group">
+              <div class="popup-input-wrapper">
+                <label for="defaultLoot">Activar loot predeterminado:</label>
+                <button id="toggleLoot" class="popup-toggle-button">
+                  <i class="fas fa-toggle-off"></i>
+                  <span>Desactivado</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-overlay" id="lootHelpPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2>Ayuda - Loot Predeterminado</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <p class="popup-description">
+              Esta opción te permite activar o desactivar el loot predeterminado del mob. Cuando está activado, el mob soltará los items que tiene configurados por defecto al morir.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-overlay" id="lootTagsPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2>Loot Tags</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <div class="popup-input-group">
+              <div class="popup-input-wrapper">
+                <label for="defaultLootTags">Activar loot tags:</label>
+                <button id="toggleLootTags" class="popup-toggle-button">
+                  <i class="fas fa-toggle-off"></i>
+                  <span>Desactivado</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-overlay" id="lootTagsHelpPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2>Ayuda - Loot Tags</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <p class="popup-description">
+              Esta opción te permite activar o desactivar los tags de loot del mob. Los tags controlan comportamientos especiales al morir el mob, como la posibilidad de soltar experiencia o items raros.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-overlay" id="armorPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2>Armadura del mob</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <div class="popup-input-group">
+              <div class="popup-input-wrapper">
+                <label for="helmetSelect">Casco:</label>
+                <select id="helmetSelect" class="select-with-images" style="width: 100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
+              </div>
+              <button class="popup-button" id="helmetStatusButton">
+                <i class="fas fa-times status-icon not-saved"></i>
+              </button>
+            </div>
+            <div class="popup-input-group">
+              <div class="popup-input-wrapper">
+                <label for="chestplateSelect">Pechera:</label>
+                <select id="chestplateSelect" class="select-with-images" style="width: 100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
+              </div>
+              <button class="popup-button" id="chestplateStatusButton">
+                <i class="fas fa-times status-icon not-saved"></i>
+              </button>
+            </div>
+            <div class="popup-input-group">
+              <div class="popup-input-wrapper">
+                <label for="leggingsSelect">Pantalones:</label>
+                <select id="leggingsSelect" class="select-with-images" style="width: 100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
+              </div>
+              <button class="popup-button" id="leggingsStatusButton">
+                <i class="fas fa-times status-icon not-saved"></i>
+              </button>
+            </div>
+            <div class="popup-input-group">
+              <div class="popup-input-wrapper">
+                <label for="bootsSelect">Botas:</label>
+                <select id="bootsSelect" class="select-with-images" style="width: 100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
+              </div>
+              <button class="popup-button" id="bootsStatusButton">
+                <i class="fas fa-times status-icon not-saved"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-overlay" id="armorHelpPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2>Ayuda - Armadura del mob</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <p class="popup-description">
+              Esta opción te permite equipar al mob con diferentes piezas de armadura. Puedes seleccionar casco, pechera, pantalones y botas de diferentes materiales.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-overlay" id="aggressivenessPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2>Agresividad del mob</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <div class="popup-input-group">
+              <div class="popup-input-wrapper">
+                <label for="aggressivenessSelect">Tipo de agresividad:</label>
+                <select id="aggressivenessSelect" class="popup-select">
+                  <option value="">--Seleccionar tipo--</option>
+                  <option value="hostile">Hostil</option>
+                  <option value="neutral">Neutral</option>
+                  <option value="passive">Pasivo</option>
+                </select>
+              </div>
+              <button class="popup-button" id="aggressivenessStatusButton">
+                <i class="fas fa-times status-icon not-saved"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-overlay" id="aggressivenessHelpPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2>Ayuda - Agresividad del mob</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <p class="popup-description">
+              Esta opción te permite definir el comportamiento agresivo del mob. Hostil atacará a los jugadores, Neutral solo atacará si es provocado, y Pasivo nunca atacará.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-divider"></div>
+
       <div class="footer">
-        <div class="footer-box"></div>
-        <div class="footer-box"></div>
+        <div class="footer-box-big"></div>
+        <div class="footer-box">
+          <i class="fas fa-copy"></i>
+        </div>
       </div>
     </div>
     <script>
+      $(document).ready(function() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          $('#themeButton').text('Claro');
+        }
+
+        $('#themeButton').on('click', function(e) {
+          e.stopPropagation();
+          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          
+          if (isDark) {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+            $(this).text('Oscuro');
+          } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            $(this).text('Claro');
+          }
+        });
+      });
+
       function formatOption(option) {
         if (!option.id) return option.text;
         const img = $(option.element).data("image");
         if (!img) return option.text;
         return $(
-          `<span><img src="${img}" style="width: 25px; height: 25px; vertical-align: middle; margin-right: 10px; border-radius: 5px;" />${option.text}</span>`
+          `<span><img src="${img}" style="width: 25px; height: 25px; vertical-align: middle; margin-right: 10px; border-radius: 5px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);" />${option.text}</span>`
         );
       }
 
@@ -507,31 +1648,597 @@
       }
 
       $(document).ready(function () {
-        $("#mobType")
-          .select2({
-            templateResult: formatOption,
-            templateSelection: formatSelection,
-            minimumResultsForSearch: -1,
-          })
-          .on("change", function () {
-            const selected = $(this).find(":selected");
-            const imageUrl = selected.data("image");
-            const mobImage = $("#mobImage");
-
-            if (imageUrl) {
-              mobImage.html(`<img src="${imageUrl}" alt="${selected.text()}">`);
-              mobImage.addClass("transparent");
-            } else {
-              mobImage.empty();
-              mobImage.removeClass("transparent");
-            }
+        $.getJSON('https://raw.githubusercontent.com/SebasOfEek/MineBlocks-Tools/main/json/mobs.json', function(data) {
+          const mobType = $('#mobType');
+          mobType.empty();
+          mobType.append('<option value="">--Seleccionar--</option>');
+          data.mobs.forEach(function(mob) {
+            const option = $('<option>')
+              .val(mob.value)
+              .text(mob.text)
+              .attr('data-image', mob.image);
+            mobType.append(option);
           });
+
+          mobType
+            .select2({
+              templateResult: formatOption,
+              templateSelection: formatSelection
+            })
+            .on("change", function () {
+              const selected = $(this).find(":selected");
+              const imageUrl = selected.data("image");
+              const mobImage = $("#mobImage");
+
+              if (imageUrl) {
+                mobImage.html(`<img src="${imageUrl}" alt="${selected.text()}">`);
+                mobImage.addClass("transparent");
+              } else {
+                mobImage.empty();
+                mobImage.removeClass("transparent");
+              }
+            });
+        });
       });
 
       function updateMobOptions() {
         const selected = $("#mobType").val();
         console.log("Mob seleccionado:", selected);
       }
+
+      $(document).ready(function () {
+        $(".menu").on("click", function (e) {
+          e.stopPropagation();
+          $(".menu").toggleClass("show-buttons");
+        });
+
+        $(document).on("click", function (e) {
+          if (!$(e.target).closest(".menu").length) {
+            $(".menu").removeClass("show-buttons");
+          }
+        });
+      });
+
+      $(document).ready(function () {
+        $(window).on("click", function (e) {
+          if ($(e.target).is(".modal")) {
+            $("#myModal").removeClass("active");
+          }
+        });
+      });
+
+      $(document).ready(function () {
+        $('#card1, #card1 + .card-icon').on('click', function() {
+          $('#customPopup').addClass('show');
+        });
+
+        $('#card1 .question-icon').on('click', function(e) {
+          e.stopPropagation();
+          $('#helpPopup').addClass('show');
+        });
+
+        $('.popup-close, .popup-overlay').on('click', function(e) {
+          if (e.target === this) {
+            $(this).closest('.popup-overlay').removeClass('show');
+          }
+        });
+
+        $('.popup-window').on('click', function(e) {
+          e.stopPropagation();
+        });
+      });
+
+      $(document).ready(function () {
+        $(".footer-box").on("click", function () {
+          $(this).addClass("copied");
+          setTimeout(() => {
+            $(this).removeClass("copied");
+          }, 1000);
+        });
+      });
+
+      let isSaved = false;
+      const updateStatus = (saved) => {
+        const statusButton = $('#statusButton');
+        const statusIcon = statusButton.find('i');
+        
+        statusIcon
+          .removeClass('fa-times fa-check not-saved saved')
+          .addClass(saved ? 'fa-check saved' : 'fa-times not-saved');
+        
+        statusButton
+          .removeClass('saved not-saved')
+          .addClass(saved ? 'saved' : 'not-saved');
+        
+        isSaved = saved;
+      };
+
+      const saveName = () => {
+        const name = $('#mobName').val().trim();
+        if (name) {
+          updateStatus(true);
+          console.log('Nombre guardado:', name);
+        }
+      };
+
+      $('#saveButton').on('click', saveName);
+      
+      $(document).ready(function () {
+        $('#customPopup').on('show', function() {
+          updateStatus(false);
+        });
+
+        $('#mobName').on('input', function() {
+          updateStatus(false);
+        }).on('keypress', function(e) {
+          if (e.key === 'Enter' || e.keyCode === 13) {
+            e.preventDefault();
+            saveName();
+          }
+        });
+      });
+
+      $(document).ready(function () {
+        $('#card2, #card2 + .card-icon').on('click', function() {
+          $('#amountPopup').addClass('show');
+        });
+
+        $('#card2 .question-icon').on('click', function(e) {
+          e.stopPropagation();
+          $('#amountHelpPopup').addClass('show');
+        });
+
+        let isAmountSaved = false;
+        const updateAmountStatus = (saved) => {
+          const statusButton = $('#amountStatusButton');
+          const statusIcon = statusButton.find('i');
+          
+          statusIcon
+            .removeClass('fa-times fa-check')
+            .addClass(saved ? 'fa-check' : 'fa-times');
+          
+          statusButton
+            .css('background-color', saved ? '#86efac' : '#fca5a5')
+            .css('color', saved ? '#166534' : '#991b1b');
+          
+          isAmountSaved = saved;
+        };
+
+        const saveAmount = () => {
+          const amount = $('#mobAmount').val().trim();
+          if (amount && !isNaN(amount)) {
+            const numAmount = parseInt(amount);
+            if (numAmount > 0 && numAmount <= 20) {
+              updateAmountStatus(true);
+              console.log('Cantidad guardada:', amount);
+            }
+          }
+        };
+
+        $('#amountSaveButton').on('click', saveAmount);
+
+        $('#mobAmount')
+          .on('input', function() {
+            let value = parseInt(this.value);
+            if (value > 20) this.value = 20;
+            updateAmountStatus(false);
+          })
+          .on('keypress', function(e) {
+            if (e.key === 'Enter' || e.keyCode === 13) {
+              e.preventDefault();
+              saveAmount();
+            }
+          });
+
+        $('#mobAmount').on('input', function() {
+          this.value = this.value.replace(/[^0-9]/g, '');
+        });
+      });
+
+      $(document).ready(function () {
+        $('#card3, #card3 + .card-icon').on('click', function() {
+          $('#positionPopup').addClass('show');
+        });
+
+        $('#card3 .question-icon').on('click', function(e) {
+          e.stopPropagation();
+          $('#positionHelpPopup').addClass('show');
+        });
+
+        let isPositionSaved = { x: false, y: false };
+        
+        const updatePositionStatus = (coord, saved) => {
+          const statusButton = $(`#pos${coord.toUpperCase()}StatusButton`);
+          const statusIcon = statusButton.find('i');
+          
+          statusIcon
+            .removeClass('fa-times fa-check')
+            .addClass(saved ? 'fa-check' : 'fa-times');
+          
+          statusButton
+            .css('background-color', saved ? '#86efac' : '#fca5a5')
+            .css('color', saved ? '#166534' : '#991b1b');
+          
+          isPositionSaved[coord.toLowerCase()] = saved;
+        };
+
+        const savePosition = (coord) => {
+          const pos = $(`#pos${coord.toUpperCase()}`).val().trim();
+          if (pos && !isNaN(pos)) {
+            updatePositionStatus(coord, true);
+            console.log(`Posición ${coord.toUpperCase()} guardada:`, pos);
+          }
+        };
+
+        $('#posXSaveButton, #posYSaveButton').on('click', function() {
+          const coord = $(this).attr('id').includes('X') ? 'X' : 'Y';
+          savePosition(coord);
+        });
+
+        $('#posX, #posY')
+          .on('input', function() {
+            const coord = $(this).attr('id').includes('X') ? 'X' : 'Y';
+            updatePositionStatus(coord, false);
+          })
+          .on('keypress', function(e) {
+            if (e.key === 'Enter' || e.keyCode === 13) {
+              e.preventDefault();
+              const coord = $(this).attr('id').includes('X') ? 'X' : 'Y';
+              savePosition(coord);
+            }
+          });
+
+        $('#positionType').on('change', function() {
+          const selectedType = $(this).val();
+          const posX = $('#posX');
+          const posY = $('#posY');
+          const labelPosX = $('#labelPosX');
+          const labelPosY = $('#labelPosY');
+
+          if (selectedType) {
+            posX.prop('disabled', false);
+            posY.prop('disabled', false);
+
+            if (selectedType === 'relative') {
+              labelPosX.text('Coordenada ~X:');
+              labelPosY.text('Coordenada ~Y:');
+            } else {
+              labelPosX.text('Coordenada X:');
+              labelPosY.text('Coordenada Y:');
+            }
+          } else {
+            posX.prop('disabled', true);
+            posY.prop('disabled', true);
+            labelPosX.text('Coordenada X:');
+            labelPosY.text('Coordenada Y:');
+          }
+
+          posX.val('');
+          posY.val('');
+          updatePositionStatus('X', false);
+          updatePositionStatus('Y', false);
+        });
+      });
+
+      $(document).ready(function () {
+        $.getJSON('https://raw.githubusercontent.com/SebasOfEek/MineBlocks-Tools/main/json/items.json', function(data) {
+          const itemSelect = $('#itemSelect');
+          
+          data.items.forEach(item => {
+            itemSelect.append(new Option(item.text, item.value));
+            itemSelect.find(`option[value="${item.value}"]`).data('image', item.image);
+          });
+
+          itemSelect.select2({
+            templateResult: formatOption,
+            templateSelection: formatOption,
+            width: '100%',
+            dropdownParent: $('#itemPopup'),
+          }).next('.select2-container').css({
+            'border-radius': '0.375rem',
+            'height': '2.8em',
+            'margin-top': '-0.4em'
+          }).find('.select2-selection').css({
+            'height': '100%',
+            'display': 'flex',
+            'align-items': 'center'
+          }).find('.select2-selection__arrow').css({
+            'height': '100%',
+            'line-height': '2.8em',
+            'top': '0'
+          });
+
+          $('#itemSelect').on('change', function() {
+            const selectedValue = $(this).val();
+            updateItemStatus(!!selectedValue);
+            if(selectedValue) {
+              console.log('Item guardado:', selectedValue);
+            }
+          });
+        });
+
+        $('#card4, #card4 + .card-icon').on('click', function() {
+          $('#itemPopup').addClass('show');
+        });
+
+        $('#card4 .question-icon').on('click', function(e) {
+          e.stopPropagation();
+          $('#itemHelpPopup').addClass('show');
+        });
+
+        let isItemSaved = false;
+        
+        const updateItemStatus = (saved) => {
+          const statusButton = $('#itemStatusButton');
+          const statusIcon = statusButton.find('i');
+          
+          statusIcon
+            .removeClass('fa-times fa-check not-saved saved')
+            .addClass(saved ? 'fa-check saved' : 'fa-times not-saved');
+          
+          statusButton
+            .removeClass('saved not-saved')
+            .addClass(saved ? 'saved' : 'not-saved');
+          
+          isItemSaved = saved;
+        };
+
+        $('#itemSelect').on('change', function() {
+          const selectedValue = $(this).val();
+          updateItemStatus(!!selectedValue);
+        });
+
+        $('#itemPopup').on('show', function() {
+          updateItemStatus(false);
+        });
+      });
+
+      $(document).ready(function () {
+        $('#card9, #card9 + .card-icon').on('click', function() {
+          $('#healthPopup').addClass('show');
+        });
+
+        $('#card9 .question-icon').on('click', function(e) {
+          e.stopPropagation();
+          $('#healthHelpPopup').addClass('show');
+        });
+
+        let isHealthSaved = false;
+        const updateHealthStatus = (saved) => {
+          const statusButton = $('#healthStatusButton');
+          const statusIcon = statusButton.find('i');
+          
+          statusIcon
+            .removeClass('fa-times fa-check')
+            .addClass(saved ? 'fa-check' : 'fa-times');
+          
+          statusButton
+            .css('background-color', saved ? '#86efac' : '#fca5a5')
+            .css('color', saved ? '#166534' : '#991b1b');
+          
+          isHealthSaved = saved;
+        };
+
+        const saveHealth = () => {
+          const health = $('#mobHealth').val().trim();
+          if (health && !isNaN(health)) {
+            const numHealth = parseInt(health);
+            if (numHealth > 0 && numHealth <= 100) {
+              updateHealthStatus(true);
+              console.log('Vida guardada:', health);
+            }
+          }
+        };
+
+        $('#healthSaveButton').on('click', saveHealth);
+
+        $('#mobHealth')
+          .on('input', function() {
+            let value = parseInt(this.value);
+            if (value > 100) this.value = 100;
+            updateHealthStatus(false);
+          })
+          .on('keypress', function(e) {
+            if (e.key === 'Enter' || e.keyCode === 13) {
+              e.preventDefault();
+              saveHealth();
+            }
+          });
+
+        $('#mobHealth').on('input', function() {
+          this.value = this.value.replace(/[^0-9]/g, '');
+        });
+      });
+
+      $(document).ready(function () {
+        let isLootEnabled = false;
+        let isLootSaved = false;
+
+        $('#card5, #card5 + .card-icon').on('click', function() {
+          $('#lootPopup').addClass('show');
+        });
+
+        $('#card5 .question-icon').on('click', function(e) {
+          e.stopPropagation();
+          $('#lootHelpPopup').addClass('show');
+        });
+
+        const updateLootStatus = (saved) => {
+          const statusButton = $('#lootStatusButton');
+          const statusIcon = statusButton.find('i');
+          
+          statusIcon
+            .removeClass('fa-times fa-check')
+            .addClass(saved ? 'fa-check' : 'fa-times');
+          
+          statusButton
+            .css('background-color', saved ? '#86efac' : '#fca5a5')
+            .css('color', saved ? '#166534' : '#991b1b');
+          
+          isLootSaved = saved;
+        };
+
+        $('#toggleLoot').on('click', function() {
+          isLootEnabled = !isLootEnabled;
+          $(this).find('i').toggleClass('fa-toggle-off fa-toggle-on');
+          $(this).find('span').text(isLootEnabled ? 'Activado' : 'Desactivado');
+          updateLootStatus(false);
+        });
+
+        $('#lootSaveButton').on('click', function() {
+          updateLootStatus(true);
+          console.log('Estado del loot guardado:', isLootEnabled);
+        });
+      });
+
+      $(document).ready(function () {
+        $.getJSON('https://raw.githubusercontent.com/SebasOfEek/MineBlocks-Tools/main/json/armor.json', function(data) {
+          const selects = ['helmet', 'chestplate', 'leggings', 'boots'];
+          const armorStatus = {};
+          
+          selects.forEach(type => {
+            const select = $(`#${type}Select`);
+            if (data[type]) {
+              data[type].forEach(item => {
+                select.append(new Option(item.text, item.value));
+                select.find(`option[value="${item.value}"]`).data('image', item.image);
+              });
+            }
+            
+            select.select2({
+              templateResult: formatOption,
+              templateSelection: formatOption,
+              width: '100%',
+              dropdownParent: $('#armorPopup'),
+            }).next('.select2-container').css({
+              'border-radius': '0.375rem',
+              'height': '2.8em',
+              'margin-top': '-0.4em'
+            }).find('.select2-selection').css({
+              'height': '100%',
+              'display': 'flex',
+              'align-items': 'center'
+            }).find('.select2-selection__arrow').css({
+              'height': '100%',
+              'line-height': '2.8em',
+              'top': '0'
+            });
+
+            armorStatus[type] = false;
+            
+            const updateArmorStatus = (type, saved) => {
+              const statusButton = $(`#${type}StatusButton`);
+              const statusIcon = statusButton.find('i');
+              
+              statusIcon
+                .removeClass('fa-times fa-check')
+                .addClass(saved ? 'fa-check' : 'fa-times');
+              
+              statusButton
+                .css('background-color', saved ? '#86efac' : '#fca5a5')
+                .css('color', saved ? '#166534' : '#991b1b');
+              
+              armorStatus[type] = saved;
+            };
+
+            // Eventos para cada pieza
+            select.on('change', function() {
+              const value = $(this).val();
+              updateArmorStatus(type, !!value);
+              if(value) {
+                console.log(`${type} guardado:`, value);
+              }
+            });
+          });
+        });
+
+        $('#card6, #card6 + .card-icon').on('click', function() {
+          $('#armorPopup').addClass('show');
+        });
+
+        $('#card6 .question-icon').on('click', function(e) {
+          e.stopPropagation();
+          $('#armorHelpPopup').addClass('show');
+        });
+      });
+
+      $(document).ready(function () {
+        let isLootTagsEnabled = false;
+        let isLootTagsSaved = false;
+
+        $('#card7, #card7 + .card-icon').on('click', function() {
+          $('#lootTagsPopup').addClass('show');
+        });
+
+        $('#card7 .question-icon').on('click', function(e) {
+          e.stopPropagation();
+          $('#lootTagsHelpPopup').addClass('show');
+        });
+
+        $('#card5 .question-icon').on('click', function(e) {
+          e.stopPropagation();
+          $('#lootHelpPopup').addClass('show');
+        });
+
+        const updateLootTagsStatus = (saved) => {
+          const statusButton = $('#lootTagsStatusButton');
+          const statusIcon = statusButton.find('i');
+          
+          statusIcon
+            .removeClass('fa-times fa-check')
+            .addClass(saved ? 'fa-check' : 'fa-times');
+          
+          statusButton
+            .css('background-color', saved ? '#86efac' : '#fca5a5')
+            .css('color', saved ? '#166534' : '#991b1b');
+          
+          isLootTagsSaved = saved;
+        };
+
+        $('#toggleLootTags').on('click', function() {
+          isLootTagsEnabled = !isLootTagsEnabled;
+          $(this).find('i').toggleClass('fa-toggle-off fa-toggle-on');
+          $(this).find('span').text(isLootTagsEnabled ? 'Activado' : 'Desactivado');
+          updateLootTagsStatus(true);
+          console.log('Estado de loot tags:', isLootTagsEnabled);
+        });
+      });
+
+      $(document).ready(function () {
+        let isAggressivenessSaved = false;
+
+        $('#cardAggressiveness, #cardAggressiveness + .card-icon').on('click', function() {
+          $('#aggressivenessPopup').addClass('show');
+        });
+
+        $('#cardAggressiveness .question-icon').on('click', function(e) {
+          e.stopPropagation();
+          $('#aggressivenessHelpPopup').addClass('show');
+        });
+
+        const updateAggressivenessStatus = (saved) => {
+          const statusButton = $('#aggressivenessStatusButton');
+          const statusIcon = statusButton.find('i');
+          
+          statusIcon
+            .removeClass('fa-times fa-check')
+            .addClass(saved ? 'fa-check' : 'fa-times');
+          
+          statusButton
+            .css('background-color', saved ? '#86efac' : '#fca5a5')
+            .css('color', saved ? '#166534' : '#991b1b');
+          
+          isAggressivenessSaved = saved;
+        };
+
+        $('#aggressivenessSelect').on('change', function() {
+          const selectedValue = $(this).val();
+          updateAggressivenessStatus(!!selectedValue);
+          if(selectedValue) {
+            console.log('Agresividad guardada:', selectedValue);
+          }
+        });
+      });
     </script>
   </body>
 </html>
