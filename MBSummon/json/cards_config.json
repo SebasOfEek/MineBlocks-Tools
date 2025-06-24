@@ -1,0 +1,256 @@
+{
+  "zombie": {
+    "lockedCards": [
+      "card1",
+      "card2",
+      "card3",
+      "card5",
+      "card6",
+      "card7",
+      "card9"
+    ]
+  },
+  "spawnskin": {
+    "lockedCards": [
+      "card1",
+      "card2",
+      "card3",
+      "card5",
+      "card6",
+      "card7",
+      "card9",
+      "card10",
+      "cardAggressiveness"
+    ]
+  },
+  "skeleton": {
+    "lockedCards": [
+      "card1",
+      "card2",
+      "card3",
+      "card5",
+      "card7",
+      "card9"
+    ]
+  },
+  "creeper": {
+    "lockedCards": [
+      "card2",
+      "card3",
+      "card9",
+      "card5",
+      "card18",
+      "card7"
+    ]
+  },
+  "spider": {
+    "lockedCards": [
+      "card2",
+      "card3",
+      "card1",
+      "card9",
+      "card5",
+      "card7"
+    ]
+  },
+  "enderman": {
+    "lockedCards": [
+      "card2",
+      "card3",
+      "card1",
+      "card9",
+      "card4",
+      "card5",
+      "card7"
+    ]
+  },
+  "blaze": {
+    "lockedCards": [
+      "card2",
+      "card3",
+      "card1",
+      "card9",
+      "card5",
+      "card7"
+    ]
+  },
+  "ghast": {
+    "lockedCards": [
+      "card2",
+      "card3",
+      "card1",
+      "card9",
+      "card5",
+      "card7"
+    ]
+  },
+  "magmacube": {
+    "lockedCards": [
+      "card2",
+      "card3",
+      "card1",
+      "card9",
+      "card5",
+      "card7"
+    ]
+  },
+  "slime": {
+    "lockedCards": [
+      "card2",
+      "card3",
+      "card1",
+      "card9",
+      "card5",
+      "card7"
+    ]
+  },
+  "enderdragon": {
+    "lockedCards": [
+      "card2",
+      "card3",
+      "card1",
+      "card9",
+      "card5",
+      "card7"
+    ]
+  },
+  "nethereye": {
+    "lockedCards": [
+      "card2",
+      "card3",
+      "card1",
+      "card9",
+      "card5",
+      "card7"
+    ]
+  },
+  "cow": {
+    "lockedCards": [
+      "card2",
+      "card3",
+      "card1",
+      "card9",
+      "card5",
+      "card7",
+      "card15"
+    ]
+  },
+  "sheep": {
+    "lockedCards": [
+      "card2",
+      "card3",
+      "card1",
+      "card9",
+      "card5",
+      "card7",
+      "card15"
+    ]
+  },
+  "mooshroom": {
+    "lockedCards": [
+      "card2",
+      "card3",
+      "card1",
+      "card9",
+      "card5",
+      "card7",
+      "card15"
+    ]
+  },
+  "pig": {
+    "lockedCards": [
+      "card2",
+      "card3",
+      "card1",
+      "card9",
+      "card5",
+      "card7",
+      "card15"
+    ]
+  },
+  "squid": {
+    "lockedCards": [
+      "card2",
+      "card3",
+      "card1",
+      "card9",
+      "card5",
+      "card7"
+    ]
+  },
+  "bat": {
+    "lockedCards": [
+      "card2",
+      "card3",
+      "card1",
+      "card9",
+      "card5",
+      "card7"
+    ]
+  },
+  "chicken": {
+    "lockedCards": [
+      "card2",
+      "card3",
+      "card1",
+      "card9",
+      "card5",
+      "card7",
+      "card15"
+    ]
+  },
+  "rabbit": {
+    "lockedCards": [
+      "card2",
+      "card3",
+      "card1",
+      "card9",
+      "card5",
+      "card7",
+      "card15"
+    ]
+  },
+  "wolf": {
+    "lockedCards": [
+      "card2",
+      "card3",
+      "card1",
+      "card9",
+      "card5",
+      "card7",
+      "card15"
+    ]
+  },
+  "pigman": {
+    "lockedCards": [
+      "card2",
+      "card3",
+      "card1",
+      "card9",
+      "card5",
+      "card7",
+      "card4"
+    ]
+  },
+  "snowgolem": {
+    "lockedCards": [
+      "card2",
+      "card3",
+      "card1",
+      "card9",
+      "card5",
+      "card7"
+    ]
+  },
+  "cowctus": {
+    "lockedCards": [
+      "card2",
+      "card3",
+      "card1",
+      "card9",
+      "card5",
+      "card7",
+      "card15"
+    ]
+  }
+}
