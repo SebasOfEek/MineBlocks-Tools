@@ -609,35 +609,6 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-  let isLootTagsEnabled = false;
-  let isLootTagsSaved = false;
-
-  $("#toggleLootTags").on("click", function () {
-    isLootTagsEnabled = !isLootTagsEnabled;
-    const $icon = $(this).find("i");
-    const $span = $(this).find("span");
-
-    $icon.toggleClass("fa-toggle-off fa-toggle-on");
-    $span.text(isLootTagsEnabled ? "Activado" : "Desactivado");
-
-    $("#lootTagsOptions").toggle(isLootTagsEnabled);
-
-    updateLootTagsStatus(true);
-    console.log("Estado de loot tags:", isLootTagsEnabled);
-  });
-
-  ["toggleEnLlamas", "toggleEsBebe", "toggleEsquilada"].forEach((id) => {
-    $(`#${id}`).on("click", function () {
-      const isEnabled = $(this).find("i").hasClass("fa-toggle-on");
-      $(this).find("i").toggleClass("fa-toggle-off fa-toggle-on");
-      $(this)
-        .find("span")
-        .text(isEnabled ? "No" : "Sí");
-    });
-  });
-});
-
-$(document).ready(function () {
   let isAggressivenessSaved = false;
 
   $("#cardAggressiveness, #cardAggressiveness + .card-icon").on(
@@ -725,17 +696,6 @@ function loadMobLockConfig(mobType) {
     });
 }
 
-// Bloquea todas las tarjetas
-function lockAllCards() {
-  $(".card, .card-icon").each(function () {
-    const $card = $(this);
-    $card.addClass("locked");
-    if (!$card.find(".card-lock-overlay").length && !$card.hasClass("card-icon")) {
-      $card.append('<div class="card-lock-overlay"><i class="fas fa-lock"></i></div>');
-    }
-  });
-}
-
 // Aplica el bloqueo/desbloqueo: solo las tarjetas en unlockedCardIds estarán desbloqueadas, el resto bloqueadas
 function applyCardLocks(unlockedCardIds) {
   $(".card, .card-icon").each(function () {
@@ -755,66 +715,136 @@ function applyCardLocks(unlockedCardIds) {
       }
     }
   });
+  reorderCardsByLockState();
 }
 
-// Cambia el evento de selección de mob para usar la nueva lógica
-$(document).ready(function () {
-  // ...existing code...
-  $.getJSON(
-    "https://raw.githubusercontent.com/SebasOfEek/MineBlocks-Tools/main/json/mobs.json",
-    function (data) {
-      // ...existing code...
-      mobType
-        .select2({
-          templateResult: formatOption,
-          templateSelection: formatSelection,
-        })
-        .on("change", function () {
-          const selected = $(this).find(":selected");
-          const imageUrl = selected.data("image");
-          const mobImage = $("#mobImage");
-
-          if (imageUrl) {
-            mobImage.html(`<img src="${imageUrl}" alt="${selected.text()}">`);
-            mobImage.addClass("transparent");
-          } else {
-            mobImage.empty();
-            mobImage.removeClass("transparent");
-          }
-
-          // Nuevo: cargar configuración de bloqueo desde JSON del mob
-          loadMobLockConfig($(this).val());
-        });
-
-      // Al inicio, bloquear todas las tarjetas
-      lockAllCards();
-    }
-  );
-});
-
-// Cambia el evento global de cambio de mobType para usar la nueva lógica
-$("#mobType").on("change", function () {
-  const selected = $(this).val();
-  loadMobLockConfig(selected);
-});
-
-// Cambia el método de bloqueo en el botón Limpiar
-$(document).ready(function () {
-  // ...existing code...
-  $(".menu-button").each(function () {
-    if ($(this).text() === "Limpiar") {
-      $(this).on("click", function () {
-        // ...existing code...
-        // Bloquear todas las cards usando la nueva función
-        lockAllCards();
-        // ...existing code...
-      });
+// Bloquea todas las tarjetas
+function lockAllCards() {
+  $(".card, .card-icon").each(function () {
+    const $card = $(this);
+    $card.addClass("locked");
+    if (!$card.find(".card-lock-overlay").length && !$card.hasClass("card-icon")) {
+      $card.append('<div class="card-lock-overlay"><i class="fas fa-lock"></i></div>');
     }
   });
-});
+  reorderCardsByLockState();
+}
 
-// Elimina la función toggleCardLocks anterior y su uso en el resto del archivo
-// ...existing code...
+// Reordena las cards: primero las desbloqueadas, luego las bloqueadas
+function reorderCardsByLockState() {
+  const $grid = $(".card-grid");
+  if ($grid.length === 0) return;
+
+  // Selecciona todas las cards y card-icons en el orden actual
+  const $cards = $grid.children(".card, .card-icon");
+  // Separa desbloqueadas y bloqueadas
+  const unlocked = [];
+  const locked = [];
+  $cards.each(function () {
+    if (!$(this).hasClass("locked")) {
+      unlocked.push(this);
+    } else {
+      locked.push(this);
+    }
+  });
+
+  // Limpia el grid y agrega primero desbloqueadas, luego bloqueadas (manteniendo pares card/card-icon juntos)
+  $grid.empty();
+  // Helper para mantener pares card/card-icon juntos
+  function appendPairs(cardList) {
+    for (let i = 0; i < cardList.length; i++) {
+      const $el = $(cardList[i]);
+      if ($el.hasClass("card")) {
+        $grid.append($el);
+        // Busca el siguiente card-icon (hermano inmediato en DOM original)
+        const $icon = $cards.eq($cards.index($el) + 1);
+        if ($icon.hasClass("card-icon")) {
+          $grid.append($icon);
+        }
+      }
+    }
+  }
+  appendPairs(unlocked);
+  appendPairs(locked);
+
+  // Reasignar eventos después de reordenar
+  attachCardPopupEvents();
+}
+
+// Asigna los eventos de apertura de popups y ayuda a las cards
+function attachCardPopupEvents() {
+  // Mapeo de cards a popups principales
+  const cardMappings = {
+    card1: "customPopup",
+    card2: "amountPopup",
+    card3: "positionPopup",
+    card4: "itemPopup",
+    card5: "lootPopup",
+    card6: "armorPopup",
+    card7: "lootTagsPopup",
+    card9: "healthPopup",
+    card10: "skinPopup",
+    card11: "soundPopup",
+    card12: "visibilityPopup",
+    card13: "firePopup",
+    card14: "lifetimePopup",
+    card15: "babyPopup",
+    card16: "colorPopup",
+    card17: "sizePopup",
+    card18: "nbtPopup",
+    cardAggressiveness: "aggressivenessPopup"
+  };
+
+  Object.entries(cardMappings).forEach(([cardId, popupId]) => {
+    $(`#${cardId}, #${cardId} + .card-icon`).off("click").on("click", function (e) {
+      if ($(this).hasClass("locked") || $(`#${cardId}`).hasClass("locked")) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+      $(`#${popupId}`).addClass("show");
+    });
+  });
+
+  // Mapeo de cards a popups de ayuda
+  const helpPopupMappings = {
+    card1: "helpPopup",
+    card2: "amountHelpPopup",
+    card3: "positionHelpPopup",
+    card4: "itemHelpPopup",
+    card5: "lootHelpPopup",
+    card6: "armorHelpPopup",
+    card7: "lootTagsHelpPopup",
+    card9: "healthHelpPopup",
+    card10: "skinHelpPopup",
+    card11: "soundHelpPopup",
+    card12: "visibilityHelpPopup",
+    card13: "fireHelpPopup",
+    card14: "lifetimeHelpPopup",
+    card15: "babyHelpPopup",
+    card16: "colorHelpPopup",
+    card17: "sizeHelpPopup",
+    card18: "nbtHelpPopup",
+    cardAggressiveness: "aggressivenessHelpPopup"
+  };
+
+  Object.entries(helpPopupMappings).forEach(([cardId, helpPopupId]) => {
+    $(`#${cardId} .question-icon`).off("click").on("click", function (e) {
+      if ($(`#${cardId}`).hasClass("locked")) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+      e.stopPropagation();
+      $(`#${helpPopupId}`).addClass("show");
+    });
+  });
+}
+
+// Inicializar eventos al cargar la página
+$(document).ready(function () {
+  attachCardPopupEvents();
+});
 
 $(document).ready(function () {
   function changePage(pageNumber) {
@@ -939,9 +969,6 @@ $(document).ready(function () {
   $(".menu-button").each(function () {
     if ($(this).text() === "Limpiar") {
       $(this).on("click", function () {
-        // Resetear el estado global de Loot Tags
-        isLootTagsEnabled = false;
-
         // Limpiar inputs normales
         $('input[type="text"], input[type="number"], input[type="color"]').val(
           ""
@@ -971,10 +998,6 @@ $(document).ready(function () {
 
           if (id === "toggleLoot" || id === "toggleLootTags") {
             text.text("Desactivado");
-            if (id === "toggleLootTags") {
-              isLootTagsEnabled = false; // Resetear el estado
-              $("#lootTagsOptions").hide(); // Ocultar opciones
-            }
           } else {
             text.text("No");
           }
