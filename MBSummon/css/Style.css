@@ -57,8 +57,28 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: scale(1);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  position: relative;
+  padding-left: 1.0em; /* Espacio para el icono */
+}
+
+.menu-button .menu-icon {
+  position: absolute;
+  left: 0.8em;
+  font-size: 1.3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  width: 1.5em;
+  height: 1.5em;
+  pointer-events: none;
+}
+
+.menu-button span {
+  flex: 1;
+  text-align: center;
+  width: 100%;
+  display: block;
 }
 
 .menu-button:hover {
@@ -1521,20 +1541,21 @@ input[type="color"].sidebar-input {
 .sidebar-lock-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.35);
+  background: rgba(0,0,0,0.1);
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 25px;
   pointer-events: all;
+  backdrop-filter: blur(35px);
 }
 
 .sidebar-lock-overlay i {
   font-size: 2.5rem;
-  color: #fff;
-  background: #2228;
-  padding: 18px 22px;
-  border-radius: 50%;
-  box-shadow: 0 2px 8px #0005;
+  color: #000000;
+}
+
+[data-theme="dark"] .sidebar-lock-overlay i {
+  color: #fff !important;
 }

@@ -1,23 +1,33 @@
 $(document).ready(function () {
+  const $themeBtn = $("#themeButton");
+  const $themeIcon = $themeBtn.find("i");
+  function updateThemeButton(isDark) {
+    if (isDark) {
+      $themeIcon.removeClass("fa-moon").addClass("fa-sun");
+      $themeBtn.find("span").text("Claro");
+    } else {
+      $themeIcon.removeClass("fa-sun").addClass("fa-moon");
+      $themeBtn.find("span").text("Oscuro");
+    }
+  }
   const savedTheme = localStorage.getItem("theme");
+  updateThemeButton(savedTheme === "dark");
   if (savedTheme === "dark") {
     document.documentElement.setAttribute("data-theme", "dark");
-    $("#themeButton").text("Claro");
   }
 
-  $("#themeButton").on("click", function (e) {
+  $themeBtn.on("click", function (e) {
     e.stopPropagation();
     const isDark =
       document.documentElement.getAttribute("data-theme") === "dark";
-
     if (isDark) {
       document.documentElement.removeAttribute("data-theme");
       localStorage.setItem("theme", "light");
-      $(this).text("Oscuro");
+      updateThemeButton(false);
     } else {
       document.documentElement.setAttribute("data-theme", "dark");
       localStorage.setItem("theme", "dark");
-      $(this).text("Claro");
+      updateThemeButton(true);
     }
   });
 });
@@ -660,11 +670,13 @@ $(document).ready(function () {
     $(this).addClass("active");
     const lang = $(this).data("lang");
     localStorage.setItem("language", lang);
+    // Aquí podrías agregar lógica para cambiar el idioma de la UI si lo deseas
   });
 
+  // Corrección aquí: typo en savedLanguage
   const savedLanguage = localStorage.getItem("language") || "es";
   $(".language-btn").removeClass("active");
-  $(`.language-btn[data-lang="${savedanguage}"]`).addClass("active");
+  $(`.language-btn[data-lang="${savedLanguage}"]`).addClass("active");
 
   $(".popup-close, .popup-overlay").on("click", function (e) {
     if (e.target === this) {
@@ -966,72 +978,75 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   // Agregar el evento click al botón Limpiar
-  $(".menu-button").each(function () {
-    if ($(this).text() === "Limpiar") {
-      $(this).on("click", function () {
-        // Limpiar inputs normales
-        $('input[type="text"], input[type="number"], input[type="color"]').val(
-          ""
-        );
+  $("#clearButton").on("click", function () {
+    // Bloquear el sidebar primero para mostrar el candado inmediatamente
+    lockSidebar();
 
-        // Limpiar y resetear todos los select2 y selects normales
-        $("select").each(function () {
-          $(this).val("").trigger("change");
-        });
+    // Limpiar inputs normales
+    $('input[type="text"], input[type="number"], input[type="color"]').val(
+      ""
+    );
 
-        // Resetear positionType y deshabilitar inputs de coordenadas
-        $("#positionType").val("").trigger("change");
-        $("#posX, #posY").prop("disabled", true);
-        $("#labelPosX").text("Coordenada X:");
-        $("#labelPosY").text("Coordenada Y:");
+    // Limpiar y resetear todos los select2 y selects normales
+    $("select").each(function () {
+      $(this).val("").trigger("change");
+    });
 
-        // Cerrar todas las casillas extendidas/popups
-        $(".popup-overlay").removeClass("show");
+    // Resetear positionType y deshabilitar inputs de coordenadas
+    $("#positionType").val("").trigger("change");
+    $("#posX, #posY").prop("disabled", true);
+    $("#labelPosX").text("Coordenada X:");
+    $("#labelPosY").text("Coordenada Y:");
 
-        // Resetear todos los toggles y establecer estado
-        $(".popup-toggle-button").each(function () {
-          const icon = $(this).find("i");
-          const text = $(this).find("span");
-          const id = $(this).attr("id");
+    // Cerrar todas las casillas extendidas/popups
+    $(".popup-overlay").removeClass("show");
 
-          icon.removeClass("fa-toggle-on").addClass("fa-toggle-off");
+    // Resetear todos los toggles y establecer estado
+    $(".popup-toggle-button").each(function () {
+      const icon = $(this).find("i");
+      const text = $(this).find("span");
+      const id = $(this).attr("id");
 
-          if (id === "toggleLoot" || id === "toggleLootTags") {
-            text.text("Desactivado");
-          } else {
-            text.text("No");
-          }
-        });
+      icon.removeClass("fa-toggle-on").addClass("fa-toggle-off");
 
-        // Ocultar específicamente las opciones de Loot Tags
-        $("#lootTagsOptions").hide();
+      if (id === "toggleLoot" || id === "toggleLootTags") {
+        text.text("Desactivado");
+      } else {
+        text.text("No");
+      }
+    });
 
-        // Resetear el mobImage
-        $("#mobImage").empty().removeClass("transparent");
+    // Ocultar específicamente las opciones de Loot Tags
+    $("#lootTagsOptions").hide();
 
-        // Resetear estados de botones
-        $(".popup-button")
-          .css({
-            "background-color": "#fca5a5",
-            color: "#991b1b",
-          })
-          .find("i")
-          .removeClass("fa-check saved")
-          .addClass("fa-times not-saved");
+    // Resetear el mobImage
+    $("#mobImage").empty().removeClass("transparent");
 
-        // Bloquear las cards
-        lockAllCards();
+    // Resetear estados de botones
+    $(".popup-button")
+      .css({
+        "background-color": "#fca5a5",
+        color: "#991b1b",
+      })
+      .find("i")
+      .removeClass("fa-check saved")
+      .addClass("fa-times not-saved");
 
-        // Ir a la primera página de cards
-        changePage(1);
+    // Bloquear las cards
+    lockAllCards();
 
-        // Actualizar el comando
-        updateCommand();
-      });
-    }
+    // Ir a la primera página de cards
+    changePage(1);
+
+    // Actualizar el comando
+    updateCommand();
+
+    // Ya no es necesario llamar a lockSidebar() aquí, ya se llamó al inicio
   });
-});
 
+  // Si se recarga la página, mantener bloqueado
+  // ...existing code...
+});
 $(document).ready(function () {
   $.getJSON(
     "https://raw.githubusercontent.com/SebasOfEek/MineBlocks-Tools/main/json/items.json",
@@ -1153,4 +1168,102 @@ $(document).ready(function () {
       $(`#${helpPopupId}`).addClass("show");
     });
   });
+});
+
+// Mueve estas funciones fuera de $(document).ready para que sean globales
+function lockSidebar() {
+  $(".sidebar-right").addClass("locked");
+  if ($(".sidebar-lock-overlay").length === 0) {
+    $(".sidebar-right").prepend('<div class="sidebar-lock-overlay"><i class="fas fa-lock"></i></div>');
+  }
+}
+function unlockSidebar() {
+  $(".sidebar-right").removeClass("locked");
+  $(".sidebar-lock-overlay").remove();
+}
+
+$(document).ready(function () {
+  // Inicialmente bloqueado
+  lockSidebar();
+
+  // Manejar el toggle de Loot Tags (activar/desactivar sidebar-right)
+  $("#toggleLootTags").on("click", function () {
+    const icon = $(this).find("i");
+    icon.toggleClass("fa-toggle-off fa-toggle-on");
+    const isActive = icon.hasClass("fa-toggle-on");
+    $(this).find("span").text(isActive ? "Activado" : "Desactivado");
+    if (isActive) {
+      unlockSidebar();
+    } else {
+      lockSidebar();
+    }
+  });
+
+  // Si se limpia el formulario, bloquear el sidebar
+  $("#clearButton").on("click", function () {
+    // Limpiar inputs normales
+    $('input[type="text"], input[type="number"], input[type="color"]').val(
+      ""
+    );
+
+    // Limpiar y resetear todos los select2 y selects normales
+    $("select").each(function () {
+      $(this).val("").trigger("change");
+    });
+
+    // Resetear positionType y deshabilitar inputs de coordenadas
+    $("#positionType").val("").trigger("change");
+    $("#posX, #posY").prop("disabled", true);
+    $("#labelPosX").text("Coordenada X:");
+    $("#labelPosY").text("Coordenada Y:");
+
+    // Cerrar todas las casillas extendidas/popups
+    $(".popup-overlay").removeClass("show");
+
+    // Resetear todos los toggles y establecer estado
+    $(".popup-toggle-button").each(function () {
+      const icon = $(this).find("i");
+      const text = $(this).find("span");
+      const id = $(this).attr("id");
+
+      icon.removeClass("fa-toggle-on").addClass("fa-toggle-off");
+
+      if (id === "toggleLoot" || id === "toggleLootTags") {
+        text.text("Desactivado");
+      } else {
+        text.text("No");
+      }
+    });
+
+    // Ocultar específicamente las opciones de Loot Tags
+    $("#lootTagsOptions").hide();
+
+    // Resetear el mobImage
+    $("#mobImage").empty().removeClass("transparent");
+
+    // Resetear estados de botones
+    $(".popup-button")
+      .css({
+        "background-color": "#fca5a5",
+        color: "#991b1b",
+      })
+      .find("i")
+      .removeClass("fa-check saved")
+      .addClass("fa-times not-saved");
+
+    // Bloquear las cards
+    lockAllCards();
+
+    // Ir a la primera página de cards
+    changePage(1);
+
+    // Actualizar el comando
+    updateCommand();
+
+    // Bloquear el sidebar
+    lockSidebar();
+  });
+
+  // Si se recarga la página, mantener bloqueado
+  // ...existing code...
 });
