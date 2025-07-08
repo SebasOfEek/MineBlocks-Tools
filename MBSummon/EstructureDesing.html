@@ -33,10 +33,10 @@
           <span>Oscuro</span>
         </button>
         <button class="menu-button" id="clearButton">
-          <i class="fas fa-broom menu-icon"></i>
+          <i class="fas fa-eraser menu-icon"></i>
           <span>Limpiar</span>
         </button>
-        <button class="menu-button">
+        <button class="menu-button" id="savedButton">
           <i class="fas fa-bookmark menu-icon"></i>
           <span>Guardados</span>
         </button>
@@ -150,9 +150,8 @@
       </div>
 
       <div class="main">
-        <!-- Grid de 3x3 para las cards, con scroll para el resto -->
+        <!-- Grid de 3x3 para las cards, solo 9 cards -->
         <div class="card-grid">
-          <!-- Todas las cards y card-icons aquí -->
           <div class="card" id="card1">
             <span class="question-icon">?</span>
             <i class="fas fa-signature"></i>
@@ -721,14 +720,37 @@
         </div>
       </div>
 
+      <!-- Guardados Modal -->
+      <div class="popup-overlay saved-modal" id="savedModal">
+        <div class="saved-modal-window">
+          <div class="saved-modal-header">
+            <h2>Guardados</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="saved-modal-content">
+            <!-- Aquí puedes poner la lista de guardados o un mensaje -->
+            <p>No hay guardados aún.</p>
+          </div> 
+        </div>
+      </div>
+
       <div class="footer-divider"></div>
       <div class="footer">
-        <div class="footer-box-big"></div>
+        <div class="footer-box-big">
+          <!-- El botón va aquí, antes del comando generado -->
+          <button id="footerSaveButton" class="footer-save-btn" title="Guardar" style="display:none;">
+            <i class="fas fa-bookmark"></i>
+          </button>
+          <!-- El comando generado se inserta aquí por JS -->
+        </div>
         <div class="footer-box">
           <i class="fas fa-copy"></i>
         </div>
       </div>
     </div>
     <script src="Function.js"></script>
+    <script>
+      
+    </script>
   </body>
 </html>

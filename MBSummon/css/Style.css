@@ -327,25 +327,29 @@ body {
   flex: 1 1 auto;
   min-height: 0;
   min-width: 0;
+  /* Asegura que el grid ocupe el espacio disponible */
+  height: 100%;
+  /* Elimina el gap extra si solo hay una card-grid */
 }
 
 /* Nuevo: grid para las cards */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: minmax(110px, auto);
+  grid-template-rows: repeat(4, 1fr); /* 4 filas */
   gap: 20px;
-  overflow-y: auto;
-  max-height: calc(100vh - 260px); /* Ajusta según tu layout */
   padding: 10px;
+  height: 100%;
 }
 
 /* Opcional: en móvil, una sola columna para las cards */
 @media screen and (max-width: 900px) {
   .card-grid {
     grid-template-columns: 1fr !important;
+    grid-template-rows: none !important;
     gap: 15px;
     max-height: none;
+    height: auto;
   }
 }
 
@@ -575,6 +579,32 @@ body {
   overflow-x: auto;
   font-family: 'Consolas', monospace;
   white-space: nowrap;
+  position: relative;
+  /* Asegura que el botón y el comando estén alineados horizontalmente */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Botón de guardado en la esquina superior derecha */
+.footer-save-btn {
+  /* Elimina position:absolute y top/right para que fluya en línea */
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0 10px 0 0;
+  z-index: 2;
+  font-size: 1.6rem;
+  color: var(--text-color);
+  transition: color 0.2s;
+  vertical-align: middle;
+}
+.footer-save-btn.saved i {
+  color: #FFD600; /* Amarillo */
+}
+.footer-save-btn i {
+  pointer-events: none;
 }
 
 .footer-box-big::-webkit-scrollbar {
@@ -1092,9 +1122,11 @@ body {
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.popup-overlay.show {
+.popup-overlay.show,
+.saved-modal.show {
   display: flex;
 }
+
 .popup-header {
   background: var(--popup-header-bg);
   padding: 1.5rem 2.5rem;
@@ -1558,4 +1590,89 @@ input[type="color"].sidebar-input {
 
 [data-theme="dark"] .sidebar-lock-overlay i {
   color: #fff !important;
+}
+
+/* Guardados Modal Styles */
+.saved-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--popup-overlay-bg);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+}
+
+.saved-modal.show {
+  display: flex;
+}
+
+.saved-modal-window {
+  background: var(--popup-bg);
+  border-radius: var(--popup-border-radius);
+  width: 90vw;
+  height: 90%;
+  max-width: 700px;
+  min-width: 320px;
+  margin: 40px 0;
+  max-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--popup-shadow);
+  overflow: hidden;
+}
+
+.saved-modal-header {
+  background: var(--popup-header-bg);
+  padding: 1.5rem 2.5rem;
+  border-top-left-radius: var(--popup-border-radius);
+  border-top-right-radius: var(--popup-border-radius);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.saved-modal-header h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.saved-modal-content {
+  padding: 2.5rem;
+  background: var(--popup-bg);
+  flex: 1 1 auto;
+  overflow-y: auto;
+}
+
+.saved-modal-content ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.saved-modal-content li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.saved-modal-content img {
+  flex-shrink: 0;
+}
+
+/* Responsive for modal */
+@media screen and (max-width: 900px) {
+  .saved-modal-window {
+    width: 98vw;
+    margin: 20px 0;
+    max-width: 99vw;
+    min-width: 0;
+    border-radius: 18px;
+  }
+  .saved-modal-content {
+    padding: 1.2rem;
+  }
+  .saved-modal-header {
+    padding: 1rem 1.2rem;
+  }
 }
