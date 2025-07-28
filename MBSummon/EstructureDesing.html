@@ -11,16 +11,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://raw.githubusercontent.com/SebasOfEek/MineBlocks-Tools/main/MBSummon/css/Style.css">
+    <link rel="stylesheet" href="Style.css">
   </head>
-  <style>
-    
-  </style>
+<style>
+
+</style>
   <body>
     <div class="container">
       <div class="menu">
         <div class="menu-title">Menú</div>
-        <button class="menu-button">
+        <button class="menu-button" id="homeButton">
           <i class="fas fa-home menu-icon"></i>
           <span>Inicio</span>
         </button>
@@ -40,7 +40,7 @@
           <i class="fas fa-bookmark menu-icon"></i>
           <span>Guardados</span>
         </button>
-        <button class="menu-button">
+        <button class="menu-button" id="configButton">
           <i class="fas fa-cog menu-icon"></i>
           <span>Configuración</span>
         </button>
@@ -57,97 +57,6 @@
       </div>
 
       <div class="divider"></div>
-
-      <div class="sidebar-right locked">
-        <div class="sidebar-lock-overlay">
-          <i class="fas fa-lock"></i>
-        </div>
-        <div class="sidebar-header">
-          <div class="add-item-header">
-            <i class="fas fa-plus"></i>
-          </div>
-          <select id="sidebarItemSelect" class="select-with-images" style="width: 200px">
-            <option value="">Seleccionar item</option>
-          </select>
-        </div>
-
-        <div class="sidebar-buttons">
-          <button class="sidebar-button save">
-            <i class="fas fa-save"></i>
-          </button>
-          <button class="sidebar-button delete">
-            <i class="fas fa-trash"></i>
-          </button>
-          <button class="sidebar-button">
-            <i class="fas fa-edit"></i>
-          </button>
-        </div>
-
-        <div class="sidebar-divider"></div>
-
-        <div class="items-container">
-          <div class="sidebar-item">
-            <label>Cantidad:</label>
-            <input type="number" class="sidebar-input" min="1" max="64">
-          </div>
-          
-          <div class="sidebar-item">
-            <label>Bonus:</label>
-            <input type="number" class="sidebar-input" min="0">
-          </div>
-          
-          <div class="sidebar-item">
-            <label>Loot Bonus:</label>
-            <input type="number" class="sidebar-input" min="0">
-          </div>
-          
-          <div class="sidebar-item">
-            <label>Oportunidad:</label>
-            <input type="number" class="sidebar-input" min="0" max="100" step="0.1">
-          </div>
-          
-          <div class="sidebar-item">
-            <label>Está en llamas:</label>
-            <button class="toggle-button">
-              <i class="fas fa-toggle-off"></i>
-              <span>No</span>
-            </button>
-          </div>
-          
-          <div class="sidebar-item">
-            <label>Tamaño:</label>
-            <input type="number" class="sidebar-input" min="0.1" max="10" step="0.1">
-          </div>
-          
-          <div class="sidebar-item">
-            <label>Es bebé:</label>
-            <button class="toggle-button">
-              <i class="fas fa-toggle-off"></i>
-              <span>No</span>
-            </button>
-          </div>
-          
-          <div class="sidebar-item">
-            <label>Variante:</label>
-            <select class="sidebar-select">
-              <option value="">--Seleccionar--</option>
-            </select>
-          </div>
-          
-          <div class="sidebar-item">
-            <label>Está esquilada:</label>
-            <button class="toggle-button">
-              <i class="fas fa-toggle-off"></i>
-              <span>No</span>
-            </button>
-          </div>
-          
-          <div class="sidebar-item">
-            <label>Color:</label>
-            <input type="color" class="sidebar-input">
-          </div>
-        </div>
-      </div>
 
       <div class="main">
         <!-- Grid de 3x3 para las cards, solo 9 cards -->
@@ -477,100 +386,99 @@
       </div>
 
       <div class="popup-overlay" id="lootTagsPopup">
-        <div class="popup-window">
+        <div class="popup-window loot-tags-window">
           <div class="popup-header">
             <h2>Loot Tags</h2>
             <button class="popup-close">&times;</button>
           </div>
           <div class="popup-content">
-            <div class="popup-input-group">
-              <div class="popup-input-wrapper">
-                <label for="defaultLootTags">Activar loot tags:</label>
-                <button id="toggleLootTags" class="popup-toggle-button">
+            <!-- Header con selector de item y botón agregar -->
+            <div class="loot-tags-header">
+              <div class="add-item-header">
+                <i class="fas fa-plus"></i>
+              </div>
+              <select id="sidebarItemSelect" class="select-with-images" style="width: 200px">
+                <option value="">Seleccionar item</option>
+              </select>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="loot-tags-buttons">
+              <button class="sidebar-button save">
+                <i class="fas fa-save"></i>
+              </button>
+              <button class="sidebar-button delete">
+                <i class="fas fa-trash"></i>
+              </button>
+              <button class="sidebar-button">
+                <i class="fas fa-edit"></i>
+              </button>
+            </div>
+
+            <!-- Divisor -->
+            <div class="loot-tags-divider"></div>
+
+            <!-- Contenedor de items con scroll -->
+            <div class="loot-tags-container">
+              <div class="loot-tags-item">
+                <label>Cantidad:</label>
+                <input type="number" class="sidebar-input" min="1" max="64">
+              </div>
+              
+              <div class="loot-tags-item">
+                <label>Bonus:</label>
+                <input type="number" class="sidebar-input" min="0">
+              </div>
+              
+              <div class="loot-tags-item">
+                <label>Loot Bonus:</label>
+                <input type="number" class="sidebar-input" min="0">
+              </div>
+              
+              <div class="loot-tags-item">
+                <label>Oportunidad:</label>
+                <input type="number" class="sidebar-input" min="0" max="100" step="0.1">
+              </div>
+              
+              <div class="loot-tags-item">
+                <label>Está en llamas:</label>
+                <button class="toggle-button">
                   <i class="fas fa-toggle-off"></i>
-                  <span>Desactivado</span>
+                  <span>No</span>
                 </button>
               </div>
-            </div>
-            <div id="lootTagsOptions" style="display: none;">
-              <div class="popup-input-group">
-                <div class="popup-input-wrapper">
-                  <label for="dropItem">Drop Item:</label>
-                  <select id="dropItem" class="popup-select">
-                    <option value="">--Seleccionar item--</option>
-                  </select>
-                </div>
+              
+              <div class="loot-tags-item">
+                <label>Tamaño:</label>
+                <input type="number" class="sidebar-input" min="0.1" max="10" step="0.1">
               </div>
-              <div class="popup-input-group">
-                <div class="popup-input-wrapper">
-                  <label for="cantidad">Cantidad:</label>
-                  <input type="number" id="cantidad" class="popup-input" min="1" max="64">
-                </div>
+              
+              <div class="loot-tags-item">
+                <label>Es bebé:</label>
+                <button class="toggle-button">
+                  <i class="fas fa-toggle-off"></i>
+                  <span>No</span>
+                </button>
               </div>
-              <div class="popup-input-group">
-                <div class="popup-input-wrapper">
-                  <label for="bonus">Bonus:</label>
-                  <input type="number" id="bonus" class="popup-input" min="0">
-                </div>
+              
+              <div class="loot-tags-item">
+                <label>Variante:</label>
+                <select class="sidebar-select">
+                  <option value="">--Seleccionar--</option>
+                </select>
               </div>
-              <div class="popup-input-group">
-                <div class="popup-input-wrapper">
-                  <label for="lootBonus">Loot Bonus:</label>
-                  <input type="number" id="lootBonus" class="popup-input" min="0">
-                </div>
+              
+              <div class="loot-tags-item">
+                <label>Está esquilada:</label>
+                <button class="toggle-button">
+                  <i class="fas fa-toggle-off"></i>
+                  <span>No</span>
+                </button>
               </div>
-              <div class="popup-input-group">
-                <div class="popup-input-wrapper">
-                  <label for="oportunidad">Oportunidad:</label>
-                  <input type="number" id="oportunidad" class="popup-input" min="0" max="100" step="0.1">
-                </div>
-              </div>
-              <div class="popup-input-group">
-                <div class="popup-input-wrapper">
-                  <label for="enLlamas">Está en llamas:</label>
-                  <button id="toggleEnLlamas" class="popup-toggle-button">
-                    <i class="fas fa-toggle-off"></i>
-                    <span>No</span>
-                  </button>
-                </div>
-              </div>
-              <div class="popup-input-group">
-                <div class="popup-input-wrapper">
-                  <label for="tamanio">Tamaño:</label>
-                  <input type="number" id="tamanio" class="popup-input" min="1" max="10" step="0.1">
-                </div>
-              </div>
-              <div class="popup-input-group">
-                <div class="popup-input-wrapper">
-                  <label for="esBebe">Es bebé:</label>
-                  <button id="toggleEsBebe" class="popup-toggle-button">
-                    <i class="fas fa-toggle-off"></i>
-                    <span>No</span>
-                  </button>
-                </div>
-              </div>
-              <div class="popup-input-group">
-                <div class="popup-input-wrapper">
-                  <label for="variante">Variante:</label>
-                  <select id="variante" class="popup-select">
-                    <option value="">--Seleccionar variante--</option>
-                  </select>
-                </div>
-              </div>
-              <div class="popup-input-group">
-                <div class="popup-input-wrapper">
-                  <label for="esquilada">Está esquilada:</label>
-                  <button id="toggleEsquilada" class="popup-toggle-button">
-                    <i class="fas fa-toggle-off"></i>
-                    <span>No</span>
-                  </button>
-                </div>
-              </div>
-              <div class="popup-input-group">
-                <div class="popup-input-wrapper">
-                  <label for="color">Color:</label>
-                  <input type="color" id="color" class="popup-input">
-                </div>
+              
+              <div class="loot-tags-item">
+                <label>Color:</label>
+                <input type="color" class="sidebar-input">
               </div>
             </div>
           </div>
@@ -720,6 +628,7 @@
         </div>
       </div>
 
+      <!-- Guardados Modal -->
       <div class="popup-overlay saved-modal" id="savedModal">
         <div class="saved-modal-window">
           <div class="saved-modal-header">
@@ -727,17 +636,20 @@
             <button class="popup-close">&times;</button>
           </div>
           <div class="saved-modal-content">
+            <!-- Aquí puedes poner la lista de guardados o un mensaje -->
             <p>No hay guardados aún.</p>
-          </div> 
+          </div>
         </div>
       </div>
 
       <div class="footer-divider"></div>
       <div class="footer">
         <div class="footer-box-big">
+          <!-- El botón va aquí, antes del comando generado -->
           <button id="footerSaveButton" class="footer-save-btn" title="Guardar" style="display:none;">
             <i class="fas fa-bookmark"></i>
           </button>
+          <!-- El comando generado se inserta aquí por JS -->
         </div>
         <div class="footer-box">
           <i class="fas fa-copy"></i>
@@ -745,7 +657,6 @@
       </div>
     </div>
     <script src="Function.js"></script>
-    <script src="MBSummon/Function.js"></script>
     <script>
       
     </script>
