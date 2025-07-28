@@ -812,6 +812,10 @@ function attachCardPopupEvents() {
       if ($(this).hasClass("locked") || $(`#${cardId}`).hasClass("locked")) {
         e.preventDefault();
         e.stopPropagation();
+        
+        // Activar animación de bloqueo
+        triggerLockedCardAnimation(cardId);
+        
         return false;
       }
       $(`#${popupId}`).addClass("show");
@@ -845,6 +849,10 @@ function attachCardPopupEvents() {
       if ($(`#${cardId}`).hasClass("locked")) {
         e.preventDefault();
         e.stopPropagation();
+        
+        // Activar animación de bloqueo
+        triggerLockedCardAnimation(cardId);
+        
         return false;
       }
       e.stopPropagation();
@@ -856,6 +864,75 @@ function attachCardPopupEvents() {
 // Inicializar eventos al cargar la página
 $(document).ready(function () {
   attachCardPopupEvents();
+});
+
+// Inicializar el modal de Loot Tags con el selector de items
+$(document).ready(function () {
+  $.getJSON(
+    "https://raw.githubusercontent.com/SebasOfEek/MineBlocks-Tools/main/json/items.json",
+    function (data) {
+      const sidebarItemSelect = $("#sidebarItemSelect");
+      
+      // Limpiar opciones existentes
+      sidebarItemSelect.empty();
+      sidebarItemSelect.append('<option value="">Seleccionar item</option>');
+      
+      // Agregar items del JSON
+      data.items.forEach((item) => {
+        const option = $("<option>")
+          .val(item.value)
+          .text(item.text)
+          .attr("data-image", item.image);
+        sidebarItemSelect.append(option);
+      });
+
+      // Inicializar Select2
+      sidebarItemSelect.select2({
+        templateResult: formatOption,
+        templateSelection: formatSelection,
+        width: "100%",
+        dropdownParent: $("#lootTagsPopup"),
+      });
+
+      // Manejar cambio de selección
+      sidebarItemSelect.on("change", function () {
+        const selectedValue = $(this).val();
+        if (selectedValue) {
+          console.log("Item seleccionado en Loot Tags:", selectedValue);
+        }
+      });
+    }
+  );
+
+  // Manejar botones toggle en el modal de Loot Tags
+  $("#lootTagsPopup .toggle-button").on("click", function () {
+    const $icon = $(this).find("i");
+    const $span = $(this).find("span");
+    
+    if ($icon.hasClass("fa-toggle-off")) {
+      $icon.removeClass("fa-toggle-off").addClass("fa-toggle-on");
+      $span.text("Sí");
+    } else {
+      $icon.removeClass("fa-toggle-on").addClass("fa-toggle-off");
+      $span.text("No");
+    }
+  });
+
+  // Manejar botones de acción
+  $("#lootTagsPopup .sidebar-button.save").on("click", function () {
+    console.log("Guardar item en Loot Tags");
+    // Aquí puedes agregar la lógica para guardar
+  });
+
+  $("#lootTagsPopup .sidebar-button.delete").on("click", function () {
+    console.log("Eliminar item de Loot Tags");
+    // Aquí puedes agregar la lógica para eliminar
+  });
+
+  $("#lootTagsPopup .sidebar-button:not(.save):not(.delete)").on("click", function () {
+    console.log("Editar item en Loot Tags");
+    // Aquí puedes agregar la lógica para editar
+  });
 });
 
 $(document).ready(function () {
@@ -948,13 +1025,16 @@ $(document).ready(function () {
       }
     }
 
-    // Solo actualiza el contenido, no borres el botón de guardado
-    // Elimina el html() directo, usa .contents() para no borrar el botón
+    // Solo actualiza el contenido del comando, preservando el botón de guardado
     const $footerBoxBig = $(".footer-box-big");
+    
+    // Remover solo el contenido del comando, no el botón
     $footerBoxBig.contents().filter(function() {
-      // Borra solo los nodos de texto y spans de comando previos, no el botón
-      return this.nodeType === 3 || (this.nodeType === 1 && $(this).hasClass("command-summon"));
+      // Mantener el botón de guardado, eliminar solo texto y spans de comando
+      return this.nodeType === 3 || (this.nodeType === 1 && !$(this).hasClass("footer-save-btn"));
     }).remove();
+    
+    // Agregar el comando después del botón
     $footerBoxBig.append(command);
   }
 
@@ -1295,31 +1375,7 @@ $(document).ready(function () {
   });
 });
 
-$(document).ready(function () {
-  // Mostrar/ocultar el botón de guardado según selección de mob
-  function toggleFooterSaveButton() {
-    if ($("#mobType").val()) {
-      $("#footerSaveButton").show();
-    } else {
-      $("#footerSaveButton").hide();
-    }
-  }
 
-  // Al cambiar el mobType, mostrar/ocultar el botón
-  $("#mobType").on("change", toggleFooterSaveButton);
-
-  // También al cargar la página, por si ya hay uno seleccionado
-  toggleFooterSaveButton();
-
-  // Guardado del comando desde el botón en el footer
-  $("#footerSaveButton").on("click", function () {
-    $(this).addClass("saved");
-    setTimeout(() => {
-      $(this).removeClass("saved");
-    }, 1200);
-    // Aquí podrías agregar lógica real de guardado si lo deseas
-  });
-});
 
 // Utilidad para obtener todos los datos relevantes del formulario
 function getCurrentFormData() {
@@ -1346,45 +1402,88 @@ function getCurrentFormData() {
 
 // Utilidad para obtener el texto del comando generado
 function getCurrentCommandText() {
-  // Busca el primer .command-summon dentro de .footer-box-big
-  const $cmd = $(".footer-box-big .command-summon");
-  return $cmd.length ? $cmd.parent().text().trim() : "";
+  // Obtener todo el texto del footer-box-big excluyendo el botón
+  const $footerBoxBig = $(".footer-box-big");
+  let commandText = "";
+  
+  $footerBoxBig.contents().each(function() {
+    if (this.nodeType === 3) { // Nodo de texto
+      commandText += $(this).text();
+    } else if (this.nodeType === 1 && !$(this).hasClass("footer-save-btn")) { // Elemento HTML que no sea el botón
+      commandText += $(this).text();
+    }
+  });
+  
+  return commandText.trim();
 }
 
 // Utilidad para obtener todos los datos relevantes del formulario, agrupados por card
 function getCurrentFormDataByCard() {
-  return {
-    card1: {
-      mobName: $("#mobName").val()
-    },
-    card2: {
-      mobAmount: $("#mobAmount").val()
-    },
-    card3: {
-      positionType: $("#positionType").val(),
-      posX: $("#posX").val(),
-      posY: $("#posY").val()
-    },
-    card4: {
-      itemSelect: $("#itemSelect").val()
-    },
-    card5: {
-      lootEnabled: $("#toggleLoot").find("i").hasClass("fa-toggle-on")
-    },
-    card6: {
-      helmetSelect: $("#helmetSelect").val(),
-      chestplateSelect: $("#chestplateSelect").val(),
-      leggingsSelect: $("#leggingsSelect").val(),
-      bootsSelect: $("#bootsSelect").val()
-    },
-    card9: {
-      mobHealth: $("#mobHealth").val()
-    },
-    cardAggressiveness: {
-      aggressivenessSelect: $("#aggressivenessSelect").val()
-    }
-    // ...agrega aquí más cards si tienes más...
-  };
+  const data = {};
+  
+  // Card 1 - Nombre
+  const mobName = $("#mobName").val();
+  if (mobName) {
+    data.card1 = { mobName: mobName };
+  }
+  
+  // Card 2 - Cantidad
+  const mobAmount = $("#mobAmount").val();
+  if (mobAmount) {
+    data.card2 = { mobAmount: mobAmount };
+  }
+  
+  // Card 3 - Posición
+  const positionType = $("#positionType").val();
+  const posX = $("#posX").val();
+  const posY = $("#posY").val();
+  if (positionType || posX || posY) {
+    data.card3 = {
+      positionType: positionType,
+      posX: posX,
+      posY: posY
+    };
+  }
+  
+  // Card 4 - Item equipado
+  const itemSelect = $("#itemSelect").val();
+  if (itemSelect) {
+    data.card4 = { itemSelect: itemSelect };
+  }
+  
+  // Card 5 - Loot predeterminado
+  const lootEnabled = $("#toggleLoot").find("i").hasClass("fa-toggle-on");
+  if (lootEnabled) {
+    data.card5 = { lootEnabled: lootEnabled };
+  }
+  
+  // Card 6 - Armadura
+  const helmetSelect = $("#helmetSelect").val();
+  const chestplateSelect = $("#chestplateSelect").val();
+  const leggingsSelect = $("#leggingsSelect").val();
+  const bootsSelect = $("#bootsSelect").val();
+  if (helmetSelect || chestplateSelect || leggingsSelect || bootsSelect) {
+    data.card6 = {
+      helmetSelect: helmetSelect,
+      chestplateSelect: chestplateSelect,
+      leggingsSelect: leggingsSelect,
+      bootsSelect: bootsSelect
+    };
+  }
+  
+  // Card 9 - Vida
+  const mobHealth = $("#mobHealth").val();
+  if (mobHealth) {
+    data.card9 = { mobHealth: mobHealth };
+  }
+  
+  // Card Agresividad
+  const aggressivenessSelect = $("#aggressivenessSelect").val();
+  if (aggressivenessSelect) {
+    data.cardAggressiveness = { aggressivenessSelect: aggressivenessSelect };
+  }
+  
+  return data;
 }
 
 // Guardar y cargar desde localStorage
@@ -1402,88 +1501,35 @@ function saveCurrentCommand() {
   const cards = getCurrentFormDataByCard();
   let saved = getSavedCommands();
 
+  if (!mobType || !command) {
+    console.log("No se puede guardar: falta mobType o comando");
+    return false;
+  }
+
   // Evita duplicados por mobType y comando
   const exists = saved.some(
     (item) => item.mobType === mobType && item.command === command
   );
+  
   if (!exists) {
-    saved.push({
-      mobType,
-      command,
-      cards
-    });
+    const newSave = {
+      mobType: mobType,
+      command: command,
+      cards: cards,
+      timestamp: new Date().toISOString()
+    };
+    
+    saved.push(newSave);
     setSavedCommands(saved);
+    console.log("Comando guardado:", newSave);
+    return true;
+  } else {
+    console.log("El comando ya existe en los guardados");
+    return false;
   }
 }
 
 // Editar: cargar todos los datos guardados de las cards al formulario
-
-// Bookmark toggle y guardado/eliminado
-$(document).ready(function () {
-  // Mostrar/ocultar el botón de guardado según selección de mob
-  function toggleFooterSaveButton() {
-    if ($("#mobType").val()) {
-      $("#footerSaveButton").show();
-      // Si el actual está guardado, marca el bookmark
-      if (isCurrentSaved()) {
-        $("#footerSaveButton").addClass("saved");
-      } else {
-        $("#footerSaveButton").removeClass("saved");
-      }
-    } else {
-      $("#footerSaveButton").hide();
-    }
-  }
-
-  // Al cambiar el mobType, mostrar/ocultar el botón
-  $("#mobType").on("change", function() {
-    toggleFooterSaveButton();
-    // También actualizar el estado del bookmark
-  });
-
-  // También al cargar la página, por si ya hay uno seleccionado
-  toggleFooterSaveButton();
-
-  // Guardado del comando desde el botón en el footer
-  $("#footerSaveButton").off("click").on("click", function () {
-    const $btn = $(this);
-    const mobType = $("#mobType").val();
-    const command = getCurrentCommandText();
-    let saved = getSavedCommands();
-
-    if ($btn.hasClass("saved")) {
-      // Quitar guardado
-      saved = saved.filter(
-        (item) =>
-          !(item.command === command && item.mobType === mobType)
-      );
-      setSavedCommands(saved);
-      $btn.removeClass("saved");
-    } else {
-      // Guardar con datos de todas las cards
-      saveCurrentCommand();
-      $btn.addClass("saved");
-    }
-    renderSavedCommands();
-  });
-
-  // Renderizar guardados al abrir el modal
-  $("#savedButton").on("click", function () {
-    renderSavedCommands();
-  });
-
-  // Si cambian los campos relevantes, actualizar el estado del bookmark
-  $(
-    "#mobType, #mobName, #mobHealth, #itemSelect, #mobAmount, #aggressivenessSelect, #helmetSelect, #chestplateSelect, #leggingsSelect, #bootsSelect, #positionType, #posX, #posY, #toggleLoot"
-  ).on("input change", function () {
-    toggleFooterSaveButton();
-  });
-
-  // Al limpiar, actualizar estado del bookmark
-  $("#clearButton").on("click", function () {
-    toggleFooterSaveButton();
-  });
-});
 
 // Renderizar la lista de guardados en el modal (muestra datos de las cards)
 function renderSavedCommands() {
@@ -1590,16 +1636,29 @@ function renderSavedCommands() {
     $btns.append($copy, $edit, $del);
 
     // Mostrar resumen de datos de cards (opcional)
-    const $cardsSummary = $("<div>").css({fontSize:"0.9em", color:"#444", marginLeft:"10px"});
-    if (item.cards) {
-      Object.entries(item.cards).forEach(([card, data]) => {
-        const keys = Object.keys(data).filter(k => data[k]);
-        if (keys.length) {
-          $cardsSummary.append(
-            $("<div>").text(card + ": " + keys.map(k => `${k}: ${data[k]}`).join(", "))
-          );
-        }
-      });
+    const $cardsSummary = $("<div>").css({fontSize:"0.8em", color:"#666", marginTop:"5px", maxWidth:"300px"});
+    if (item.cards && Object.keys(item.cards).length > 0) {
+      const summaryParts = [];
+      
+      if (item.cards.card1 && item.cards.card1.mobName) {
+        summaryParts.push(`Nombre: ${item.cards.card1.mobName}`);
+      }
+      if (item.cards.card2 && item.cards.card2.mobAmount) {
+        summaryParts.push(`Cantidad: ${item.cards.card2.mobAmount}`);
+      }
+      if (item.cards.card9 && item.cards.card9.mobHealth) {
+        summaryParts.push(`Vida: ${item.cards.card9.mobHealth}`);
+      }
+      if (item.cards.card4 && item.cards.card4.itemSelect) {
+        summaryParts.push(`Item: ${item.cards.card4.itemSelect}`);
+      }
+      if (item.cards.cardAggressiveness && item.cards.cardAggressiveness.aggressivenessSelect) {
+        summaryParts.push(`Agresividad: ${item.cards.cardAggressiveness.aggressivenessSelect}`);
+      }
+      
+      if (summaryParts.length > 0) {
+        $cardsSummary.text(summaryParts.join(" | "));
+      }
     }
 
     $li.append($img, $cmd, $cardsSummary, $btns);
@@ -1625,46 +1684,118 @@ function copyTextToClipboard(text) {
 
 // Cargar los datos guardados en el formulario y actualizar el comando
 function loadSavedCommandToForm(item) {
-  // MobType
+  console.log("Cargando datos guardados:", item);
+  
+  // Primero cargar el mobType - esto desbloqueará las cards automáticamente
   $("#mobType").val(item.mobType || "").trigger("change");
-  // Cards
+  
+  // Cargar los datos inmediatamente después de que se desbloqueen las cards
   const cards = item.cards || {};
-  setTimeout(function() {
-    if (cards.card1) $("#mobName").val(cards.card1.mobName || "").trigger("input");
-    if (cards.card2) $("#mobAmount").val(cards.card2.mobAmount || "").trigger("input");
+  
+  // Función para cargar datos con reintentos si es necesario
+  function loadCardData() {
+    // Card 1 - Nombre
+    if (cards.card1 && cards.card1.mobName) {
+      $("#mobName").val(cards.card1.mobName).trigger("input");
+      console.log("Cargado nombre:", cards.card1.mobName);
+    }
+    
+    // Card 2 - Cantidad
+    if (cards.card2 && cards.card2.mobAmount) {
+      $("#mobAmount").val(cards.card2.mobAmount).trigger("input");
+      console.log("Cargada cantidad:", cards.card2.mobAmount);
+    }
+    
+    // Card 3 - Posición
     if (cards.card3) {
-      $("#positionType").val(cards.card3.positionType || "").trigger("change");
-      $("#posX").val(cards.card3.posX || "").trigger("input");
-      $("#posY").val(cards.card3.posY || "").trigger("input");
-    }
-    if (cards.card4) $("#itemSelect").val(cards.card4.itemSelect || "").trigger("change");
-    if (cards.card5) {
-      const loot = cards.card5.lootEnabled;
-      const $lootIcon = $("#toggleLoot").find("i");
-      const isOn = $lootIcon.hasClass("fa-toggle-on");
-      if (loot && !isOn) $("#toggleLoot").trigger("click");
-      else if (!loot && isOn) $("#toggleLoot").trigger("click");
-    }
-    if (cards.card6) {
-      $("#helmetSelect").val(cards.card6.helmetSelect || "").trigger("change");
-      $("#chestplateSelect").val(cards.card6.chestplateSelect || "").trigger("change");
-      $("#leggingsSelect").val(cards.card6.leggingsSelect || "").trigger("change");
-      $("#bootsSelect").val(cards.card6.bootsSelect || "").trigger("change");
-    }
-    if (cards.card9) $("#mobHealth").val(cards.card9.mobHealth || "").trigger("input");
-    if (cards.cardAggressiveness) $("#aggressivenessSelect").val(cards.cardAggressiveness.aggressivenessSelect || "").trigger("change");
-    // ...agrega aquí más cards si tienes más...
-    setTimeout(function() {
-      if (typeof updateCommand === "function") updateCommand();
-      if (typeof isCurrentSaved === "function") {
-        if (isCurrentSaved()) {
-          $("#footerSaveButton").addClass("saved");
-        } else {
-          $("#footerSaveButton").removeClass("saved");
+      if (cards.card3.positionType) {
+        $("#positionType").val(cards.card3.positionType).trigger("change");
+        console.log("Cargado tipo de posición:", cards.card3.positionType);
+        
+        // Cargar coordenadas inmediatamente después del tipo
+        if (cards.card3.posX) {
+          $("#posX").val(cards.card3.posX).trigger("input");
+          console.log("Cargada posX:", cards.card3.posX);
+        }
+        if (cards.card3.posY) {
+          $("#posY").val(cards.card3.posY).trigger("input");
+          console.log("Cargada posY:", cards.card3.posY);
         }
       }
-    }, 150);
-  }, 150);
+    }
+    
+    // Card 4 - Item equipado
+    if (cards.card4 && cards.card4.itemSelect) {
+      $("#itemSelect").val(cards.card4.itemSelect).trigger("change");
+      console.log("Cargado item:", cards.card4.itemSelect);
+    }
+    
+    // Card 5 - Loot predeterminado
+    if (cards.card5 && typeof cards.card5.lootEnabled !== 'undefined') {
+      const loot = cards.card5.lootEnabled;
+      const $lootIcon = $("#toggleLoot").find("i");
+      const isCurrentlyOn = $lootIcon.hasClass("fa-toggle-on");
+      
+      if (loot && !isCurrentlyOn) {
+        $("#toggleLoot").trigger("click");
+        console.log("Activado loot");
+      } else if (!loot && isCurrentlyOn) {
+        $("#toggleLoot").trigger("click");
+        console.log("Desactivado loot");
+      }
+    }
+    
+    // Card 6 - Armadura
+    if (cards.card6) {
+      if (cards.card6.helmetSelect) {
+        $("#helmetSelect").val(cards.card6.helmetSelect).trigger("change");
+        console.log("Cargado casco:", cards.card6.helmetSelect);
+      }
+      if (cards.card6.chestplateSelect) {
+        $("#chestplateSelect").val(cards.card6.chestplateSelect).trigger("change");
+        console.log("Cargada pechera:", cards.card6.chestplateSelect);
+      }
+      if (cards.card6.leggingsSelect) {
+        $("#leggingsSelect").val(cards.card6.leggingsSelect).trigger("change");
+        console.log("Cargadas grebas:", cards.card6.leggingsSelect);
+      }
+      if (cards.card6.bootsSelect) {
+        $("#bootsSelect").val(cards.card6.bootsSelect).trigger("change");
+        console.log("Cargadas botas:", cards.card6.bootsSelect);
+      }
+    }
+    
+    // Card 9 - Vida
+    if (cards.card9 && cards.card9.mobHealth) {
+      $("#mobHealth").val(cards.card9.mobHealth).trigger("input");
+      console.log("Cargada vida:", cards.card9.mobHealth);
+    }
+    
+    // Card Agresividad
+    if (cards.cardAggressiveness && cards.cardAggressiveness.aggressivenessSelect) {
+      $("#aggressivenessSelect").val(cards.cardAggressiveness.aggressivenessSelect).trigger("change");
+      console.log("Cargada agresividad:", cards.cardAggressiveness.aggressivenessSelect);
+    }
+    
+    // Actualizar comando inmediatamente
+    if (typeof updateCommand === "function") {
+      updateCommand();
+    }
+    
+    // Actualizar estado del botón de guardado
+    if (typeof isCurrentSaved === "function") {
+      if (isCurrentSaved()) {
+        $("#footerSaveButton").addClass("saved");
+      } else {
+        $("#footerSaveButton").removeClass("saved");
+      }
+    }
+  }
+  
+  // Ejecutar la carga de datos inmediatamente
+  loadCardData();
+  
+  console.log("Datos cargados completamente");
 }
 
 // Eliminar guardado por índice
@@ -1684,14 +1815,21 @@ function removeSavedCommand(idx) {
 function isCurrentSaved() {
   const current = getCurrentFormData();
   const saved = getSavedCommands();
-  return saved.some(
+  
+  if (!current.mobType || !current.command) {
+    return false;
+  }
+  
+  const exists = saved.some(
     (item) =>
       item.command === current.command &&
       item.mobType === current.mobType
   );
+  
+  return exists;
 }
 
-// Bookmark toggle y guardado/eliminado
+// Sistema de guardado principal - Manejo de eventos
 $(document).ready(function () {
   // Mostrar/ocultar el botón de guardado según selección de mob
   function toggleFooterSaveButton() {
@@ -1711,7 +1849,6 @@ $(document).ready(function () {
   // Al cambiar el mobType, mostrar/ocultar el botón
   $("#mobType").on("change", function() {
     toggleFooterSaveButton();
-    // También actualizar el estado del bookmark
   });
 
   // También al cargar la página, por si ya hay uno seleccionado
@@ -1732,12 +1869,14 @@ $(document).ready(function () {
       );
       setSavedCommands(saved);
       $btn.removeClass("saved");
+      console.log("Guardado eliminado");
     } else {
       // Guardar con datos de todas las cards
-      saveCurrentCommand();
-      $btn.addClass("saved");
+      if (saveCurrentCommand()) {
+        $btn.addClass("saved");
+        console.log("Comando guardado exitosamente");
+      }
     }
-    renderSavedCommands();
   });
 
   // Renderizar guardados al abrir el modal
@@ -1749,11 +1888,20 @@ $(document).ready(function () {
   $(
     "#mobType, #mobName, #mobHealth, #itemSelect, #mobAmount, #aggressivenessSelect, #helmetSelect, #chestplateSelect, #leggingsSelect, #bootsSelect, #positionType, #posX, #posY, #toggleLoot"
   ).on("input change", function () {
-    toggleFooterSaveButton();
+    // Pequeño delay para que se actualice el comando primero
+    setTimeout(function() {
+      toggleFooterSaveButton();
+    }, 50);
   });
 
   // Al limpiar, actualizar estado del bookmark
   $("#clearButton").on("click", function () {
-    toggleFooterSaveButton();
+    setTimeout(function() {
+      toggleFooterSaveButton();
+    }, 100);
   });
+  
+  // Inicialización del sistema de guardado
+  console.log("Sistema de guardado inicializado");
+  console.log("Guardados existentes:", getSavedCommands().length);
 });
