@@ -1033,7 +1033,7 @@ body {
   .footer-divider {
     display: block;
     position: fixed;
-    bottom: 83px;
+    bottom: 80px;
     left: 13px;
     width: 94%;
     z-index: 119;
