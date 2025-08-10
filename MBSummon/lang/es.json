@@ -1,0 +1,51 @@
+{
+  "menu": {
+    "title": "Menú",
+    "home": "Inicio",
+    "language": "Idioma",
+    "theme": {
+      "dark": "Oscuro",
+      "light": "Claro"
+    },
+    "discord": "Discord",
+    "clear": "Limpiar",
+    "settings": "Configuración"
+  },
+  "cards": {
+    "name": "Nombre",
+    "amount": "Cantidad",
+    "position": "Posición",
+    "health": "Vida",
+    "equipment": "Objeto equip.",
+    "defaultLoot": "Loot predet.",
+    "armor": "Armadura",
+    "lootTags": "Loot Tags",
+    "aggressiveness": "Agresividad"
+  },
+  "modals": {
+    "language": {
+      "title": "Seleccionar Idioma",
+      "english": "Inglés",
+      "spanish": "Español"
+    },
+    "name": {
+      "title": "Nombre del mob",
+      "label": "Nombre personalizado:",
+      "placeholder": "Ingresa un nombre...",
+      "help": "Esta opción te permite personalizar el nombre del mob que vas a invocar. El nombre que escribas aquí será visible flotando sobre el mob cuando lo invoques en el juego. Puedes usar códigos de formato usando el símbolo & seguido de un número."
+    },
+    "amount": {
+      "title": "Cantidad de mobs",
+      "label": "Cantidad a invocar:",
+      "placeholder": "Ingresa una cantidad...",
+      "help": "Esta opción te permite definir cuántos mobs quieres invocar a la vez. Por razones de rendimiento y equilibrio del juego, el límite máximo es de 20 mobs por invocación."
+    }
+  },
+  "common": {
+    "select": "--Seleccionar--",
+    "save": "Guardar",
+    "help": "Ayuda",
+    "enabled": "Activado",
+    "disabled": "Desactivado"
+  }
+}

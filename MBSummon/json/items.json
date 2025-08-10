@@ -1,0 +1,1759 @@
+{
+  "items": [
+    {
+      "value": "acid",
+      "text": "Acid",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683347/Acid_pojqsr.png"
+    },
+    {
+      "value": "rail_activator",
+      "text": "Activator Minecart Rail",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683347/Activator_rail_blkhzt.png"
+    },
+    {
+      "value": "afro",
+      "text": "Afro",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Afro_lqqcni.png"
+    },
+    {
+      "value": "anvil",
+      "text": "Anvil",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Anvil_awvhog.png"
+    },
+    {
+      "value": "apple",
+      "text": "Apple",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763957/Apple_p26lrl.png"
+    },
+    {
+      "value": "apple_juice",
+      "text": "Apple Juice",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763955/Apple_Juice_ro3q9h.png"
+    },
+    {
+      "value": "leaves_apple",
+      "text": "Apple in Leaves",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Apple_in_Leaves_adnq5y.png"
+    },
+    {
+      "value": "arrow",
+      "text": "Arrow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Arrow_fil3ar.png"
+    },
+    {
+      "value": "potato_baked",
+      "text": "Baked Potato",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763957/Baked_Potato_bzs4yg.png"
+    },
+    {
+      "value": "balloon",
+      "text": "Balloon",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Balloon_alwke7.png"
+    },
+    {
+      "value": "bamboo",
+      "text": "Bamboo",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Bamboo_no8jkp.png"
+    },
+    {
+      "value": "bamboo_block",
+      "text": "Bamboo Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Bamboo_Block_ujpesl.png"
+    },
+    {
+      "value": "backdrop_bamboo",
+      "text": "Bamboo Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775084/Backdrop_Bamboo_qs3f8y.png"
+    },
+    {
+      "value": "stairs_bamboo",
+      "text": "Bamboo Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775092/Stair_Bamboo_ayi04h.png"
+    },
+    {
+      "value": "slab_bamboo",
+      "text": "Bamboo Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775091/Slab_Bamboo_fjrwan.png"
+    },
+    {
+      "value": "bamboo_door",
+      "text": "Bamboo Door",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775086/Bamboo_Door_drbz8x.png"
+    },
+    {
+      "value": "barrier",
+      "text": "Barrier",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Barrier_j18rjv.png"
+    },
+    {
+      "value": "bed",
+      "text": "Bed",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726895514/Bed_hob94q.png"
+    },
+    {
+      "value": "bedrock",
+      "text": "Bedrock",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687264/Bedrock_hragzu.png"
+    },
+    {
+      "value": "slab_bedrock",
+      "text": "Bedrock Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775085/Bedrock_Slab_e7jjk6.png"
+    },
+    {
+      "value": "stairs_bedrock",
+      "text": "Bedrock Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775087/Bedrock-Stair_mzgxaj.png"
+    },
+    {
+      "value": "beet_soup",
+      "text": "Beet Soup",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763952/Beet_Soup_g26uvp.png"
+    },
+    {
+      "value": "beetroot",
+      "text": "Beetroot",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763952/Beetroot_hdg9xa.png"
+    },
+    {
+      "value": "beetroot_seed",
+      "text": "Beetroot Seed",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763952/Beetroot_Seed_fwyds0.png"
+    },
+    {
+      "value": "blaze_powder",
+      "text": "Blaze Powder",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763953/Blaze_Powder_pbjh3z.png"
+    },
+    {
+      "value": "blaze_rod",
+      "text": "Blaze Rod",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Blaze_Rod_pvzr1v.png"
+    },
+    {
+      "value": "bone",
+      "text": "Bone",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1726769261/Bone_tdofq4.png"
+    },
+    {
+      "value": "bone_block",
+      "text": "Bone Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687269/Bone_Block_sfa7nl.png"
+    },
+    {
+      "value": "bone_meal",
+      "text": "Bone Meal",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769265/Bone_Meal_c4sbsq.png"
+    },
+    {
+      "value": "bone_shuriken",
+      "text": "Bone Shuriken",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687271/Bone_Shuriken_yf7gin.png"
+    },
+    {
+      "value": "book",
+      "text": "Book",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769265/Book_y6ei1a.png"
+    },
+    {
+      "value": "bookshelf",
+      "text": "Bookshelf",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687273/Bookshelf_pwquo1.png"
+    },
+    {
+      "value": "backdrop_bookshelf",
+      "text": "Bookshelf Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775087/Bookshelf_Backdrop_zes5zj.png"
+    },
+    {
+      "value": "bottle_of_enchanting",
+      "text": "Bottle of Enchanting",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763962/Bottle_of_Enchanting_rnlbxz.png"
+    },
+    {
+      "value": "bow",
+      "text": "Bow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687275/Bow_udyzbk.png"
+    },
+    {
+      "value": "bowl",
+      "text": "Bowl",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763954/Bowl_dwhevo.png"
+    },
+    {
+      "value": "bread",
+      "text": "Bread",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775088/Bread_mjfxkl.png"
+    },
+    {
+      "value": "brewing_stand",
+      "text": "Brewing Stand",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687280/Brewing_Stand_c19pin.png"
+    },
+    {
+      "value": "brick",
+      "text": "Brick",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775094/Brick_zbta4b.png"
+    },
+    {
+      "value": "bricks",
+      "text": "Bricks",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687282/Bricks_lx0n2a.png"
+    },
+    {
+      "value": "backdrop_brick",
+      "text": "Brick Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775084/Backdrop_Bricks_yrkyiy.png"
+    },
+    {
+      "value": "stairs_brick",
+      "text": "Brick Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775092/Stair_Bricks_kuucfc.png"
+    },
+    {
+      "value": "slab_brick",
+      "text": "Brick Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775092/Slab_Bricks_sm89uz.png"
+    },
+    {
+      "value": "brown_mushroom",
+      "text": "Brown Mushroom",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775088/Brown_Mushroom_xhy18f.png"
+    },
+    {
+      "value": "brown_mushroom_cap",
+      "text": "Brown Mushroom Cap",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775089/Brown_Mushroom_Cap_jhdyvt.png"
+    },
+    {
+      "value": "brown_mushroom_stem",
+      "text": "Brown Mushroom Stem",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775089/Brown_Mushroom_Stem_wl5u0e.png"
+    },
+    {
+      "value": "bucket_acid",
+      "text": "Bucket of Acid",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687284/Bucket_of_Acid_gpwjfv.png"
+    },
+    {
+      "value": "bucket_lava",
+      "text": "Bucket of Lava",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687290/Bucket_of_Lava_umlfoa.png"
+    },
+    {
+      "value": "bucket_milk",
+      "text": "Bucket of Milk",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763957/Bucket_of_Milk_gtuxsp.png"
+    },
+    {
+      "value": "bucket_water",
+      "text": "Bucket of Water",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688917/Bucket_of_Water_tesg5f.png"
+    },
+    {
+      "value": "button",
+      "text": "Button",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687317/Button_zcnf0g.png"
+    },
+    {
+      "value": "cactus",
+      "text": "Cactus",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687319/Cactus_hd8nja.png"
+    },
+    {
+      "value": "cactus_cake",
+      "text": "Cactus Cake",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687321/Cactus_Cake_z81duo.png"
+    },
+    {
+      "value": "cake",
+      "text": "Cake",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687324/Cake_tomaze.png"
+    },
+    {
+      "value": "apple_candy",
+      "text": "Candy Apple",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763965/Candy_apple_oo2dh6.png"
+    },
+    {
+      "value": "candy_cane",
+      "text": "Candy Cane",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763960/Candy_Cane_atpeee.png"
+    },
+    {
+      "value": "caramel",
+      "text": "Caramel",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763956/Caramel_eks5xx.png"
+    },
+    {
+      "value": "carpet",
+      "text": "Carpet",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726895142/Carpet_bgbclg.png"
+    },
+    {
+      "value": "carrot",
+      "text": "Carrot",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763957/Carrot_hftz9p.png"
+    },
+    {
+      "value": "carrot_on_a_stick",
+      "text": "Carrot on a Stick",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1726775090/Carrot_on_a_Stick_kms9of.png"
+    },
+    {
+      "value": "cauldron",
+      "text": "Cauldron",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/f_webp/v1726687337/Cauldron_vnpi7l.png"
+    },
+    {
+      "value": "charcoal",
+      "text": "Charcoal",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Charcoal_xueqiz.png"
+    },
+    {
+      "value": "chest",
+      "text": "Chest",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687199/Chest_xdt3ol.png"
+    },
+    {
+      "value": "chicken_nugget",
+      "text": "Chicken Nugget",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763962/Chicken_Nugget_pilyuw.png"
+    },
+    {
+      "value": "clay",
+      "text": "Clay",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769265/Clay_gxqjfj.png"
+    },
+    {
+      "value": "clay_block",
+      "text": "Clay Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687202/Clay_Block_z7gvez.png"
+    },
+    {
+      "value": "clock",
+      "text": "Clock",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687204/Clock_gtkdf1.png"
+    },
+    {
+      "value": "clownfish",
+      "text": "Clownfish",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763918/Clownfish_p9ljdj.png"
+    },
+    {
+      "value": "coal",
+      "text": "Coal",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769266/Coal_qkizys.png"
+    },
+    {
+      "value": "coal_block",
+      "text": "Coal Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687205/Coal_Block_rd6rfs.png"
+    },
+    {
+      "value": "coal_ore",
+      "text": "Coal Ore",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688957/Coal_Ore_yqizpr.png"
+    },
+    {
+      "value": "coarse_dirt",
+      "text": "Coarse Dirt",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687207/Coarse_Dirt_kuiokc.png"
+    },
+    {
+      "value": "cobblestone",
+      "text": "Cobblestone",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687209/Cobblestone_j1mi9j.png"
+    },
+    {
+      "value": "backdrop_cobblestone",
+      "text": "Cobblestone Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Backdrop_Cobblestone_ooudju.png"
+    },
+    {
+      "value": "stairs_cobblestone",
+      "text": "Cobblestone Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Stair_Cobblestone_jwbr6h.png"
+    },
+    {
+      "value": "slab_cobblestone",
+      "text": "Cobblestone Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Slab_Cobblestone_f0xgei.png"
+    },
+    {
+      "value": "cobweb",
+      "text": "Cobweb",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687211/Cobweb_ex5z9n.png"
+    },
+    {
+      "value": "cocoa_bean",
+      "text": "Cocoa Bean",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763918/Cocoa_Bean_jvrwyk.png"
+    },
+    {
+      "value": "command_book",
+      "text": "Command Book",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Command_Book_zavc2s.png"
+    },
+    {
+      "value": "compass",
+      "text": "Compass",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687213/Compass_qocmq7.png"
+    },
+    {
+      "value": "composter",
+      "text": "Composter",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687215/Composter_ootfoa.png"
+    },
+    {
+      "value": "bacon_cooked",
+      "text": "Cooked Bacon",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Cooked_Bacon_jnlvjm.png"
+    },
+    {
+      "value": "chicken_cooked",
+      "text": "Cooked Chicken",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763918/Cooked_Chicken_akjmwn.png"
+    },
+    {
+      "value": "cooked_egg",
+      "text": "Cooked Egg",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763918/Cooked_Egg_zpavtp.png"
+    },
+    {
+      "value": "fish_cooked",
+      "text": "Cooked Fish",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763924/Cooked_Fish_racqnp.png"
+    },
+    {
+      "value": "cooked_mutton",
+      "text": "Cooked Mutton",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763943/Cooked_Mutton_fpwcwn.png"
+    },
+    {
+      "value": "porkchop_cooked",
+      "text": "Cooked Porkchop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763948/Cooked_Porkchop_tkzfsq.png"
+    },
+    {
+      "value": "rabbit_cooked",
+      "text": "Cooked Rabbit",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763943/Cooked_Rabbit_cr2wtx.png"
+    },
+    {
+      "value": "salmon_cooked",
+      "text": "Cooked Salmon",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Cooked_Salmon_ckmz3z.png"
+    },
+    {
+      "value": "cookie",
+      "text": "Cookie",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763944/Cookie_bgmhhc.png"
+    },
+    {
+      "value": "coral",
+      "text": "Coral",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687217/Coral_dt3kcu.png"
+    },
+    {
+      "value": "coral_lantern",
+      "text": "Coral Lantern",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687219/Coral_Lantern_ofuesm.png"
+    },
+    {
+      "value": "crafting_table",
+      "text": "Crafting Table",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687221/Crafting_Table_dq2zc4.png"
+    },
+    {
+      "value": "dead_bush",
+      "text": "Desert Shrub",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687224/Desert_Shrub_weel3x.png"
+    },
+    {
+      "value": "rail_detector",
+      "text": "Detector Minecart Rail",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687277/Detector_rail_opqnpp.png"
+    },
+    {
+      "value": "diamond",
+      "text": "Diamond",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769266/Diamond_w7dr8y.png"
+    },
+    {
+      "value": "diamond_ore",
+      "text": "Diamond Ore",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687226/Diamond_Ore_s5mdqe.png"
+    },
+    {
+      "value": "diamond_block",
+      "text": "Diamond Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688952/Diamond_Block_zuvh5s.png"
+    },
+    {
+      "value": "stairs_diamond",
+      "text": "Diamond Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871612/Diamond_Stair_dydts2.png"
+    },
+    {
+      "value": "slab_diamond",
+      "text": "Diamond Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871594/Diamond_Slab_wsegsu.png"
+    },
+    {
+      "value": "diamond_helmet",
+      "text": "Diamond Helmet",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Helmet_ugg9vy.png"
+    },
+    {
+      "value": "diamond_chestplate",
+      "text": "Diamond Chestplate",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Chestplate_rzyjxh.png"
+    },
+    {
+      "value": "diamond_leggings",
+      "text": "Diamond Leggings",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Leggings_q4hf45.png"
+    },
+    {
+      "value": "diamond_boots",
+      "text": "Diamond Boots",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Boots_ubkywn.png"
+    },
+    {
+      "value": "diamond_pickaxe",
+      "text": "Diamond Pickaxe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871799/Diamond_Pickaxe_vhadur.png"
+    },
+    {
+      "value": "diamond_axe",
+      "text": "Diamond Axe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871796/Diamond_Axe_sggiqp.png"
+    },
+    {
+      "value": "diamond_hoe",
+      "text": "Diamond Hoe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871799/Diamond_Hoe_tt4aha.png"
+    },
+    {
+      "value": "diamond_shovel",
+      "text": "Diamond Shovel",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871799/Diamond_Shovel_sqtoua.png"
+    },
+    {
+      "value": "diamond_sword",
+      "text": "Diamond Sword",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871631/Diamond_Sword_t8lpfx.png"
+    },
+    {
+      "value": "dirt",
+      "text": "Dirt",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687228/Dirt_sgepvg.png"
+    },
+    {
+      "value": "backdrop_dirt",
+      "text": "Dirt Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871797/Backdrop_Dirt_loek8x.png"
+    },
+    {
+      "value": "dispenser",
+      "text": "Dispenser",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687230/Dispenser_v3pfcf.png"
+    },
+    {
+      "value": "dragon_scale",
+      "text": "Dragon Scale",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769267/Dragon_Scale_viorgs.png"
+    },
+    {
+      "value": "dragon_scale_block",
+      "text": "Dragon Scale Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687232/Dragon_Scale_Block_a8r0c8.png"
+    },
+    {
+      "value": "dragon_scale_helmet",
+      "text": "Dragon Scale Helmet",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871796/Dragon_Scale_Helmet_raeklo.png"
+    },
+    {
+      "value": "dragon_scale_chestplate",
+      "text": "Dragon Scale Chestplate",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871795/Dragon_Scale_Chestplate_heemid.png"
+    },
+    {
+      "value": "dragon_scale_leggings",
+      "text": "Dragon Scale Leggings",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871796/Dragon_Scale_Leggings_zyhqa5.png"
+    },
+    {
+      "value": "dragon_scale_boots",
+      "text": "Dragon Scale Boots",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871795/Dragon_Scale_Boots_r3nxyz.png"
+    },
+    {
+      "value": "dropper",
+      "text": "Dropper",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687234/Dropper_wrqeer.png"
+    },
+    {
+      "value": "dye",
+      "text": "Dye",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890418/Dye_yqqecq.png"
+    },
+    {
+      "value": "egg",
+      "text": "Egg",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763962/Egg_kpabbx.png"
+    },
+    {
+      "value": "bucket_empty",
+      "text": "Empty Bucket",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687236/Empty_Bucket_xpgkfw.png"
+    },
+    {
+      "value": "bottle_empty",
+      "text": "Empty Bottle",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763960/Empty_Bottle_bfsgem.png"
+    },
+    {
+      "value": "enchantment_table",
+      "text": "Enchantment Table",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687238/Enchantment_table_qdchdy.png"
+    },
+    {
+      "value": "ender_chest",
+      "text": "Ender Chest",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687258/Ender_Chest_enlgti.png"
+    },
+    {
+      "value": "ender_dragon_egg",
+      "text": "Ender Dragon Egg",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687260/Ender_Dragon_Egg_ux1roz.png"
+    },
+    {
+      "value": "ender_gem",
+      "text": "Ender Gem",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769269/Ender_Gem_u8wjn7.png"
+    },
+    {
+      "value": "ender_gem_ore",
+      "text": "Ender Gem Ore",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687262/Ender_Gem_Ore_idiuxe.png"
+    },
+    {
+      "value": "enderstone",
+      "text": "Enderstone",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688913/Enderstone_vz7iqa.png"
+    },
+    {
+      "value": "ender_pearl",
+      "text": "Ender Pearl",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769269/Ender_Pearl_ioawuv.png"
+    },
+    {
+      "value": "eye_of_ender",
+      "text": "Eye of Ender",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769269/Eye_of_Ender_ysc4j0.png"
+    },
+    {
+      "value": "farmland",
+      "text": "Farmland",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688925/Farmland_d0pfyx.png"
+    },
+    {
+      "value": "feather",
+      "text": "Feather",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769269/Feather_nb3gem.png"
+    },
+    {
+      "value": "fermented_spider_eye",
+      "text": "Fermented Spider Eye",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763962/Fermented_Spider_Eye_zgj39j.png"
+    },
+    {
+      "value": "egg_fire",
+      "text": "Fire Egg",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763960/Fire_Egg_daaumd.png"
+    },
+    {
+      "value": "fishing_rod",
+      "text": "Fishing Rod",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688935/Fishing_Rod_p0a9jw.png"
+    },
+    {
+      "value": "flint",
+      "text": "Flint",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769272/Flint_pddojt.png"
+    },
+    {
+      "value": "flint_and_steel",
+      "text": "Flint and Steel",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688941/Flint_and_Steel_ldtv7m.png"
+    },
+    {
+      "value": "furnace",
+      "text": "Furnace",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688948/Furnace_ukutec.png"
+    },
+    {
+      "value": "frosted_ice",
+      "text": "Frosted Ice",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688946/Frosted_Ice_yy0evm.png"
+    },
+    {
+      "value": "ghast_tear",
+      "text": "Ghast Tear",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769270/Ghast_Tear_rgy9vt.png"
+    },
+    {
+      "value": "glass",
+      "text": "Glass",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876945/Glass_urwmmr.png"
+    },
+    {
+      "value": "backdrop_glass",
+      "text": "Glass Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Backdrop_Glass_hvpjhx.png"
+    },
+    {
+      "value": "glass_shard",
+      "text": "Glass Shard",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769270/Glass_Shard_o3ovxy.png"
+    },
+    {
+      "value": "glistering_melon",
+      "text": "Glistering Melon",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763948/Glistering_Melon_nntbpp.png"
+    },
+    {
+      "value": "glow_stone",
+      "text": "Glow Stone",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688927/Glowstone_gthsd6.png"
+    },
+    {
+      "value": "glowstone_dust",
+      "text": "Glowstone Dust",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726877477/Glowstone_Dust_ycrgss.png"
+    },
+    {
+      "value": "gold_nugget",
+      "text": "Gold Nugget",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726877476/Gold_Nugget_wahhq4.png"
+    },
+    {
+      "value": "gold_ingot",
+      "text": "Gold Ingot",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769272/Gold_Ingot_i9a5pi.png"
+    },
+    {
+      "value": "gold_ore",
+      "text": "Gold Ore",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688929/Gold_Ore_vjzlfw.png"
+    },
+    {
+      "value": "gold_block",
+      "text": "Gold Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688950/Gold_Block_u7uf2k.png"
+    },
+    {
+      "value": "stairs_gold",
+      "text": "Gold Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876950/Gold_Stair_xxpd7a.png"
+    },
+    {
+      "value": "slab_gold",
+      "text": "Gold Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876951/Gold_Slab_iprrxh.png"
+    },
+    {
+      "value": "gold_helmet",
+      "text": "Gold Helmet",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Helmet_vehqkm.png"
+    },
+    {
+      "value": "gold_chestplate",
+      "text": "Gold Chestplate",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Chestplate_j3to7v.png"
+    },
+    {
+      "value": "gold_leggings",
+      "text": "Gold Leggings",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876948/Gold_Leggings_qspwtb.png"
+    },
+    {
+      "value": "gold_boots",
+      "text": "Gold Boots",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Boots_tkocg7.png"
+    },
+    {
+      "value": "golden_pickaxe",
+      "text": "Golden Pickaxe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876949/Gold_Pickaxe_jgvxzj.png"
+    },
+    {
+      "value": "golden_axe",
+      "text": "Golden Axe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Axe_juptxw.png"
+    },
+    {
+      "value": "golden_hoe",
+      "text": "Golden Hoe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876948/Gold_Hoe_u2qwso.png"
+    },
+    {
+      "value": "golden_shovel",
+      "text": "Golden Shovel",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876949/Gold_Shovel_cdbnhe.png"
+    },
+    {
+      "value": "golden_sword",
+      "text": "Golden Sword",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876951/Gold_Sword_oth7st.png"
+    },
+    {
+      "value": "gold_soil",
+      "text": "Gold Soil",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688959/Gold_Soil_orspe5.png"
+    },
+    {
+      "value": "golden_apple",
+      "text": "Golden Apple",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763949/Golden_Apple_dyo6i1.png"
+    },
+    {
+      "value": "golden_apple_seed",
+      "text": "Golden Apple Seed",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765431/Golden_Apple_Seed_qhyfr6.png"
+    },
+    {
+      "value": "leaves_golden_apple",
+      "text": "Golden Apple in Leaves",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688973/Golden_Apple_in_Leaves_rs4ucr.png"
+    },
+    {
+      "value": "carrot_golden",
+      "text": "Golden Carrot",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765430/Golden_Carrot_ly8oap.png"
+    },
+    {
+      "value": "grass",
+      "text": "Grass",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688982/Grass_uickic.png"
+    },
+    {
+      "value": "gravel",
+      "text": "Gravel",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688965/Gravel_lyodun.png"
+    },
+    {
+      "value": "gunpowder",
+      "text": "Gunpowder",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769272/Gunpowder_spkuzf.png"
+    },
+    {
+      "value": "hay_bale",
+      "text": "Hay Bale",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688967/Hay_Bale_nydn5n.png"
+    },
+    {
+      "value": "healing_crystal",
+      "text": "Healing Crystal",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688961/Healing_Crystal_ds8sda.png"
+    },
+    {
+      "value": "ice",
+      "text": "Ice",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688955/Ice_ypn1fs.png"
+    },
+    {
+      "value": "ice_cream",
+      "text": "Ice Cream",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765427/Ice_Cream_yqort2.png"
+    },
+    {
+      "value": "ink_sac",
+      "text": "Ink Sac",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769272/Ink_Sac_uvsyuo.png"
+    },
+    {
+      "value": "iron_nugget",
+      "text": "Iron Nugget",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769273/Iron_Nugget_asiajr.png"
+    },
+    {
+      "value": "iron_ingot",
+      "text": "Iron Ingot",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769272/Iron_Ingot_vpcqcv.png"
+    },
+    {
+      "value": "iron_ore",
+      "text": "Iron Ore",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688878/Iron_Ore_rrrzqo.png"
+    },
+    {
+      "value": "iron_block",
+      "text": "Iron Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688977/Iron_Block_oumxkt.png"
+    },
+    {
+      "value": "stairs_iron",
+      "text": "Iron Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878561/Iron_Stair_bhpewy.png"
+    },
+    {
+      "value": "slab_iron",
+      "text": "Iron Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878561/Iron_Slab_blp5tz.png"
+    },
+    {
+      "value": "iron_helmet",
+      "text": "Iron Helmet",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896975/Iron_Helmet_pibqyq.png"
+    },
+    {
+      "value": "iron_chestplate",
+      "text": "Iron Chestplate",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896973/Iron_Chestplate_gfvdbm.png"
+    },
+    {
+      "value": "iron_leggings",
+      "text": "Iron Leggings",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896977/Iron_Leggings_ni8md1.png"
+    },
+    {
+      "value": "iron_boots",
+      "text": "Iron Boots",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896972/Iron_Boots_z5f74c.png"
+    },
+    {
+      "value": "iron_pickaxe",
+      "text": "Iron Pickaxe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688880/Iron_Pickaxe_g1yiry.png"
+    },
+    {
+      "value": "iron_axe",
+      "text": "Iron Axe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694186/Iron_Axe_nf7nnx.png"
+    },
+    {
+      "value": "iron_hoe",
+      "text": "Iron Hoe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688876/Iron_Hoe_iufxh3.png"
+    },
+    {
+      "value": "iron_shovel",
+      "text": "Iron Shovel",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688889/Iron_Shovel_otmgkh.png"
+    },
+    {
+      "value": "iron_sword",
+      "text": "Iron Sword",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694186/Iron_Sword_ityryc.png"
+    },
+    {
+      "value": "iron_bars",
+      "text": "Iron Bars",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688969/Iron_Bars_zjdfxm.png"
+    },
+    {
+      "value": "iron_door",
+      "text": "Iron Door",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890421/Iron_Door_q35vu3.png"
+    },
+    {
+      "value": "jack_o_lantern",
+      "text": "Jack-o-Lantern",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688892/Jack-o_-Lantern_mrtj6r.png"
+    },
+    {
+      "value": "ladder",
+      "text": "Ladder",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688894/Ladder_ersevn.png"
+    },
+    {
+      "value": "lapis",
+      "text": "Lapis Lazuli",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769288/Lapis_Lazuli_ltepob.png"
+    },
+    {
+      "value": "lapis_ore",
+      "text": "Lapis Lazuli Ore",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688896/Lapis_Lazuli_Ore_kkmpn9.png"
+    },
+    {
+      "value": "lapis_lazuli_block",
+      "text": "Lapis Lazuli Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1726688916/Lapis_Lazuli_Block_e0vf7e.png"
+    },
+    {
+      "value": "lava",
+      "text": "Lava",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688931/Lava_noq1bp.png"
+    },
+    {
+      "value": "leather",
+      "text": "Leather",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769289/Leather_ok5fjz.png"
+    },
+    {
+      "value": "leather_cap",
+      "text": "Leather Cap",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Cap_kc3wwv.png"
+    },
+    {
+      "value": "leather_tunic",
+      "text": "Leather Tunic",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Tunic_lk2z0j.png"
+    },
+    {
+      "value": "leather_pants",
+      "text": "Leather Pants",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Pants_dknwqd.png"
+    },
+    {
+      "value": "leather_boots",
+      "text": "Leather Boots",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Boots_zofh0b.png"
+    },
+    {
+      "value": "leaves",
+      "text": "Leaves",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688898/Leaves_anwhq8.png"
+    },
+    {
+      "value": "lemon",
+      "text": "Lemon",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765429/Lemon_qrdw8j.png"
+    },
+    {
+      "value": "lemon_block",
+      "text": "Lemon Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688900/Lemon_Block_jvzcut.png"
+    },
+    {
+      "value": "leaves_lemon",
+      "text": "Lemon in Leaves",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688902/Lemon_in_Leaves_afumce.png"
+    },
+    {
+      "value": "lemonade",
+      "text": "Lemonade",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765432/Lemonade_ejzq4s.png"
+    },
+    {
+      "value": "lever",
+      "text": "Lever",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688904/Lever_s6wpso.png"
+    },
+    {
+      "value": "lilypad",
+      "text": "Lily Pad",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688919/Lily_Pad_visuys.png"
+    },
+    {
+      "value": "long_grass",
+      "text": "Long Grass",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688906/Long_Grass_fjqebh.png"
+    },
+    {
+      "value": "magma_cream",
+      "text": "Magma Cream",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769289/Magma_Cream_cbwqpx.png"
+    },
+    {
+      "value": "magma_block",
+      "text": "Magma Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688908/Magma_Block_bmfnpx.png"
+    },
+    {
+      "value": "melon",
+      "text": "Melon",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765439/Melon_phnsjp.png"
+    },
+    {
+      "value": "melon_block",
+      "text": "Melon Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688910/Melon_Block_k61fn8.png"
+    },
+    {
+      "value": "melon_seed",
+      "text": "Melon Seed",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765433/Melon_Seed_rl77bc.png"
+    },
+    {
+      "value": "minecart",
+      "text": "Minecart",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688921/Minecart_zlufjq.png"
+    },
+    {
+      "value": "minecart_furnace",
+      "text": "Minecart Furnace",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694185/Furnace_Minecart_bdzhdy.png"
+    },
+    {
+      "value": "minecart_chest",
+      "text": "Minecart Chest",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687200/Chest_Minecart_kbpoqr.png"
+    },
+    {
+      "value": "rail",
+      "text": "Minecart Rail",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688936/Minecart_Rail_prvr6e.png"
+    },
+    {
+      "value": "monster_spawner",
+      "text": "Monster Spawner",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688923/Monster_Spawner_cqhshz.png"
+    },
+    {
+      "value": "moss",
+      "text": "Moss",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688912/Moss_pjq3ge.png"
+    },
+    {
+      "value": "moss_stone",
+      "text": "Moss Stone",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688938/Moss_Stone_pkyjuf.png"
+    },
+    {
+      "value": "mycelium",
+      "text": "Mycelium",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694187/Mycelium_knjcwb.png"
+    },
+    {
+      "value": "mustache",
+      "text": "Mustache",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694186/Mustache_fjc2up.png"
+    },
+    {
+      "value": "name_tag",
+      "text": "Name Tag",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694187/Name_Tag_axwcot.png"
+    },
+    {
+      "value": "nether_brick",
+      "text": "Nether Brick",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694188/Nether_Brick_zgoc21.png"
+    },
+    {
+      "value": "nether_bricks",
+      "text": "Nether Bricks",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694188/Nether_Bricks_ba5s62.png"
+    },
+    {
+      "value": "backdrop_nether_brick",
+      "text": "Nether Brick Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882507/Backdrop_Nether_Bricks_xkz21o.png"
+    },
+    {
+      "value": "stairs_nether_brick",
+      "text": "Nether Brick Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882513/Stair_Nether_Brick_mvxhii.png"
+    },
+    {
+      "value": "slab_nether_brick",
+      "text": "Nether Brick Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882512/Slab_Nether_Brick_iqwky7.png"
+    },
+    {
+      "value": "nether_fence",
+      "text": "Nether Brick Fence",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890421/Nether_Brick_Fence_q3bkxk.png"
+    },
+    {
+      "value": "nether_fence_gate",
+      "text": "Nether Brick Fence Gate",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882509/Nether_Brick_Fence_Gate_vvzah9.png"
+    },
+    {
+      "value": "nether_wart",
+      "text": "Nether Wart",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769289/Nether_Wart_kratav.png"
+    },
+    {
+      "value": "nether_wart_block",
+      "text": "Nether Wart Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694189/Nether_Wart_Block_hr0pbd.png"
+    },
+    {
+      "value": "netherrack",
+      "text": "Netherrack",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694188/Netherrack_rwknpl.png"
+    },
+    {
+      "value": "note_block",
+      "text": "Note Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719732/Note_Block_v9moxk.png"
+    },
+    {
+      "value": "obsidian",
+      "text": "Obsidian",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694189/Obsidian_cudeye.png"
+    },
+    {
+      "value": "backdrop_obsidian",
+      "text": "Obsidian Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882508/Backdrop_Obsidian_uarkom.png"
+    },
+    {
+      "value": "stairs_obsidian",
+      "text": "Obsidian Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882514/Stair_Obsidian_laeped.png"
+    },
+    {
+      "value": "slab_obsidian",
+      "text": "Obsidian Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882512/Slab_Obsidian_kqbung.png"
+    },
+    {
+      "value": "odd_rock",
+      "text": "Odd Rock",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769290/Odd_Rock_onof4h.png"
+    },
+    {
+      "value": "odd_rock_ore",
+      "text": "Odd Rock Ore",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694190/Odd_Rock_Ore_sdgdsm.png"
+    },
+    {
+      "value": "odd_torch",
+      "text": "Odd Torch",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694190/Odd_Torch_ml6l7n.png"
+    },
+    {
+      "value": "orange",
+      "text": "Orange",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765433/Orange_cpi0du.png"
+    },
+    {
+      "value": "orange_juice",
+      "text": "Orange Juice",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765436/Orange_Juice_xqg5zi.png"
+    },
+    {
+      "value": "leaves_orange",
+      "text": "Orange in Leaves",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694190/Orange_in_Leaves_pakzdf.png"
+    },
+    {
+      "value": "paper",
+      "text": "Paper",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769290/Paper_teh5gb.png"
+    },
+    {
+      "value": "party_hat",
+      "text": "Party Hat",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694191/Party_Hat_bjn9as.png"
+    },
+    {
+      "value": "piston",
+      "text": "Piston",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694191/Piston_o2bdfm.png"
+    },
+    {
+      "value": "poisonous_potato",
+      "text": "Poisonous Potato",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726766540/Poisonous_Potato_cqpgsg.png"
+    },
+    {
+      "value": "portal_frame",
+      "text": "Portal Frame",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694192/Portal_Frame_ob7x5y.png"
+    },
+    {
+      "value": "portal_stone",
+      "text": "Portal Stone",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694192/Portal_Stone_m9hhbk.png"
+    },
+    {
+      "value": "potato",
+      "text": "Potato",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765440/Potato_ii3edg.png"
+    },
+    {
+      "value": "potion",
+      "text": "Potion",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765434/Healing_Potion_pc4a3t.png"
+    },
+    {
+      "value": "rail_powered",
+      "text": "Powered Minecart Rail",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694192/Powered_rail_xez7lx.png"
+    },
+    {
+      "value": "pressure_plate",
+      "text": "Pressure Plate",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694192/Pressure_Plate_nbiube.png"
+    },
+    {
+      "value": "pufferfish",
+      "text": "Pufferfish",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765441/Pufferfish_nbvrqc.png"
+    },
+    {
+      "value": "pumpkin",
+      "text": "Pumpkin",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694193/Pumpkin_rnjsyk.png"
+    },
+    {
+      "value": "pumpkin_pie",
+      "text": "Pumpkin Pie",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765438/Pumpkin_Pie_q8qz0a.png"
+    },
+    {
+      "value": "pumpkin_seed",
+      "text": "Pumpkin Seed",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765436/Pumpkin_Seed_fuxbyt.png"
+    },
+    {
+      "value": "rabbit_hide",
+      "text": "Rabbit Hide",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Rabbit_Hide_i1s1fd.png"
+    },
+    {
+      "value": "rabbit_stew",
+      "text": "Rabbit Stew",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765431/Rabbit_Stew_eiqsc6.png"
+    },
+    {
+      "value": "rabbits_foot",
+      "text": "Rabbit's Foot",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Rabbit_s_Foot_l1xnon.png"
+    },
+    {
+      "value": "raft",
+      "text": "Raft",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719733/Raft_vwf1sw.png"
+    },
+    {
+      "value": "bacon",
+      "text": "Raw Bacon",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1726882511/Raw_Bacon_hkogvl.png"
+    },
+    {
+      "value": "beef",
+      "text": "Raw Beef",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765442/Raw_Beef_qweexs.png"
+    },
+    {
+      "value": "chicken",
+      "text": "Raw Chicken",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765437/Raw_Chicken_dvqbar.png"
+    },
+    {
+      "value": "fish",
+      "text": "Raw Fish",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765435/Raw_Fish_piqkpn.png"
+    },
+    {
+      "value": "mutton",
+      "text": "Raw Mutton",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765439/Raw_Mutton_xytorj.png"
+    },
+    {
+      "value": "porkchop",
+      "text": "Raw Porkchop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765442/Raw_Porkchop_iqrljp.png"
+    },
+    {
+      "value": "rabbit",
+      "text": "Raw Rabbit",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765443/Raw_Rabbit_jnaoav.png"
+    },
+    {
+      "value": "salmon",
+      "text": "Raw Salmon",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726766541/Raw_Salmon_n759fj.png"
+    },
+    {
+      "value": "red_flower",
+      "text": "Red Flower",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688944/Flower2_ng4atf.png"
+    },
+    {
+      "value": "red_mushroom",
+      "text": "Red Mushroom",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688933/Mushroom2_qj9jac.png"
+    },
+    {
+      "value": "red_mushroom_cap",
+      "text": "Red Mushroom Cap",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882515/Red_Mushroom_Cap_wpw6cr.png"
+    },
+    {
+      "value": "red_mushroom_stem",
+      "text": "Red Mushroom Stem",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882516/Red_Mushroom_Stem_z6cniu.png"
+    },
+    {
+      "value": "nether_bricks_red",
+      "text": "Red Nether Bricks",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694193/Red_Nether_Bricks_embna7.png"
+    },
+    {
+      "value": "redstone",
+      "text": "Redstone Dust",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765444/Redstone_unba0a.png"
+    },
+    {
+      "value": "redstone_lamp",
+      "text": "Redstone Lamp",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694194/Redstone_Lamp_hmwsba.png"
+    },
+    {
+      "value": "redstone_ore",
+      "text": "Redstone Ore",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694194/Redstone_Ore_vvcxm6.png"
+    },
+    {
+      "value": "redstone_torch",
+      "text": "Redstone Torch",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694194/Redstone_Torch_vssp21.png"
+    },
+    {
+      "value": "rope",
+      "text": "Rope",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694195/Rope_mbqgxw.png"
+    },
+    {
+      "value": "rotten_flesh",
+      "text": "Rotten Flesh",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765446/Rotten_Flesh_cvxmzv.png"
+    },
+    {
+      "value": "saddle",
+      "text": "Saddle",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882517/Saddle_nlp6ev.png"
+    },
+    {
+      "value": "sand",
+      "text": "Sand",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694195/Sand_ou2qvk.png"
+    },
+    {
+      "value": "sandstone",
+      "text": "Sandstone",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694195/Sandstone_fkgaiq.png"
+    },
+    {
+      "value": "santa_hat",
+      "text": "Santa Hat",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Santa_Hat_jzj24t.png"
+    },
+    {
+      "value": "sapling",
+      "text": "Sapling",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882517/Sappling_jccbia.png"
+    },
+    {
+      "value": "seaweed",
+      "text": "Seaweed",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Seaweed_slvtvy.png"
+    },
+    {
+      "value": "seeds",
+      "text": "Seeds",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765446/Seeds_zdicrp.png"
+    },
+    {
+      "value": "shades",
+      "text": "Shades",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Shades_erre9t.png"
+    },
+    {
+      "value": "shear",
+      "text": "Shear",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Shears_bfupbu.png"
+    },
+    {
+      "value": "shrub",
+      "text": "Shrub",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719734/Shrub_zrtj5c.png"
+    },
+    {
+      "value": "sign",
+      "text": "Sign",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Sign_ynevxj.png"
+    },
+    {
+      "value": "slime_block",
+      "text": "Slime Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Slime_Block_jpvxr2.png"
+    },
+    {
+      "value": "slimeball",
+      "text": "Slimeball",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Slimeball_mzqlxd.png"
+    },
+    {
+      "value": "snow",
+      "text": "Snow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882519/Snow_l5uwyn.png"
+    },
+    {
+      "value": "snow_ball",
+      "text": "Snow Ball",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Snow_Ball_mvkx2c.png"
+    },
+    {
+      "value": "snow_block",
+      "text": "Snow Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Snow_Block_eukorp.png"
+    },
+    {
+      "value": "soul_sand",
+      "text": "Soul Sand",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Soul_Sand_f9pq2y.png"
+    },
+    {
+      "value": "soup",
+      "text": "Soup",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765445/Soup_dpx8up.png"
+    },
+    {
+      "value": "spawn_egg",
+      "text": "Spawn Egg",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Spawn_Egg_gie4jl.png"
+    },
+    {
+      "value": "spear",
+      "text": "Spear",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Spear_zm6cba.png"
+    },
+    {
+      "value": "spider_eye",
+      "text": "Spider Eye",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765448/Spider_Eye_ealks0.png"
+    },
+    {
+      "value": "steak",
+      "text": "Steak",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765447/Steak_tl1ccw.png"
+    },
+    {
+      "value": "stick",
+      "text": "Stick", 
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694183/Stick_cxkdco.png"
+    },
+    {
+      "value": "piston_sticky",
+      "text": "Sticky Piston",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694184/Sticky_Piston_k7pe2f.png"
+    },
+    {
+      "value": "stone",
+      "text": "Stone",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694184/Stone_gko4lw.png"
+    },
+    {
+      "value": "backdrop_stone",
+      "text": "Stone Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890413/Backdrop_Stone_wjnnrb.png"
+    },
+    {
+      "value": "stairs_stone",
+      "text": "Stone Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694185/Stone_Stairs_ysp7ty.png"
+    },
+    {
+      "value": "slab_stone",
+      "text": "Stone Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694184/Stone_Slab_fsqmax.png"
+    },
+    {
+      "value": "stone_pickaxe",
+      "text": "Stone Pickaxe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890397/Stone_Pickaxe_ezr6rv.png"
+    },
+    {
+      "value": "stone_axe",
+      "text": "Stone Axe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726891290/Stone_Axe_i7rx00.png"
+    },
+    {
+      "value": "stone_hoe",
+      "text": "Stone Hoe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890397/Stone_Hoe_xkp77l.png"
+    },
+    {
+      "value": "stone_shovel",
+      "text": "Stone Shovel",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890398/Stone_Shovel_z0vuoi.png"
+    },
+    {
+      "value": "stone_sword",
+      "text": "Stone Sword",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890400/Stone_Sword_vvirm6.png"
+    },
+    {
+      "value": "stone_brick",
+      "text": "Stone Brick",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694184/Stone_Brick_rbds7j.png"
+    },
+    {
+      "value": "backdrop_stone_brick",
+      "text": "Stone Brick Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890415/Backdrop_Stone_Brick_in3vxv.png"
+    },
+    {
+      "value": "stairs_stone_brick",
+      "text": "Stone Brick Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726891287/Stair_Stone_Brick_zmcacy.png"
+    },
+    {
+      "value": "slab_stone_brick",
+      "text": "Stone Brick Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890909/Slab_Stone_Brick_tqvzow.png"
+    },
+    {
+      "value": "string",
+      "text": "String",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/String_ngvv2d.png"
+    },
+    {
+      "value": "sugar",
+      "text": "Sugar",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775094/Sugar_pzzhmz.png"
+    },
+    {
+      "value": "sugarcane",
+      "text": "Sugarcane",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719734/Sugarcane_tsu8k1.png"
+    },
+    {
+      "value": "tnt",
+      "text": "TNT",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719735/TNT_faqcxq.png"
+    },
+    {
+      "value": "minecart_tnt",
+      "text": "TNT Minecart",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719619/TNT_Minecart_ybq1gr.png"
+    },
+    {
+      "value": "topaz",
+      "text": "Topaz",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Topaz_tqbllx.png"
+    },
+    {
+      "value": "topaz_block",
+      "text": "Topaz Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687266/Block_of_Topaz_bzgnfy.png"
+    },
+    {
+      "value": "topaz_ore",
+      "text": "Topaz Ore",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719620/Topaz_Ore_ka07wl.png"
+    },
+    {
+      "value": "torch",
+      "text": "Torch",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719620/Torch_qffndk.png"
+    },
+    {
+      "value": "water",
+      "text": "Water",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719621/Water_rl5hym.png"
+    },
+    {
+      "value": "wheat",
+      "text": "Wheat",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775094/Wheat_gqbzfz.png"
+    },
+    {
+      "value": "trap_door",
+      "text": "Trap Door",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719621/Trap_Door_by0deq.png"
+    },
+    {
+      "value": "tree_wood",
+      "text": "Tree Wood",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719629/Wood_gbhuqz.png"
+    },
+    {
+      "value": "wood",
+      "text": "Wood",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719629/Wood_gbhuqz.png"
+    },
+    {
+      "value": "wooden_planks",
+      "text": "Wooden Planks",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719679/Wooden_Planks_n0ponw.png"
+    },
+    {
+      "value": "backdrop_wooden_planks",
+      "text": "Wooden Planks Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890415/Backdrop_Wooden_Plank_cwjyhd.png"
+    },
+    {
+      "value": "stairs_wooden_planks",
+      "text": "Wooden Planks Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726891287/Stair_Wooden_Plank_qdk1v0.png"
+    },
+    {
+      "value": "slab_wooden_planks",
+      "text": "Wooden Planks Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726891287/Slab_Wooden_Plank_bl2osj.png"
+    },
+    {
+      "value": "wooden_pickaxe",
+      "text": "Wooden Pickaxe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890406/Wooden_Pickaxe_k45e3c.png"
+    },
+    {
+      "value": "wooden_axe",
+      "text": "Wooden Axe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890401/Wooden_Axe_dg67if.png"
+    },
+    {
+      "value": "wooden_hoe",
+      "text": "Wooden Hoe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890404/Wooden_Hoe_pfyxyi.png"
+    },
+    {
+      "value": "wooden_shovel",
+      "text": "Wooden Shovel",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890407/Wooden_Shovel_pheilb.png"
+    },
+    {
+      "value": "wooden_sword",
+      "text": "Wooden Sword",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890409/Wooden_Sword_dvt16x.png"
+    },
+    {
+      "value": "fence",
+      "text": "Wooden Fence",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890403/Wooden_Fence_gqqxcz.png"
+    },
+    {
+      "value": "fence_gate",
+      "text": "Wooden Fence Gate",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726752883/Wooden_Fence_Gate_stz1cv.png"
+    },
+    {
+      "value": "wooden_door",
+      "text": "Wooden Door",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890403/Wooden_Door_ploffn.png"
+    },
+    {
+      "value": "pressure_plate_wooden",
+      "text": "Wooden Pressure Plate",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726893427/Wooden_Pressure_Plate_z8mdzz.png"
+    },
+    {
+      "value": "wool",
+      "text": "Wool",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890410/Wool_ukof8x.png"
+    },
+    {
+      "value": "backdrop_wool",
+      "text": "Wool Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890418/Backdrop_Wool_s6sfpm.png"
+    },
+    {
+      "value": "yellow_flower",
+      "text": "Yellow Flower",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890412/Yellow_Flower_pk30c3.png"
+    }
+  ]
+}

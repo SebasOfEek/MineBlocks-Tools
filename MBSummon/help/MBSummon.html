@@ -1,0 +1,3141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <script>
+        // Ejecutar inmediatamente para evitar flash de contenido
+        (function() {
+            const savedMode = localStorage.getItem('darkMode');
+            if (savedMode === 'true') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="icon" href="MBLogo.ico" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
+
+<style>
+
+/* Estilo base para toda la página */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%; /* Para usar flexbox o grid en el contenedor */
+    font-size: 16px; /* Tamaño base estándar */
+    transform: scale(1); /* Escala inicial */
+    transform-origin: top center; /* Centro horizontal como punto de escala */
+}
+
+/* Asegurar que el modo oscuro se aplique inmediatamente */
+html.dark-mode, 
+html.dark-mode body {
+    background-color: #333738;
+    color: white;
+}
+
+/* Aplicar estilo a select2 */
+.select2-container--default .select2-selection--single {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 15px;
+    border: 1px solid #dcdfe6;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #333;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 1.5; /* Ajustar alineación vertical */
+    padding: 0 13px; /* Consistente con input y select */
+    color: #333;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 100%;
+    right: 10px; /* Ajustar posición de la flecha */
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Contenedor principal */
+.container {
+    width: 90%;
+    max-width: 1200px; /* Evita que crezca demasiado en pantallas grandes */
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para visualización */
+    text-align: center; /* Centrar el texto */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Escala general para pantallas pequeñas */
+@media (max-width: 768px) {
+    html {
+        font-size: 14px; /* Reduce el tamaño de fuente base */
+        transform: scale(0.95); /* Escala general 90% */
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 12px; /* Reduce más el tamaño de fuente base */
+        transform: scale(0.8); /* Escala general 80% */
+    }
+}
+
+
+body {
+    background-color: white;
+    font-family: 'Arial', sans-serif;
+}
+
+table {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #e5e8eb;
+    box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-sizing: border-box;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 12px 15px 12px 10px;
+    vertical-align: middle;
+    text-align: left;
+}
+
+/* Ajuste de input y select dentro de td */
+input, select {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 15px;
+    border: 1px solid #dcdfe6;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #333;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+}
+
+/* Estilo general del contenedor select2 */
+.select2-container--default {
+    width: calc(100% - 2px);
+    margin: 0; 
+    padding: 0; 
+    display: block; 
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* Ajuste del select dentro de select2 */
+.select2-selection--single {
+    height: 48px !important; /* Altura optimizada */
+    padding: 0; /* Sin padding interno */
+    outline: none; /* Evita el contorno al enfocar */
+    display: flex; /* Flexibilidad para alinear el contenido */
+    align-items: center; /* Centrado vertical */
+    border: 1px solid #ccc; /* Borde más claro */
+    border-radius: 5px; /* Igual que el select normal */
+}
+
+/* Estilo del texto dentro del select2 para asegurar que se muestre completamente */
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    white-space: nowrap; /* Evitar saltos de línea */
+    overflow: hidden; /* Ocultar overflow de texto */
+    text-overflow: clip !important; /* Puntos suspensivos si el texto es muy largo */
+    padding: 0 4px; /* Padding lateral para no pegar el texto a los bordes */
+    font-size: 15px; /* Tamaño de fuente consistente */
+    color: #333; /* Color de texto oscuro para mejor contraste */
+    line-height: 23px; 
+}
+
+/* Ajuste de la flecha del select para alinear y estilizar */
+.select2-selection__arrow {
+    height: 100% !important; /* Ajuste a la altura total */
+    position: absolute; /* Posicionamiento absoluto para no afectar el texto */
+    top: 0;
+    right: 1px; /* Ligeramente hacia dentro para evitar desbordamiento */
+    width: 20px ; /* Ancho controlado de la flecha */
+    display: flex;
+    align-items: center; /* Centrado vertical de la flecha */
+    justify-content: center; /* Centrado horizontal de la flecha */
+}
+
+/* Asegura que el contenedor select2 ocupe todo el ancho de td correctamente */
+td .select2-container {
+    width: 100%!important; /* Asegura el 100% del espacio dentro de td, con !important para sobreescribir estilos */
+}
+
+/* Estilo para el cuadro de búsqueda dentro del select2 */
+.select2-container--default .select2-search--dropdown {
+    border-radius: 5px !important; /* Bordes redondeados */
+    padding: 5px 8px; /* Espaciado interno */
+    background-color: #f9f9f9; /* Color de fondo del cuadro de búsqueda */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Estilo del campo de entrada de búsqueda */
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    outline: none; /* Elimina el contorno de enfoque */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding: 8px; /* Espaciado interno del campo de búsqueda */
+    font-size: 14px !important; /* Tamaño de la fuente */
+    color: #333; /* Color del texto */
+    box-sizing: border-box; /* Incluye padding en el ancho total */
+}
+
+/* Estilo de la barra de búsqueda cuando está enfocada */
+.select2-container--default .select2-search--dropdown .select2-search__field:focus {
+    border: 1px solid #007BFF; /* Borde azul al enfocar */
+    background-color: #fff; /* Fondo blanco al enfocar */
+    box-shadow: 0 0 3px rgba(0, 123, 255, 0.5); /* Sombra azul sutil al enfocar */
+}
+
+/* Estilo para la lista de opciones de búsqueda */
+.select2-container--default .select2-results__options {
+    max-height: 250px !important; /* Altura máxima para la lista de resultados */
+    overflow-y: auto; /* Habilita el desplazamiento vertical si el contenido excede la altura */
+    padding: 0px; /* Espaciado interno */
+}
+
+/* Estilo para las opciones de búsqueda */
+.select2-container--default .select2-results__option {
+    padding: 8px 10px; /* Espaciado interno de las opciones */
+    font-size: 14px !important; /* Tamaño de fuente de las opciones */
+    color: #000000; /* Color del texto de las opciones */
+}
+
+/* Estilo para las opciones seleccionadas en la búsqueda */
+.select2-container--default .select2-results__option--selected {
+    background-color: #0059ff;
+    color: #fff;
+}
+
+/* Estilo para las opciones al pasar el ratón sobre ellas */
+.select2-container--default .select2-results__option--highlighted {
+    background-color: #e9ecef; 
+}
+
+.select2-container--default .select2-dropdown {
+    z-index: 999; 
+}
+
+.menu {
+    z-index: 1000;
+}
+
+button {
+    width: 48%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0.5%;
+    transition: background-color 0.3s, transform 0.2s;
+    position: relative;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+button.success {
+    background-color: #28a745;
+}
+
+button.success:hover {
+    background-color: #218838;
+}
+
+button.add-loot {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 9px;
+    margin: 9px 0;
+    margin-bottom: -20px;
+    margin-left: 1px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 98%;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s; 
+}
+
+button.add-loot:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+pre {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-x: auto;
+    max-width: 580px;
+    margin: auto;
+    margin-top: 12px;
+}
+
+.tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 8px;
+    border-radius: 5px;
+    white-space: nowrap;
+    display: none;
+    font-size: 14px;
+    z-index: 10;
+    width: 250px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+td:hover .tooltip {
+    display: block;
+}
+
+.question-mark {
+    cursor: pointer;
+    font-weight: bold;
+    color: #007BFF;
+    margin-left: 5px;
+    position: relative;
+}
+
+.position-group {
+    display: flex;
+    gap: 10px;
+}
+
+.loot-list {
+    margin-top: 10px;
+    margin-right: 9px;
+    border-top: 1px solid #ced4da;
+    padding-top: 10px;
+}
+
+.loot-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    padding-right: 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    margin-left: 1px;
+}
+
+.remove-loot, .edit-loot, .save-loot {
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    color: #ff0000;
+    cursor: pointer;
+}
+
+.remove-loot {
+    color: #ff0000; /* Color rojo */
+}
+
+.edit-loot {
+    color: #ffa500; /* Color naranja */
+}
+
+.save-loot {
+    color: #00ff00; /* Color verde */
+}
+
+.loot-item div {
+    display: flex;
+    gap: 10px;
+}
+
+button.add-loot {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 9px;
+    margin: 9px 0;
+    margin-bottom: -20px;
+    margin-left: 1px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 98%;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-10px); }
+    40%, 80% { transform: translateX(10px); }
+}
+
+@keyframes smooth-shake {
+    0%, 100% { transform: translate(-50%, -50%); }
+    20%, 60% { transform: translate(-52%, -50%); }
+    40%, 80% { transform: translate(-48%, -50%); }
+}
+
+@keyframes fade-in-slide-down {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.alert {
+    position: fixed;
+    top: 16%; /* Centrado vertical */
+    left: 50%; /* Centrado horizontal */
+    transform: translate(-50%, -50%); /* Ajuste para centrar el contenedor */
+    z-index: 9999;
+    background-color: #ffdddd;
+    color: #d8000c;
+    border: 1px solid #d8000c;
+    border-radius: 8px;
+    padding: 1em 2em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s, transform 0.5s ease;
+    text-align: center;
+}
+
+.alert.show {
+    opacity: 1;
+    visibility: visible;
+    animation: fade-in-slide-down 0.5s ease forwards, smooth-shake 0.8s ease;
+}
+
+.alert.hide {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -60%);
+}
+.menu {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    max-width: 600px;
+    margin: auto;
+    background-color: #495057;
+    padding: 10px 0;
+    box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.menu ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    flex-wrap: wrap; /* Permitir que los elementos se envuelvan en líneas nuevas si es necesario */
+}
+
+.menu ul li {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.menu ul li a,
+.menu ul li button {
+    color: white;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    margin: 4px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.menu ul li a:hover,
+.menu ul li button:hover {
+    background-color: #17a2b8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Efecto de brillo en los botones al ser presionados en PC */
+.menu ul li a:active,
+.menu ul li button:active {
+    box-shadow: 0 0 25px rgba(23, 162, 184, 0.6);
+    transform: scale(0.98);
+}
+
+.menu ul li i {
+    margin-right: 13px;
+    font-size: 20px; /* Aumenta el tamaño del ícono */
+}
+
+.menu-icon {
+    display: none; /* Oculta el ícono por defecto */
+}
+@media (max-width: 600px) {
+    .menu {
+        max-width: 100%;
+        padding: 0;
+        background-color: #333;
+        box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.7);
+        border-radius: 5px;
+    }
+
+    .menu-icon {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        color: white;
+        background-color: #495057;
+        font-size: 20px;
+        cursor: pointer;
+        user-select: none;
+        border-radius: 7px;
+    }
+
+    .menu ul.menu-list {
+        display: flex;
+        flex-direction: column;
+        background-color: #495057;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
+        transform: translateY(-20px); /* Desplazamiento inicial */
+        transition: opacity 0.3s ease, transform 0.3s ease; /* Transiciones para suavidad */
+        height: 0; /* Oculta el contenido al inicio */
+        overflow: hidden; /* Evita desbordamiento visual */
+    }
+
+    .menu ul.menu-list li {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        padding: 10px 0;
+        border-top: 1px solid #444;
+    }
+
+    .menu ul.menu-list li:first-child {
+        border-top: none;
+    }
+
+    .menu ul.menu-list li a,
+    .menu ul.menu-list li button {
+        font-size: 16px;
+        padding: 15px;
+        color: white;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        text-align: center;
+    }
+
+    .menu ul.menu-list li a:hover,
+    .menu ul.menu-list li button:hover {
+        background-color: #17a2b8;
+        color: white;
+    }
+
+    .menu.show .menu-list {
+        opacity: 1;
+        transform: translateY(0); /* Retorno a la posición original */
+        height: auto; /* Ajusta la altura automáticamente para el contenido */
+    }
+}
+
+/*Modo Oscuro*/
+
+        body.dark-mode {
+            background-color: #333738;
+            color: white;
+        }
+
+        body.dark-mode table {
+            background-color: #333;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
+        }
+
+        body.dark-mode td {
+            color: white;
+        }
+
+        body.dark-mode pre {
+            background-color: #444;
+            color: white;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
+            border: 1px solid #333738;
+        }
+
+        body.dark-mode .menu {
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
+        }
+
+        body.dark-mode .menu ul li a,
+        body.dark-mode .menu ul li button {
+            color: white;
+        }
+        
+        body.dark-mode .select2-container--default .select2-results__option {
+            color: black; /* Cambia el color del texto de las opciones a negro */
+        }
+
+        /* Cambiar colores en modo oscuro */
+        body.dark-mode .toggle-mode {
+            color: white;
+        }
+        
+        body.dark-mode .bi-sun {
+            transform: rotate(-45deg);
+        }
+        
+        body.dark-mode .loot-item {
+            color: #000; /* Asegúrate de que el texto sea negro en modo oscuro */
+        }
+        
+        body.dark-mode input[disabled]::placeholder {
+            color: #aaa; /* Color del placeholder que contraste en modo oscuro */
+        }
+        
+        /* Estilo para el botón de modo oscuro */
+        .toggle-mode {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: #333;
+            transition: transform 0.3s ease, color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .toggle-mode:focus {
+            outline: none;
+        }
+        
+        .toggle-mode i {
+            transition: transform 0.3s ease;
+            margin-right: 8px;
+        }
+        
+        .toggle-mode:hover i {
+            transform: rotate(45deg);
+        }
+        
+        .menu-list {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .menu-list li {
+            margin: 0 15px;
+        }
+        
+        .menu-list .separator {
+            width: 1px;
+            background-color: #ccc;
+            height: 24px;
+            margin: 0 10px;
+            align-self: center;
+        }
+
+        /* Animación para el ícono de refrescar */
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        #RefreshText:hover i {
+            animation: rotate 1s linear infinite;
+        }
+        
+        body.dark-mode .toggle-mode {
+            color: white;
+        }
+        
+        body.dark-mode .bi-sun {
+            transition: transform 0.3s ease;
+        }
+        
+        body.dark-mode .toggle-mode:hover .bi-sun {
+            transform: rotate(10deg); 
+        }
+        
+        .select-with-images img {
+            border-radius: 20%; 
+            box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3); 
+            width: 30px; 
+            height: 30px; 
+            object-fit: cover; 
+            margin-right: 8px; 
+            vertical-align: middle; 
+        }
+        
+        .select2-results__option img {
+            border-radius: 20%; 
+            box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3); 
+            width: 30px;
+            height: 30px;
+            object-fit: cover;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+        .select2-container--default .select2-selection--single .select2-selection__rendered img {
+            border-radius: 20%; /* Bordes redondeados */
+            box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3); /* Sombra ligera */
+            width: 30px; /* Ancho de las imágenes */
+            height: 30px; /* Altura de las imágenes */
+            object-fit: cover; /* Asegurar que la imagen se ajuste al contenedor */
+            margin-right: 8px; /* Espaciado entre imagen y texto */
+            vertical-align: middle;
+        }
+        
+        .item-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .item-image {
+            border-radius: 20%; 
+            box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3); 
+            width: 30px; 
+            height: 30px; 
+            object-fit: cover; 
+            margin-right: 8px; 
+        }
+        
+        .loot-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px;
+        }
+
+        
+        .editing {
+            background-color: #f8f169;
+            border: 2px solid orange;
+        }
+        
+        .dimmed {
+            opacity: 0.5;
+        }
+        
+.command-button {
+    width: 48%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0.5%;
+    position: relative; /* Necesario para posicionar el menú desplegable */
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Ícono del engranaje */
+.gear-button {
+    font-size: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: color 0.2s, transform 0.3s ease; /* Añadir transición para la animación */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%); /* Centrar verticalmente */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Animación de giro */
+.gear-button:hover {
+    color: #cccccc;
+    transform: translateY(-50%) rotate(40deg); /* Rotar un poco el engranaje */
+}
+
+/* Estilo del menú desplegable */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 47%;
+    transform: translateY(-70%);
+    background-color: white;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* Estilo de los enlaces del menú */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.show {
+    display: block;
+}
+
+/* Flex para alinear los botones en fila */
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* Flex para alinear los botones en fila */
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* Flex para alinear los botones en fila */
+.buttons-container {
+    display: flex;
+    justify-content: center; /* Alinea los botones en el centro */
+    align-items: center;
+    margin-top: 10px;
+}
+
+.command-options {
+    display: none;
+    margin-top: 10px;
+}
+
+.command-options .option-button, 
+.checkbox-container .option-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.command-options .option-button:hover,
+.checkbox-container .option-button:hover {
+    background-color: #218838;
+}
+
+.show-options {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Ajuste del botón pequeño con emoji */
+.emoji-button {
+    background: transparent;
+    border: none;
+    font-size: 24px; /* Tamaño del emoji */
+    cursor: pointer;
+    padding: 5px; /* Sin padding */
+    margin: 2; /* Sin margen */
+    width: auto; /* Ajustar el ancho automáticamente */
+}
+
+/* Estilo para las casillas que aparecen */
+.checkbox-container {
+    display: none;
+    margin-top: 10px;
+}
+
+.checkbox-container.show {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox-container label {
+    margin-right: 10px;
+}
+    </style>
+    <script>
+        // Agregar al inicio del documento, después de las etiquetas de script existentes
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar si hay un modo guardado
+            const savedMode = localStorage.getItem('darkMode');
+            if (savedMode === 'true') {
+                document.body.classList.add('dark-mode');
+                updateDarkModeButton(true);
+            }
+        });
+
+        function updateDarkModeButton(isDark) {
+            const button = document.getElementById('toggle-mode');
+            const icon = button.querySelector('i');
+            const text = document.getElementById('modeText');
+            
+            if (isDark) {
+                icon.classList.remove('bi-moon');
+                icon.classList.add('bi-sun');
+                text.textContent = 'Modo Claro';
+            } else {
+                icon.classList.remove('bi-sun');
+                icon.classList.add('bi-moon');
+                text.textContent = 'Modo Oscuro';
+            }
+        }
+
+        document.getElementById('toggle-mode').addEventListener('click', function() {
+            const isDarkMode = document.body.classList.toggle('dark-mode');
+            updateDarkModeButton(isDarkMode);
+            // Guardar la preferencia
+            localStorage.setItem('darkMode', isDarkMode);
+        });
+    </script>
+</head>
+<body>
+    <nav class="menu">
+        <div id="MenuText" class="menu-icon" onclick="toggleMobileMenu()">☰ Menú</div>
+        <ul class="menu-list">
+            <li>
+                <button id="toggle-mode" class="toggle-mode">
+                    <i class="bi bi-moon"></i>
+                    <span id="modeText">Modo Oscuro</span> <!-- Texto al lado del ícono -->
+                </button>
+            </li>
+            <li><button id="IdiomaText" onclick="toggleLanguage()"><i class="bi bi-translate"></i> Cambiar Idioma</button></li>
+            <li><a href="https://discord.com/users/sebasofeek" target="_blank"><i class="bi bi-discord"></i> Discord</a></li>
+            <li><a href="pagetwo.html" id="HomeText"><i class="bi bi-house"></i> Inicio</a></li>
+            <li><button id="RefreshText" onclick="resetFields()"><i class="bi bi-arrow-clockwise"></i> Refrescar Casillas</button></li>
+        </ul>
+    </nav>
+    <div id="alertContainer" class="alert"></div>
+    <table>
+        <tr>
+            <td id="TypeMobText">Tipo de Mob:</td>
+            <td>
+                <select id="mobType" onchange="updateMobOptions()" class="select-with-images">
+                    <option value="">--Seleccionar--</option>
+                
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td id="QuantityText">Cantidad:</td>
+            <td><input type="number" id="quantity" max="20"></td>
+        </tr>
+        <tr>
+            <td id="PositionText">Posición:</td>
+            <td>
+                <select id="positionType" onchange="updatePositionFields()">
+                    <option value="">--Seleccionar--</option>
+                    <option value="relative">Relativa</option>
+                    <option value="absolute">Absoluta</option>
+                </select>
+            </td>
+        </tr>
+        <tr class="relative-pos position-group" style="display:none;">
+            <td id="PositionRelText">Posición Relativa:</td>
+            <td>
+                <input type="number" id="posX" placeholder="Pos~X" style="width: 45%; display: inline-block; margin-right: 5%;">
+                <input type="number" id="posY" placeholder="Pos~Y" style="width: 45%; display: inline-block;">
+            </td>
+        </tr>
+        <tr class="absolute-pos position-group" style="display:none;">
+            <td id="PositionAbsText">Posición Absoluta:</td>
+            <td>
+                <input type="number" id="absPosX" placeholder="Pos X" style="width: 45%; display: inline-block; margin-right: 5%;">
+                <input type="number" id="absPosY" placeholder="Pos Y" style="width: 45%; display: inline-block;">
+            </td>
+        </tr>
+        <tr>
+            <td id="NameText">Nombre:</td>
+            <td><input type="text" id="name"></td>
+        </tr>
+        <tr>
+            <td id="HealthText">Salud:</td>
+            <td><input type="number" id="health" min="1"></td>
+        </tr>
+        <tr id="handItemRow" style="display: none;">
+            <td id="ItemHandText">Item en mano:</td>
+            <td>
+               <select id="holding" class="select-with-images">
+               <option value="">--Seleccionar--</option>
+                
+            </select>
+            </td>  
+        </tr>
+        <tr id="armorRow" style="display: none;">
+            <td id="ArmorText">Armadura:</td>
+            <td>
+                <select id="armor" onchange="toggleArmorOptions()">
+                    <option value="">--Seleccionar--</option>
+                    <option value="yes">Sí</option>
+                    <option value="no">No</option>
+                </select>
+            </td>
+        </tr>
+
+<tr id="helmetRow" style="display: none;">
+    <td id="HelmetText">Casco:</td>
+    <td>
+        <select id="helmetSelect" class="select-with-images">
+            <option value="">--Seleccionar--</option>
+            <option value="leather_cap" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Cap_kc3wwv.png">Casco de Cuero</option>
+            <option value="iron_helmet" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896975/Iron_Helmet_pibqyq.png">Casco de Hierro</option>
+            <option value="gold_helmet" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Helmet_vehqkm.png">Casco de Oro</option>
+            <option value="diamond_helmet" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Helmet_ugg9vy.png">Casco de Diamante</option>
+            <option value="dragon_scale_helmet" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871796/Dragon_Scale_Helmet_raeklo.png">Casco de Escama de Dragón</option>
+            <option value="jack_o_lantern" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688892/Jack-o_-Lantern_mrtj6r.png">Jack-o-Lantern</option>
+            <option value="santa_hat" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Santa_Hat_jzj24t.png">Santa Hat</option>
+            <option value="party_hat" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694191/Party_Hat_bjn9as.png">Party Hat</option>
+            <option value="afro" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Afro_lqqcni.png">Afro</option>
+            <option value="shades" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Shades_erre9t.png">Shades</option>
+            <option value="mustache" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694186/Mustache_fjc2up.png">Mustache</option> 
+        </select>
+    </td>
+</tr>
+
+<tr id="chestplateRow" style="display: none;">
+    <td id="ChestplateText">Pechera:</td>
+    <td>
+        <select id="chestplateSelect" class="select-with-images">
+            <option value="">--Seleccionar--</option>
+            <option value="leather_tunic" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Tunic_lk2z0j.png">Pechera de Cuero</option>
+            <option value="iron_chestplate" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896973/Iron_Chestplate_gfvdbm.png">Pechera de Hierro</option>
+            <option value="gold_chestplate" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Chestplate_j3to7v.png">Pechera de Oro</option>
+            <option value="diamond_chestplate" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Chestplate_rzyjxh.png">Pechera de Diamante</option>
+            <option value="dragon_scale_chestplate" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871795/Dragon_Scale_Chestplate_heemid.png">Pechera de Escama de Dragón</option>
+        </select>
+    </td>
+</tr>
+
+<tr id="leggingsRow" style="display: none;">
+    <td id="LeggingsText">Pantalones:</td>
+    <td>
+        <select id="leggingsSelect" class="select-with-images">
+            <option value="">--Seleccionar--</option>
+            <option value="leather_pants" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Pants_dknwqd.png">Pantalones de Cuero</option>
+            <option value="iron_leggings" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896977/Iron_Leggings_ni8md1.png">Pantalones de Hierro</option>
+            <option value="gold_leggings" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876948/Gold_Leggings_qspwtb.png">Pantalones de Oro</option>
+            <option value="diamond_leggings" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Leggings_q4hf45.png">Pantalones de Diamante</option>
+            <option value="dragon_scale_leggings" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871796/Dragon_Scale_Leggings_zyhqa5.png">Pantalones de Escama de Dragón</option>
+        </select>
+    </td>
+</tr>
+
+<tr id="bootsRow" style="display: none;">
+    <td id="BootsText">Botas:</td>
+    <td>
+        <select id="bootsSelect" class="select-with-images">
+            <option value="">--Seleccionar--</option>
+            <option value="leather_boots" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Boots_zofh0b.png">Botas de Cuero</option>
+            <option value="iron_boots" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896972/Iron_Boots_z5f74c.png">Botas de Hierro</option>
+            <option value="gold_boots" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Boots_tkocg7.png">Botas de Oro</option>
+            <option value="diamond_boots" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/v1726844162/Diamond_Boots_ubkywn.png">Botas de Diamante</option>
+            <option value="dragon_scale_boots" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871795/Dragon_Scale_Boots_r3nxyz.png">Botas de Escama de Dragón</option>
+        </select>
+    </td>
+</tr>
+        <tr id="defaultDropsRow">
+            <td id="DropDText">Drops por defecto:</td>
+            <td>
+                <select id="defaultDrops">
+                    <option value="">--Seleccionar--</option>
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="creeperChargedRow" style="display: none;">
+            <td id="CreeperCharText">Creeper Cargado:</td>
+            <td>
+                <select id="charged">
+                    <option value="">--Seleccionar--</option>
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="spawnskinOptions" style="display: none;">
+            <td id="IDText">ID de la Skin:</td>
+            <td><input type="text" id="skin"></td>
+        </tr>
+        <tr id="aggroRow" style="display: none;">
+            <td id="AggroText">Hostilidad:</td>
+            <td>
+                <select id="aggro">
+                    <option value="">--Seleccionar--</option>
+                    <option value="hostile">Hostil</option>
+                    <option value="neutral">Neutral</option>
+                    <option value="passive">Pasivo</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="babyRow" style="display: none;">
+            <td id="BabyText">Bebé:</td>
+            <td>
+                <select id="baby" onchange="handleBabyChange()">
+                    <option value="">--Seleccionar--</option>
+                    <option value="time">Tiempo</option>
+                    <option value="true">Siempre</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="babyTimeRow" style="display: none;">
+            <td id="BabySText">Bebé (segundos):</td>
+            <td><input type="number" id="babyTime" min="1"></td>
+        </tr>
+        <tr>
+            <td>Loot Tags:</td>
+            <td>
+                <select id="drops" onchange="updateConditionals()">
+                    <option value="">--Seleccionar--</option>
+                    <option value="1">Sí</option>
+                    <option value="2">No</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="additionalRows" class="additional-rows" style="display: none;">
+            <td>Drops items:</td>
+            <td>
+                <select id="additional1" class="select-with-images">
+                <option value="" >--Seleccionar--</option>
+                <option value="acid" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683347/Acid_pojqsr.png">Acid</option>
+                <option value="rail_activator" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683347/Activator_rail_blkhzt.png">Activator Minecart Rail</option>
+                <option value="afro" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Afro_lqqcni.png">Afro</option>
+                <option value="anvil" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Anvil_awvhog.png">Anvil</option>
+                <option value="apple" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763957/Apple_p26lrl.png">Apple</option>
+                <option value="apple_juice" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763955/Apple_Juice_ro3q9h.png">Apple Juice</option>
+                <option value="leaves_apple" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Apple_in_Leaves_adnq5y.png">Apple in Leaves</option>
+                <option value="arrow" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Arrow_fil3ar.png">Arrow</option>
+                <option value="potato_baked" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763957/Baked_Potato_bzs4yg.png">Baked Potato</option>
+                <option value="balloon" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Balloon_alwke7.png">Balloon</option>
+                <option value="bamboo" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Bamboo_no8jkp.png">Bamboo</option>
+                <option value="bamboo_block" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Bamboo_Block_ujpesl.png">Bamboo Block</option>
+                <option value="backdrop_bamboo" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775084/Backdrop_Bamboo_qs3f8y.png">Bamboo Backdrop</option>
+                <option value="stairs_bamboo" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775092/Stair_Bamboo_ayi04h.png">Bamboo Stairs</option>
+                <option value="slab_bamboo" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775091/Slab_Bamboo_fjrwan.png">Bamboo Slab</option>
+                <option value="bamboo_door" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775086/Bamboo_Door_drbz8x.png">Bamboo Door</option>
+                <option value="barrier" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Barrier_j18rjv.png">Barrier</option>
+                <option value="bed" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726895514/Bed_hob94q.png">Bed</option>
+                <option value="bedrock" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687264/Bedrock_hragzu.png">Bedrock</option>
+                <option value="slab_bedrock" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775085/Bedrock_Slab_e7jjk6.png">Bedrock Slab</option>
+                <option value="stairs_bedrock" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775087/Bedrock-Stair_mzgxaj.png">Bedrock Stairs</option>
+                <option value="beet_soup" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763952/Beet_Soup_g26uvp.png">Beet Soup</option>
+                <option value="beetroot" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763952/Beetroot_hdg9xa.png">Beetroot</option>
+                <option value="beetroot_seed" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763952/Beetroot_Seed_fwyds0.png">Beetroot Seed</option>
+                <option value="blaze_powder" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763953/Blaze_Powder_pbjh3z.png">Blaze Powder</option>
+                <option value="blaze_rod" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Blaze_Rod_pvzr1v.png">Blaze Rod</option>
+                <option value="bone" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/v1726769261/Bone_tdofq4.png">Bone</option>
+                <option value="bone_block" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687269/Bone_Block_sfa7nl.png">Bone Block</option>
+                <option value="bone_meal" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769265/Bone_Meal_c4sbsq.png">Bone Meal</option>
+                <option value="bone_shuriken" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687271/Bone_Shuriken_yf7gin.png">Bone Shuriken</option>
+                <option value="book" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769265/Book_y6ei1a.png">Book</option>
+                <option value="bookshelf" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687273/Bookshelf_pwquo1.png">Bookshelf</option>
+                <option value="backdrop_bookshelf" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775087/Bookshelf_Backdrop_zes5zj.png">Bookshelf Backdrop</option>
+                <option value="bottle_of_enchanting" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763962/Bottle_of_Enchanting_rnlbxz.png">Bottle of Enchanting</option>
+                <option value="bow" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687275/Bow_udyzbk.png">Bow</option>
+                <option value="bowl" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763954/Bowl_dwhevo.png">Bowl</option>
+                <option value="bread" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775088/Bread_mjfxkl.png">Bread</option>
+                <option value="brewing_stand" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687280/Brewing_Stand_c19pin.png">Brewing Stand</option>
+                <option value="brick" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775094/Brick_zbta4b.png">Brick</option>
+                <option value="bricks" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687282/Bricks_lx0n2a.png">Bricks</option>
+                <option value="backdrop_brick" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775084/Backdrop_Bricks_yrkyiy.png">Brick Backdrop</option>
+                <option value="stairs_brick" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775092/Stair_Bricks_kuucfc.png">Brick Stairs</option>
+                <option value="slab_brick" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775092/Slab_Bricks_sm89uz.png">Brick Slab</option>
+                <option value="brown_mushroom" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775088/Brown_Mushroom_xhy18f.png">Brown Mushroom</option>
+                <option value="brown_mushroom_cap" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775089/Brown_Mushroom_Cap_jhdyvt.png">Brown Mushroom Cap</option>
+                <option value="brown_mushroom_stem" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775089/Brown_Mushroom_Stem_wl5u0e.png">Brown Mushroom Stem</option>
+                <option value="bucket_acid" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687284/Bucket_of_Acid_gpwjfv.png">Bucket of Acid</option>
+                <option value="bucket_lava" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687290/Bucket_of_Lava_umlfoa.png">Bucket of Lava</option>
+                <option value="bucket_milk" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763957/Bucket_of_Milk_gtuxsp.png">Bucket of Milk</option>
+                <option value="bucket_water" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688917/Bucket_of_Water_tesg5f.png">Bucket of Water</option>
+                <option value="button" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687317/Button_zcnf0g.png">Button</option>
+                <option value="cactus" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687319/Cactus_hd8nja.png">Cactus</option>
+                <option value="cactus_cake" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687321/Cactus_Cake_z81duo.png">Cactus Cake</option>
+                <option value="cake" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687324/Cake_tomaze.png">Cake</option>
+                <option value="apple_candy" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763965/Candy_apple_oo2dh6.png">Candy Apple</option>
+                <option value="candy_cane" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763960/Candy_Cane_atpeee.png">Candy Cane</option>
+                <option value="caramel" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763956/Caramel_eks5xx.png">Caramel</option>
+                <option value="carpet" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726895142/Carpet_bgbclg.png">Carpet</option>
+                <option value="carrot" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763957/Carrot_hftz9p.png">Carrot</option>
+                <option value="carrot_on_a_stick" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/v1726775090/Carrot_on_a_Stick_kms9of.png">Carrot on a Stick</option>
+                <option value="cauldron" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/f_webp/v1726687337/Cauldron_vnpi7l.png">Cauldron</option>
+                <option value="charcoal" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Charcoal_xueqiz.png">Charcoal</option>
+                <option value="chest" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687199/Chest_xdt3ol.png">Chest</option>
+                <option value="chicken_nugget" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763962/Chicken_Nugget_pilyuw.png">Chicken Nugget</option>
+                <option value="clay" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769265/Clay_gxqjfj.png">Clay</option>
+                <option value="clay_block" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687202/Clay_Block_z7gvez.png">Clay Block</option>
+                <option value="clock" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687204/Clock_gtkdf1.png">Clock</option>
+                <option value="clownfish" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763918/Clownfish_p9ljdj.png">Clownfish</option>
+                <option value="coal" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769266/Coal_qkizys.png">Coal</option>
+                <option value="coal_block" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687205/Coal_Block_rd6rfs.png">Coal Block</option>
+                <option value="coal_ore" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688957/Coal_Ore_yqizpr.png">Coal Ore</option>
+                <option value="coarse_dirt" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687207/Coarse_Dirt_kuiokc.png">Coarse Dirt</option>
+                <option value="cobblestone" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687209/Cobblestone_j1mi9j.png">Cobblestone</option>
+                <option value="backdrop_cobblestone" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Backdrop_Cobblestone_ooudju.png">Cobblestone Backdrop</option>
+                <option value="stairs_cobblestone" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Stair_Cobblestone_jwbr6h.png">Cobblestone Stairs</option>
+                <option value="slab_cobblestone" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Slab_Cobblestone_f0xgei.png">Cobblestone Slab</option>
+                <option value="cobweb" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687211/Cobweb_ex5z9n.png">Cobweb</option>
+                <option value="cocoa_bean" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763918/Cocoa_Bean_jvrwyk.png">Cocoa Bean</option>
+                <option value="command_book" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Command_Book_zavc2s.png">Command Book</option>
+                <option value="compass" data-image=https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687213/Compass_qocmq7.png"">Compass</option>
+                <option value="composter" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687215/Composter_ootfoa.png">Composter</option>
+                <option value="bacon_cooked" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Cooked_Bacon_jnlvjm.png">Cooked Bacon</option>
+                <option value="chicken_cooked" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763918/Cooked_Chicken_akjmwn.png">Cooked Chicken</option>
+                <option value="cooked_egg" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763918/Cooked_Egg_zpavtp.png">Cooked Egg</option>
+                <option value="fish_cooked" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763924/Cooked_Fish_racqnp.png">Cooked Fish</option>
+                <option value="cooked_mutton" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763943/Cooked_Mutton_fpwcwn.png">Cooked Mutton</option>
+                <option value="porkchop_cooked" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763948/Cooked_Porkchop_tkzfsq.png">Cooked Porkchop</option>
+                <option value="rabbit_cooked" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763943/Cooked_Rabbit_cr2wtx.png">Cooked Rabbit</option>
+                <option value="salmon_cooked" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Cooked_Salmon_ckmz3z.png">Cooked Salmon</option>
+                <option value="cookie" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763944/Cookie_bgmhhc.png">Cookie</option>
+                <option value="coral" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687217/Coral_dt3kcu.png">Coral</option>
+                <option value="coral_lantern" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687219/Coral_Lantern_ofuesm.png">Coral Lantern</option>
+                <option value="crafting_table" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687221/Crafting_Table_dq2zc4.png">Crafting Table</option>
+                <option value="dead_bush" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687224/Desert_Shrub_weel3x.png">Desert Shrub</option>
+                <option value="rail_detector" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687277/Detector_rail_opqnpp.png">Detector Minecart Rail</option>
+                <option value="diamond" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769266/Diamond_w7dr8y.png">Diamond</option>
+                <option value="diamond_ore" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687226/Diamond_Ore_s5mdqe.png">Diamond Ore</option>
+                <option value="diamond_block" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688952/Diamond_Block_zuvh5s.png">Diamond Block</option>
+                <option value="stairs_diamond" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871612/Diamond_Stair_dydts2.png">Diamond Stairs</option>
+                <option value="slab_diamond" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871594/Diamond_Slab_wsegsu.png">Diamond Slab</option>
+                <option value="diamond_helmet" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Helmet_ugg9vy.png">Diamond Helmet</option>
+                <option value="diamond_chestplate" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Chestplate_rzyjxh.png">Diamond Chestplate</option>
+                <option value="diamond_leggings" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Leggings_q4hf45.png">Diamond Leggings</option>
+                <option value="diamond_boots" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Boots_ubkywn.png">Diamond Boots</option>
+                <option value="diamond_pickaxe" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871799/Diamond_Pickaxe_vhadur.png">Diamond Pickaxe</option>
+                <option value="diamond_axe" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871796/Diamond_Axe_sggiqp.png">Diamond Axe</option>
+                <option value="diamond_hoe" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871799/Diamond_Hoe_tt4aha.png">Diamond Hoe</option>
+                <option value="diamond_shovel" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871799/Diamond_Shovel_sqtoua.png">Diamond Shovel</option>
+                <option value="diamond_sword" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871631/Diamond_Sword_t8lpfx.png">Diamond Sword</option>
+                <option value="dirt" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687228/Dirt_sgepvg.png">Dirt</option>
+                <option value="backdrop_dirt" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871797/Backdrop_Dirt_loek8x.png">Dirt Backdrop</option>
+                <option value="dispenser" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687230/Dispenser_v3pfcf.png">Dispenser</option>
+                <option value="dragon_scale" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769267/Dragon_Scale_viorgs.png">Dragon Scale</option>
+                <option value="dragon_scale_block" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687232/Dragon_Scale_Block_a8r0c8.png">Dragon Scale Block</option>
+                <option value="dragon_scale_helmet" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871796/Dragon_Scale_Helmet_raeklo.png">Dragon Scale Helmet</option>
+                <option value="dragon_scale_chestplate" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871795/Dragon_Scale_Chestplate_heemid.png">Dragon Scale Chestplate</option>
+                <option value="dragon_scale_leggings" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871796/Dragon_Scale_Leggings_zyhqa5.png">Dragon Scale Leggings</option>
+                <option value="dragon_scale_boots" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871795/Dragon_Scale_Boots_r3nxyz.png">Dragon Scale Boots</option>
+                <option value="dropper" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687234/Dropper_wrqeer.png">Dropper</option>
+                <option value="dye" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890418/Dye_yqqecq.png">Dye</option>
+                <option value="egg" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763962/Egg_kpabbx.png">Egg</option>
+                <option value="bucket_empty" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687236/Empty_Bucket_xpgkfw.png">Empty Bucket</option>
+                <option value="bottle_empty" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763960/Empty_Bottle_bfsgem.png">Empty Bottle</option>
+                <option value="enchantment_table" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687238/Enchantment_table_qdchdy.png">Enchantment Table</option>
+                <option value="ender_chest" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687258/Ender_Chest_enlgti.png">Ender Chest</option>
+                <option value="ender_dragon_egg" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687260/Ender_Dragon_Egg_ux1roz.png">Ender Dragon Egg</option>
+                <option value="ender_gem" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769269/Ender_Gem_u8wjn7.png">Ender Gem</option>
+                <option value="ender_gem_ore" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687262/Ender_Gem_Ore_idiuxe.png">Ender Gem Ore</option>
+                <option value="enderstone" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688913/Enderstone_vz7iqa.png">Enderstone</option>
+                <option value="ender_pearl" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769269/Ender_Pearl_ioawuv.png">Ender Pearl</option>
+                <option value="eye_of_ender" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769269/Eye_of_Ender_ysc4j0.png">Eye of Ender</option>
+                <option value="farmland" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688925/Farmland_d0pfyx.png">Farmland</option>
+                <option value="feather" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769269/Feather_nb3gem.png">Feather</option>
+                <option value="fermented_spider_eye" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763962/Fermented_Spider_Eye_zgj39j.png">Fermented Spider Eye</option>
+                <option value="egg_fire" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763960/Fire_Egg_daaumd.png">Fire Egg</option>
+                <option value="fishing_rod" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688935/Fishing_Rod_p0a9jw.png">Fishing Rod</option>
+                <option value="flint" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769269/Flint_pddojt.png">Flint</option>
+                <option value="flint_and_steel" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688941/Flint_and_Steel_ldtv7m.png">Flint and Steel</option>
+                <option value="furnace" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688948/Furnace_ukutec.png">Furnace</option>
+                <option value="frosted_ice" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688946/Frosted_Ice_yy0evm.png">Frosted Ice</option>
+                <option value="ghast_tear" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769270/Ghast_Tear_rgy9vt.png">Ghast Tear</option>
+                <option value="glass" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876945/Glass_urwmmr.png">Glass</option>
+                <option value="backdrop_glass" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Backdrop_Glass_hvpjhx.png">Glass Backdrop</option>
+                <option value="glass_shard" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769270/Glass_Shard_o3ovxy.png">Glass Shard</option>
+                <option value="glistering_melon" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763948/Glistering_Melon_nntbpp.png">Glistering Melon</option>
+                <option value="glow_stone" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688927/Glowstone_gthsd6.png">Glow Stone</option>
+                <option value="glowstone_dust" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726877477/Glowstone_Dust_ycrgss.png">Glowstone Dust</option>
+                <option value="gold_nugget" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726877476/Gold_Nugget_wahhq4.png">Gold Nugget</option>
+                <option value="gold_ingot" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769272/Gold_Ingot_i9a5pi.png">Gold Ingot</option>
+                <option value="gold_ore" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688929/Gold_Ore_vjzlfw.png">Gold Ore</option>
+                <option value="gold_block" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688950/Gold_Block_u7uf2k.png">Gold Block</option>
+                <option value="stairs_gold" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876950/Gold_Stair_xxpd7a.png">Gold Stairs</option>
+                <option value="slab_gold" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876951/Gold_Slab_iprrxh.png">Gold Slab</option>
+                <option value="gold_helmet" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Helmet_vehqkm.png">Gold Helmet</option>
+                <option value="gold_chestplate" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Chestplate_j3to7v.png">Gold Chestplate</option>
+                <option value="gold_leggings" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876948/Gold_Leggings_qspwtb.png">Gold Leggings</option>
+                <option value="gold_boots" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Boots_tkocg7.png">Gold Boots</option>
+                <option value="golden_pickaxe" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876949/Gold_Pickaxe_jgvxzj.png">Golden Pickaxe</option>
+                <option value="golden_axe" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Axe_juptxw.png">Golden Axe</option>
+                <option value="golden_hoe" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876948/Gold_Hoe_u2qwso.png">Golden Hoe</option>
+                <option value="golden_shovel" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876949/Gold_Shovel_cdbnhe.png">Golden Shovel</option>
+                <option value="golden_sword" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876951/Gold_Sword_oth7st.png">Golden Sword</option>
+                <option value="gold_soil" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688959/Gold_Soil_orspe5.png">Gold Soil</option>
+                <option value="golden_apple" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763949/Golden_Apple_dyo6i1.png">Golden Apple</option>
+                <option value="golden_apple_seed" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765431/Golden_Apple_Seed_qhyfr6.png">Golden Apple Seed</option>
+                <option value="leaves_golden_apple" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688973/Golden_Apple_in_Leaves_rs4ucr.png">Golden Apple in Leaves</option>
+                <option value="carrot_golden" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765430/Golden_Carrot_ly8oap.png">Golden Carrot</option>
+                <option value="grass" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688982/Grass_uickic.png">Grass</option>
+                <option value="gravel" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688965/Gravel_lyodun.png">Gravel</option>
+                <option value="gunpowder" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769272/Gunpowder_spkuzf.png">Gunpowder</option>
+                <option value="hay_bale" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688967/Hay_Bale_nydn5n.png">Hay Bale</option>
+                <option value="healing_crystal" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688961/Healing_Crystal_ds8sda.png">Healing Crystal</option>
+                <option value="ice" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688955/Ice_ypn1fs.png">Ice</option>
+                <option value="ice_cream" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765427/Ice_Cream_yqort2.png">Ice Cream</option>
+                <option value="ink_sac" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769272/Ink_Sac_uvsyuo.png">Ink Sac</option>
+                <option value="iron_nugget" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769273/Iron_Nugget_asiajr.png">Iron Nugget</option>
+                <option value="iron_ingot" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769272/Iron_Ingot_vpcqcv.png">Iron Ingot</option>
+                <option value="iron_ore" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688878/Iron_Ore_rrrzqo.png">Iron Ore</option>
+                <option value="iron_block" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688977/Iron_Block_oumxkt.png">Iron Block</option>
+                <option value="stairs_iron" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878561/Iron_Stair_bhpewy.png">Iron Stairs</option>
+                <option value="slab_iron" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878561/Iron_Slab_blp5tz.png">Iron Slab</option>
+                <option value="iron_helmet" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896975/Iron_Helmet_pibqyq.png">Iron Helmet</option>
+                <option value="iron_chestplate" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896973/Iron_Chestplate_gfvdbm.png">Iron Chestplate</option>
+                <option value="iron_leggings" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896977/Iron_Leggings_ni8md1.png">Iron Leggings</option>
+                <option value="iron_boots" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896972/Iron_Boots_z5f74c.png">Iron Boots</option>
+                <option value="iron_pickaxe" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688880/Iron_Pickaxe_g1yiry.png">Iron Pickaxe</option>
+                <option value="iron_axe" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694186/Iron_Axe_nf7nnx.png">Iron Axe</option>
+                <option value="iron_hoe" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688876/Iron_Hoe_iufxh3.png">Iron Hoe</option>
+                <option value="iron_shovel" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688889/Iron_Shovel_otmgkh.png">Iron Shovel</option>
+                <option value="iron_sword" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694186/Iron_Sword_ityryc.png">Iron Sword</option>
+                <option value="iron_bars" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688969/Iron_Bars_zjdfxm.png">Iron Bars</option>
+                <option value="iron_door" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890421/Iron_Door_q35vu3.png">Iron Door</option>
+                <option value="jack_o_lantern" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688892/Jack-o_-Lantern_mrtj6r.png">Jack-o-Lantern</option>
+                <option value="ladder" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688894/Ladder_ersevn.png">Ladder</option>
+                <option value="lapis" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769288/Lapis_Lazuli_ltepob.png">Lapis Lazuli</option>
+                <option value="lapis_ore" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688896/Lapis_Lazuli_Ore_kkmpn9.png">Lapis Lazuli Ore</option>
+                <option value="lapis_lazuli_block" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/v1726688916/Lapis_Lazuli_Block_e0vf7e.png">Lapis Lazuli Block</option>
+                <option value="lava" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688931/Lava_noq1bp.png">Lava</option>
+                <option value="leather" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769289/Leather_ok5fjz.png">Leather</option>
+                <option value="leather_cap" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Cap_kc3wwv.png">Leather Cap</option>
+                <option value="leather_tunic" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Tunic_lk2z0j.png">Leather Tunic</option>
+                <option value="leather_pants" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Pants_dknwqd.png">Leather Pants</option>
+                <option value="leather_boots" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Boots_zofh0b.png">Leather Boots</option>
+                <option value="leaves" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688898/Leaves_anwhq8.png">Leaves</option>
+                <option value="lemon" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765429/Lemon_qrdw8j.png">Lemon</option>
+                <option value="lemon_block" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688900/Lemon_Block_jvzcut.png">Lemon Block</option>
+                <option value="leaves_lemon" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688902/Lemon_in_Leaves_afumce.png">Lemon in Leaves</option>
+                <option value="lemonade" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765432/Lemonade_ejzq4s.png">Lemonade</option>
+                <option value="lever" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688904/Lever_s6wpso.png">Lever</option>
+                <option value="lilypad" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688919/Lily_Pad_visuys.png">Lily Pad</option>
+                <option value="long_grass" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688906/Long_Grass_fjqebh.png">Long Grass</option>
+                <option value="magma_cream" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769289/Magma_Cream_cbwqpx.png">Magma Cream</option>
+                <option value="magma_block" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688908/Magma_Block_bmfnpx.png">Magma Block</option>
+                <option value="melon" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765439/Melon_phnsjp.png">Melon</option>
+                <option value="melon_block" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688910/Melon_Block_k61fn8.png">Melon Block</option>
+                <option value="melon_seed" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765433/Melon_Seed_rl77bc.png">Melon Seed</option>
+                <option value="minecart" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688921/Minecart_zlufjq.png">Minecart</option>
+                <option value="minecart_furnace" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694185/Furnace_Minecart_bdzhdy.png">Minecart Furnace</option>
+                <option value="minecart_chest" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687200/Chest_Minecart_kbpoqr.png">Minecart Chest</option>
+                <option value="rail" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688936/Minecart_Rail_prvr6e.png">Minecart Rail</option>
+                <option value="monster_spawner" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688923/Monster_Spawner_cqhshz.png">Monster Spawner</option>
+                <option value="moss" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688912/Moss_pjq3ge.png">Moss</option>
+                <option value="moss_stone" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688938/Moss_Stone_pkyjuf.png">Moss Stone</option>
+                <option value="mycelium" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694187/Mycelium_knjcwb.png">Mycelium</option>
+                <option value="mustache" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694186/Mustache_fjc2up.png">Mustache</option>
+                <option value="name_tag" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694187/Name_Tag_axwcot.png">Name Tag</option>
+                <option value="nether_brick" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694188/Nether_Brick_zgoc21.png">Nether Brick</option>
+                <option value="nether_bricks" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694188/Nether_Bricks_ba5s62.png">Nether Bricks</option>
+                <option value="backdrop_nether_brick" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882507/Backdrop_Nether_Bricks_xkz21o.png">Nether Brick Backdrop</option>
+                <option value="stairs_nether_brick" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882513/Stair_Nether_Brick_mvxhii.png">Nether Brick Stairs</option>
+                <option value="slab_nether_brick" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882512/Slab_Nether_Brick_iqwky7.png">Nether Brick Slab</option>
+                <option value="nether_fence" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890421/Nether_Brick_Fence_q3bkxk.png">Nether Brick Fence</option>
+                <option value="nether_fence_gate" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882509/Nether_Brick_Fence_Gate_vvzah9.png">Nether Brick Fence Gate</option>
+                <option value="nether_wart" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769289/Nether_Wart_kratav.png">Nether Wart</option>
+                <option value="nether_wart_block" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694189/Nether_Wart_Block_hr0pbd.png">Nether Wart Block</option>
+                <option value="netherrack" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694188/Netherrack_rwknpl.png">Netherrack</option>
+                <option value="note_block" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719732/Note_Block_v9moxk.png">Note Block</option>
+                <option value="obsidian" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694189/Obsidian_cudeye.png">Obsidian</option>
+                <option value="backdrop_obsidian" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882508/Backdrop_Obsidian_uarkom.png">Obsidian Backdrop</option>
+                <option value="stairs_obsidian" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882514/Stair_Obsidian_laeped.png">Obsidian Stairs</option>
+                <option value="slab_obsidian" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882512/Slab_Obsidian_kqbung.png">Obsidian Slab</option>
+                <option value="odd_rock" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769290/Odd_Rock_onof4h.png">Odd Rock</option>
+                <option value="odd_rock_ore" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694190/Odd_Rock_Ore_sdgdsm.png">Odd Rock Ore</option>
+                <option value="odd_torch" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694190/Odd_Torch_ml6l7n.png">Odd Torch</option>
+                <option value="orange" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765433/Orange_cpi0du.png">Orange</option>
+                <option value="orange_juice" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765436/Orange_Juice_xqg5zi.png">Orange Juice</option>
+                <option value="leaves_orange" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694190/Orange_in_Leaves_pakzdf.png">Orange in Leaves</option>
+                <option value="paper" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769290/Paper_teh5gb.png">Paper</option>
+                <option value="party_hat" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694191/Party_Hat_bjn9as.png">Party Hat</option>
+                <option value="piston" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694191/Piston_o2bdfm.png">Piston</option>
+                <option value="poisonous_potato" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726766540/Poisonous_Potato_cqpgsg.png">Poisonous Potato</option>
+                <option value="portal_frame" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694192/Portal_Frame_ob7x5y.png">Portal Frame</option>
+                <option value="portal_stone" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694192/Portal_Stone_m9hhbk.png">Portal Stone</option>
+                <option value="potato" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765440/Potato_ii3edg.png">Potato</option>
+                <option value="potion" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765434/Healing_Potion_pc4a3t.png">Potion</option>
+                <option value="rail_powered" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694192/Powered_rail_xez7lx.png">Powered Minecart Rail</option>
+                <option value="pressure_plate" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694192/Pressure_Plate_nbiube.png">Pressure Plate</option>
+                <option value="pufferfish" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765441/Pufferfish_nbvrqc.png">Pufferfish</option>
+                <option value="pumpkin" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694193/Pumpkin_rnjsyk.png">Pumpkin</option>
+                <option value="pumpkin_pie" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765438/Pumpkin_Pie_q8qz0a.png">Pumpkin Pie</option>
+                <option value="pumpkin_seed" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765436/Pumpkin_Seed_fuxbyt.png">Pumpkin Seed</option>
+                <option value="rabbit_hide" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Rabbit_Hide_i1s1fd.png">Rabbit Hide</option>
+                <option value="rabbit_stew" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765431/Rabbit_Stew_eiqsc6.png">Rabbit Stew</option>
+                <option value="rabbits_foot" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Rabbit_s_Foot_l1xnon.png">Rabbit's Foot</option>
+                <option value="raft" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719733/Raft_vwf1sw.png">Raft</option>
+                <option value="bacon" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/v1726882511/Raw_Bacon_hkogvl.png">Raw Bacon</option>
+                <option value="beef" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765442/Raw_Beef_qweexs.png">Raw Beef</option>
+                <option value="chicken" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765437/Raw_Chicken_dvqbar.png">Raw Chicken</option>
+                <option value="fish" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765435/Raw_Fish_piqkpn.png">Raw Fish</option>
+                <option value="mutton" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765439/Raw_Mutton_xytorj.png">Raw Mutton</option>
+                <option value="porkchop" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765442/Raw_Porkchop_iqrljp.png">Raw Porkchop</option>
+                <option value="rabbit" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765443/Raw_Rabbit_jnaoav.png">Raw Rabbit</option>
+                <option value="salmon" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726766541/Raw_Salmon_n759fj.png">Raw Salmon</option>
+                <option value="red_flower" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688944/Flower2_ng4atf.png">Red Flower</option>
+                <option value="red_mushroom" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688933/Mushroom2_qj9jac.png">Red Mushroom</option>
+                <option value="red_mushroom_cap" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882515/Red_Mushroom_Cap_wpw6cr.png">Red Mushroom Cap</option>
+                <option value="red_mushroom_stem" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882516/Red_Mushroom_Stem_z6cniu.png">Red Mushroom Stem</option>
+                <option value="nether_bricks_red" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694193/Red_Nether_Bricks_embna7.png">Red Nether Bricks</option>
+                <option value="redstone" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765444/Redstone_unba0a.png">Redstone Dust</option>
+                <option value="redstone_lamp" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694194/Redstone_Lamp_hmwsba.png">Redstone Lamp</option>
+                <option value="redstone_ore" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694194/Redstone_Ore_vvcxm6.png">Redstone Ore</option>
+                <option value="redstone_torch" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694194/Redstone_Torch_vssp21.png">Redstone Torch</option>
+                <option value="rope" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694195/Rope_mbqgxw.png">Rope</option>
+                <option value="rotten_flesh" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765446/Rotten_Flesh_cvxmzv.png">Rotten Flesh</option>
+                <option value="saddle" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882517/Saddle_nlp6ev.png">Saddle</option>
+                <option value="sand" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694195/Sand_ou2qvk.png">Sand</option>
+                <option value="sandstone" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694195/Sandstone_fkgaiq.png">Sandstone</option>
+                <option value="santa_hat" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Santa_Hat_jzj24t.png">Santa Hat</option>
+                <option value="sapling" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882517/Sappling_jccbia.png">Sapling</option>
+                <option value="seaweed" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Seaweed_slvtvy.png">Seaweed</option>
+                <option value="seeds" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765446/Seeds_zdicrp.png">Seeds</option>
+                <option value="shades" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Shades_erre9t.png">Shades</option>
+                <option value="shear" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Shears_bfupbu.png">Shear</option>
+                <option value="shrub" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719734/Shrub_zrtj5c.png">Shrub</option>
+                <option value="sign" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Sign_ynevxj.png">Sign</option>
+                <option value="slime_block" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Slime_Block_jpvxr2.png">Slime Block</option>
+                <option value="slimeball" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Slimeball_mzqlxd.png">Slimeball</option>
+                <option value="snow" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882519/Snow_l5uwyn.png">Snow</option>
+                <option value="snow_ball" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Snow_Ball_mvkx2c.png">Snow Ball</option>
+                <option value="snow_block" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Snow_Block_eukorp.png">Snow Block</option>
+                <option value="soul_sand" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Soul_Sand_f9pq2y.png">Soul Sand</option>
+                <option value="soup" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765445/Soup_dpx8up.png">Soup</option>
+                <option value="spawn_egg" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Spawn_Egg_gie4jl.png">Spawn Egg</option>
+                <option value="spear" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Spear_zm6cba.png">Spear</option>
+                <option value="spider_eye" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765448/Spider_Eye_ealks0.png">Spider Eye</option>
+                <option value="steak" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765447/Steak_tl1ccw.png">Steak</option>
+                <option value="stick" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694183/Stick_cxkdco.png">Stick</option>
+                <option value="piston_sticky" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694184/Sticky_Piston_k7pe2f.png">Sticky Piston</option>
+                <option value="stone" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694184/Stone_gko4lw.png">Stone</option>
+                <option value="backdrop_stone" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890413/Backdrop_Stone_wjnnrb.png">Stone Backdrop</option>
+                <option value="stairs_stone" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694185/Stone_Stairs_ysp7ty.png">Stone Stairs</option>
+                <option value="slab_stone" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694184/Stone_Slab_fsqmax.png">Stone Slab</option>
+                <option value="stone_pickaxe" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890397/Stone_Pickaxe_ezr6rv.png">Stone Pickaxe</option>
+                <option value="stone_axe" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726891290/Stone_Axe_i7rx00.png">Stone Axe</option>
+                <option value="stone_hoe" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890397/Stone_Hoe_xkp77l.png">Stone Hoe</option>
+                <option value="stone_shovel" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890398/Stone_Shovel_z0vuoi.png">Stone Shovel</option>
+                <option value="stone_sword" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890400/Stone_Sword_vvirm6.png">Stone Sword</option>
+                <option value="stone_brick" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694184/Stone_Brick_rbds7j.png">Stone Brick</option>
+                <option value="backdrop_stone_brick" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890415/Backdrop_Stone_Brick_in3vxv.png">Stone Brick Backdrop</option>
+                <option value="stairs_stone_brick" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726891287/Stair_Stone_Brick_zmcacy.png">Stone Brick Stairs</option>
+                <option value="slab_stone_brick" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890909/Slab_Stone_Brick_tqvzow.png">Stone Brick Slab</option>
+                <option value="string" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/String_ngvv2d.png">String</option>
+                <option value="sugar" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775094/Sugar_pzzhmz.png">Sugar</option>
+                <option value="sugarcane" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719734/Sugarcane_tsu8k1.png">Sugarcane</option>
+                <option value="tnt" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719735/TNT_faqcxq.png">TNT</option>
+                <option value="minecart_tnt" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719619/TNT_Minecart_ybq1gr.png">TNT Minecart</option>
+                <option value="topaz" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Topaz_tqbllx.png">Topaz</option>
+                <option value="topaz_block" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687266/Block_of_Topaz_bzgnfy.png">Topaz Block</option>
+                <option value="topaz_ore" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719620/Topaz_Ore_ka07wl.png">Topaz Ore</option>
+                <option value="torch" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719620/Torch_qffndk.png">Torch</option>
+                <option value="water" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719621/Water_rl5hym.png">Water</option>
+                <option value="wheat" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775094/Wheat_gqbzfz.png">Wheat</option>
+                <option value="trap_door" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719621/Trap_Door_by0deq.png">Trap Door</option>
+                <option value="tree_wood" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719629/Wood_gbhuqz.png">Tree Wood</option>
+                <option value="wood" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719629/Wood_gbhuqz.png">Wood</option>
+                <option value="wooden_planks" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719679/Wooden_Planks_n0ponw.png">Wooden Planks</option>
+                <option value="backdrop_wooden_planks" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890415/Backdrop_Wooden_Plank_cwjyhd.png">Wooden Planks Backdrop</option>
+                <option value="stairs_wooden_planks" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726891287/Stair_Wooden_Plank_qdk1v0.png">Wooden Planks Stairs</option>
+                <option value="slab_wooden_planks" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726891287/Slab_Wooden_Plank_bl2osj.png">Wooden Planks Slab</option>
+                <option value="wooden_pickaxe" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890406/Wooden_Pickaxe_k45e3c.png">Wooden Pickaxe</option>
+                <option value="wooden_axe" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890401/Wooden_Axe_dg67if.png">Wooden Axe</option>
+                <option value="wooden_hoe" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890404/Wooden_Hoe_pfyxyi.png">Wooden Hoe</option>
+                <option value="wooden_shovel" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890407/Wooden_Shovel_pheilb.png">Wooden Shovel</option>
+                <option value="wooden_sword" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890409/Wooden_Sword_dvt16x.png">Wooden Sword</option>
+                <option value="fence" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890403/Wooden_Fence_gqqxcz.png">Wooden Fence</option>
+                <option value="fence_gate" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726752883/Wooden_Fence_Gate_stz1cv.png">Wooden Fence Gate</option>
+                <option value="wooden_door" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890403/Wooden_Door_ploffn.png">Wooden Door</option>
+                <option value="pressure_plate_wooden" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726893427/Wooden_Pressure_Plate_z8mdzz.png">Wooden Pressure Plate</option>
+                <option value="wool" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890410/Wool_ukof8x.png">Wool</option>
+                <option value="backdrop_wool" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890418/Backdrop_Wool_s6sfpm.png">Wool Backdrop</option>
+                <option value="yellow_flower" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890412/Yellow_Flower_pk30c3.png">Yellow Flower</option>
+            </select>
+        </td>
+        <tr id="additionalRows2" class="additional-rows" style="display: none;">
+            <td id="QuantitySText">Cantidad:</td>
+            <td><input type="number" id="additional2" max="1000"></td>
+        </tr>
+        <tr id="additionalRows3" class="additional-rows" style="display: none;">
+            <td>Bonus:</td>
+            <td><input type="number" id="additional3"></td>
+        </tr>
+        <tr id="additionalRows4" class="additional-rows" style="display: none;">
+            <td>Loot Bonus:</td>
+            <td><input type="number" id="additional4"></td>
+        </tr>
+        <tr id="additionalRows5" class="additional-rows" style="display: none;">
+            <td id="ChanceText">Oportunidad:</td>
+            <td><input type="text" id="additional5" placeholder="Proximamente Disponible..." disabled></td>
+        </tr>
+        <tr id="additionalRows6" class="additional-rows" style="display: none;">
+            <td id="VarianteText">Variante:</td>
+            <td>
+                <select id="additional6" class="select-with-images">
+                    <option value="">--Seleccionar--</option>
+                    <option value="mooshroom" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/v1726898090/MoshroomHead_ekdzm1.png">Mooshroom</option>
+                    <option value="cowctus" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898075/CactuscowHead_igghuq.png">Cactus Cow</option>
+                    <option value="normal" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898081/CowHead_z4cmpi.png">Normal</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="additionalRows7" class="additional-rows" style="display: none;">
+            <td id="ShearedText">¿Está esquilada?:</td>
+            <td><input type="text" id="additional7" placeholder="Fuera de Servicio" disabled></td>
+        </tr>
+        <tr id="additionalRows9" class="additional-rows" style="display: none;">
+            <td id="isBabyText">¿Es bebé?:</td>
+            <td>
+                <select id="additional9" onchange="handleBabyChange()">
+                    <option value="">--Seleccionar--</option>
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="additionalRows10" class="additional-rows" style="display: none;">
+            <td>Color:</td>
+            <td>
+                <select id="additional10" onchange="handleColorChange()" class="select-with-images">
+                    <option value="">--Seleccionar--</option>
+                    <option value="red"  data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Red_ow8fz1.png">Rojo</option>
+                    <option value="green" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Green_hojzk0.png">Verde</option>
+                    <option value="blue" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Blue_nfyfrs.png">Azul</option>
+                    <option value="brown" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Brown_n54tmt.png">Marrón</option>
+                    <option value="cyan" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Cyan_ietx4o.png">Cian</option>
+                    <option value="lightblue" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Light_Blue_jiivto.png">Azul claro</option>
+                    <option value="lightgreen" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Light_Green_xozy6s.png">Verde claro</option>
+                    <option value="magenta" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Magenta_wk1euz.png">Magenta</option>
+                    <option value="orange" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Orange_xkxwgg.png">Naranja</option>
+                    <option value="pink" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Pink_nilaad.png">Rosa</option>
+                    <option value="purple" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Purple_r0jjhk.png">Púrpura</option>
+                    <option value="white" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/White_hjvvrz.png">Blanco</option>
+                    <option value="yellow" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Yellow_dm8nsr.png">Amarillo</option>
+                    <option value="lightgray" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Light_Gray_hjjfrv.png">Gris claro</option>
+                    <option value="gray" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/v1726962877/Gray_fkir91.png">Gris</option>
+                    <option value="black" data-image="https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Black_feewkv.png">Negro</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="additionalRows11" class="additional-rows" style="display: none;">
+            <td id="onFireText">¿Está en llamas?:</td>
+            <td>
+                <select id="additional11">
+                    <option value="">--Seleccionar--</option>
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="additionalRows12" class="additional-rows" style="display: none;">
+            <td id="SizeText">Tamaño:</td>
+            <td>
+                <select id="additional12">
+                    <option value="">--Seleccionar--</option>
+                    <option value="1">Pequeño</option>
+                    <option value="2">Mediano</option>
+                    <option value="3">Grande</option>
+                </select>
+            </td>
+        </tr>
+<td colspan="2">
+    <button id="AddLootText" class="add-loot" onclick="addLoot()">Agregar Loot</button>
+    <div class="loot-list" id="lootList"></div>
+    
+    <!-- Botón principal con engranaje dentro -->
+    <button id="CommandSummonText" class="command-button" onclick="generateCommand()">
+        Generar Comando
+        <!-- Añadido correctamente el ícono de engranaje -->
+        <span class="gear-button" onclick="toggleOptions(event)"><i class="bi bi-gear"></i></span>
+    </button>
+
+    <button id="copyButton" onclick="copyCommand()">Copiar Comando</button>
+
+    <!-- Opciones que aparecen al presionar el engranaje -->
+    <div id="commandOptions" class="command-options">
+        <button id="ManualText" class="option-button" onclick="selectOption('Manual')">Manual</button>
+        <button id="AutoText" class="option-button" onclick="selectOption('Automático')">Automático</button>
+    </div>
+</td>
+    </table>
+    <pre id="outputCommand">/summon </pre>
+
+    <script> 
+    $(document).ready(function() {
+    // Función para formatear cada opción del select
+    function formatOption(option) {
+        if (!option.id) return option.text; // Si no hay ID, retorna solo el texto.
+
+        var placeholderImage = 'https://via.placeholder.com/64'; // Imagen temporal de 64x64
+        var imageUrl = $(option.element).data('image');
+
+        // Retorna la opción con una imagen de placeholder que será remplazada más adelante
+        return $('<span><img class="lazy-load" data-src="' + imageUrl + '" src="' + placeholderImage + '" style="width: 20px; height: 20px; margin-right: 10px;" onerror="this.onerror=null; this.src=\'https://via.placeholder.com/64\'" />' + option.text + '</span>');
+    }
+
+    // Inicializa Select2 con el formato personalizado para las imágenes
+    $('.select-with-images').select2({
+        templateResult: formatOption,  // Formatea cómo se muestran las opciones en el dropdown
+        templateSelection: formatOption,  // Formatea cómo se muestra la opción seleccionada
+    });
+
+    // Configurar IntersectionObserver para lazy loading
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                const src = img.getAttribute('data-src');
+                if (src) {
+                    img.src = src; // Reemplazar la imagen placeholder por la real
+                    img.removeAttribute('data-src'); // Remover el atributo data-src
+                    observer.unobserve(img); // Dejar de observar esta imagen
+                }
+            }
+        });
+    });
+
+    // Solo iniciar lazy load cuando el select se abra
+    $('.select-with-images').on('select2:open', function() {
+        const lazyImages = document.querySelectorAll('.select2-results__option img.lazy-load');
+        lazyImages.forEach(image => observer.observe(image));
+    });
+});
+    
+     $(document).ready(function() {
+         function formatOption(option) {
+             if (!option.id) return option.text;  // Si no hay ID, retorna solo el texto.
+     
+             // Obtén la URL de la imagen desde el atributo data-image.
+             var imageUrl = $(option.element).data('image');
+             if (imageUrl) {
+                 // Si la URL de la imagen está presente, retorna el HTML que incluye la imagen y el texto.
+                 return $('<span><img src="' + imageUrl + '" style="width: 20px; height: 20px; margin-right: 10px;" />' + option.text + '</span>');
+             }
+     
+             return option.text;  // Si no hay imagen, retorna solo el texto.
+         }
+     
+         // Inicializa Select2 con el formato personalizado para las imágenes.
+         $('.select-with-images').select2({
+             templateResult: formatOption,  // Cómo se muestran las opciones en el dropdown.
+             templateSelection: formatOption,  // Cómo se muestra la opción seleccionada.
+         });
+     });
+    
+     let lootItems = [];
+     let currentLanguage = 'es';
+     
+     document.getElementById('toggle-mode').addEventListener('click', function() {
+         document.body.classList.toggle('dark-mode');
+     
+         const icon = this.querySelector('i');
+         const modeText = document.getElementById('modeText');
+     
+         if (document.body.classList.contains('dark-mode')) {
+             icon.classList.remove('bi-moon');
+             icon.classList.add('bi-sun');
+             modeText.innerText = currentLanguage === 'es' ? 'Modo Claro' : 'Light Mode';
+         } else {
+             icon.classList.remove('bi-sun');
+             icon.classList.add('bi-moon');
+             modeText.innerText = currentLanguage === 'es' ? 'Modo Oscuro' : 'Dark Mode';
+         }
+     });
+     
+     function showAlert(messageKey) {
+         const messages = {
+             es: {
+                 AddLoot: "Por favor, seleccione un ítem",
+                 AddLootCase: "Este ítem ya ha sido agregado.",
+                 commandGenerated: "Por favor, seleccione un tipo de mob.",
+                 autoMode: "Modo automático activado.",
+                 manualMode: "Modo manual activado."
+             },
+             en: {
+                 AddLoot: "Please select an item.",
+                 AddLootCase: "This item has already been added.",
+                 commandGenerated: "Please select a mob type.",
+                 autoMode: "Automatic mode enabled.",
+                 manualMode: "Manual mode enabled."
+             }
+         };
+     
+         const message = messages[currentLanguage][messageKey];
+         const alertContainer = document.getElementById('alertContainer');
+         alertContainer.textContent = message;
+         alertContainer.classList.add('show');
+     
+         setTimeout(() => {
+             alertContainer.classList.remove('show');
+             alertContainer.classList.add('hide');
+             setTimeout(() => {
+                 alertContainer.classList.remove('hide');
+             }, 300);
+         }, 3000);
+     }
+
+     // Función para alternar el menú móvil
+     function toggleMobileMenu() {
+         const menu = document.querySelector('.menu');
+         menu.classList.toggle('show');
+     }
+     
+     // Función para cerrar el menú móvil después de seleccionar una opción
+     function closeMobileMenu() {
+         const menu = document.querySelector('.menu');
+         menu.classList.remove('show');
+     }
+     
+     // Añadir el evento de cierre a cada enlace o botón del menú
+     document.querySelectorAll('.menu ul.menu-list li a, .menu ul.menu-list li button').forEach(item => {
+         item.addEventListener('click', closeMobileMenu);
+     });
+
+     // Función para limpiar subcasillas y compatibilidad con select2
+     function clearSubFields(containerId) {
+         const container = document.getElementById(containerId);
+     
+         // Reseteamos todos los input y select dentro del contenedor
+         const inputs = container.querySelectorAll('input, select');
+         inputs.forEach(input => {
+             input.value = '';  // Resetear a valor predeterminado
+             input.checked = false; // Desmarcar cualquier checkbox o radio
+         });
+     
+         const select2Elements = container.querySelectorAll('.select2');
+         select2Elements.forEach(select2 => {
+             $(select2).val(null).trigger('change'); 
+         });
+     }
+
+     function toggleArmorOptions() {
+         const armorSelection = document.getElementById('armor').value;
+     
+         // Obtener las filas de las piezas de armadura
+         const helmetRow = document.getElementById('helmetRow');
+         const chestplateRow = document.getElementById('chestplateRow');
+         const leggingsRow = document.getElementById('leggingsRow');
+         const bootsRow = document.getElementById('bootsRow');
+     
+         // Mostrar/ocultar filas y limpiar los selectores si es necesario
+         if (armorSelection === 'yes') {
+             // Mostrar las filas de armadura
+             helmetRow.style.display = 'table-row';
+             chestplateRow.style.display = 'table-row';
+             leggingsRow.style.display = 'table-row';
+             bootsRow.style.display = 'table-row';
+         } else {
+             // Ocultar las filas de armadura
+             helmetRow.style.display = 'none';
+             chestplateRow.style.display = 'none';
+             leggingsRow.style.display = 'none';
+             bootsRow.style.display = 'none';
+     
+             // Limpiar y restablecer los select2
+             clearSelect2Field('helmetSelect');
+             clearSelect2Field('chestplateSelect');
+             clearSelect2Field('leggingsSelect');
+             clearSelect2Field('bootsSelect');
+         }
+     }
+     
+     // Función para limpiar y restablecer los selectores select2
+     function clearSelect2Field(selectId) {
+         const selectElement = document.getElementById(selectId);
+         $(selectElement).val(null).trigger('change'); // Restablecer el valor y actualizar select2
+     }
+
+     function resetFields() {
+         // Restablecer los valores de select2 para 'mobType', 'drops', y otros select2
+         $('#mobType').val(null).trigger('change');  // Restablece el select2 de 'mobType'
+         $('#drops').val(null).trigger('change');    // Restablece el select2 de 'drops'
+         $('#positionType').val(null).trigger('change');  // Resetea el select2 de 'positionType'
+         $('#additional10').val(null).trigger('change');  
+
+
+         // Actualiza los campos de posición después de restablecer
+         updatePositionFields();
+     
+         // Mostrar la fila de 'defaultDropsRow' por defecto
+         document.getElementById('defaultDropsRow').style.display = 'table-row';
+     
+         // Ocultar casillas adicionales relacionadas con el mob
+         const rowsToHide = [
+             'creeperChargedRow', 
+             'spawnskinOptions', 
+             'aggroRow', 
+             'handItemRow', 
+             'armorRow', 
+             'babyRow', 
+             'babyTimeRow', 
+             'helmetRow', 
+             'chestplateRow', 
+             'leggingsRow', 
+             'bootsRow'
+         ];
+         rowsToHide.forEach(rowId => {
+             const row = document.getElementById(rowId);
+             if (row) {
+                 row.style.display = 'none';  // Oculta todas estas filas
+             }
+         });
+     
+         // Ocultar las opciones de armadura si están visibles
+         toggleArmorOptions();  // Asegura que las opciones de armadura se oculten correctamente
+     
+         // Contraer todas las casillas desplegables de grupo de posición
+         const positionGroups = document.querySelectorAll('.position-group');
+         positionGroups.forEach(group => group.style.display = 'none');
+     
+         // Limpiar cualquier contenido dentro de los divs de loot (botín)
+         const lootList = document.getElementById('lootList');
+         if (lootList) {
+             lootList.innerHTML = '';  // Limpia el contenido de 'lootList'
+         }
+     
+         // Restablecer todos los campos de texto, número y select
+         $('input[type="text"], input[type="number"], input[type="checkbox"], input[type="radio"], textarea').val('');  // Restablece los campos de texto, numéricos y textarea
+         $('input[type="checkbox"], input[type="radio"]').prop('checked', false);  // Desmarca todos los checkboxes y radios
+     
+         // Restablecer todos los selects a su valor por defecto
+         $('select').each(function() {
+             $(this).val(null).trigger('change');  // Resetea select2 y selects normales
+         });
+         
+          lootItems = [];  // Vacía el array de lootItems
+     
+         // Ocultar todas las filas adicionales relacionadas a los 'drops'
+         const additionalRows = document.querySelectorAll('.additional-rows');
+         additionalRows.forEach(row => row.style.display = 'none');
+     
+         // Restablecer también los campos dentro de las filas adicionales
+         additionalRows.forEach(row => {
+             const inputs = row.querySelectorAll('input, select');
+             inputs.forEach(input => {
+                 input.value = ''; 
+             });
+         });
+     
+         updateMobOptions(); 
+         
+         const outputCommand = document.getElementById('outputCommand');
+         if (outputCommand) {
+             outputCommand.textContent = '/summon ';
+         }
+     }
+
+     // Función para actualizar los campos de posición
+     function updatePositionFields() {
+         const positionType = document.getElementById('positionType').value;
+         const relativeFields = document.querySelectorAll('.relative-pos');
+         const absoluteFields = document.querySelectorAll('.absolute-pos');
+     
+         relativeFields.forEach(row => row.style.display = 'none');
+         absoluteFields.forEach(row => row.style.display = 'none');
+     
+         if (positionType === 'relative') {
+             relativeFields.forEach(row => row.style.display = 'table-row');
+         } else if (positionType === 'absolute') {
+             absoluteFields.forEach(row => row.style.display = 'table-row');
+         }
+     }
+
+     $(document).ready(function() {
+         // Inicializa select2 con imágenes
+         $('#mobType').select2({
+             templateResult: formatOption,  // Muestra imágenes en las opciones
+             templateSelection: formatOption  // Muestra la imagen en la opción seleccionada
+         });
+     
+         // Usa change.select2 para detectar cambios sin afectar las imágenes
+         $('#mobType').on('change.select2', function() {
+             updateMobOptions();  // Llama a la función que maneja las casillas condicionales
+         });
+     });
+
+// Función para actualizar las opciones basadas en las condiciones del mob
+function updateConditionals() {
+    const drops = document.getElementById('drops').value;
+    const mobType = $('#mobType').val(); 
+
+    // Selecciona todas las filas adicionales y las oculta
+    const additionalRows = document.querySelectorAll('.additional-rows');
+    additionalRows.forEach(row => {
+        row.style.display = 'none';  // Oculta todas las filas adicionales por defecto
+    });
+
+    // Si los drops están activados, mostramos las filas adicionales
+    if (drops === '1') {
+        document.getElementById('additionalRows').style.display = 'table-row';
+        document.getElementById('additionalRows2').style.display = 'table-row';
+        document.getElementById('additionalRows3').style.display = 'table-row';
+        document.getElementById('additionalRows4').style.display = 'table-row';
+        document.getElementById('additionalRows5').style.display = 'table-row';
+        document.getElementById('additionalRows11').style.display = 'table-row';
+
+        const animalMobs = ['cow', 'sheep', 'mooshroom', 'pig', 'rabbit', 'wolf', 'cowctus', 'chicken'];
+        if (animalMobs.includes(mobType) && mobType !== 'squid' && mobType !== 'bat') {
+            document.getElementById('additionalRows9').style.display = 'table-row';
+        }
+
+        if (mobType === 'cow' || mobType === 'mooshroom' || mobType === 'cowctus') {
+            document.getElementById('additionalRows6').style.display = 'table-row';
+        }
+
+        if (mobType === 'sheep') {
+            document.getElementById('additionalRows7').style.display = 'table-row';
+            document.getElementById('additionalRows10').style.display = 'table-row';
+        }
+
+        if (mobType === 'slime' || mobType === 'magmacube') {
+            document.getElementById('additionalRows12').style.display = 'table-row';
+        }
+    }
+}
+
+     document.getElementById('quantity').addEventListener('input', function() {
+         var quantityInput = document.getElementById('quantity');
+         var value = quantityInput.value;
+     
+         if (value.includes('.')) {
+             quantityInput.value = Math.floor(parseFloat(value));
+         }
+     
+         var intValue = parseInt(quantityInput.value, 10);
+     
+         if (!isNaN(intValue)) {
+             if (intValue > 20) {
+                 quantityInput.value = 20;
+             }
+             if (intValue < 1) {
+                 quantityInput.value = 1; 
+             }
+         }
+     });
+     
+     document.getElementById('additional2').addEventListener('input', function() {
+         var quantityInput = document.getElementById('additional2');
+         var value = quantityInput.value;
+     
+         if (value.includes('.')) {
+             quantityInput.value = Math.floor(parseFloat(value));
+         }
+     
+         var intValue = parseInt(quantityInput.value, 10);
+     
+         if (!isNaN(intValue)) {
+             if (intValue > 10000) {
+                 quantityInput.value = 10000; 
+             }
+             if (intValue < 1) {
+                 quantityInput.value = 1; 
+             }
+         }
+     });
+     
+     document.getElementById('additional3').addEventListener('input', function() {
+         var quantityInput = document.getElementById('additional3');
+         var value = quantityInput.value;
+     
+         if (value.includes('.')) {
+             quantityInput.value = Math.floor(parseFloat(value));
+         }
+     
+         var intValue = parseInt(quantityInput.value, 10);
+     
+         if (!isNaN(intValue)) {
+             if (intValue > 10000) {
+                 quantityInput.value = 10000;  
+             }
+             if (intValue < 1) {
+                 quantityInput.value = 1; 
+             }
+         }
+     });
+     
+     document.getElementById('additional4').addEventListener('input', function() {
+         var quantityInput = document.getElementById('additional4');
+         var value = quantityInput.value;
+     
+         if (value.includes('.')) {
+             quantityInput.value = Math.floor(parseFloat(value));
+         }
+     
+         var intValue = parseInt(quantityInput.value, 10);
+     
+         if (!isNaN(intValue)) {
+             if (intValue > 10000) {
+                 quantityInput.value = 10000;  
+             }
+             if (intValue < 1) {
+                 quantityInput.value = 1; 
+             }
+         }
+     });
+     
+     document.getElementById('health').addEventListener('input', function() {
+         var quantityInput = document.getElementById('health');
+         var value = parseInt(quantityInput.value, 10);
+
+         if (value > 100000) {
+             quantityInput.value = 100000;
+         }
+         
+         if (value < 1) {
+             quantityInput.value = 1;
+         }
+     });
+     
+     document.getElementById('babyTime').addEventListener('input', function() {
+         var quantityInput = document.getElementById('babyTime');
+         var value = quantityInput.value;
+     
+         if (value.includes('.')) {
+             quantityInput.value = Math.floor(parseFloat(value));
+         }
+     
+         var intValue = parseInt(quantityInput.value, 10);
+     
+         if (!isNaN(intValue)) {
+         
+             if (intValue > 86400) {
+                 quantityInput.value = 86400;
+             }
+     
+             if (intValue < 1) {
+                 quantityInput.value = 1;
+             }
+         }
+     });
+
+      // Función para manejar los cambios en la opción "baby"
+      function handleBabyChange() {
+          const baby = document.getElementById('baby').value;
+          const babyTimeRow = document.getElementById('babyTimeRow');
+          const shearedInput = document.getElementById('additional7');
+      
+          if (baby === 'time') {
+              babyTimeRow.style.display = 'table-row';
+          } else {
+              babyTimeRow.style.display = 'none';
+          }
+      }
+
+      // Función para manejar los cambios en la opción "color"
+      function handleColorChange() {
+          const color = document.getElementById('additional10').value;
+          const sheared = document.getElementById('additional7');
+          const baby = document.getElementById('additional9');
+      
+      }
+
+function updateMobOptions() {
+    // Obtenemos el valor del mobType directamente desde select2
+    const mobType = $('#mobType').val(); // El formato de imágenes sigue funcionando correctamente
+    $('#drops').val(null).trigger('change');    // Restablece el select2 de 'drops'
+    $('#positionType').val(null).trigger('change');  // Resetea el select2 de 'positionType'
+    
+    // Contraer todas las casillas desplegables de grupo de posición
+    const positionGroups = document.querySelectorAll('.position-group');
+    positionGroups.forEach(group => group.style.display = 'none');
+    
+    // Limpiar cualquier contenido dentro de los divs de loot (botín)
+    const lootList = document.getElementById('lootList');
+    if (lootList) {
+        lootList.innerHTML = '';  // Limpia el contenido de 'lootList'
+    }
+    
+    lootItems = [];  // Vacía el array de lootItems
+    
+    // Restablecer todos los campos de texto, número y select
+    $('input[type="text"], input[type="number"], input[type="checkbox"], input[type="radio"], textarea').val('');  // Restablece los campos de texto, numéricos y textarea
+    $('input[type="checkbox"], input[type="radio"]').prop('checked', false);  // Desmarca todos los checkboxes y radios
+    
+    // Restablecer todos los selects a su valor por defecto, excepto 'mobType'
+    $('select').each(function() {
+        if (this.id !== 'mobType') { // Excluir el select con id 'mobType'
+            $(this).val(null).trigger('change');  // Resetea select2 y selects normales
+        }
+    });
+    
+    // Oculta todas las filas condicionales inicialmente
+    const rowsToHide = [
+        'creeperChargedRow', 
+        'spawnskinOptions', 
+        'aggroRow', 
+        'handItemRow', 
+        'armorRow', 
+        'babyRow', 
+        'babyTimeRow', 
+        'helmetRow', 
+        'chestplateRow', 
+        'leggingsRow', 
+        'bootsRow'
+    ];
+
+    // Recorre todas las filas que deben estar ocultas y las oculta
+    rowsToHide.forEach(rowId => {
+        const row = document.getElementById(rowId);
+        if (row) {
+            row.style.display = 'none'; // Asegúrate de que la fila esté oculta
+        }
+    });
+
+    // Lógica para mostrar filas basadas en el tipo de mob
+    if (mobType === 'creeper') {
+        document.getElementById('creeperChargedRow').style.display = 'table-row';
+    } else if (mobType === 'spawnskin') {
+        document.getElementById('spawnskinOptions').style.display = 'table-row';
+        document.getElementById('aggroRow').style.display = 'table-row';
+        document.getElementById('armorRow').style.display = 'table-row';
+    } else if (mobType === 'pigman' || mobType === 'enderman') {
+        document.getElementById('handItemRow').style.display = 'table-row';
+    } else if (mobType === 'zombie') {
+        document.getElementById('armorRow').style.display = 'table-row';
+    } else if (mobType === 'sheep') {
+        document.getElementById('additional7').disabled = true; 
+        document.getElementById('babyRow').style.display = 'table-row';
+    }
+
+    // Mostrar la fila del bebé para ciertos mobs animales
+    const animalMobs = ['cow', 'sheep', 'mooshroom', 'pig', 'rabbit', 'wolf', 'cowctus', 'chicken'];
+    if (animalMobs.includes(mobType)) {
+        document.getElementById('babyRow').style.display = 'table-row';
+    }
+
+    // Llamar a updateConditionals para manejar las condiciones adicionales
+    updateConditionals();
+
+    // Ocultar las opciones de armadura si no son aplicables
+    toggleArmorOptions();
+}
+
+function generateCommand() {
+    var mobType = document.getElementById('mobType').value;
+    if (!mobType) {
+        showAlert("commandGenerated");
+        return;
+    }
+
+    var quantity = document.getElementById('quantity').value || 1;
+    var posX = document.getElementById('posX').value;
+    var posY = document.getElementById('posY').value;
+    var absPosX = document.getElementById('absPosX').value;
+    var absPosY = document.getElementById('absPosY').value;
+    var name = document.getElementById('name').value;
+    var health = document.getElementById('health').value;
+    var holding = document.getElementById('holding').value;
+    var armorSelection = document.getElementById('armor').value;
+    var defaultDrops = document.getElementById('defaultDrops').value;
+    var drops = document.getElementById('drops').value;
+    var skin = document.getElementById('skin').value;
+    var aggro = document.getElementById('aggro').value;
+    var charged = document.getElementById('charged').value;
+    var baby = document.getElementById('baby').value;
+    var babyTime = document.getElementById('babyTime').value;
+
+    // Obtener los valores de las casillas de armadura desde select2
+    var helmet = $('#helmetSelect').val() || '{}';
+    var chestplate = $('#chestplateSelect').val() || '{}';
+    var leggings = $('#leggingsSelect').val() || '{}';
+    var boots = $('#bootsSelect').val() || '{}';
+
+    // Construir la lista de armadura
+    var armorList = `[${helmet === '{}' ? helmet : `"${helmet}"`}, ${chestplate === '{}' ? chestplate : `"${chestplate}"`}, ${leggings === '{}' ? leggings : `"${leggings}"`}, ${boots === '{}' ? boots : `"${boots}"`}]`;
+
+    var command = `/summon ${mobType}`;
+    if (quantity > 0) command += ` ${quantity}`;
+
+    if (document.getElementById('positionType').value === 'relative') {
+        command += ` ~${posX || ""} ~${posY || ""}`;
+    } else if (document.getElementById('positionType').value === 'absolute') {
+        command += ` ${absPosX || ""} ${absPosY || ""}`;
+    } else if (checkDataTags()) {
+        command += ` ~ ~`;
+    }
+
+    command += ` {`;
+
+    if (name) command += `name:"${name}", `;
+    if (health) command += `health:${health}, `;
+    if (holding && (mobType === 'pigman' || mobType === 'enderman')) command += `holding:"${holding}", `;
+    if (armorSelection === 'yes' && armorList !== '[{}, {}, {}, {}]') command += `armor:${armorList}, `;
+    if (defaultDrops !== "" && mobType !== 'wolf') command += `defaultDrops:${defaultDrops === 'true' ? true : false}, `;
+
+    if (drops === '1' && lootItems.length > 0) {
+        command += `drops:[`;
+        lootItems.forEach(item => {
+            command += `{item:{id:"${item.id}"}`;
+            if (item.quantity) command += `, quantity:${item.quantity}`;
+            if (item.bonus) command += `, bonus:${item.bonus}`;
+            if (item.lootBonus) command += `, lootBonus:${item.lootBonus}`;
+            if (item.chance) command += `, chance:${item.chance}`;
+            if (item.variant) command += `, variant:"${item.variant}"`;
+            if (item.sheared && !item.sheared.disabled) command += `, sheared:${item.sheared}`;
+            if (item.isBaby && !item.isBaby.disabled) command += `, isBaby:${item.isBaby}`;
+            if (item.color && mobType !== 'wolf') command += `, color:"${item.color}"`;
+            if (item.onFire) command += `, onFire:${item.onFire}`;
+            if (item.size) command += `, size:${item.size}`;
+            command += `}, `;
+        });
+        command = command.replace(/, $/, "");
+        command += `], `;
+    }
+
+    if (skin && mobType === 'spawnskin') command += `skin:"${skin}", `;
+    if (aggro && mobType === 'spawnskin') command += `aggro:"${aggro}", `;
+    if (charged !== "") command += `charged:${charged}, `;
+    if (baby === "true" && ['cow', 'sheep', 'mooshroom', 'pig', 'chicken', 'rabbit', 'wolf', 'cowctus'].includes(mobType)) command += `baby:true, `;
+    if (baby === "time" && babyTime) command += `baby:${babyTime}, `;
+
+    command = command.replace(/, $/, "");
+    command += "}";
+
+    document.getElementById('outputCommand').textContent = command;
+}
+
+      
+// Variable para rastrear el estado automático/manual
+let isAutoMode = false; 
+
+// Función para manejar la visibilidad de las opciones
+function toggleOptions(event) {
+    event.stopPropagation();
+    var options = document.getElementById("commandOptions");
+    options.classList.toggle("show-options");
+}
+
+// Función para manejar la selección de una opción (Manual o Automático)
+function selectOption(option) {
+    if (option === "Automático") {
+        showAlert('autoMode');
+        isAutoMode = true;
+        document.getElementById("CommandSummonText").disabled = true;
+        document.getElementById("CommandSummonText").style.backgroundColor = 'gray'; // Deshabilitar botón y cambiar color
+        autoGenerateCommand(); // Generar comando automáticamente
+        enableAutoUpdate();    // Habilitar la actualización automática
+    } else {
+        showAlert('manualMode');
+        isAutoMode = false;
+        document.getElementById("CommandSummonText").disabled = false;
+        document.getElementById("CommandSummonText").style.backgroundColor = ''; // Rehabilitar botón y restaurar color
+        disableAutoUpdate();   // Deshabilitar la actualización automática
+    }
+
+    var options = document.getElementById("commandOptions");
+    options.classList.remove("show-options");
+}
+
+// Función que genera el comando automáticamente en modo automático
+function autoGenerateCommand() {
+    if (isAutoMode) {
+        generateCommand(); // Llamar a la función de generación de comando
+    }
+}
+
+// Habilitar la actualización automática utilizando un MutationObserver para cambios en los select2
+function enableAutoUpdate() {
+    const inputs = document.querySelectorAll('input, select');
+    
+    // Añadir evento a todos los inputs y selects estándar
+    inputs.forEach(input => {
+        input.addEventListener('input', autoGenerateCommand); // Detectar cambios en inputs y selects estándar
+    });
+
+    // Observador para los select2
+    const observer = new MutationObserver(autoGenerateCommand);
+
+    // Configurar el observador en cada select2
+    $('.select2').each(function() {
+        observer.observe(this, {
+            attributes: true, // Observa cambios en atributos (como la selección en select2)
+            childList: true,   // Observa cambios en la lista de hijos
+            subtree: true      // Observa dentro de los nodos hijos
+        });
+    });
+
+    // Guardamos el observador en una variable global para poder desconectarlo luego
+    window.select2Observer = observer;
+}
+
+// Deshabilitar la actualización automática
+function disableAutoUpdate() {
+    const inputs = document.querySelectorAll('input, select');
+    
+    // Eliminar eventos de inputs y selects estándar
+    inputs.forEach(input => {
+        input.removeEventListener('input', autoGenerateCommand); // Remover eventos de inputs y selects
+    });
+
+    // Desconectar el observador para los select2 si estaba activo
+    if (window.select2Observer) {
+        window.select2Observer.disconnect();
+    }
+}
+
+// Cerrar las opciones si se hace clic fuera del botón del engranaje
+window.onclick = function(event) {
+    var options = document.getElementById("commandOptions");
+    if (!event.target.matches('.gear-button') && options.classList.contains('show-options')) {
+        options.classList.remove('show-options'); // Cerrar el menú si está abierto y haces clic fuera
+    }
+};
+      
+let editingIndex = null;
+let buttonTimeout = null;
+
+// Función para resetear los campos de entrada
+function resetLootInputs() {
+    const fields = ['additional1', 'additional2', 'additional3', 'additional4', 'additional5', 'additional6', 'additional7', 'additional9', 'additional10', 'additional11', 'additional12'];
+    fields.forEach(field => document.getElementById(field).value = "");
+    $('#additional1').val(null).trigger('change');
+    $('#additional10').val(null).trigger('change');
+    toggleSaveButton(false);
+    clearItemHighlights(); // Restablecer el estilo original
+}
+
+// Función para añadir o guardar loot a la lista
+function addLoot() {
+    const loot = getLootFromFormInputs();
+
+    if (!loot.id || loot.id === "--Seleccionar--") {
+        showAlert("AddLoot");
+        return;
+    }
+
+    // Verificar si el ítem ya existe en la lista
+    if (lootItems.some(item => item.id === loot.id && editingIndex === null)) {
+        showAlert("AddLootCase");
+        return;
+    }
+
+    if (editingIndex !== null) {
+        lootItems[editingIndex] = loot;
+        editingIndex = null;
+        enableSelect();
+        enableLootInteraction();
+    } else {
+        lootItems.push(loot);
+    }
+
+    displayLootItems();
+    resetLootInputs();
+}
+
+// Obtener los valores del formulario de inputs
+function getLootFromFormInputs() {
+    return {
+        id: document.getElementById('additional1').value,
+        quantity: document.getElementById('additional2').value || "",
+        bonus: document.getElementById('additional3').value || "",
+        lootBonus: document.getElementById('additional4').value || "",
+        chance: document.getElementById('additional5').value || "",
+        variant: document.getElementById('additional6').value || "",
+        sheared: document.getElementById('additional7').value || "",
+        isBaby: document.getElementById('additional9').value || "",
+        color: document.getElementById('additional10').value || "",
+        onFire: document.getElementById('additional11').value || "",
+        size: document.getElementById('additional12').value || ""
+    };
+}
+
+// Función temporal para mostrar emojis en el botón
+function showTempButtonState(emoji, className, duration) {
+    const buttons = document.querySelectorAll(`.${className}`);
+    buttons.forEach(button => {
+        const originalContent = button.innerHTML;
+        button.innerHTML = emoji;
+        if (buttonTimeout) clearTimeout(buttonTimeout);
+        buttonTimeout = setTimeout(() => {
+            button.innerHTML = originalContent;
+        }, duration);
+    });
+}
+
+// Deshabilitar el select2 al editar un ítem
+function disableSelect() {
+    $('#additional1').prop('disabled', true);
+}
+
+// Habilitar el select2 tras guardar un ítem
+function enableSelect() {
+    $('#additional1').prop('disabled', false).trigger('change');
+}
+
+// Función para mostrar los ítems en la interfaz
+function displayLootItems() {
+    const lootList = document.getElementById('lootList');
+    lootList.innerHTML = "";
+
+    lootItems.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = "loot-item";
+        div.dataset.index = index;  // Agregar el índice para identificar el ítem
+
+        // Buscar la opción correspondiente en el select para obtener la URL de la imagen
+        const option = document.querySelector(`#holding option[value="${item.id}"]`);
+        const itemName = option ? option.textContent : item.id;
+        const itemImage = option ? option.getAttribute('data-image') : 'https://via.placeholder.com/64'; // Imagen por defecto si no se encuentra
+        
+        // Crear el contenedor del ítem con la imagen
+        const itemContainer = document.createElement('div');
+        itemContainer.className = 'item-container';
+
+        // Crear el elemento de imagen
+        const itemImg = document.createElement('img');
+        itemImg.src = itemImage;  // Establecer la URL de la imagen
+        itemImg.alt = itemName;
+        itemImg.className = 'item-image';  // Aplicar el estilo común de las imágenes
+        itemImg.onerror = () => {
+            itemImg.src = 'https://via.placeholder.com/64';  // En caso de error en la carga de imagen
+        };
+
+        // Crear el elemento de texto
+        const itemText = document.createElement('span');
+        itemText.textContent = itemName;
+
+        // Añadir la imagen y el texto al contenedor del ítem
+        itemContainer.appendChild(itemImg);
+        itemContainer.appendChild(itemText);
+
+        // Añadir el contenedor del ítem al div principal
+        div.appendChild(itemContainer);
+
+        // Crear botones para Editar, Guardar, y Eliminar
+        const buttonContainer = createButtonContainer(index);
+        div.appendChild(buttonContainer);
+
+        // Añadir el ítem completo al listado
+        lootList.appendChild(div);
+    });
+}
+
+
+function createButtonContainer(index) {
+    const editBtn = createButton('✏️', 'edit-loot', () => loadLoot(index));
+    const saveBtn = createButton('💾', 'save-loot', () => replaceLoot(index), false); 
+    const removeBtn = createButton('🗑️', 'remove-loot', () => removeLoot(index));
+
+    const buttonContainer = document.createElement('div');
+    buttonContainer.appendChild(editBtn);
+    buttonContainer.appendChild(saveBtn);
+    buttonContainer.appendChild(removeBtn);
+
+    return buttonContainer;
+}
+
+// Función para crear un botón reutilizable
+function createButton(innerHTML, className, onClick, disabled = false) {
+    const btn = document.createElement('button');
+    btn.className = className;
+    btn.innerHTML = innerHTML;
+    btn.onclick = onClick;
+    btn.disabled = disabled;
+    return btn;
+}
+
+// Función para cargar un ítem en el formulario (Editar)
+function loadLoot(index) {
+    const item = lootItems[index];
+    if (item) {
+        document.getElementById('additional1').value = item.id;
+        document.getElementById('additional2').value = item.quantity;
+        document.getElementById('additional3').value = item.bonus;
+        document.getElementById('additional4').value = item.lootBonus;
+        document.getElementById('additional5').value = item.chance;
+        document.getElementById('additional6').value = item.variant;
+        document.getElementById('additional7').value = item.sheared;
+        document.getElementById('additional9').value = item.isBaby;
+        document.getElementById('additional10').value = item.color;
+        document.getElementById('additional11').value = item.onFire;
+        document.getElementById('additional12').value = item.size;
+
+        $('#additional1').trigger('change');
+        disableSelect();
+        editingIndex = index;
+
+        highlightEditingItem(index);
+        disableLootInteraction();
+        toggleSaveButton(true);
+    }
+}
+
+// Función para resaltar el ítem que se está editando
+function highlightEditingItem(index) {
+    const items = document.querySelectorAll('.loot-item');
+    items.forEach((item, idx) => {
+        if (idx === index) {
+            item.classList.add('editing');
+        } else {
+            item.classList.add('dimmed');
+        }
+    });
+}
+
+// Función para restablecer los estilos de los ítems al terminar de editar
+function clearItemHighlights() {
+    const items = document.querySelectorAll('.loot-item');
+    items.forEach(item => {
+        item.classList.remove('editing', 'dimmed'); 
+    });
+}
+
+function replaceLoot(index) {
+    if (editingIndex === null || editingIndex !== index) {
+        return; 
+    }
+
+    const updatedLoot = getLootFromFormInputs();
+
+    lootItems[index] = updatedLoot;
+    displayLootItems();
+    resetLootInputs();
+    enableSelect();
+    enableLootInteraction(); 
+
+    // Restablecer el estado de edición
+    editingIndex = null; 
+
+    const saveButton = document.querySelector(`.loot-item[data-index="${index}"] .save-loot`);
+    showTempButtonState('✔️', saveButton, 2000); 
+    toggleSaveButton(false);  
+}
+
+function showTempButtonState(emoji, button, duration) {
+    const originalContent = button.innerHTML;
+    button.innerHTML = emoji;
+    if (buttonTimeout) clearTimeout(buttonTimeout);
+    buttonTimeout = setTimeout(() => {
+        button.innerHTML = originalContent;
+    }, duration);
+}
+
+// Función para eliminar un ítem de la lista
+function removeLoot(index) {
+    // Verificar si se está editando otro ítem
+    if (editingIndex !== null && editingIndex !== index) {
+        return;  // Evitar eliminar mientras otro ítem se está editando
+    }
+
+    // Proceder a eliminar el ítem
+    lootItems.splice(index, 1);
+    displayLootItems();
+
+    // Llamar a la función de actualización automática si el modo automático está activado
+    if (isAutoMode) {
+        autoGenerateCommand(); // Actualizar comando automáticamente después de eliminar
+    }
+
+    // Restablecer el estado de edición si es necesario
+    editingIndex = null;
+}
+
+// Función para deshabilitar interacción con otros ítems mientras se edita
+function disableLootInteraction() {
+    const buttons = document.querySelectorAll('.edit-loot, .remove-loot');
+    buttons.forEach(button => {
+        button.disabled = true;
+    });
+}
+
+// Función para habilitar interacción con otros ítems
+function enableLootInteraction() {
+    const buttons = document.querySelectorAll('.edit-loot, .remove-loot');
+    buttons.forEach(button => {
+        button.disabled = false;
+    });
+}
+
+// Función para habilitar o deshabilitar el botón de guardar
+function toggleSaveButton(enabled) {
+    const saveButtons = document.querySelectorAll('.save-loot');
+    saveButtons.forEach(button => {
+        button.disabled = !enabled;
+    });
+}
+
+      // Función para comprobar si hay etiquetas de datos para el mob
+      function checkDataTags() {
+          var name = document.getElementById('name').value;
+          var health = document.getElementById('health').value;
+          var holding = document.getElementById('holding').value;
+          var armor = document.getElementById('armor').value;
+          var defaultDrops = document.getElementById('defaultDrops').value;
+          var drops = document.getElementById('drops').value;
+          var skin = document.getElementById('skin').value;
+          var aggro = document.getElementById('aggro').value;
+          var charged = document.getElementById('charged').value;
+          var baby = document.getElementById('baby').value;
+          var babyTime = document.getElementById('babyTime').value;
+          return name || health || holding || armor || defaultDrops || drops || skin || aggro || charged || baby || babyTime;
+      }
+
+      // Función para copiar el comando generado al portapapeles
+      function copyCommand() {
+          var command = document.getElementById('outputCommand').textContent;
+          navigator.clipboard.writeText(command).then(() => {
+              var copyButton = document.getElementById('copyButton');
+              copyButton.textContent = translations[currentLanguage].copied;
+              copyButton.classList.add('success');
+              setTimeout(() => {
+                  copyButton.textContent = translations[currentLanguage].copyButton;
+                  copyButton.classList.remove('success');
+              }, 2000);
+          });
+      }
+        
+      const translations = {
+      es: {
+          selectPlaceholder: '--Seleccionar--',
+          copyButton: 'Copiar Comando',
+          copied: 'Copiado',
+      },
+      en: {
+          selectPlaceholder: '--Select--',
+          copyButton: 'Copy Command',
+          copied: 'Copied',
+      }
+};
+        
+function toggleLanguage() {
+    const currentTranslations = translations[currentLanguage];
+
+    if (currentLanguage === 'es') {
+        currentLanguage = 'en';
+        
+        const newTranslations = translations[currentLanguage];
+                    
+        document.getElementById('modeText').innerText = document.body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+        document.getElementById('copyButton').innerText = newTranslations.copyButton;
+        
+        updateOptionWithImage('mobType', 0, '--Select--', '');
+        updateOptionWithImage('mobType', 1, 'Zombie', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898103/Zombie2_cmi8uo.png');
+        updateOptionWithImage('mobType', 2, 'Spawnskin', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898066/Player_head_ak0iz8.png');
+        updateOptionWithImage('mobType', 3, 'Skeleton', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898059/Skeleton1_rcnbyh.png');
+        updateOptionWithImage('mobType', 4, 'Creeper', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898105/CreeperHead_wwk2om.png');
+        updateOptionWithImage('mobType', 5, 'Spider', 'https://res.cloudinary.com/dkrcpm32u/image/upload//f_webp/v1726898063/Spider1_tseshs.png');
+        updateOptionWithImage('mobType', 6, 'Enderman', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898083/EndermanHead_wzsopl.png');
+        updateOptionWithImage('mobType', 7, 'Blaze', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898072/BlazeHead_gobfr5.png');
+        updateOptionWithImage('mobType', 8, 'Ghast', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898093/GhastHead_l8codj.png');
+        updateOptionWithImage('mobType', 9, 'Magma Cube', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898088/Magma_mtx4ol.png');
+        updateOptionWithImage('mobType', 10, 'Slime', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898061/Slime_l899it.png');
+        updateOptionWithImage('mobType', 11, 'Ender Dragon', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898096/EnderDragonHead_tpq93z.png');
+        updateOptionWithImage('mobType', 12, 'Nethereye', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898977/Nethereye_ykh9mm.png');
+        updateOptionWithImage('mobType', 13, 'Cow', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898081/CowHead_z4cmpi.png');
+        updateOptionWithImage('mobType', 14, 'Sheep', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898055/SheepHead_heoidt.png');
+        updateOptionWithImage('mobType', 15, 'Mooshroom', 'https://res.cloudinary.com/dkrcpm32u/image/upload/v1726898090/MoshroomHead_ekdzm1.png');
+        updateOptionWithImage('mobType', 16, 'Pig', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898099/PigHead_uzp55c.png');
+        updateOptionWithImage('mobType', 17, 'Squid', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898101/SquidHead_b5b5hi.png');
+        updateOptionWithImage('mobType', 18, 'Bat', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898070/BatHead_bofwz5.png');
+        updateOptionWithImage('mobType', 19, 'Chicken', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898079/ChickenHead_owuwv1.png');
+        updateOptionWithImage('mobType', 20, 'Rabbit', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898057/RabbitHead_aupj5f.png');
+        updateOptionWithImage('mobType', 21, 'Wolf', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898068/WolfHead_wrpweo.pn');
+        updateOptionWithImage('mobType', 22, 'Zombie Pigman', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898053/PigmanHead_egvkzy.png');
+        updateOptionWithImage('mobType', 23, 'Snow Golem', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898094/SnowgolemHead_yk8xc4.png');
+        updateOptionWithImage('mobType', 24, 'Cactus Cow', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898075/CactuscowHead_igghuq.png');
+        
+        updateOptionWithImage('additional1', 0, '--Select--', '');
+        
+        updateOptionWithImage('holding', 0, '--Select--', '');
+        
+        $('#holding').select2('destroy');
+        $('#holding').select2({
+            templateResult: formatOption,
+            templateSelection: formatOption 
+        });
+        
+        $('#additional1').select2('destroy');
+        $('#additional1').select2({
+            templateResult: formatOption,
+            templateSelection: formatOption 
+        });
+        
+        $('#mobType').select2('destroy'); 
+        $('#mobType').select2({
+            templateResult: formatOption, 
+            templateSelection: formatOption 
+        });
+        
+        updateOptionWithImage('additional10', 0, '--Select--', '');
+        updateOptionWithImage('additional10', 1, 'Red', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Red_ow8fz1.png');
+        updateOptionWithImage('additional10', 2, 'Green', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Green_hojzk0.png');
+        updateOptionWithImage('additional10', 3, 'Blue', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Blue_nfyfrs.png');
+        updateOptionWithImage('additional10', 4, 'Brown', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Brown_n54tmt.png');
+        updateOptionWithImage('additional10', 5, 'Cyan', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Cyan_ietx4o.png');
+        updateOptionWithImage('additional10', 6, 'Lightblue', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Light_Blue_jiivto.png');
+        updateOptionWithImage('additional10', 7, 'Lightgreen', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Light_Green_xozy6s.png');
+        updateOptionWithImage('additional10', 8, 'Magenta', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Magenta_wk1euz.png');
+        updateOptionWithImage('additional10', 9, 'Orange', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Orange_xkxwgg.png');
+        updateOptionWithImage('additional10', 10, 'Pink', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Pink_nilaad.png');
+        updateOptionWithImage('additional10', 11, 'Purple', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Purple_r0jjhk.png');
+        updateOptionWithImage('additional10', 12, 'White', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/White_hjvvrz.png');
+        updateOptionWithImage('additional10', 13, 'Yellow', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Yellow_dm8nsr.png');
+        updateOptionWithImage('additional10', 14, 'Lightgray', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Light_Gray_hjjfrv.png');
+        updateOptionWithImage('additional10', 15, 'Gray', 'https://res.cloudinary.com/dkrcpm32u/image/upload/v1726962877/Gray_fkir91.png');
+        updateOptionWithImage('additional10', 16, 'Black', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Black_feewkv.png');
+        
+        document.getElementById('additional6').options[0].text = '--Select--';
+        document.getElementById('additional6').options[1].text = 'Mooshroom';
+        document.getElementById('additional6').options[2].text = 'Cactus Cow';
+        document.getElementById('additional6').options[3].text = 'Normal Cow';
+        
+        $('#additional10').select2('destroy');
+        $('#additional10').select2({
+            templateResult: formatOption,
+            templateSelection: formatOption 
+        });
+        
+        $('#additional6').select2('destroy');
+        $('#additional6').select2({
+            templateResult: formatOption,
+            templateSelection: formatOption 
+        });
+        
+        document.getElementById('ManualText').innerText = 'Manual';
+        document.getElementById('AutoText').innerText = 'Automatic';
+        document.getElementById('TypeMobText').innerText = 'Mob Type:';
+        document.getElementById('QuantityText').innerText = 'Quantity:';
+        document.getElementById('PositionText').innerText = 'Position:';
+        document.getElementById('PositionRelText').innerText = 'Relative Position:';
+        document.getElementById('PositionAbsText').innerText = 'Absolute Position:';
+        document.getElementById('NameText').innerText = 'Name:';
+        document.getElementById('HealthText').innerText = 'Health:';
+        document.getElementById('ItemHandText').innerText = 'Items in Hand:';
+        document.getElementById('ArmorText').innerText = 'Armor:';
+        document.getElementById('DropDText').innerText = 'Default Drops:';
+        document.getElementById('CreeperCharText').innerText = 'Charged Creeper:';
+        document.getElementById('IDText').innerText = 'Skin ID:';
+        document.getElementById('AggroText').innerText = 'Behavior:';
+        document.getElementById('BabyText').innerText = 'Baby:';
+        document.getElementById('BabySText').innerText = 'Baby (Seconds)';
+        document.getElementById('QuantitySText').innerText = 'Quantity:';
+        document.getElementById('ChanceText').innerText = 'Chance:';
+        document.getElementById('VarianteText').innerText = 'Variant:';
+        document.getElementById('ShearedText').innerText = '¿Is it Sheared?';
+        document.getElementById('isBabyText').innerText = '¿Is it baby?';
+        document.getElementById('onFireText').innerText = '¿Is it on fire?';
+        document.getElementById('SizeText').innerText = 'Size:';
+        document.getElementById('copyButton').innerText = 'Copy Command';
+        document.getElementById('AddLootText').innerText = 'Add Loot';
+        document.getElementById('RefreshText').innerHTML = '<i class="bi bi-arrow-clockwise"></i> Refresh Boxes';
+        document.getElementById('IdiomaText').innerHTML = '<i class="bi bi-translate"></i> Change Language';
+        document.getElementById('HomeText').innerHTML = '<i class="bi bi-house"></i> Home';
+        document.getElementById('CommandSummonText').innerHTML = 'Generate Command <span class="gear-button" onclick="toggleOptions(event)"><i class="bi bi-gear"></i></span>';
+        document.getElementById('positionType').options[0].text = '--Select--';
+        document.getElementById('positionType').options[1].text = 'Relative';
+        document.getElementById('positionType').options[2].text = 'Absolute';
+        document.getElementById('holding').options[0].text = '--Select--';
+        document.getElementById('defaultDrops').options[0].text = '--Select--';
+        document.getElementById('defaultDrops').options[1].text = 'Yes';
+        document.getElementById('charged').options[0].text = '--Select--';
+        document.getElementById('charged').options[1].text = 'Yes';
+        document.getElementById('aggro').options[0].text = '--Select--';
+        document.getElementById('aggro').options[1].text = 'Hostile';
+        document.getElementById('aggro').options[2].text = 'Neutral';
+        document.getElementById('aggro').options[3].text = 'Passive';
+        document.getElementById('baby').options[0].text = '--Select--';
+        document.getElementById('baby').options[1].text = 'Time';
+        document.getElementById('baby').options[2].text = 'Forever';
+        document.getElementById('drops').options[0].text = '--Select--';
+        document.getElementById('drops').options[1].text = 'Yes';
+        document.getElementById('additional1').options[0].text = '--Select--';
+        document.getElementById('additional9').options[0].text = '--Select--';
+        document.getElementById('additional9').options[1].text = 'Yes';
+        document.getElementById('additional10').options[0].text = '--Select--';
+        document.getElementById('additional11').options[0].text = '--Select--';
+        document.getElementById('additional11').options[1].text = 'Yes';
+        document.getElementById('additional12').options[0].text = '--Select--';
+        document.getElementById('additional12').options[1].text = 'Small';
+        document.getElementById('additional12').options[2].text = 'Medium';
+        document.getElementById('additional12').options[3].text = 'Big';
+        document.getElementById('armor').placeholder = 'Coming Soon...';
+        document.getElementById('additional5').placeholder = 'Coming Soon...';
+        document.getElementById('MenuText').innerText = '☰ Menu';
+        document.getElementById('armor').options[0].text = '--Select--';
+        document.getElementById('armor').options[1].text = 'Yes';
+        document.getElementById('additional7').placeholder = 'Out of Service';
+        // Casco
+        document.getElementById('HelmetText').innerText = 'Helmet:';
+        updateOptionWithImage('helmetSelect', 0, '--Select--', '');
+        updateOptionWithImage('helmetSelect', 1, 'Leather Cap', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Cap_kc3wwv.png');
+        updateOptionWithImage('helmetSelect', 2, 'Iron Helmet', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896975/Iron_Helmet_pibqyq.png');
+        updateOptionWithImage('helmetSelect', 3, 'Gold Helmet', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Helmet_vehqkm.png');
+        updateOptionWithImage('helmetSelect', 4, 'Diamond Helmet', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Helmet_ugg9vy.png');
+        updateOptionWithImage('helmetSelect', 5, 'Dragon Scale Helmet', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871796/Dragon_Scale_Helmet_raeklo.png');
+        updateOptionWithImage('helmetSelect', 6, 'Jack-o-Lantern', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688892/Jack-o_-Lantern_mrtj6r.png');
+        updateOptionWithImage('helmetSelect', 7, 'Santa Hat', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Santa_Hat_jzj24t.png');
+        updateOptionWithImage('helmetSelect', 8, 'Party Hat', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694191/Party_Hat_bjn9as.png');
+        updateOptionWithImage('helmetSelect', 9, 'Afro', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Afro_lqqcni.png');
+        updateOptionWithImage('helmetSelect', 10, 'Shades', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Shades_erre9t.png');
+        updateOptionWithImage('helmetSelect', 11, 'Mustache', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694186/Mustache_fjc2up.png');
+
+        
+        // Pechera
+        document.getElementById('ChestplateText').innerText = 'Chestplate:';
+        updateOptionWithImage('chestplateSelect', 0, '--Select--', '');
+        updateOptionWithImage('chestplateSelect', 1, 'Leather Tunic', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Tunic_lk2z0j.png');
+        updateOptionWithImage('chestplateSelect', 2, 'Iron Chestplate', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896973/Iron_Chestplate_gfvdbm.png');
+        updateOptionWithImage('chestplateSelect', 3, 'Gold Chestplate', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Chestplate_j3to7v.png');
+        updateOptionWithImage('chestplateSelect', 4, 'Diamond Chestplate', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Chestplate_rzyjxh.png');
+        updateOptionWithImage('chestplateSelect', 5, 'Dragon Scale Chestplate', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871795/Dragon_Scale_Chestplate_heemid.png');
+        
+        // Pantalones
+        document.getElementById('LeggingsText').innerText = 'Leggings:';
+        updateOptionWithImage('leggingsSelect', 0, '--Select--', '');
+        updateOptionWithImage('leggingsSelect', 1, 'Leather Pants', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Pants_dknwqd.png');
+        updateOptionWithImage('leggingsSelect', 2, 'Iron Leggings', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896977/Iron_Leggings_ni8md1.png');
+        updateOptionWithImage('leggingsSelect', 3, 'Gold Leggings', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876948/Gold_Leggings_qspwtb.png');
+        updateOptionWithImage('leggingsSelect', 4, 'Diamond Leggings', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Leggings_q4hf45.png');
+        updateOptionWithImage('leggingsSelect', 5, 'Dragon Scale Leggings', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871796/Dragon_Scale_Leggings_zyhqa5.png');
+        
+        // Botas
+        document.getElementById('BootsText').innerText = 'Boots:';
+        updateOptionWithImage('bootsSelect', 0, '--Select--', '');
+        updateOptionWithImage('bootsSelect', 1, 'Leather Boots', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Boots_zofh0b.png');
+        updateOptionWithImage('bootsSelect', 2, 'Iron Boots', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896972/Iron_Boots_z5f74c.png');
+        updateOptionWithImage('bootsSelect', 3, 'Gold Boots', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Boots_tkocg7.png');
+        updateOptionWithImage('bootsSelect', 4, 'Diamond Boots', 'https://res.cloudinary.com/dkrcpm32u/image/upload/v1726844162/Diamond_Boots_ubkywn.png');
+        updateOptionWithImage('bootsSelect', 5, 'Dragon Scale Boots', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871795/Dragon_Scale_Boots_r3nxyz.png');
+
+        $('#helmetSelect').select2('destroy');
+        $('#helmetSelect').select2({
+            templateResult: formatOption,
+            templateSelection: formatOption
+        });
+        
+        $('#chestplateSelect').select2('destroy');
+        $('#chestplateSelect').select2({
+            templateResult: formatOption,
+            templateSelection: formatOption
+        });
+        
+        $('#leggingsSelect').select2('destroy');
+        $('#leggingsSelect').select2({
+            templateResult: formatOption,
+            templateSelection: formatOption
+        });
+        
+        $('#bootsSelect').select2('destroy');
+        $('#bootsSelect').select2({
+            templateResult: formatOption,
+            templateSelection: formatOption
+        });
+        
+        if (isAutoMode) {
+            enableAutoUpdate(); 
+        }
+        
+    } else {
+        currentLanguage = 'es';
+
+        document.getElementById('modeText').innerText = document.body.classList.contains('dark-mode') ? 'Modo Claro' : 'Modo Oscuro';
+
+        updateOptionWithImage('mobType', 0, '--Seleccionar--', '');
+        updateOptionWithImage('mobType', 1, 'Zombie', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898103/Zombie2_cmi8uo.png');
+        updateOptionWithImage('mobType', 2, 'Spawnskin', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898066/Player_head_ak0iz8.png');
+        updateOptionWithImage('mobType', 3, 'Skeleto', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898059/Skeleton1_rcnbyh.png');
+        updateOptionWithImage('mobType', 4, 'Creeper', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898105/CreeperHead_wwk2om.png');
+        updateOptionWithImage('mobType', 5, 'Araña', 'https://res.cloudinary.com/dkrcpm32u/image/upload//f_webp/v1726898063/Spider1_tseshs.png');
+        updateOptionWithImage('mobType', 6, 'Enderman', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898083/EndermanHead_wzsopl.png');
+        updateOptionWithImage('mobType', 7, 'Blaze', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898072/BlazeHead_gobfr5.png');
+        updateOptionWithImage('mobType', 8, 'Ghast', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898093/GhastHead_l8codj.png');
+        updateOptionWithImage('mobType', 9, 'Cubo de Magma', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898088/Magma_mtx4ol.png');
+        updateOptionWithImage('mobType', 10, 'Slime', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898061/Slime_l899it.png');
+        updateOptionWithImage('mobType', 11, 'Dragón de Ender', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898096/EnderDragonHead_tpq93z.png');
+        updateOptionWithImage('mobType', 12, 'Nethereye', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898977/Nethereye_ykh9mm.png');
+        updateOptionWithImage('mobType', 13, 'Vaca', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898081/CowHead_z4cmpi.png');
+        updateOptionWithImage('mobType', 14, 'Oveja', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898055/SheepHead_heoidt.png');
+        updateOptionWithImage('mobType', 15, 'Vaca Seta', 'https://res.cloudinary.com/dkrcpm32u/image/upload/v1726898090/MoshroomHead_ekdzm1.png');
+        updateOptionWithImage('mobType', 16, 'Cerdo', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898099/PigHead_uzp55c.png');
+        updateOptionWithImage('mobType', 17, 'Calamar', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898101/SquidHead_b5b5hi.png');
+        updateOptionWithImage('mobType', 18, 'Murciélago', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898070/BatHead_bofwz5.png');
+        updateOptionWithImage('mobType', 19, 'Pollo', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898079/ChickenHead_owuwv1.png');
+        updateOptionWithImage('mobType', 20, 'Conejo', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898057/RabbitHead_aupj5f.png');
+        updateOptionWithImage('mobType', 21, 'Lobo', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898068/WolfHead_wrpweo.pn');
+        updateOptionWithImage('mobType', 22, 'Zombie Pigman', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898053/PigmanHead_egvkzy.png');
+        updateOptionWithImage('mobType', 23, 'Golem de Nieve', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898094/SnowgolemHead_yk8xc4.png');
+        updateOptionWithImage('mobType', 24, 'Vaca Cactus', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898075/CactuscowHead_igghuq.png');
+        
+        updateOptionWithImage('additional1', 0, '--Seleccionar--', '');
+       
+        updateOptionWithImage('holding', 0, '--Seleccionar--', '');
+        
+        $('#holding').select2('destroy');
+        $('#holding').select2({
+            templateResult: formatOption,
+            templateSelection: formatOption 
+        });
+        
+        $('#additional1').select2('destroy');
+        $('#additional1').select2({
+            templateResult: formatOption,
+            templateSelection: formatOption
+        });
+
+        $('#mobType').select2('destroy'); 
+        $('#mobType').select2({
+            templateResult: formatOption, 
+            templateSelection: formatOption 
+        });
+
+        updateOptionWithImage('additional10', 0, '--Seleccionar--', '');
+        updateOptionWithImage('additional10', 1, 'Rojo', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Red_ow8fz1.png');
+        updateOptionWithImage('additional10', 2, 'Verde', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Green_hojzk0.png');
+        updateOptionWithImage('additional10', 3, 'Azul', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Blue_nfyfrs.png');
+        updateOptionWithImage('additional10', 4, 'Marrón', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Brown_n54tmt.png');
+        updateOptionWithImage('additional10', 5, 'Cian', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Cyan_ietx4o.png');
+        updateOptionWithImage('additional10', 6, 'Azul claro', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Light_Blue_jiivto.png');
+        updateOptionWithImage('additional10', 7, 'Verde claro', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Light_Green_xozy6s.png');
+        updateOptionWithImage('additional10', 8, 'Magenta', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Magenta_wk1euz.png');
+        updateOptionWithImage('additional10', 9, 'Naranja', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Orange_xkxwgg.png');
+        updateOptionWithImage('additional10', 10, 'Rosa', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Pink_nilaad.png');
+        updateOptionWithImage('additional10', 11, 'Púrpura', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Purple_r0jjhk.png');
+        updateOptionWithImage('additional10', 12, 'Blanco', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/White_hjvvrz.png');
+        updateOptionWithImage('additional10', 13, 'Amarillo', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Yellow_dm8nsr.png');
+        updateOptionWithImage('additional10', 14, 'Gris claro', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Light_Gray_hjjfrv.png');
+        updateOptionWithImage('additional10', 15, 'Gris', 'https://res.cloudinary.com/dkrcpm32u/image/upload/v1726962877/Gray_fkir91.png');
+        updateOptionWithImage('additional10', 16, 'Negro', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Black_feewkv.png');
+        
+        document.getElementById('additional6').options[0].text = '--Seleccionar--';
+        document.getElementById('additional6').options[1].text = 'Vaca Seta';
+        document.getElementById('additional6').options[2].text = 'Vaca Cactus';
+        document.getElementById('additional6').options[3].text = 'Vaca Normal';
+        
+        $('#additional10').select2('destroy');
+        $('#additional10').select2({
+            templateResult: formatOption,
+            templateSelection: formatOption 
+        });
+        
+        $('#additional6').select2('destroy');
+        $('#additional6').select2({
+            templateResult: formatOption,
+            templateSelection: formatOption 
+        });
+        
+        document.getElementById('ManualText').innerText = 'Manual';
+        document.getElementById('AutoText').innerText = 'Automático'
+        document.getElementById('TypeMobText').innerText = 'Tipo de Mob:';
+        document.getElementById('QuantityText').innerText = 'Cantidad:';
+        document.getElementById('PositionText').innerText = 'Posición:';
+        document.getElementById('PositionRelText').innerText = 'Posición Relativa:';
+        document.getElementById('PositionAbsText').innerText = 'Posición Absoluta:';
+        document.getElementById('NameText').innerText = 'Nombre:';
+        document.getElementById('HealthText').innerText = 'Salud:';
+        document.getElementById('ItemHandText').innerText = 'Item en mano:';
+        document.getElementById('ArmorText').innerText = 'Armadura:';
+        document.getElementById('DropDText').innerText = 'Drops por defecto:';
+        document.getElementById('CreeperCharText').innerText = 'Creeper Cargado:';
+        document.getElementById('IDText').innerText = 'ID de la Skin:';
+        document.getElementById('AggroText').innerText = 'Hostilidad:';
+        document.getElementById('BabyText').innerText = 'Bebé:';
+        document.getElementById('BabySText').innerText = 'Bebé (Segundos)';
+        document.getElementById('QuantitySText').innerText = 'Cantidad:';
+        document.getElementById('ChanceText').innerText = 'Oportunidad:';
+        document.getElementById('VarianteText').innerText = 'Variante:';
+        document.getElementById('ShearedText').innerText = '¿Está esquilada?';
+        document.getElementById('isBabyText').innerText = '¿Es bebé?';
+        document.getElementById('onFireText').innerText = '¿Está en llamas?';
+        document.getElementById('SizeText').innerText = 'Tamaño:';
+        document.getElementById('copyButton').innerText = 'Copiar Comando';
+        document.getElementById('AddLootText').innerText = 'Agregar Loot';
+        document.getElementById('RefreshText').innerHTML = '<i class="bi bi-arrow-clockwise"></i> Refrescar Casillas';
+        document.getElementById('IdiomaText').innerHTML = '<i class="bi bi-translate"></i> Cambiar Idioma';
+        document.getElementById('HomeText').innerHTML = '<i class="bi bi-house"></i> Inicio';
+        document.getElementById('CommandSummonText').innerHTML = 'Generar Comando <span class="gear-button" onclick="toggleOptions(event)"><i class="bi bi-gear"></i></span>';
+        document.getElementById('positionType').options[0].text = '--Seleccionar--';
+        document.getElementById('positionType').options[1].text = 'Relativo';
+        document.getElementById('positionType').options[2].text = 'Absoluto';
+        document.getElementById('holding').options[0].text = '--Seleccionar--';
+        document.getElementById('defaultDrops').options[0].text = '--Seleccionar--';
+        document.getElementById('defaultDrops').options[1].text = 'Si';
+        document.getElementById('charged').options[0].text = '--Seleccionar--';
+        document.getElementById('charged').options[1].text = 'Si';
+        document.getElementById('aggro').options[0].text = '--Seleccionar--';
+        document.getElementById('aggro').options[1].text = 'Hostil';
+        document.getElementById('aggro').options[2].text = 'Neutral';
+        document.getElementById('aggro').options[3].text = 'Pasivo';
+        document.getElementById('baby').options[0].text = '--Seleccionar--';
+        document.getElementById('baby').options[1].text = 'Tiempo';
+        document.getElementById('baby').options[2].text = 'Siempre';
+        document.getElementById('drops').options[0].text = '--Seleccionar--';
+        document.getElementById('drops').options[1].text = 'Si';
+        document.getElementById('additional1').options[0].text = '--Seleccionar--';
+        document.getElementById('additional9').options[0].text = '--Seleccionar--';
+        document.getElementById('additional9').options[1].text = 'Si';
+        document.getElementById('additional10').options[0].text = '--Seleccionar--';
+        document.getElementById('additional11').options[0].text = '--Seleccionar--';
+        document.getElementById('additional11').options[1].text = 'Si';
+        document.getElementById('additional12').options[0].text = '--Seleccionar--';
+        document.getElementById('additional12').options[1].text = 'Pequeño';
+        document.getElementById('additional12').options[2].text = 'Mediano';
+        document.getElementById('additional12').options[3].text = 'Grande';
+        document.getElementById('armor').placeholder = 'Próximamente Disponible...';
+        document.getElementById('additional5').placeholder = 'Próximamente Disponible...';
+        document.getElementById('MenuText').innerText = '☰ Menú';
+        document.getElementById('armor').options[0].text = '--Seleccionar--';
+        document.getElementById('armor').options[1].text = 'Si';
+        document.getElementById('additional7').placeholder = 'Fuera de Servicio';
+        // Casco
+        document.getElementById('HelmetText').innerText = 'Casco:';
+        updateOptionWithImage('helmetSelect', 0, '--Seleccionar--', '');
+        updateOptionWithImage('helmetSelect', 1, 'Casco de Cuero', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Cap_kc3wwv.png');
+        updateOptionWithImage('helmetSelect', 2, 'Casco de Hierro', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896975/Iron_Helmet_pibqyq.png');
+        updateOptionWithImage('helmetSelect', 3, 'Casco de Oro', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Helmet_vehqkm.png');
+        updateOptionWithImage('helmetSelect', 4, 'Casco de Diamante', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Helmet_ugg9vy.png');
+        updateOptionWithImage('helmetSelect', 5, 'Casco de Escamas de Dragón', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871796/Dragon_Scale_Helmet_raeklo.png');
+        updateOptionWithImage('helmetSelect', 6, 'Jack-o-Lantern', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688892/Jack-o_-Lantern_mrtj6r.png');
+        updateOptionWithImage('helmetSelect', 7, 'Sombrero de Santa', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Santa_Hat_jzj24t.png');
+        updateOptionWithImage('helmetSelect', 8, 'Sombrero de Fiesta', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694191/Party_Hat_bjn9as.png');
+        updateOptionWithImage('helmetSelect', 9, 'Afro', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Afro_lqqcni.png');
+        updateOptionWithImage('helmetSelect', 10, 'Gafas', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Shades_erre9t.png');
+        updateOptionWithImage('helmetSelect', 11, 'Mostacho', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694186/Mustache_fjc2up.png');
+        
+        // Pechera
+        document.getElementById('ChestplateText').innerText = 'Pechera:';
+        updateOptionWithImage('chestplateSelect', 0, '--Seleccionar--', '');
+        updateOptionWithImage('chestplateSelect', 1, 'Túnica de Cuero', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Tunic_lk2z0j.png');
+        updateOptionWithImage('chestplateSelect', 2, 'Peto de Hierro', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896973/Iron_Chestplate_gfvdbm.png');
+        updateOptionWithImage('chestplateSelect', 3, 'Peto de Oro', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Chestplate_j3to7v.png');
+        updateOptionWithImage('chestplateSelect', 4, 'Peto de Diamante', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Chestplate_rzyjxh.png');
+        updateOptionWithImage('chestplateSelect', 5, 'Peto de Escamas de Dragón', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871795/Dragon_Scale_Chestplate_heemid.png');
+        
+        // Pantalones
+        document.getElementById('LeggingsText').innerText = 'Pantalones:';
+        updateOptionWithImage('leggingsSelect', 0, '--Seleccionar--', '');
+        updateOptionWithImage('leggingsSelect', 1, 'Pantalones de Cuero', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Pants_dknwqd.png');
+        updateOptionWithImage('leggingsSelect', 2, 'Pantalones de Hierro', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896977/Iron_Leggings_ni8md1.png');
+        updateOptionWithImage('leggingsSelect', 3, 'Pantalones de Oro', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876948/Gold_Leggings_qspwtb.png');
+        updateOptionWithImage('leggingsSelect', 4, 'Pantalones de Diamante', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Leggings_q4hf45.png');
+        updateOptionWithImage('leggingsSelect', 5, 'Pantalones de Escamas de Dragón', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871796/Dragon_Scale_Leggings_zyhqa5.png');
+        
+        // Botas
+        document.getElementById('BootsText').innerText = 'Botas:';
+        updateOptionWithImage('bootsSelect', 0, '--Seleccionar--', '');
+        updateOptionWithImage('bootsSelect', 1, 'Botas de Cuero', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Boots_zofh0b.png');
+        updateOptionWithImage('bootsSelect', 2, 'Botas de Hierro', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896972/Iron_Boots_z5f74c.png');
+        updateOptionWithImage('bootsSelect', 3, 'Botas de Oro', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Boots_tkocg7.png');
+        updateOptionWithImage('bootsSelect', 4, 'Botas de Diamante', 'https://res.cloudinary.com/dkrcpm32u/image/upload/v1726844162/Diamond_Boots_ubkywn.png');
+        updateOptionWithImage('bootsSelect', 5, 'Botas de Escamas de Dragón', 'https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871795/Dragon_Scale_Boots_r3nxyz.png');
+        
+        $('#helmetSelect').select2('destroy');
+        $('#helmetSelect').select2({
+            templateResult: formatOption,
+            templateSelection: formatOption
+        });
+        
+        $('#chestplateSelect').select2('destroy');
+        $('#chestplateSelect').select2({
+            templateResult: formatOption,
+            templateSelection: formatOption
+        });
+        
+        $('#leggingsSelect').select2('destroy');
+        $('#leggingsSelect').select2({
+            templateResult: formatOption,
+            templateSelection: formatOption
+        });
+        
+        $('#bootsSelect').select2('destroy');
+        $('#bootsSelect').select2({
+            templateResult: formatOption,
+            templateSelection: formatOption
+        });
+        
+        if (isAutoMode) {
+            enableAutoUpdate(); 
+        }
+        
+    }
+    function updateOptionWithImage(selectId, optionIndex, newText, newImageUrl) {
+    const selectElement = document.getElementById(selectId);
+    const optionElement = selectElement.options[optionIndex];
+
+    optionElement.text = newText; 
+    if (newImageUrl) {
+        optionElement.setAttribute('data-image', newImageUrl);  
+    } else {
+        optionElement.removeAttribute('data-image');  
+    }
+}
+
+function formatOption(option) {
+    if (!option.id) return option.text;  
+
+    var imageUrl = $(option.element).data('image'); 
+    if (imageUrl) {
+        return $('<span><img src="' + imageUrl + '" style="width: 20px; height: 20px; margin-right: 10px;" />' + option.text + '</span>');
+    }
+
+    return option.text;
+}   
+}
+    </script>
+</body>
+</html>	

@@ -1,0 +1,51 @@
+{
+  "menu": {
+    "title": "Menu",
+    "home": "Home",
+    "language": "Language",
+    "theme": {
+      "dark": "Dark",
+      "light": "Light"
+    },
+    "discord": "Discord",
+    "clear": "Clear",
+    "settings": "Settings"
+  },
+  "cards": {
+    "name": "Name",
+    "amount": "Amount",
+    "position": "Position",
+    "health": "Health",
+    "equipment": "Equipment",
+    "defaultLoot": "Default Loot",
+    "armor": "Armor",
+    "lootTags": "Loot Tags",
+    "aggressiveness": "Aggressiveness"
+  },
+  "modals": {
+    "language": {
+      "title": "Select Language",
+      "english": "English",
+      "spanish": "Spanish"
+    },
+    "name": {
+      "title": "Mob Name",
+      "label": "Custom name:",
+      "placeholder": "Enter a name...",
+      "help": "This option allows you to customize the name of the mob you will summon. The name you write here will be visible floating above the mob when you summon it in the game. You can use format codes using the & symbol followed by a number."
+    },
+    "amount": {
+      "title": "Mob Amount",
+      "label": "Amount to summon:",
+      "placeholder": "Enter an amount...",
+      "help": "This option allows you to define how many mobs you want to summon at once. For performance and game balance reasons, the maximum limit is 20 mobs per summon."
+    }
+  },
+  "common": {
+    "select": "--Select--",
+    "save": "Save",
+    "help": "Help",
+    "enabled": "Enabled",
+    "disabled": "Disabled"
+  }
+}
