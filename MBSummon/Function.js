@@ -461,6 +461,14 @@ $(document).ready(function () {
     const isComplete = itemSelect && itemAmount && itemData;
     const finalSaved = saved && isComplete;
 
+    console.log("Estado de los campos:", {
+      itemSelect,
+      itemAmount,
+      itemData,
+      isComplete,
+      finalSaved
+    });
+
     statusIcon
       .removeClass("fa-times fa-check not-saved saved")
       .addClass(finalSaved ? "fa-check saved" : "fa-times not-saved");
@@ -469,7 +477,17 @@ $(document).ready(function () {
       .removeClass("saved not-saved")
       .addClass(finalSaved ? "saved" : "not-saved");
 
+    // Si no están todos los campos completos, mostrar mensaje
+    if (!isComplete && saved) {
+      console.log("Campos faltantes:", {
+        item: !itemSelect ? "Seleccione un item" : "",
+        amount: !itemAmount ? "Ingrese una cantidad" : "",
+        data: !itemData ? "Ingrese los datos del item" : ""
+      });
+    }
+
     isItemSaved = finalSaved;
+    return finalSaved;
   };
 
   $("#itemSelect").on("change", function () {
@@ -1627,6 +1645,8 @@ function getCurrentFormData() {
     posY: $("#posY").val(),
     mobHealth: $("#mobHealth").val(),
     itemSelect: $("#itemSelect").val(),
+    itemAmount: $("#itemAmount").val(),
+    itemData: $("#itemData").val(),
     helmetSelect: $("#helmetSelect").val(),
     chestplateSelect: $("#chestplateSelect").val(),
     leggingsSelect: $("#leggingsSelect").val(),
@@ -1683,13 +1703,19 @@ function getCurrentFormDataByCard() {
     };
   }
   
-  // Card 4 - Item equipado
+    // Card 4 - Item equipado y sus datos
   const itemSelect = $("#itemSelect").val();
-  if (itemSelect) {
-    data.card4 = { itemSelect: itemSelect };
-  }
+  const itemAmount = $("#itemAmount").val();
+  const itemData = $("#itemData").val();
   
-  // Card 5 - Loot predeterminado
+  if (itemSelect) {
+    data.card4 = { 
+      itemSelect: itemSelect,
+      itemAmount: itemAmount,
+      itemData: itemData
+    };
+    console.log("Guardando datos del item:", data.card4);
+  }  // Card 5 - Loot predeterminado
   const lootEnabled = $("#toggleLoot").find("i").hasClass("fa-toggle-on");
   if (lootEnabled) {
     data.card5 = { lootEnabled: lootEnabled };
@@ -1962,10 +1988,24 @@ function loadSavedCommandToForm(item) {
       }
     }
     
-    // Card 4 - Item equipado
-    if (cards.card4 && cards.card4.itemSelect) {
-      $("#itemSelect").val(cards.card4.itemSelect).trigger("change");
-      console.log("Cargado item:", cards.card4.itemSelect);
+    // Card 4 - Item equipado y datos
+    if (cards.card4) {
+      console.log("Cargando datos del item:", cards.card4);
+      
+      if (cards.card4.itemSelect) {
+        $("#itemSelect").val(cards.card4.itemSelect).trigger("change");
+        console.log("Item seleccionado:", cards.card4.itemSelect);
+      }
+      
+      if (cards.card4.itemAmount) {
+        $("#itemAmount").val(cards.card4.itemAmount).trigger("input");
+        console.log("Cantidad del item:", cards.card4.itemAmount);
+      }
+      
+      if (cards.card4.itemData) {
+        $("#itemData").val(cards.card4.itemData).trigger("input");
+        console.log("Datos del item:", cards.card4.itemData);
+      }
     }
     
     // Card 5 - Loot predeterminado
