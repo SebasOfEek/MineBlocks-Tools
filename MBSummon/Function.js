@@ -967,77 +967,78 @@ $(document).ready(function () {
   }
 });
 
-$(document).ready(function () {
-  function updateCommand() {
-    let command = '<span class="command-summon">/summon</span>';
+// Definir updateCommand en el scope global para evitar ReferenceError
+function updateCommand() {
+  let command = '<span class="command-summon">/summon</span>';
 
-    const mobType = $("#mobType").val() || "";
-    if (mobType) {
-      command += ` ${mobType}`;
+  const mobType = $("#mobType").val() || "";
+  if (mobType) {
+    command += ` ${mobType}`;
 
-      const quantity = $("#mobAmount").val() || "1";
-      command += ` ${quantity}`;
+    const quantity = $("#mobAmount").val() || "1";
+    command += ` ${quantity}`;
 
-      // Manejar la posición según el tipo seleccionado
-      const positionType = $("#positionType").val();
-      const posX = $("#posX").val() || "~";
-      const posY = $("#posY").val() || "~";
+    // Manejar la posición según el tipo seleccionado
+    const positionType = $("#positionType").val();
+    const posX = $("#posX").val() || "~";
+    const posY = $("#posY").val() || "~";
 
-      if (positionType === "relative") {
-        command += ` ~${posX === "~" ? "" : posX} ~${posY === "~" ? "" : posY}`;
-      } else if (positionType === "absolute") {
-        command += ` ${posX} ${posY}`;
-      } else {
-        command += " ~ ~";
-      }
-
-      // Solo añadir atributos si están configurados
-      let attributes = [];
-
-      const name = $("#mobName").val() || "";
-      if (name) attributes.push(`name:"${name}"`);
-
-      const health = $("#mobHealth").val() || "";
-      if (health) attributes.push(`health:${health}`);
-
-      const aggro = $("#aggressivenessSelect").val() || "";
-      if (aggro) attributes.push(`aggro:"${aggro}"`);
-
-      const armorPieces = ["helmet", "chestplate", "leggings", "boots"].map(
-        (type) => {
-          const value = $(`#${type}Select`).val() || "{}";
-          return value === "{}" ? value : `"${value}"`;
-        }
-      );
-
-      if (armorPieces.some((piece) => piece !== "{}")) {
-        attributes.push(`armor:[${armorPieces.join(", ")}]`);
-      }
-
-      const holding = $("#itemSelect").val() || "";
-      if (holding) attributes.push(`holding:"${holding}"`);
-
-      const lootEnabled = $("#toggleLoot").find("i").hasClass("fa-toggle-on");
-      if (lootEnabled) attributes.push("defaultDrops:true");
-
-      if (attributes.length > 0) {
-        command += ` {${attributes.join(", ")}}`;
-      }
+    if (positionType === "relative") {
+      command += ` ~${posX === "~" ? "" : posX} ~${posY === "~" ? "" : posY}`;
+    } else if (positionType === "absolute") {
+      command += ` ${posX} ${posY}`;
+    } else {
+      command += " ~ ~";
     }
 
-    // Solo actualiza el contenido del comando, preservando el botón de guardado
-    const $footerBoxBig = $(".footer-box-big");
-    
-    // Remover solo el contenido del comando, no el botón
-    $footerBoxBig.contents().filter(function() {
-      // Mantener el botón de guardado, eliminar solo texto y spans de comando
-      return this.nodeType === 3 || (this.nodeType === 1 && !$(this).hasClass("footer-save-btn"));
-    }).remove();
-    
-    // Agregar el comando después del botón
-    $footerBoxBig.append(command);
+    // Solo añadir atributos si están configurados
+    let attributes = [];
+
+    const name = $("#mobName").val() || "";
+    if (name) attributes.push(`name:"${name}"`);
+
+    const health = $("#mobHealth").val() || "";
+    if (health) attributes.push(`health:${health}`);
+
+    const aggro = $("#aggressivenessSelect").val() || "";
+    if (aggro) attributes.push(`aggro:"${aggro}"`);
+
+    const armorPieces = ["helmet", "chestplate", "leggings", "boots"].map(
+      (type) => {
+        const value = $(`#${type}Select`).val() || "{}";
+        return value === "{}" ? value : `"${value}"`;
+      }
+    );
+
+    if (armorPieces.some((piece) => piece !== "{}")) {
+      attributes.push(`armor:[${armorPieces.join(", ")}]`);
+    }
+
+    const holding = $("#itemSelect").val() || "";
+    if (holding) attributes.push(`holding:"${holding}"`);
+
+    const lootEnabled = $("#toggleLoot").find("i").hasClass("fa-toggle-on");
+    if (lootEnabled) attributes.push("defaultDrops:true");
+
+    if (attributes.length > 0) {
+      command += ` {${attributes.join(", ")}}`;
+    }
   }
 
+  // Solo actualiza el contenido del comando, preservando el botón de guardado
+  const $footerBoxBig = $(".footer-box-big");
+  
+  // Remover solo el contenido del comando, no el botón
+  $footerBoxBig.contents().filter(function() {
+    // Mantener el botón de guardado, eliminar solo texto y spans de comando
+    return this.nodeType === 3 || (this.nodeType === 1 && !$(this).hasClass("footer-save-btn"));
+  }).remove();
+  
+  // Agregar el comando después del botón
+  $footerBoxBig.append(command);
+}
+
+$(document).ready(function () {
   // Eventos para campos de entrada
   $(
     "#mobType, #mobName, #mobHealth, #itemSelect, #mobAmount, #aggressivenessSelect"
