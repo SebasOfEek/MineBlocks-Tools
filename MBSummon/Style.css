@@ -74,7 +74,7 @@ body {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   transform: scale(1);
   overflow: hidden;
-  margin: 7px 10px;
+  margin: 0 10px;
 }
 
 .menu-button::before {
@@ -407,7 +407,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 27px 16px 0px 16px;
+  padding: 19px 16px 0px 16px;
   flex: 1 1 auto;
   min-height: 0;
   min-width: 0;
@@ -868,18 +868,9 @@ body {
     font-size: 2rem;
   }
 
-  .main {
-    gap: 30px;
-    padding: 20px 12px 12px;
-  }
-
   .card {
     height: 100%;
     font-size: 1.1rem;
-  }
-
-  .footer {
-    padding: 12px;
   }
 
   .select2-container--default .select2-selection--single {
@@ -890,10 +881,6 @@ body {
 @media screen and (max-height: 880px) {
   .container {
     grid-template-rows: auto 12px 1fr auto;
-  }
-
-  .main {
-    gap: 30px;
   }
 
   .card {
@@ -908,7 +895,7 @@ body {
   }
 
   .menu {
-    margin: 20px 8px 10px;
+    margin: 20px 8px 15px;
   }
 
   .sidebar-right {
@@ -916,7 +903,7 @@ body {
   }
 
   .topbar {
-    padding: 20px 12px 20px;
+    padding: 20px 24px 30px;
     gap: 10px;
   }
 
@@ -929,18 +916,9 @@ body {
     font-size: 1.8rem;
   }
 
-  .main {
-    gap: 25px;
-    padding: 15px 14px 10px;
-  }
-
   .card {
     height: 100%;
     font-size: 1rem;
-  }
-
-  .footer {
-    padding: 10px;
   }
 
   .select2-container--default .select2-selection--single {
