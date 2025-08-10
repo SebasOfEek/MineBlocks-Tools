@@ -370,6 +370,20 @@ $(document).ready(function () {
           templateSelection: formatOption,
           width: "100%",
           dropdownParent: $("#itemPopup"),
+          matcher: function(params, data) {
+            // Si la opción está deshabilitada, no permitir su selección
+            if ($(data.element).prop('disabled')) {
+              return null;
+            }
+            // Comportamiento normal de búsqueda
+            if (!params.term) {
+              return data;
+            }
+            if (data.text.toLowerCase().indexOf(params.term.toLowerCase()) > -1) {
+              return data;
+            }
+            return null;
+          }
         })
         .next(".select2-container")
         .css({
@@ -392,9 +406,34 @@ $(document).ready(function () {
 
       $("#itemSelect").on("change", function () {
         const selectedValue = $(this).val();
-        updateItemStatus(!!selectedValue);
+        const itemAmount = $("#itemAmount").val();
+        const itemData = $("#itemData").val();
+        
         if (selectedValue) {
-          console.log("Item guardado:", selectedValue);
+          // Solo actualizar el estado si tenemos todos los datos necesarios
+          const isValid = selectedValue && itemAmount && itemData;
+          updateItemStatus(isValid);
+          if (isValid) {
+            console.log("Item guardado:", {
+              item: selectedValue,
+              amount: itemAmount,
+              data: itemData
+            });
+            // Guardar en el objeto de cards
+            if (window.cards && window.cards.card4) {
+              window.cards.card4 = {
+                itemSelect: selectedValue,
+                itemAmount: itemAmount,
+                itemData: itemData
+              };
+            }
+            // Actualizar el comando
+            updateCommand();
+            // Limpiar los inputs después de guardar
+            $("#itemAmount, #itemData").val("");
+          }
+        } else {
+          updateItemStatus(false);
         }
       });
     }
@@ -414,16 +453,23 @@ $(document).ready(function () {
   const updateItemStatus = (saved) => {
     const statusButton = $("#itemStatusButton");
     const statusIcon = statusButton.find("i");
+    const itemSelect = $("#itemSelect").val();
+    const itemAmount = $("#itemAmount").val();
+    const itemData = $("#itemData").val();
+
+    // Solo considerar como guardado si todos los campos requeridos tienen valor
+    const isComplete = itemSelect && itemAmount && itemData;
+    const finalSaved = saved && isComplete;
 
     statusIcon
       .removeClass("fa-times fa-check not-saved saved")
-      .addClass(saved ? "fa-check saved" : "fa-times not-saved");
+      .addClass(finalSaved ? "fa-check saved" : "fa-times not-saved");
 
     statusButton
       .removeClass("saved not-saved")
-      .addClass(saved ? "saved" : "not-saved");
+      .addClass(finalSaved ? "saved" : "not-saved");
 
-    isItemSaved = saved;
+    isItemSaved = finalSaved;
   };
 
   $("#itemSelect").on("change", function () {
@@ -433,6 +479,16 @@ $(document).ready(function () {
 
   $("#itemPopup").on("show", function () {
     updateItemStatus(false);
+    // Limpiar los inputs al abrir el popup
+    $("#itemAmount, #itemData").val("");
+  });
+
+  // Agregar listeners para los inputs
+  $("#itemAmount, #itemData").on("input", function() {
+    const itemSelect = $("#itemSelect").val();
+    if (itemSelect) {
+      updateItemStatus(true);
+    }
   });
 });
 
@@ -469,6 +525,10 @@ $(document).ready(function () {
       if (numHealth > 0 && numHealth <= 100) {
         updateHealthStatus(true);
         console.log("Vida guardada:", health);
+        // Actualizar el comando con la nueva vida
+        updateCommand();
+        // Limpiar el input después de guardar
+        $("#mobHealth").val("");
       }
     }
   };
@@ -886,18 +946,90 @@ $(document).ready(function () {
         sidebarItemSelect.append(option);
       });
 
-      // Inicializar Select2
-      sidebarItemSelect.select2({
-        templateResult: formatOption,
-        templateSelection: formatSelection,
-        width: "100%",
-        dropdownParent: $("#lootTagsPopup"),
-      });
+      // Destruir instancia previa de Select2 si existe
+      if (sidebarItemSelect.data('select2')) {
+        sidebarItemSelect.select2('destroy');
+      }
+
+      // Pequeño retraso para asegurar que el DOM esté listo
+      setTimeout(() => {
+        // Inicializar Select2 con nueva configuración
+        sidebarItemSelect.select2({
+          templateResult: function(option) {
+            if (!option.id) return option.text;
+            const img = $(option.element).data('image');
+            const isSelected = $('.saved-item[data-value="' + option.id + '"]').length > 0;
+            
+            if (isSelected) {
+              const $disabledOption = $('<span></span>').css({
+                opacity: 0.5,
+                cursor: 'not-allowed',
+                color: '#999',
+                textDecoration: 'line-through'
+              });
+              
+              if (img) {
+                $disabledOption.append(
+                  $('<img src="' + img + '" style="width:20px;height:20px;vertical-align:middle;margin-right:8px;filter:grayscale(100%);" />')
+                );
+              }
+              $disabledOption.append(option.text);
+              option.disabled = true;
+              return $disabledOption;
+            }
+            
+            const $optionElem = $('<span></span>');
+            if (img) {
+              $optionElem.append(
+                $('<img src="' + img + '" style="width:20px;height:20px;vertical-align:middle;margin-right:8px;" />')
+              );
+            }
+            $optionElem.append(option.text);
+            return $optionElem;
+          },
+          templateSelection: function(option) {
+            return option.text; // Solo mostrar el texto sin imagen
+          },
+          width: "100%",
+          dropdownParent: $("#lootTagsPopup .popup-content"),
+          placeholder: "Seleccionar item",
+          allowClear: false,
+          closeOnSelect: true,
+          minimumResultsForSearch: 5
+        });
+        
+        // Asegurar que el select2 esté por encima de otros elementos
+        $("#lootTagsPopup .select2-container").css('z-index', 9999);
+        
+        // Debug para ver si el select2 se inicializó correctamente
+        console.log('Select2 initialized:', sidebarItemSelect.data('select2'));
+      }, 100);
 
       // Manejar cambio de selección
       sidebarItemSelect.on("change", function () {
         const selectedValue = $(this).val();
         if (selectedValue) {
+          // Obtener la imagen del item seleccionado
+          const selectedOption = $(this).find('option:selected');
+          const imageUrl = selectedOption.data('image');
+          
+          // Actualizar el add-item-header con la imagen
+          const $addItemHeader = $('.add-item-header');
+          $addItemHeader.find('.item-image').remove(); // Remover imagen anterior si existe
+          
+          if (imageUrl) {
+            // Agregar nueva imagen antes del icono de plus
+            const $image = $('<img>')
+              .addClass('item-image')
+              .attr('src', imageUrl)
+              .css({
+                width: '32px',
+                height: '32px',
+                verticalAlign: 'middle',
+                marginRight: '8px'
+              });
+            $addItemHeader.find('.fa-plus').before($image);
+          }
           console.log("Item seleccionado en Loot Tags:", selectedValue);
         }
       });
@@ -918,15 +1050,120 @@ $(document).ready(function () {
     }
   });
 
+  // Container para los items guardados
+  if (!$('.saved-items-container').length) {
+    $('.loot-tags-header').before('<div class="saved-items-container" style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;"></div>');
+  }
+
+  // Función para limpiar todos los inputs
+  function clearInputs() {
+    $('#itemQuantity, #itemBonus, #lootBonus, #itemChance, #itemDamage, #itemVariant, #itemColor').val('');
+    $('#itemOnFire, #isBaby, #isSheared').prop('checked', false);
+  }
+
+  // Función para cargar datos en los inputs
+  function loadItemData(itemData) {
+    $('#itemQuantity').val(itemData.cantidad || '');
+    $('#itemBonus').val(itemData.bonus || '');
+    $('#lootBonus').val(itemData.lootBonus || '');
+    $('#itemChance').val(itemData.oportunidad || '');
+    $('#itemDamage').val(itemData.danio || '');
+    $('#itemVariant').val(itemData.variante || '');
+    $('#itemColor').val(itemData.color || '');
+    $('#itemOnFire').prop('checked', itemData.enLlamas || false);
+    $('#isBaby').prop('checked', itemData.esBebe || false);
+    $('#isSheared').prop('checked', itemData.esquilada || false);
+  }
+
+  // Click en item guardado para cargar sus datos
+  $(document).on('click', '.saved-item', function() {
+    const itemData = JSON.parse($(this).attr('data-item'));
+    loadItemData(itemData);
+    // Seleccionar el item en el select2
+    $('#sidebarItemSelect').val(itemData.value).trigger('change');
+  });
+
   // Manejar botones de acción
   $("#lootTagsPopup .sidebar-button.save").on("click", function () {
-    console.log("Guardar item en Loot Tags");
-    // Aquí puedes agregar la lógica para guardar
+    const selectedOption = $('#sidebarItemSelect').find('option:selected');
+    const imageUrl = selectedOption.data('image');
+    const itemValue = selectedOption.val();
+    
+    if (imageUrl && itemValue) {
+      // Verificar si el item ya está guardado
+      if ($('.saved-item[data-value="' + itemValue + '"]').length > 0) {
+        return; // No permitir guardar el mismo item dos veces
+      }
+
+      // Recopilar todos los datos
+      const itemData = {
+        value: itemValue,
+        image: imageUrl,
+        cantidad: $('#itemQuantity').val(),
+        bonus: $('#itemBonus').val(),
+        lootBonus: $('#lootBonus').val(),
+        oportunidad: $('#itemChance').val(),
+        enLlamas: $('#itemOnFire').is(':checked'),
+        danio: $('#itemDamage').val(),
+        esBebe: $('#isBaby').is(':checked'),
+        variante: $('#itemVariant').val(),
+        esquilada: $('#isSheared').is(':checked'),
+        color: $('#itemColor').val()
+      };
+
+      // Crear elemento para el item guardado
+      const $savedItem = $('<div>')
+        .addClass('saved-item')
+        .css({
+          width: '32px',
+          height: '32px',
+          borderRadius: '5px',
+          overflow: 'hidden',
+          boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+          cursor: 'pointer',
+          position: 'relative'
+        })
+        .attr('data-value', itemValue)
+        .attr('data-item', JSON.stringify(itemData));
+
+      const $img = $('<img>')
+        .attr('src', imageUrl)
+        .css({
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover'
+        });
+
+      // Agregar indicador si hay datos adicionales
+      if (Object.values(itemData).some(val => val && val !== itemValue && val !== imageUrl)) {
+        const $indicator = $('<div>')
+          .css({
+            position: 'absolute',
+            bottom: '2px',
+            right: '2px',
+            width: '8px',
+            height: '8px',
+            borderRadius: '50%',
+            backgroundColor: '#4CAF50',
+            border: '1px solid white'
+          });
+        $savedItem.append($indicator);
+      }
+
+      // Agregar tooltip con los datos
+      $savedItem.attr('title', 'Click para ver detalles');
+      
+      $savedItem.append($img);
+      $('.saved-items-container').append($savedItem);
+      
+      // Limpiar selección y todos los inputs
+      $('#sidebarItemSelect').val(null).trigger('change');
+      clearInputs();
+    }
   });
 
   $("#lootTagsPopup .sidebar-button.delete").on("click", function () {
-    console.log("Eliminar item de Loot Tags");
-    // Aquí puedes agregar la lógica para eliminar
+    $('.saved-items-container').empty();
   });
 
   $("#lootTagsPopup .sidebar-button:not(.save):not(.delete)").on("click", function () {
