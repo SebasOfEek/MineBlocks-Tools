@@ -1765,9 +1765,28 @@ function saveCurrentCommand() {
   const cards = getCurrentFormDataByCard();
   let saved = getSavedCommands();
 
+  console.log("Iniciando proceso de guardado...");
+
   if (!mobType || !command) {
+    alert("No se puede guardar: Seleccione un mob y configure sus propiedades");
     console.log("No se puede guardar: falta mobType o comando");
     return false;
+  }
+
+  // Validar datos del item si existe
+  if (cards.card4) {
+    const { itemSelect, itemAmount, itemData } = cards.card4;
+    console.log("Validando datos del item:", cards.card4);
+    
+    if (itemSelect && (!itemAmount || !itemData)) {
+      alert("Complete todos los datos del item (cantidad y datos) antes de guardar");
+      console.log("Faltan datos del item:", {
+        itemSelect,
+        itemAmount: itemAmount || "falta cantidad",
+        itemData: itemData || "faltan datos"
+      });
+      return false;
+    }
   }
 
   // Evita duplicados por mobType y comando
@@ -1785,9 +1804,13 @@ function saveCurrentCommand() {
     
     saved.push(newSave);
     setSavedCommands(saved);
-    console.log("Comando guardado:", newSave);
+    console.log("Comando guardado exitosamente:", newSave);
+    
+    // Mostrar un mensaje de éxito
+    alert("¡Comando guardado exitosamente!");
     return true;
   } else {
+    alert("Este comando ya está guardado");
     console.log("El comando ya existe en los guardados");
     return false;
   }
@@ -2141,18 +2164,26 @@ $(document).ready(function () {
 
     if ($btn.hasClass("saved")) {
       // Quitar guardado
-      saved = saved.filter(
-        (item) =>
-          !(item.command === command && item.mobType === mobType)
-      );
-      setSavedCommands(saved);
-      $btn.removeClass("saved");
-      console.log("Guardado eliminado");
+      if (confirm("¿Desea eliminar este comando de los guardados?")) {
+        saved = saved.filter(
+          (item) =>
+            !(item.command === command && item.mobType === mobType)
+        );
+        setSavedCommands(saved);
+        $btn.removeClass("saved");
+        alert("Comando eliminado de los guardados");
+        console.log("Guardado eliminado");
+      }
     } else {
       // Guardar con datos de todas las cards
+      console.log("Intentando guardar comando...");
+      const formData = getCurrentFormDataByCard();
+      console.log("Datos del formulario:", formData);
+      
       if (saveCurrentCommand()) {
         $btn.addClass("saved");
         console.log("Comando guardado exitosamente");
+        // El mensaje de éxito se muestra en saveCurrentCommand
       }
     }
   });
