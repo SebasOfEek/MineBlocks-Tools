@@ -404,36 +404,54 @@ $(document).ready(function () {
           top: "0",
         });
 
-      $("#itemSelect").on("change", function () {
-        const selectedValue = $(this).val();
+      // Función para guardar el item y sus datos
+      function saveItem() {
+        const selectedValue = $("#itemSelect").val();
         const itemAmount = $("#itemAmount").val();
         const itemData = $("#itemData").val();
         
-        if (selectedValue) {
-          // Solo actualizar el estado si tenemos todos los datos necesarios
-          const isValid = selectedValue && itemAmount && itemData;
-          updateItemStatus(isValid);
-          if (isValid) {
-            console.log("Item guardado:", {
-              item: selectedValue,
-              amount: itemAmount,
-              data: itemData
-            });
-            // Guardar en el objeto de cards
-            if (window.cards && window.cards.card4) {
-              window.cards.card4 = {
-                itemSelect: selectedValue,
-                itemAmount: itemAmount,
-                itemData: itemData
-              };
-            }
-            // Actualizar el comando
-            updateCommand();
-            // Limpiar los inputs después de guardar
-            $("#itemAmount, #itemData").val("");
+        console.log("Intentando guardar item con datos:", {
+          item: selectedValue,
+          amount: itemAmount,
+          data: itemData
+        });
+
+        const isValid = selectedValue && itemAmount && itemData;
+        
+        if (isValid) {
+          // Crear el objeto cards si no existe
+          if (!window.currentCardData) {
+            window.currentCardData = {};
           }
+          
+          // Guardar los datos
+          window.currentCardData.card4 = {
+            itemSelect: selectedValue,
+            itemAmount: itemAmount,
+            itemData: itemData
+          };
+          
+          console.log("Item guardado exitosamente:", window.currentCardData.card4);
+          updateItemStatus(true);
+          updateCommand();
+          return true;
         } else {
+          if (selectedValue) {
+            alert("Por favor complete todos los campos del item (cantidad y datos)");
+          }
           updateItemStatus(false);
+          return false;
+        }
+      }
+
+      // Event listeners para todos los campos del item
+      $("#itemSelect").on("change", function() {
+        saveItem();
+      });
+
+      $("#itemAmount, #itemData").on("input", function() {
+        if ($("#itemSelect").val()) {
+          saveItem();
         }
       });
     }
@@ -461,7 +479,7 @@ $(document).ready(function () {
     const isComplete = itemSelect && itemAmount && itemData;
     const finalSaved = saved && isComplete;
 
-    console.log("Estado de los campos:", {
+    console.log("Estado actual de los campos del item:", {
       itemSelect,
       itemAmount,
       itemData,
@@ -477,13 +495,19 @@ $(document).ready(function () {
       .removeClass("saved not-saved")
       .addClass(finalSaved ? "saved" : "not-saved");
 
-    // Si no están todos los campos completos, mostrar mensaje
-    if (!isComplete && saved) {
-      console.log("Campos faltantes:", {
-        item: !itemSelect ? "Seleccione un item" : "",
-        amount: !itemAmount ? "Ingrese una cantidad" : "",
-        data: !itemData ? "Ingrese los datos del item" : ""
-      });
+    // Actualizar el texto del botón según el estado
+    if (itemSelect) {
+      if (!itemAmount && !itemData) {
+        $("#itemStatusText").text("Faltan cantidad y datos");
+      } else if (!itemAmount) {
+        $("#itemStatusText").text("Falta cantidad");
+      } else if (!itemData) {
+        $("#itemStatusText").text("Faltan datos");
+      } else {
+        $("#itemStatusText").text(finalSaved ? "Guardado" : "No guardado");
+      }
+    } else {
+      $("#itemStatusText").text("Seleccione un item");
     }
 
     isItemSaved = finalSaved;
@@ -496,9 +520,16 @@ $(document).ready(function () {
   });
 
   $("#itemPopup").on("show", function () {
-    updateItemStatus(false);
-    // Limpiar los inputs al abrir el popup
-    $("#itemAmount, #itemData").val("");
+    // Cargar datos guardados si existen
+    if (window.currentCardData && window.currentCardData.card4) {
+      const savedData = window.currentCardData.card4;
+      $("#itemSelect").val(savedData.itemSelect).trigger('change');
+      $("#itemAmount").val(savedData.itemAmount);
+      $("#itemData").val(savedData.itemData);
+      updateItemStatus(true);
+    } else {
+      updateItemStatus(false);
+    }
   });
 
   // Agregar listeners para los inputs
