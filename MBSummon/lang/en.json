@@ -9,18 +9,23 @@
     },
     "discord": "Discord",
     "clear": "Clear",
-    "settings": "Settings"
+    "settings": "Settings",
+    "saved": "Saved"
   },
   "cards": {
     "name": "Name",
     "amount": "Amount",
     "position": "Position",
     "health": "Health",
-    "equipment": "Equipment",
+    "equipment": "Equipped Item",
+    "holding": "Equipped Item",
     "defaultLoot": "Default Loot",
     "armor": "Armor",
     "lootTags": "Loot Tags",
-    "aggressiveness": "Aggressiveness"
+    "aggressiveness": "Aggressiveness",
+    "skin": "Skin ID",
+    "charged": "Charged Creeper",
+    "test": "Test"
   },
   "modals": {
     "language": {
@@ -32,13 +37,211 @@
       "title": "Mob Name",
       "label": "Custom name:",
       "placeholder": "Enter a name...",
-      "help": "This option allows you to customize the name of the mob you will summon. The name you write here will be visible floating above the mob when you summon it in the game. You can use format codes using the & symbol followed by a number."
+      "help": {
+        "title": "Help - Mob Name",
+        "description": "This option allows you to customize the name of the mob you will summon. The name you write here will be visible floating above the mob when you summon it in the game. You can use format codes using the & symbol followed by a number."
+      }
     },
     "amount": {
       "title": "Mob Amount",
       "label": "Amount to summon:",
       "placeholder": "Enter an amount...",
-      "help": "This option allows you to define how many mobs you want to summon at once. For performance and game balance reasons, the maximum limit is 20 mobs per summon."
+      "help": {
+        "title": "Help - Mob Amount",
+        "description": "This option allows you to define how many mobs you want to summon at once. For performance and game balance reasons, the maximum limit is 20 mobs per summon."
+      }
+    },
+  "position": {
+      "title": "Mob Position",
+      "label": "Position type:",
+      "selectPlaceholder": "--Select type--",
+      "relative": "Relative position",
+      "absolute": "Absolute position",
+  "coordXLabel": "Coordinate X:",
+  "coordYLabel": "Coordinate Y:",
+  "coordXPlaceholder": "Enter X coordinate...",
+  "coordYPlaceholder": "Enter Y coordinate...",
+  "coordXRelative": "Coordinate ~X:",
+  "coordYRelative": "Coordinate ~Y:",
+      "help": {
+        "title": "Help - Mob Position",
+        "description": "This option lets you define where the mob will appear. You can choose between relative position (relative to the player) or absolute position (world coordinates). Enter X and Y values to determine the exact spawn point."
+      }
+    },
+    "item": {
+      "title": "Equipped Item",
+      "label": "Select item:",
+      "selectPlaceholder": "--Select item--",
+      "help": {
+        "title": "Help - Equipped Item",
+        "description": "This option allows you to choose the item the mob will hold in its hand. The selected item will appear in the mob's hand when summoned."
+      }
+    },
+    "health": {
+      "title": "Mob Health",
+      "label": "Amount of health:",
+      "placeholder": "Enter health...",
+      "help": {
+        "title": "Help - Mob Health",
+        "description": "This option lets you set how much health the mob will have when it appears. The value should be between 1 and 100 health points."
+      }
+    },
+    "loot": {
+      "title": "Default Loot",
+      "label": "Enable default loot:",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "help": {
+        "title": "Help - Default Loot",
+        "description": "This option allows you to enable or disable the mob's default loot. When enabled, the mob will drop its default configured items on death."
+      }
+    },
+    "lootTags": {
+      "title": "Loot Tags",
+      "selectItemPlaceholder": "Select item",
+      "saveButton": "Save",
+      "deleteButton": "Delete",
+      "editButton": "Edit",
+      "fields": {
+        "amount": "Amount:",
+        "bonus": "Bonus:",
+        "lootBonus": "Loot Bonus:",
+        "chance": "Chance:",
+        "onFire": "Is on fire:",
+        "size": "Size:",
+        "isBaby": "Is baby:",
+        "variant": "Variant:",
+        "isSheared": "Is sheared:",
+        "color": "Color:"
+      },
+      "help": {
+        "title": "Help - Loot Tags",
+        "description": "Loot tags control special behaviors when the mob dies, such as the chance to drop rare items or extra experience."
+      }
+    },
+    "armor": {
+      "title": "Mob Armor",
+      "helmet": "Helmet:",
+      "chestplate": "Chestplate:",
+      "leggings": "Leggings:",
+      "boots": "Boots:",
+      "selectPlaceholder": "--Select--",
+      "help": {
+        "title": "Help - Mob Armor",
+        "description": "This option lets you equip the mob with different pieces of armor. You can choose helmet, chestplate, leggings and boots of various materials."
+      }
+    },
+    "aggressiveness": {
+      "title": "Mob Aggressiveness",
+      "label": "Aggressiveness type:",
+      "selectPlaceholder": "--Select type--",
+      "hostile": "Hostile",
+      "neutral": "Neutral",
+      "passive": "Passive",
+      "help": {
+        "title": "Help - Aggressiveness",
+        "description": "This option lets you define the mob's aggressive behavior. Hostile will attack players, Neutral will only attack if provoked, and Passive will never attack."
+      }
+    },
+    "skin": {
+      "title": "Skin ID",
+      "label": "Skin ID (numbers only):",
+      "placeholder": "Example: 76198",
+      "help": {
+        "title": "Help - Skin ID",
+        "description": "Enter the numeric ID of the skin you want to assign to the mob. Only numbers are allowed (e.g. 76198). In the command it will be added as `skin:76198`."
+      }
+    },
+    "charged": {
+      "title": "Charged Creeper",
+      "label": "Charged Creeper:",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "help": {
+        "title": "Help - Charged Creeper",
+        "description": "Enable this option to turn the creeper into a charged variant. The command will include `charged:1` when enabled."
+      }
+    },
+    "languagePopup": {
+      "title": "Select Language",
+      "spanish": "Spanish",
+      "english": "English"
+    },
+    "savedModal": {
+      "title": "Saved",
+      "emptyMessage": "No saved items yet."
+    }
+  },
+  "footer": {
+    "saveTitle": "Save",
+    "copy": "Copy command"
+  },
+  "languages": {
+    "es": { "name": "Español", "alt": "Español" },
+    "en": { "name": "English", "alt": "English" }
+  },
+  "external": {
+    "mobs": {
+      "zombie": "Zombie",
+      "spawnskin": "Spawnskin",
+      "skeleton": "Skeleton",
+      "creeper": "Creeper",
+      "spider": "Spider",
+      "enderman": "Enderman",
+      "blaze": "Blaze",
+      "ghast": "Ghast",
+      "magmacube": "Magma Cube",
+      "slime": "Slime",
+      "enderdragon": "Ender Dragon",
+      "nethereye": "Nethereye",
+      "cow": "Cow",
+      "sheep": "Sheep",
+      "mooshroom": "Mooshroom",
+      "pig": "Pig",
+      "squid": "Squid",
+      "bat": "Bat",
+      "chicken": "Chicken",
+      "rabbit": "Rabbit",
+      "wolf": "Wolf",
+      "pigman": "Zombie Pigman",
+      "snowgolem": "Snow Golem",
+      "cowctus": "Cowctus"
+    },
+    "armor": {
+      "helmet": {
+        "leather_cap": "Leather Cap",
+        "iron_helmet": "Iron Helmet",
+        "gold_helmet": "Gold Helmet",
+        "diamond_helmet": "Diamond Helmet",
+        "dragon_scale_helmet": "Dragon Scale Helmet",
+        "jack_o_lantern": "Jack-o-Lantern",
+        "santa_hat": "Santa Hat",
+        "party_hat": "Party Hat",
+        "afro": "Afro",
+        "shades": "Shades",
+        "mustache": "Mustache"
+      },
+      "chestplate": {
+        "leather_tunic": "Leather Tunic",
+        "iron_chestplate": "Iron Chestplate",
+        "gold_chestplate": "Gold Chestplate",
+        "diamond_chestplate": "Diamond Chestplate",
+        "dragon_scale_chestplate": "Dragon Scale Chestplate"
+      },
+      "leggings": {
+        "leather_pants": "Leather Pants",
+        "iron_leggings": "Iron Leggings",
+        "gold_leggings": "Gold Leggings",
+        "diamond_leggings": "Diamond Leggings",
+        "dragon_scale_leggings": "Dragon Scale Leggings"
+      },
+      "boots": {
+        "leather_boots": "Leather Boots",
+        "iron_boots": "Iron Boots",
+        "gold_boots": "Gold Boots",
+        "diamond_boots": "Diamond Boots",
+        "dragon_scale_boots": "Dragon Scale Boots"
+      }
     }
   },
   "common": {
@@ -46,6 +249,8 @@
     "save": "Save",
     "help": "Help",
     "enabled": "Enabled",
-    "disabled": "Disabled"
+    "disabled": "Disabled",
+    "yes": "Yes",
+    "no": "No"
   }
 }
