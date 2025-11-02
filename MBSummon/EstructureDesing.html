@@ -19,38 +19,38 @@
   <body>
     <div class="container">
       <div class="menu">
-        <div class="menu-title">Menú</div>
+        <div class="menu-title" data-i18n="menu.title">Menú</div>
         <button class="menu-button" id="homeButton">
           <i class="fas fa-home menu-icon"></i>
-          <span>Inicio</span>
+          <span data-i18n="menu.home">Inicio</span>
         </button>
         <button class="menu-button" id="languageButton">
           <i class="fas fa-language menu-icon"></i>
-          <span>Idioma</span>
+          <span data-i18n="menu.language">Idioma</span>
         </button>
         <button class="menu-button" id="themeButton">
           <i class="fas fa-moon menu-icon"></i>
-          <span>Oscuro</span>
+          <span data-i18n="menu.theme">Oscuro</span>
         </button>
         <button class="menu-button" id="clearButton">
           <i class="fas fa-eraser menu-icon"></i>
-          <span>Limpiar</span>
+          <span data-i18n="menu.clear">Limpiar</span>
         </button>
         <button class="menu-button" id="savedButton">
           <i class="fas fa-bookmark menu-icon"></i>
-          <span>Guardados</span>
+          <span data-i18n="menu.saved">Guardados</span>
         </button>
         <button class="menu-button" id="configButton">
           <i class="fas fa-cog menu-icon"></i>
-          <span>Configuración</span>
+          <span data-i18n="menu.settings">Configuración</span>
         </button>
       </div>
       <div class="mobile-header-bg"></div>
 
       <div class="topbar">
-        <div class="mob-select-wrapper">
+          <div class="mob-select-wrapper">
           <div class="box small" id="mobImage"></div>
-          <select id="mobType" class="select-with-images" style="width: 300px" data-tag="mobType">
+          <select id="mobType" class="select-with-images" data-tag="mobType">
           </select>
         </div>
         <div class="logo">MBSummon</div>
@@ -64,7 +64,7 @@
           <div class="card" id="card1">
             <span class="question-icon">?</span>
             <i class="fas fa-signature"></i>
-            <span class="card-text">Nombre</span>
+            <span class="card-text" data-i18n="cards.name">Nombre</span>
           </div>
           <div class="card-icon">
             <i class="fas fa-signature"></i>
@@ -72,7 +72,7 @@
           <div class="card" id="card2">
             <span class="question-icon">?</span>
             <i class="fas fa-hashtag"></i>
-            <span class="card-text">Cantidad</span>
+            <span class="card-text" data-i18n="cards.amount">Cantidad</span>
           </div>
           <div class="card-icon">
             <i class="fas fa-hashtag"></i>
@@ -80,7 +80,7 @@
           <div class="card" id="card3">
             <span class="question-icon">?</span>
             <i class="fas fa-location-dot"></i>
-            <span class="card-text">Posición</span>
+            <span class="card-text" data-i18n="cards.position">Posición</span>
           </div>
           <div class="card-icon">
             <i class="fas fa-location-dot"></i>
@@ -88,7 +88,7 @@
           <div class="card" id="card9">
             <span class="question-icon">?</span>
             <i class="fas fa-heart"></i>
-            <span class="card-text">Vida</span>
+            <span class="card-text" data-i18n="cards.health">Vida</span>
           </div>
           <div class="card-icon">
             <i class="fas fa-heart"></i>
@@ -96,7 +96,7 @@
           <div class="card" id="card4">
             <span class="question-icon">?</span>
             <i class="fas fa-hand-sparkles"></i>
-            <span class="card-text">Objeto equip.</span>
+            <span class="card-text" data-i18n="cards.holding">Objeto equip.</span>
           </div>
           <div class="card-icon">
             <i class="fas fa-hand-sparkles"></i>
@@ -104,7 +104,7 @@
           <div class="card" id="card5">
             <span class="question-icon">?</span>
             <i class="fas fa-box"></i>
-            <span class="card-text">Loot predet.</span>
+            <span class="card-text" data-i18n="cards.defaultLoot">Loot predet.</span>
           </div>
           <div class="card-icon">
             <i class="fas fa-box"></i>
@@ -112,7 +112,7 @@
           <div class="card" id="card6">
             <span class="question-icon">?</span>
             <i class="fas fa-shield"></i>
-            <span class="card-text">Armadura</span>
+            <span class="card-text" data-i18n="cards.armor">Armadura</span>
           </div>
           <div class="card-icon">
             <i class="fas fa-shield"></i>
@@ -120,7 +120,7 @@
           <div class="card" id="card7">
             <span class="question-icon">?</span>
             <i class="fas fa-tags"></i>
-            <span class="card-text">Loot Tags</span>
+            <span class="card-text" data-i18n="cards.lootTags">Loot Tags</span>
           </div>
           <div class="card-icon">
             <i class="fas fa-tags"></i>
@@ -128,7 +128,7 @@
           <div class="card" id="cardAggressiveness">
             <span class="question-icon">?</span>
             <i class="fas fa-skull"></i>
-            <span class="card-text">Agresividad</span>
+            <span class="card-text" data-i18n="cards.aggressiveness">Agresividad</span>
           </div>
           <div class="card-icon">
             <i class="fas fa-skull"></i>
@@ -136,7 +136,7 @@
           <div class="card" id="card10">
             <span class="question-icon">?</span>
             <i class="fas fa-wand-magic-sparkles"></i>
-            <span class="card-text">Skin ID</span>
+            <span class="card-text" data-i18n="cards.skinId">Skin ID</span>
           </div>
           <div class="card-icon">
             <i class="fas fa-wand-magic-sparkles"></i>
@@ -144,7 +144,7 @@
           <div class="card" id="card18">
             <span class="question-icon">?</span>
             <i class="fas fa-code"></i>
-            <span class="card-text">Creeper Cargado</span>
+            <span class="card-text" data-i18n="cards.charged">Creeper Cargado</span>
           </div>
           <div class="card-icon">
             <i class="fas fa-code"></i>
@@ -152,7 +152,7 @@
           <div class="card" id="card19">
             <span class="question-icon">?</span>
             <i class="fas fa-code"></i>
-            <span class="card-text">Test</span>
+            <span class="card-text" data-i18n="cards.test">Test</span>
           </div>
           <div class="card-icon">
             <i class="fas fa-code"></i>
@@ -163,14 +163,14 @@
       <div class="popup-overlay" id="customPopup">
         <div class="popup-window">
           <div class="popup-header">
-            <h2>Nombre del mob</h2>
+            <h2 data-i18n="modals.name.title">Nombre del mob</h2>
             <button class="popup-close">&times;</button>
           </div>
           <div class="popup-content">
             <div class="popup-input-group">
               <div class="popup-input-wrapper">
-                <label for="mobName">Nombre personalizado:</label>
-                <input type="text" id="mobName" class="popup-input" placeholder="Ingresa un nombre..." data-tag="name">
+                <label for="mobName" data-i18n="modals.name.label">Nombre personalizado:</label>
+                <input type="text" id="mobName" class="popup-input" data-i18n="modals.name.placeholder" data-i18n-attr="placeholder" placeholder="Ingresa un nombre..." data-tag="name">
               </div>
               <button class="popup-button" id="statusButton">
                 <i class="fas fa-times status-icon not-saved"></i>
@@ -183,11 +183,11 @@
       <div class="popup-overlay" id="helpPopup">
         <div class="popup-window">
           <div class="popup-header">
-            <h2>Ayuda - Nombre del mob</h2>
+            <h2 data-i18n="modals.name.help.title">Ayuda - Nombre del mob</h2>
             <button class="popup-close">&times;</button>
           </div>
           <div class="popup-content">
-            <p class="popup-description">
+            <p class="popup-description" data-i18n="modals.name.help.description">
               Esta opción te permite personalizar el nombre del mob que vas a invocar. El nombre que escribas aquí será visible flotando sobre el mob cuando lo invoques en el juego. Puedes usar códigos de formato usando el símbolo & seguido de un número.
             </p>
           </div>
@@ -197,14 +197,19 @@
       <div class="popup-overlay" id="amountPopup">
         <div class="popup-window">
           <div class="popup-header">
-            <h2>Cantidad de mobs</h2>
+            <h2 data-i18n="modals.amount.title">Cantidad de mobs</h2>
             <button class="popup-close">&times;</button>
           </div>
           <div class="popup-content">
             <div class="popup-input-group">
               <div class="popup-input-wrapper">
-                <label for="mobAmount">Cantidad a invocar:</label>
-                <input type="number" id="mobAmount" class="popup-input" placeholder="Ingresa una cantidad..." min="1" max="20" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-tag="quantity">
+                <label for="mobAmount" data-i18n="modals.amount.label">Cantidad a invocar:</label>
+                <input type="number" id="mobAmount" class="popup-input" 
+                  data-i18n="modals.amount.placeholder" data-i18n-attr="placeholder"
+                  placeholder="Ingresa una cantidad..." 
+                  min="1" max="20" step="1" 
+                  onkeypress="return event.charCode >= 48 && event.charCode <= 57" 
+                  data-tag="quantity">
               </div>
               <button class="popup-button" id="amountStatusButton">
                 <i class="fas fa-times status-icon not-saved"></i>
@@ -217,11 +222,11 @@
       <div class="popup-overlay" id="amountHelpPopup">
         <div class="popup-window">
           <div class="popup-header">
-            <h2>Ayuda - Cantidad de mobs</h2>
+            <h2 data-i18n="modals.amount.help.title">Ayuda - Cantidad de mobs</h2>
             <button class="popup-close">&times;</button>
           </div>
           <div class="popup-content">
-            <p class="popup-description">
+            <p class="popup-description" data-i18n="modals.amount.help.description">
               Esta opción te permite definir cuántos mobs quieres invocar a la vez. Por razones de rendimiento y equilibrio del juego, el límite máximo es de 20 mobs por invocación.
             </p>
           </div>
@@ -231,24 +236,24 @@
       <div class="popup-overlay" id="positionPopup">
         <div class="popup-window">
           <div class="popup-header">
-            <h2>Posición del mob</h2>
+            <h2 data-i18n="modals.position.title">Posición del mob</h2>
             <button class="popup-close">&times;</button>
           </div>
           <div class="popup-content">
             <div class="popup-input-group">
               <div class="popup-input-wrapper">
-                <label for="positionType">Tipo de posición:</label>
+                <label for="positionType" data-i18n="modals.position.typeLabel">Tipo de posición:</label>
                 <select id="positionType" class="popup-select">
-                  <option value="">--Seleccionar tipo--</option>
-                  <option value="relative">Posición relativa</option>
-                  <option value="absolute">Posición absoluta</option>
+                  <option value="" data-i18n="common.select">--Seleccionar tipo--</option>
+                  <option value="relative" data-i18n="modals.position.relative">Posición relativa</option>
+                  <option value="absolute" data-i18n="modals.position.absolute">Posición absoluta</option>
                 </select>
               </div>
             </div>
             <div class="popup-input-group">
               <div class="popup-input-wrapper">
-                <label for="posX" id="labelPosX">Coordenada X:</label>
-                <input type="number" id="posX" class="popup-input" placeholder="Ingresa la coordenada X..." disabled>
+                <label for="posX" id="labelPosX" data-i18n="modals.position.coordX">Coordenada X:</label>
+                <input type="number" id="posX" class="popup-input" data-i18n="modals.position.coordXPlaceholder" data-i18n-attr="placeholder" placeholder="Ingresa la coordenada X..." disabled>
               </div>
               <button class="popup-button" id="posXStatusButton">
                 <i class="fas fa-times status-icon not-saved"></i>
@@ -256,8 +261,8 @@
             </div>
             <div class="popup-input-group">
               <div class="popup-input-wrapper">
-                <label for="posY" id="labelPosY">Coordenada Y:</label>
-                <input type="number" id="posY" class="popup-input" placeholder="Ingresa la coordenada Y..." disabled>
+                <label for="posY" id="labelPosY" data-i18n="modals.position.coordY">Coordenada Y:</label>
+                <input type="number" id="posY" class="popup-input" data-i18n="modals.position.coordYPlaceholder" data-i18n-attr="placeholder" placeholder="Ingresa la coordenada Y..." disabled>
               </div>
               <button class="popup-button" id="posYStatusButton">
                 <i class="fas fa-times status-icon not-saved"></i>
@@ -270,11 +275,11 @@
       <div class="popup-overlay" id="positionHelpPopup">
         <div class="popup-window">
           <div class="popup-header">
-            <h2>Ayuda - Posición del mob</h2>
+            <h2 data-i18n="modals.position.help.title">Ayuda - Posición del mob</h2>
             <button class="popup-close">&times;</button>
           </div>
           <div class="popup-content">
-            <p class="popup-description">
+            <p class="popup-description" data-i18n="modals.position.help.description">
               Esta opción te permite definir dónde aparecerá el mob. Puedes elegir entre posición relativa (respecto al jugador) o posición absoluta (coordenadas fijas del mundo). Ingresa los valores X e Y para determinar el punto exacto de aparición.
             </p>
           </div>
@@ -284,15 +289,15 @@
       <div class="popup-overlay" id="itemPopup">
         <div class="popup-window">
           <div class="popup-header">
-            <h2>Objeto equipado</h2>
+            <h2 data-i18n="modals.item.title">Objeto equipado</h2>
             <button class="popup-close">&times;</button>
           </div>
           <div class="popup-content">
             <div class="popup-input-group">
               <div class="popup-input-wrapper">
-                <label for="itemSelect">Seleccionar objeto:</label>
+                <label for="itemSelect" data-i18n="modals.item.label">Seleccionar objeto:</label>
                 <select id="itemSelect" class="select-with-images" style="width: 100%" data-tag="holding">
-                  <option value="">--Seleccionar objeto--</option>
+                  <option value="" data-i18n="modals.item.selectPlaceholder">--Seleccionar objeto--</option>
                 </select>
               </div>
               <button class="popup-button" id="itemStatusButton">
@@ -306,11 +311,11 @@
       <div class="popup-overlay" id="itemHelpPopup">
         <div class="popup-window">
           <div class="popup-header">
-            <h2>Ayuda - Objeto equipado</h2>
+            <h2 data-i18n="modals.item.help.title">Ayuda - Objeto equipado</h2>
             <button class="popup-close">&times;</button>
           </div>
           <div class="popup-content">
-            <p class="popup-description">
+            <p class="popup-description" data-i18n="modals.item.help.description">
               Esta opción te permite seleccionar el objeto que el mob tendrá equipado en su mano. El objeto seleccionado aparecerá en la mano del mob cuando sea invocado.
             </p>
           </div>
@@ -320,14 +325,14 @@
       <div class="popup-overlay" id="healthPopup">
         <div class="popup-window">
           <div class="popup-header">
-            <h2>Vida del mob</h2>
+            <h2 data-i18n="modals.health.title">Vida del mob</h2>
             <button class="popup-close">&times;</button>
           </div>
           <div class="popup-content">
             <div class="popup-input-group">
               <div class="popup-input-wrapper">
-                <label for="mobHealth">Cantidad de vida:</label>
-                <input type="number" id="mobHealth" class="popup-input" placeholder="Ingresa la vida..." min="1" max="100" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-tag="health">
+                <label for="mobHealth" data-i18n="modals.health.label">Cantidad de vida:</label>
+                <input type="number" id="mobHealth" class="popup-input" data-i18n="modals.health.placeholder" data-i18n-attr="placeholder" placeholder="Ingresa la vida..." min="1" max="100" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-tag="health">
               </div>
               <button class="popup-button" id="healthStatusButton">
                 <i class="fas fa-times status-icon not-saved"></i>
@@ -340,45 +345,27 @@
       <div class="popup-overlay" id="healthHelpPopup">
         <div class="popup-window">
           <div class="popup-header">
-            <h2>Ayuda - Vida del mob</h2>
+            <h2 data-i18n="modals.health.help.title">Ayuda - Vida del mob</h2>
             <button class="popup-close">&times;</button>
           </div>
           <div class="popup-content">
-            <p class="popup-description">
+            <p class="popup-description" data-i18n="modals.health.help.description">
               Esta opción te permite definir la cantidad de vida que tendrá el mob al aparecer. El valor debe estar entre 1 y 100 puntos de vida.
             </p>
           </div>
         </div>
       </div>
 
-      <div class="popup-overlay" id="lootPopup">
-        <div class="popup-window">
-          <div class="popup-header">
-            <h2>Loot Predeterminado</h2>
-            <button class="popup-close">&times;</button>
-          </div>
-          <div class="popup-content">
-            <div class="popup-input-group">
-              <div class="popup-input-wrapper">
-                <label for="defaultLoot">Activar loot predeterminado:</label>
-                <button id="toggleLoot" class="popup-toggle-button" data-tag="defaultDrops">
-                  <i class="fas fa-toggle-off"></i>
-                  <span>Desactivado</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      
 
       <div class="popup-overlay" id="lootHelpPopup">
         <div class="popup-window">
           <div class="popup-header">
-            <h2>Ayuda - Loot Predeterminado</h2>
+            <h2 data-i18n="modals.loot.help.title">Ayuda - Loot Predeterminado</h2>
             <button class="popup-close">&times;</button>
           </div>
           <div class="popup-content">
-            <p class="popup-description">
+            <p class="popup-description" data-i18n="modals.loot.help.description">
               Esta opción te permite activar o desactivar el loot predeterminado del mob. Cuando está activado, el mob soltará los items que tiene configurados por defecto al morir.
             </p>
           </div>
@@ -488,11 +475,11 @@
       <div class="popup-overlay" id="lootTagsHelpPopup">
         <div class="popup-window">
           <div class="popup-header">
-            <h2>Ayuda - Loot Tags</h2>
+            <h2 data-i18n="modals.lootTags.help.title">Ayuda - Loot Tags</h2>
             <button class="popup-close">&times;</button>
           </div>
           <div class="popup-content">
-            <p class="popup-description">
+            <p class="popup-description" data-i18n="modals.lootTags.help.description">
               Esta opción te permite activar o desactivar los tags de loot del mob. Los tags controlan comportamientos especiales al morir el mob, como la posibilidad de soltar experiencia o items raros.
             </p>
           </div>
@@ -502,13 +489,13 @@
       <div class="popup-overlay" id="armorPopup">
         <div class="popup-window">
           <div class="popup-header">
-            <h2>Armadura del mob</h2>
+            <h2 data-i18n="modals.armor.title">Armadura del mob</h2>
             <button class="popup-close">&times;</button>
           </div>
           <div class="popup-content">
             <div class="popup-input-group">
               <div class="popup-input-wrapper">
-                <label for="helmetSelect">Casco:</label>
+                <label for="helmetSelect" data-i18n="modals.armor.helmet">Casco:</label>
                 <select id="helmetSelect" class="select-with-images" style="width: 100%" data-tag="armor">
                   <option value="">--Seleccionar--</option>
                 </select>
@@ -519,7 +506,7 @@
             </div>
             <div class="popup-input-group">
               <div class="popup-input-wrapper">
-                <label for="chestplateSelect">Pechera:</label>
+                <label for="chestplateSelect" data-i18n="modals.armor.chestplate">Pechera:</label>
                 <select id="chestplateSelect" class="select-with-images" style="width: 100%" data-tag="armor">
                   <option value="">--Seleccionar--</option>
                 </select>
@@ -530,7 +517,7 @@
             </div>
             <div class="popup-input-group">
               <div class="popup-input-wrapper">
-                <label for="leggingsSelect">Pantalones:</label>
+                <label for="leggingsSelect" data-i18n="modals.armor.leggings">Pantalones:</label>
                 <select id="leggingsSelect" class="select-with-images" style="width: 100%" data-tag="armor">
                   <option value="">--Seleccionar--</option>
                 </select>
@@ -541,7 +528,7 @@
             </div>
             <div class="popup-input-group">
               <div class="popup-input-wrapper">
-                <label for="bootsSelect">Botas:</label>
+                <label for="bootsSelect" data-i18n="modals.armor.boots">Botas:</label>
                 <select id="bootsSelect" class="select-with-images" style="width: 100%" data-tag="armor">
                   <option value="">--Seleccionar--</option>
                 </select>
@@ -557,11 +544,11 @@
       <div class="popup-overlay" id="armorHelpPopup">
         <div class="popup-window">
           <div class="popup-header">
-            <h2>Ayuda - Armadura del mob</h2>
+            <h2 data-i18n="modals.armor.help.title">Ayuda - Armadura del mob</h2>
             <button class="popup-close">&times;</button>
           </div>
           <div class="popup-content">
-            <p class="popup-description">
+            <p class="popup-description" data-i18n="modals.armor.help.description">
               Esta opción te permite equipar al mob con diferentes piezas de armadura. Puedes seleccionar casco, pechera, pantalones y botas de diferentes materiales.
             </p>
           </div>
@@ -571,19 +558,19 @@
       <div class="popup-overlay" id="aggressivenessPopup">
         <div class="popup-window">
           <div class="popup-header">
-            <h2>Agresividad del mob</h2>
+            <h2 data-i18n="modals.aggressiveness.title">Agresividad del mob</h2>
             <button class="popup-close">&times;</button>
           </div>
           <div class="popup-content">
             <div class="popup-input-group">
               <div class="popup-input-wrapper">
-                <label for="aggressivenessSelect">Tipo de agresividad:</label>
-                <select id="aggressivenessSelect" class="popup-select" data-tag="aggro">
-                  <option value="">--Seleccionar tipo--</option>
-                  <option value="hostile">Hostil</option>
-                  <option value="neutral">Neutral</option>
-                  <option value="passive">Pasivo</option>
-                </select>
+                <label for="aggressivenessSelect" data-i18n="modals.aggressiveness.label">Tipo de agresividad:</label>
+                  <select id="aggressivenessSelect" class="popup-select" data-tag="aggro">
+                    <option value="" data-i18n="common.select">--Seleccionar tipo--</option>
+                    <option value="hostile" data-i18n="modals.aggressiveness.hostile">Hostil</option>
+                    <option value="neutral" data-i18n="modals.aggressiveness.neutral">Neutral</option>
+                    <option value="passive" data-i18n="modals.aggressiveness.passive">Pasivo</option>
+                  </select>
               </div>
               <button class="popup-button" id="aggressivenessStatusButton">
                 <i class="fas fa-times status-icon not-saved"></i>
@@ -596,13 +583,82 @@
       <div class="popup-overlay" id="aggressivenessHelpPopup">
         <div class="popup-window">
           <div class="popup-header">
-            <h2>Ayuda - Agresividad del mob</h2>
+            <h2 data-i18n="modals.aggressiveness.help.title">Ayuda - Agresividad del mob</h2>
             <button class="popup-close">&times;</button>
           </div>
           <div class="popup-content">
-            <p class="popup-description">
+            <p class="popup-description" data-i18n="modals.aggressiveness.help.description">
               Esta opción te permite definir el comportamiento agresivo del mob. Hostil atacará a los jugadores, Neutral solo atacará si es provocado, y Pasivo nunca atacará.
             </p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Skin ID Popup -->
+      <div class="popup-overlay" id="skinPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2 data-i18n="modals.skin.title">Skin ID</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <div class="popup-input-group">
+              <div class="popup-input-wrapper">
+                <label for="skinId" data-i18n="modals.skin.label">ID de skin (solo números):</label>
+                <input type="text" id="skinId" class="popup-input" data-i18n="modals.skin.placeholder" data-i18n-attr="placeholder" placeholder="Ejemplo: 76198" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+              </div>
+              <button class="popup-button" id="skinStatusButton">
+                <i class="fas fa-times status-icon not-saved"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-overlay" id="skinHelpPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2 data-i18n="modals.skin.help.title">Ayuda - Skin ID</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <p class="popup-description" data-i18n="modals.skin.help.description">Ingresa el ID numérico de la skin que deseas asignar al mob. Solo se permiten números (ej: 76198). En el comando se añadirá como <code>skin:76198</code>.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Creeper Cargado (Charged) Popup -->
+      <div class="popup-overlay" id="lootPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2 data-i18n="modals.loot.title">Loot Predeterminado</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <div class="popup-input-group">
+              <div class="popup-input-wrapper">
+                <label for="defaultLoot" data-i18n="modals.loot.label">Activar loot predeterminado:</label>
+                <button id="toggleLoot" class="popup-toggle-button" data-tag="defaultDrops">
+                  <i class="fas fa-toggle-off"></i>
+                  <span>Desactivado</span>
+                </button>
+              </div>
+              <button class="popup-button" id="lootStatusButton">
+                <i class="fas fa-times status-icon not-saved"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-overlay" id="chargedHelpPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2 data-i18n="modals.charged.help.title">Ayuda - Creeper Cargado</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <p class="popup-description" data-i18n="modals.charged.help.description">Activa esta opción para convertir al creeper en una versión cargada. En el comando se añadirá <code>charged:1</code> cuando esté activado.</p>
           </div>
         </div>
       </div>
@@ -610,18 +666,18 @@
       <div class="popup-overlay" id="languagePopup">
         <div class="popup-window">
           <div class="popup-header">
-            <h2>Seleccionar Idioma</h2>
+            <h2 data-i18n="modals.language.title">Seleccionar Idioma</h2>
             <button class="popup-close">&times;</button>
           </div>
           <div class="popup-content">
             <div class="language-buttons">
               <button class="language-btn active" data-lang="es">
-                <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1750881497/ES-es_vsqvgk.jpg" alt="Español">
-                Español
+                <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1750881497/ES-es_vsqvgk.jpg" data-i18n-attr="alt" data-i18n="languages.es.alt" alt="Español">
+                <span data-i18n="languages.es.name">Español</span>
               </button>
               <button class="language-btn" data-lang="en">
-                <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1750881497/EN-en_jr23vm.jpg" alt="English">
-                English
+                <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1750881497/EN-en_jr23vm.jpg" data-i18n-attr="alt" data-i18n="languages.en.alt" alt="English">
+                <span data-i18n="languages.en.name">English</span>
               </button>
             </div>
           </div>
@@ -632,12 +688,12 @@
       <div class="popup-overlay saved-modal" id="savedModal">
         <div class="saved-modal-window">
           <div class="saved-modal-header">
-            <h2>Guardados</h2>
+            <h2 data-i18n="modals.savedModal.title">Guardados</h2>
             <button class="popup-close">&times;</button>
           </div>
           <div class="saved-modal-content">
             <!-- Aquí puedes poner la lista de guardados o un mensaje -->
-            <p>No hay guardados aún.</p>
+            <p data-i18n="modals.savedModal.emptyMessage">No hay guardados aún.</p>
           </div>
         </div>
       </div>
@@ -646,7 +702,7 @@
       <div class="footer">
         <div class="footer-box-big">
           <!-- El botón va aquí, antes del comando generado -->
-          <button id="footerSaveButton" class="footer-save-btn" title="Guardar" style="display:none;">
+          <button id="footerSaveButton" class="footer-save-btn" data-i18n="common.save" data-i18n-attr="title" title="Guardar" style="display:none;">
             <i class="fas fa-bookmark"></i>
           </button>
           <!-- El comando generado se inserta aquí por JS -->
