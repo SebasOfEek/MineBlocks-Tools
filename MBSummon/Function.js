@@ -4,10 +4,12 @@ $(document).ready(function () {
   function updateThemeButton(isDark) {
     if (isDark) {
       $themeIcon.removeClass("fa-moon").addClass("fa-sun");
-      $themeBtn.find("span").text("Claro");
+      const lightText = (window.currentLangData && window.currentLangData.menu && window.currentLangData.menu.theme && window.currentLangData.menu.theme.light) || "Claro";
+      $themeBtn.find("span").text(lightText);
     } else {
       $themeIcon.removeClass("fa-sun").addClass("fa-moon");
-      $themeBtn.find("span").text("Oscuro");
+      const darkText = (window.currentLangData && window.currentLangData.menu && window.currentLangData.menu.theme && window.currentLangData.menu.theme.dark) || "Oscuro";
+      $themeBtn.find("span").text(darkText);
     }
   }
   const savedTheme = localStorage.getItem("theme");
@@ -34,16 +36,142 @@ $(document).ready(function () {
 
 function formatOption(option) {
   if (!option.id) return option.text;
-  const img = $(option.element).data("image");
-  if (!img) return option.text;
+  // determine display text dynamically using data-i18n / external translations
+  const $el = $(option.element);
+  const key = $el.data('i18n');
+  let display = option.text || $el.attr('data-default-text') || '';
+  try {
+    if (key) {
+      // try language JSON first
+      const fromLang = t(key, null);
+      if (fromLang) display = fromLang;
+      else if (window.externalTranslations && window.externalTranslations[key]) {
+        const lang = localStorage.getItem('language') || 'es';
+        if (window.externalTranslations[key][lang]) display = window.externalTranslations[key][lang];
+      }
+    }
+  } catch (e) {
+    // ignore
+  }
+  const img = $el.data('image');
+  if (!img) return display;
   return $(
-    `<span><img src="${img}" style="width: 25px; height: 25px; vertical-align: middle; margin-right: 10px; border-radius: 5px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);" />${option.text}</span>`
+    `<span><img src="${img}" style="width: 25px; height: 25px; vertical-align: middle; margin-right: 10px; border-radius: 5px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);" />${display}</span>`
   );
 }
 
 function formatSelection(option) {
   if (!option.id) return option.text;
-  return option.text;
+  const $el = $(option.element);
+  const key = $el.data('i18n');
+  let display = option.text || $el.attr('data-default-text') || '';
+  try {
+    if (key) {
+      const fromLang = t(key, null);
+      if (fromLang) display = fromLang;
+      else if (window.externalTranslations && window.externalTranslations[key]) {
+        const lang = localStorage.getItem('language') || 'es';
+        if (window.externalTranslations[key][lang]) display = window.externalTranslations[key][lang];
+      }
+    }
+  } catch (e) {}
+  return display;
+}
+
+// Translation helper: t('path.to.key', 'fallback') => returns translation from loaded language data
+function t(key, fallback) {
+  try {
+    if (window.currentLangData) {
+      const parts = key.split('.');
+      let cur = window.currentLangData;
+      for (let i = 0; i < parts.length; i++) {
+        cur = cur[parts[i]];
+        if (cur === undefined) return fallback;
+      }
+      return cur || fallback;
+    }
+  } catch (e) {
+    // ignore
+  }
+  return fallback;
+}
+
+// Función reutilizable global que limpia el formulario. Si preserveMob=true,
+// no tocará el select `#mobType` (útil al cambiar de mob y querer mantener la selección).
+function clearAllFormData(preserveMob = false) {
+  // Bloquear el sidebar primero para mostrar el candado inmediatamente
+  if (typeof lockSidebar === 'function') lockSidebar();
+
+  // Limpiar inputs normales
+  $('input[type="text"], input[type="number"], input[type="color"]').val("");
+
+  // Limpiar y resetear todos los select2 y selects normales
+  $("select").each(function () {
+    if (preserveMob && $(this).is("#mobType")) return; // mantener mobType si se pide
+    $(this).val("").trigger("change");
+  });
+
+  // Resetear positionType y deshabilitar inputs de coordenadas
+  if (!preserveMob) {
+    $("#positionType").val("").trigger("change");
+  } else {
+    // Si preservamos mob, solo resetear positionType visual si existe
+    $("#positionType").trigger("change");
+  }
+  $("#posX, #posY").prop("disabled", true);
+  $("#labelPosX").text(t('modals.position.coordX', 'Coordenada X:'));
+  $("#labelPosY").text(t('modals.position.coordY', 'Coordenada Y:'));
+
+  // Cerrar todas las casillas extendidas/popups
+  $(".popup-overlay").removeClass("show");
+
+  // Resetear todos los toggles y establecer estado
+  $(".popup-toggle-button").each(function () {
+    const icon = $(this).find("i");
+    const text = $(this).find("span");
+    const id = $(this).attr("id");
+
+    icon.removeClass("fa-toggle-on").addClass("fa-toggle-off");
+
+    // Use translated labels when available
+    const enabledText = t('common.enabled', 'Activado');
+    const disabledText = t('common.disabled', 'Desactivado');
+    const yesText = t('common.yes', 'Sí');
+    const noText = t('common.no', 'No');
+
+    if (id === "toggleLoot" || id === "toggleLootTags") {
+      text.text(disabledText);
+    } else {
+      text.text(noText);
+    }
+  });
+
+  // Ocultar específicamente las opciones de Loot Tags
+  $("#lootTagsOptions").hide();
+
+  // Resetear el mobImage solo si no se preserva la selección
+  if (!preserveMob) {
+    $("#mobImage").empty().removeClass("transparent");
+  }
+
+  // Resetear estados de botones
+  $(".popup-button")
+    .css({
+      "background-color": "#fca5a5",
+      color: "#991b1b",
+    })
+    .find("i")
+    .removeClass("fa-check saved")
+    .addClass("fa-times not-saved");
+
+  // Bloquear las cards
+  if (typeof lockAllCards === 'function') lockAllCards();
+
+  // Ir a la primera página de cards (si existe)
+  if (typeof changePage === 'function') changePage(1);
+
+  // Actualizar el comando
+  if (typeof updateCommand === 'function') updateCommand();
 }
 
 $(document).ready(function () {
@@ -52,12 +180,14 @@ $(document).ready(function () {
     function (data) {
       const mobType = $("#mobType");
       mobType.empty();
-      mobType.append('<option value="">--Seleccionar--</option>');
+      mobType.append('<option value="" data-i18n="common.select">--Seleccionar--</option>');
       data.mobs.forEach(function (mob) {
         const option = $("<option>")
           .val(mob.value)
           .text(mob.text)
-          .attr("data-image", mob.image);
+          .attr("data-image", mob.image)
+          .attr("data-i18n", `external.mobs.${mob.value}`)
+          .attr("data-default-text", mob.text);
         mobType.append(option);
       });
 
@@ -65,23 +195,30 @@ $(document).ready(function () {
         .select2({
           templateResult: formatOption,
           templateSelection: formatSelection,
-        })
-        .on("change", function () {
-          const selected = $(this).find(":selected");
-          const imageUrl = selected.data("image");
-          const mobImage = $("#mobImage");
-
-          if (imageUrl) {
-            mobImage.html(`<img src="${imageUrl}" alt="${selected.text()}">`);
-            mobImage.addClass("transparent");
-          } else {
-            mobImage.empty();
-            mobImage.removeClass("transparent");
-          }
-
-          // Nuevo: cargar configuración de bloqueo desde JSON del mob
-          loadMobLockConfig($(this).val());
         });
+
+      // Cuando se selecciona un mob con select2, limpiar el formulario usando
+      // la misma lógica que el botón Limpiar (preservando la selección)
+      mobType.on("select2:select", function (e) {
+        const newVal = e && e.params && e.params.data ? e.params.data.id : $(this).val();
+        clearAllFormData(true);
+
+        // Actualizar imagen
+        const selected = mobType.find(":selected");
+        const imageUrl = selected.data("image");
+        const mobImage = $("#mobImage");
+
+        if (imageUrl) {
+          mobImage.html(`<img src="${imageUrl}" alt="${selected.text()}">`);
+          mobImage.addClass("transparent");
+        } else {
+          mobImage.empty();
+          mobImage.removeClass("transparent");
+        }
+
+        // Cargar configuración de bloqueo del mob seleccionado
+        loadMobLockConfig(newVal);
+      });
 
       // Al inicio, bloquear todas las tarjetas
       lockAllCards();
@@ -171,8 +308,8 @@ const updateStatus = (saved) => {
     .addClass(saved ? "fa-check saved" : "fa-times not-saved");
 
   statusButton
-    .removeClass("saved not-saved")
-    .addClass(saved ? "saved" : "not-saved");
+    .css("background-color", saved ? "#86efac" : "#fca5a5")
+    .css("color", saved ? "#166534" : "#991b1b");
 
   isSaved = saved;
 };
@@ -194,7 +331,9 @@ $(document).ready(function () {
 
   $("#mobName")
     .on("input", function () {
-      updateStatus(false);
+      const name = $(this).val().trim();
+      // Actualizar estado según si hay contenido
+      updateStatus(!!name);
       updateCommand();
     })
     .on("keypress", function (e) {
@@ -220,10 +359,12 @@ $(document).ready(function () {
     const statusButton = $("#amountStatusButton");
     const statusIcon = statusButton.find("i");
 
+    // Remover todas las clases posibles primero
     statusIcon
-      .removeClass("fa-times fa-check")
-      .addClass(saved ? "fa-check" : "fa-times");
+      .removeClass("fa-times fa-check not-saved saved")
+      .addClass(saved ? "fa-check saved" : "fa-times not-saved");
 
+    // Actualizar estilos directamente
     statusButton
       .css("background-color", saved ? "#86efac" : "#fca5a5")
       .css("color", saved ? "#166534" : "#991b1b");
@@ -247,9 +388,17 @@ $(document).ready(function () {
 
   $("#mobAmount")
     .on("input", function () {
-      let value = parseInt(this.value);
-      if (value > 20) this.value = 20;
-      updateAmountStatus(false);
+      // Forzar solo números
+      this.value = this.value.replace(/[^0-9]/g, "");
+      let value = parseInt(this.value, 10);
+      if (isNaN(value)) value = 0;
+      if (value > 20) {
+        this.value = "20";
+        value = 20;
+      }
+      // Actualizar estado cuando hay un valor válido
+      const isValid = value > 0 && value <= 20;
+      updateAmountStatus(isValid);
     })
     .on("keypress", function (e) {
       if (e.key === "Enter" || e.keyCode === 13) {
@@ -257,10 +406,7 @@ $(document).ready(function () {
         saveAmount();
       }
     });
-
-  $("#mobAmount").on("input", function () {
-    this.value = this.value.replace(/[^0-9]/g, "");
-  });
+  // Nota: la limpieza de caracteres se hace arriba en el mismo handler
 });
 
 $(document).ready(function () {
@@ -306,7 +452,9 @@ $(document).ready(function () {
   $("#posX, #posY")
     .on("input", function () {
       const coord = $(this).attr("id").includes("X") ? "X" : "Y";
-      updatePositionStatus(coord, false);
+      const value = $(this).val().trim();
+      // Actualizar estado cuando hay un valor
+      updatePositionStatus(coord, !!value);
     })
     .on("keypress", function (e) {
       if (e.key === "Enter" || e.keyCode === 13) {
@@ -328,11 +476,11 @@ $(document).ready(function () {
       posY.prop("disabled", false);
 
       if (selectedType === "relative") {
-        labelPosX.text("Coordenada ~X:");
-        labelPosY.text("Coordenada ~Y:");
+        labelPosX.text(t('modals.position.coordXRelative', 'Coordenada ~X:'));
+        labelPosY.text(t('modals.position.coordYRelative', 'Coordenada ~Y:'));
       } else {
-        labelPosX.text("Coordenada X:");
-        labelPosY.text("Coordenada Y:");
+        labelPosX.text(t('modals.position.coordX', 'Coordenada X:'));
+        labelPosY.text(t('modals.position.coordY', 'Coordenada Y:'));
       }
 
       // Actualizar el comando cuando cambie el tipo de posición
@@ -357,11 +505,28 @@ $(document).ready(function () {
     function (data) {
       const itemSelect = $("#itemSelect");
 
+      // ensure externalTranslations map exists
+      window.externalTranslations = window.externalTranslations || {};
+      const currentSavedLang = localStorage.getItem('language') || 'es';
+
       data.items.forEach((item) => {
-        itemSelect.append(new Option(item.text, item.value));
-        itemSelect
-          .find(`option[value="${item.value}"]`)
-          .data("image", item.image);
+        const key = `external.items.${item.value}`;
+        if (item.translations) {
+          window.externalTranslations[key] = item.translations;
+        } else {
+          window.externalTranslations[key] = { en: item.text, es: item.text };
+        }
+
+        const displayText = (window.externalTranslations[key] && window.externalTranslations[key][currentSavedLang]) ? window.externalTranslations[key][currentSavedLang] : item.text;
+
+        const $opt = $("<option>")
+          .val(item.value)
+          .text(displayText)
+          .attr('data-i18n', key)
+          .attr('data-default-text', item.text)
+          .data('image', item.image);
+
+        itemSelect.append($opt);
       });
 
       itemSelect
@@ -404,54 +569,36 @@ $(document).ready(function () {
           top: "0",
         });
 
-      // Función para guardar el item y sus datos
-      function saveItem() {
-        const selectedValue = $("#itemSelect").val();
+      $("#itemSelect").on("change", function () {
+        const selectedValue = $(this).val();
         const itemAmount = $("#itemAmount").val();
         const itemData = $("#itemData").val();
         
-        console.log("Intentando guardar item con datos:", {
-          item: selectedValue,
-          amount: itemAmount,
-          data: itemData
-        });
-
-        const isValid = selectedValue && itemAmount && itemData;
-        
-        if (isValid) {
-          // Crear el objeto cards si no existe
-          if (!window.currentCardData) {
-            window.currentCardData = {};
+        if (selectedValue) {
+          // Solo actualizar el estado si tenemos todos los datos necesarios
+          const isValid = selectedValue && itemAmount && itemData;
+          updateItemStatus(isValid);
+          if (isValid) {
+            console.log("Item guardado:", {
+              item: selectedValue,
+              amount: itemAmount,
+              data: itemData
+            });
+            // Guardar en el objeto de cards
+            if (window.cards && window.cards.card4) {
+              window.cards.card4 = {
+                itemSelect: selectedValue,
+                itemAmount: itemAmount,
+                itemData: itemData
+              };
+            }
+            // Actualizar el comando
+            updateCommand();
+            // Limpiar los inputs después de guardar
+            $("#itemAmount, #itemData").val("");
           }
-          
-          // Guardar los datos
-          window.currentCardData.card4 = {
-            itemSelect: selectedValue,
-            itemAmount: itemAmount,
-            itemData: itemData
-          };
-          
-          console.log("Item guardado exitosamente:", window.currentCardData.card4);
-          updateItemStatus(true);
-          updateCommand();
-          return true;
         } else {
-          if (selectedValue) {
-            alert("Por favor complete todos los campos del item (cantidad y datos)");
-          }
           updateItemStatus(false);
-          return false;
-        }
-      }
-
-      // Event listeners para todos los campos del item
-      $("#itemSelect").on("change", function() {
-        saveItem();
-      });
-
-      $("#itemAmount, #itemData").on("input", function() {
-        if ($("#itemSelect").val()) {
-          saveItem();
         }
       });
     }
@@ -474,16 +621,13 @@ $(document).ready(function () {
     const itemSelect = $("#itemSelect").val();
     const itemAmount = $("#itemAmount").val();
     const itemData = $("#itemData").val();
+    // Considerar guardado si hay un item seleccionado (comportamiento similar a armadura)
+    const finalSaved = !!itemSelect;
 
-    // Solo considerar como guardado si todos los campos requeridos tienen valor
-    const isComplete = itemSelect && itemAmount && itemData;
-    const finalSaved = saved && isComplete;
-
-    console.log("Estado actual de los campos del item:", {
+    console.log("Estado de los campos (item):", {
       itemSelect,
       itemAmount,
       itemData,
-      isComplete,
       finalSaved
     });
 
@@ -492,44 +636,28 @@ $(document).ready(function () {
       .addClass(finalSaved ? "fa-check saved" : "fa-times not-saved");
 
     statusButton
-      .removeClass("saved not-saved")
-      .addClass(finalSaved ? "saved" : "not-saved");
-
-    // Actualizar el texto del botón según el estado
-    if (itemSelect) {
-      if (!itemAmount && !itemData) {
-        $("#itemStatusText").text("Faltan cantidad y datos");
-      } else if (!itemAmount) {
-        $("#itemStatusText").text("Falta cantidad");
-      } else if (!itemData) {
-        $("#itemStatusText").text("Faltan datos");
-      } else {
-        $("#itemStatusText").text(finalSaved ? "Guardado" : "No guardado");
-      }
-    } else {
-      $("#itemStatusText").text("Seleccione un item");
-    }
+      .css("background-color", finalSaved ? "#86efac" : "#fca5a5")
+      .css("color", finalSaved ? "#166534" : "#991b1b");
 
     isItemSaved = finalSaved;
     return finalSaved;
   };
 
-  $("#itemSelect").on("change", function () {
-    const selectedValue = $(this).val();
-    updateItemStatus(!!selectedValue);
-  });
-
-  $("#itemPopup").on("show", function () {
-    // Cargar datos guardados si existen
-    if (window.currentCardData && window.currentCardData.card4) {
-      const savedData = window.currentCardData.card4;
-      $("#itemSelect").val(savedData.itemSelect).trigger('change');
-      $("#itemAmount").val(savedData.itemAmount);
-      $("#itemData").val(savedData.itemData);
-      updateItemStatus(true);
-    } else {
-      updateItemStatus(false);
-    }
+$("#itemSelect").on("change", function () {
+      const selectedValue = $(this).val();
+      console.log("Cambio detectado en itemSelect:", selectedValue);
+      
+      // Actualizar estado inmediatamente cuando se selecciona un item
+      const isValid = !!selectedValue;
+      updateItemStatus(isValid);
+      
+      if (isValid) {
+        console.log("Item seleccionado:", selectedValue);
+      }
+    });  $("#itemPopup").on("show", function () {
+    updateItemStatus(false);
+    // Limpiar los inputs al abrir el popup
+    $("#itemAmount, #itemData").val("");
   });
 
   // Agregar listeners para los inputs
@@ -587,8 +715,13 @@ $(document).ready(function () {
   $("#mobHealth")
     .on("input", function () {
       let value = parseInt(this.value);
-      if (value > 100) this.value = 100;
-      updateHealthStatus(false);
+      if (value > 100) {
+        this.value = 100;
+        value = 100;
+      }
+      // Actualizar estado cuando hay un valor válido
+      const isValid = value > 0 && value <= 100;
+      updateHealthStatus(isValid);
     })
     .on("keypress", function (e) {
       if (e.key === "Enter" || e.keyCode === 13) {
@@ -633,9 +766,9 @@ $(document).ready(function () {
   $("#toggleLoot").on("click", function () {
     isLootEnabled = !isLootEnabled;
     $(this).find("i").toggleClass("fa-toggle-off fa-toggle-on");
-    $(this)
-      .find("span")
-      .text(isLootEnabled ? "Activado" : "Desactivado");
+    const enabledText = t('common.enabled', 'Activado');
+    const disabledText = t('common.disabled', 'Desactivado');
+    $(this).find("span").text(isLootEnabled ? enabledText : disabledText);
     updateLootStatus(false);
   });
 
@@ -652,16 +785,36 @@ $(document).ready(function () {
       const selects = ["helmet", "chestplate", "leggings", "boots"];
       const armorStatus = {};
 
+      // Ensure a place to store external translations loaded from armor.json
+      window.externalTranslations = window.externalTranslations || {};
+      const currentSavedLang = localStorage.getItem('language') || 'es';
+
       selects.forEach((type) => {
         const select = $(`#${type}Select`);
-        if (data[type]) {
-          data[type].forEach((item) => {
-            select.append(new Option(item.text, item.value));
-            select
-              .find(`option[value="${item.value}"]`)
-              .data("image", item.image);
-          });
-        }
+          if (data[type]) {
+            data[type].forEach((item) => {
+              // create option with data-i18n key so translations can be applied
+              const key = `external.armor.${type}.${item.value}`;
+
+              // store translations map for later language switches
+              if (item.translations) {
+                window.externalTranslations[key] = item.translations;
+              } else {
+                window.externalTranslations[key] = { en: item.text, es: item.text };
+              }
+
+              // choose initial display text according to saved language
+              const displayText = (window.externalTranslations[key] && window.externalTranslations[key][currentSavedLang]) ? window.externalTranslations[key][currentSavedLang] : item.text;
+
+              const $opt = $("<option>")
+                .val(item.value)
+                .text(displayText)
+                .attr('data-i18n', key)
+                .attr('data-default-text', item.text)
+                .data('image', item.image);
+              select.append($opt);
+            });
+          }
 
         select
           .select2({
@@ -774,18 +927,152 @@ $(document).ready(function () {
       $("#languagePopup").addClass("show");
     });
 
+  // Cargar y aplicar idioma
+  function loadLanguage(lang) {
+    const url = `lang/${lang}.json`;
+    $.getJSON(url)
+      .done(function (data) {
+        window.currentLangData = data;
+
+        // Función auxiliar para obtener valor anidado de objeto usando una ruta con puntos
+        function getNestedValue(obj, path) {
+          return path.split('.').reduce((current, key) => current && current[key], obj);
+        }
+
+        // Actualizar elementos con data-i18n
+        $('[data-i18n]').each(function() {
+          const $element = $(this);
+          const key = $element.data('i18n');
+          let value = getNestedValue(data, key);
+
+          // If value not found and element has data-default-text (external lists), use that
+          if (value === undefined && $element.attr('data-default-text')) {
+            value = $element.attr('data-default-text');
+          }
+
+          if (value) {
+            if ($element.data('i18n-attr')) {
+              // Si hay un atributo específico para traducir (como placeholder, title, etc)
+              const attr = $element.data('i18n-attr');
+              $element.attr(attr, value);
+            } else if ($element.is('option') && $element.parent().hasClass('select-with-images')) {
+              // For options inside select2/complex selects, update the text and also the option's text node
+              $element.text(value);
+            } else {
+              // Por defecto, actualizar el contenido de texto
+              $element.text(value);
+            }
+          }
+        });
+
+        // Common: Update placeholder option text for selects
+        if (data.common && data.common.select) {
+          $("select").each(function () {
+            const $first = $(this).find("option").first();
+            if ($first && $first.val() === "") {
+              $first.text(data.common.select);
+            }
+          });
+        }
+
+        // Update toggle button states
+        $('.popup-toggle-button').each(function() {
+          const $button = $(this);
+          const $span = $button.find('span');
+          const isOn = $button.find('i').hasClass('fa-toggle-on');
+          const key = isOn ? 'common.enabled' : 'common.disabled';
+          const value = getNestedValue(data, key);
+          if (value) {
+            $span.text(value);
+          }
+        });
+
+          // Update dynamically populated selects (armor, mobs) by translating their options if possible
+          $('select option[data-i18n]').each(function() {
+            const $opt = $(this);
+            const key = $opt.data('i18n');
+            const val = getNestedValue(data, key);
+            if (val !== undefined) {
+              $opt.text(val);
+            } else if (window.externalTranslations && window.externalTranslations[key] && window.externalTranslations[key][lang]) {
+              // use translations provided by external data sources (e.g., armor.json or items.json)
+              $opt.text(window.externalTranslations[key][lang]);
+            } else if ($opt.attr('data-default-text')) {
+              // ensure fallback exists
+              $opt.text($opt.attr('data-default-text'));
+            }
+          });
+
+          // Reinitialize Select2 for selects that had option text changes so dropdown & selection update
+          $('select').each(function() {
+            const $sel = $(this);
+            // only handle selects that contain translated options
+            if ($sel.find('option[data-i18n]').length === 0) return;
+
+            // If not a Select2 instance, nothing to do
+            if (!$sel.data('select2')) return;
+
+            // Decide configuration based on popup container
+            const inArmorPopup = $sel.closest('#armorPopup').length > 0;
+            const inItemPopup = $sel.closest('#itemPopup').length > 0;
+            const isMobType = $sel.is('#mobType');
+
+            try {
+              $sel.select2('destroy');
+            } catch (e) {
+              // ignore
+            }
+
+            if (inArmorPopup) {
+              $sel.select2({ templateResult: formatOption, templateSelection: formatOption, width: '100%', dropdownParent: $('#armorPopup') })
+                .next('.select2-container')
+                .css({ 'border-radius': '0.375rem', height: '2.8em', 'margin-top': '-0.4em' })
+                .find('.select2-selection')
+                .css({ height: '100%', display: 'flex', 'align-items': 'center' })
+                .find('.select2-selection__arrow')
+                .css({ height: '100%', 'line-height': '2.8em', top: '0' });
+            } else if (inItemPopup) {
+              $sel.select2({ templateResult: formatOption, templateSelection: formatOption, width: '100%', dropdownParent: $('#itemPopup') })
+                .next('.select2-container')
+                .css({ 'border-radius': '0.375rem', height: '2.8em', 'margin-top': '-0.4em' })
+                .find('.select2-selection')
+                .css({ height: '100%', display: 'flex', 'align-items': 'center' })
+                .find('.select2-selection__arrow')
+                .css({ height: '100%', 'line-height': '2.8em', top: '0' });
+            } else if (isMobType) {
+              $sel.select2({ templateResult: formatOption, templateSelection: formatSelection, width: '100%' });
+            } else {
+              // generic reinit with default templates
+              $sel.select2({ templateResult: formatOption, templateSelection: formatOption, width: '100%' });
+            }
+          });
+
+        // Update theme button text according to current theme
+        const currentThemeIsDark = document.documentElement.getAttribute("data-theme") === "dark";
+        const themeText = currentThemeIsDark ? (data.menu.theme.light || "Claro") : (data.menu.theme.dark || "Oscuro");
+        $("#themeButton span").text(themeText);
+
+        console.log('Idioma cargado:', lang);
+      })
+      .fail(function (jqXHR, textStatus, errorThrown) {
+        console.error("Error al cargar el idioma:", textStatus, errorThrown);
+      });
+  }
+
   $(".language-btn").on("click", function () {
     $(".language-btn").removeClass("active");
     $(this).addClass("active");
     const lang = $(this).data("lang");
     localStorage.setItem("language", lang);
-    // Aquí podrías agregar lógica para cambiar el idioma de la UI si lo deseas
+    loadLanguage(lang);
   });
 
   // Corrección aquí: typo en savedLanguage
   const savedLanguage = localStorage.getItem("language") || "es";
   $(".language-btn").removeClass("active");
   $(`.language-btn[data-lang="${savedLanguage}"]`).addClass("active");
+  // Cargar idioma guardado al iniciar
+  if (typeof loadLanguage === 'function') loadLanguage(savedLanguage);
 
   $(".popup-close, .popup-overlay").on("click", function (e) {
     if (e.target === this) {
@@ -912,7 +1199,7 @@ function attachCardPopupEvents() {
     card15: "babyPopup",
     card16: "colorPopup",
     card17: "sizePopup",
-    card18: "nbtPopup",
+    card18: "chargedPopup",
     cardAggressiveness: "aggressivenessPopup"
   };
 
@@ -949,7 +1236,7 @@ function attachCardPopupEvents() {
     card15: "babyHelpPopup",
     card16: "colorHelpPopup",
     card17: "sizeHelpPopup",
-    card18: "nbtHelpPopup",
+    card18: "chargedHelpPopup",
     cardAggressiveness: "aggressivenessHelpPopup"
   };
 
@@ -1089,13 +1376,15 @@ $(document).ready(function () {
   $("#lootTagsPopup .toggle-button").on("click", function () {
     const $icon = $(this).find("i");
     const $span = $(this).find("span");
-    
+    const yesText = t('common.yes', 'Sí');
+    const noText = t('common.no', 'No');
+
     if ($icon.hasClass("fa-toggle-off")) {
       $icon.removeClass("fa-toggle-off").addClass("fa-toggle-on");
-      $span.text("Sí");
+      $span.text(yesText);
     } else {
       $icon.removeClass("fa-toggle-on").addClass("fa-toggle-off");
-      $span.text("No");
+      $span.text(noText);
     }
   });
 
@@ -1303,8 +1592,16 @@ function updateCommand() {
     const holding = $("#itemSelect").val() || "";
     if (holding) attributes.push(`holding:"${holding}"`);
 
-    const lootEnabled = $("#toggleLoot").find("i").hasClass("fa-toggle-on");
-    if (lootEnabled) attributes.push("defaultDrops:true");
+  // Skin ID (sin comillas, solo número) - si existe, agregar como skin:NNN
+  const skin = $("#skinId").val() || "";
+  if (skin) attributes.push(`skin:${skin}`);
+
+  // Creeper cargado (charged) - toggle similar a loot
+  const charged = $("#toggleCharged").find("i").hasClass("fa-toggle-on");
+  if (charged) attributes.push("charged:1");
+
+  const lootEnabled = $("#toggleLoot").find("i").hasClass("fa-toggle-on");
+  if (lootEnabled) attributes.push("defaultDrops:true");
 
     if (attributes.length > 0) {
       command += ` {${attributes.join(", ")}}`;
@@ -1327,14 +1624,18 @@ function updateCommand() {
 $(document).ready(function () {
   // Eventos para campos de entrada
   $(
-    "#mobType, #mobName, #mobHealth, #itemSelect, #mobAmount, #aggressivenessSelect"
-  ).on("input change", updateCommand);
+    "#mobType, #mobName, #mobHealth, #itemSelect, #mobAmount, #aggressivenessSelect, #skinId"
+    ).on("input change", updateCommand);
   $("#helmetSelect, #chestplateSelect, #leggingsSelect, #bootsSelect").on(
     "change",
     updateCommand
   );
   $("#positionType, #posX, #posY").on("input change", updateCommand);
   $("#toggleLoot").on("click", updateCommand);
+  // Toggle para creeper cargado
+  $("#toggleCharged").on("click", function() {
+    updateCommand();
+  });
 
   // Eventos para guardar con Enter
   $("#mobName, #mobAmount, #posX, #posY, #mobHealth").on(
@@ -1351,71 +1652,11 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-  // Agregar el evento click al botón Limpiar
+  
+
+  // Agregar el evento click al botón Limpiar (usa la función reutilizable)
   $("#clearButton").on("click", function () {
-    // Bloquear el sidebar primero para mostrar el candado inmediatamente
-    lockSidebar();
-
-    // Limpiar inputs normales
-    $('input[type="text"], input[type="number"], input[type="color"]').val(
-      ""
-    );
-
-    // Limpiar y resetear todos los select2 y selects normales
-    $("select").each(function () {
-      $(this).val("").trigger("change");
-    });
-
-    // Resetear positionType y deshabilitar inputs de coordenadas
-    $("#positionType").val("").trigger("change");
-    $("#posX, #posY").prop("disabled", true);
-    $("#labelPosX").text("Coordenada X:");
-    $("#labelPosY").text("Coordenada Y:");
-
-    // Cerrar todas las casillas extendidas/popups
-    $(".popup-overlay").removeClass("show");
-
-    // Resetear todos los toggles y establecer estado
-    $(".popup-toggle-button").each(function () {
-      const icon = $(this).find("i");
-      const text = $(this).find("span");
-      const id = $(this).attr("id");
-
-      icon.removeClass("fa-toggle-on").addClass("fa-toggle-off");
-
-      if (id === "toggleLoot" || id === "toggleLootTags") {
-        text.text("Desactivado");
-      } else {
-        text.text("No");
-      }
-    });
-
-    // Ocultar específicamente las opciones de Loot Tags
-    $("#lootTagsOptions").hide();
-
-    // Resetear el mobImage
-    $("#mobImage").empty().removeClass("transparent");
-
-    // Resetear estados de botones
-    $(".popup-button")
-      .css({
-        "background-color": "#fca5a5",
-        color: "#991b1b",
-      })
-      .find("i")
-      .removeClass("fa-check saved")
-      .addClass("fa-times not-saved");
-
-    // Bloquear las cards
-    lockAllCards();
-
-    // Ir a la primera página de cards
-    changePage(1);
-
-    // Actualizar el comando
-    updateCommand();
-
-    // Ya no es necesario llamar a lockSidebar() aquí, ya se llamó al inicio
+    clearAllFormData(false);
   });
 
   // Si se recarga la página, mantener bloqueado
@@ -1565,7 +1806,9 @@ $(document).ready(function () {
     const icon = $(this).find("i");
     icon.toggleClass("fa-toggle-off fa-toggle-on");
     const isActive = icon.hasClass("fa-toggle-on");
-    $(this).find("span").text(isActive ? "Activado" : "Desactivado");
+    const enabledText = t('common.enabled', 'Activado');
+    const disabledText = t('common.disabled', 'Desactivado');
+    $(this).find("span").text(isActive ? enabledText : disabledText);
     if (isActive) {
       unlockSidebar();
     } else {
@@ -1588,8 +1831,8 @@ $(document).ready(function () {
     // Resetear positionType y deshabilitar inputs de coordenadas
     $("#positionType").val("").trigger("change");
     $("#posX, #posY").prop("disabled", true);
-    $("#labelPosX").text("Coordenada X:");
-    $("#labelPosY").text("Coordenada Y:");
+  $("#labelPosX").text(t('modals.position.coordX', 'Coordenada X:'));
+  $("#labelPosY").text(t('modals.position.coordY', 'Coordenada Y:'));
 
     // Cerrar todas las casillas extendidas/popups
     $(".popup-overlay").removeClass("show");
@@ -1602,10 +1845,15 @@ $(document).ready(function () {
 
       icon.removeClass("fa-toggle-on").addClass("fa-toggle-off");
 
+      const enabledText = t('common.enabled', 'Activado');
+      const disabledText = t('common.disabled', 'Desactivado');
+      const yesText = t('common.yes', 'Sí');
+      const noText = t('common.no', 'No');
+
       if (id === "toggleLoot" || id === "toggleLootTags") {
-        text.text("Desactivado");
+        text.text(disabledText);
       } else {
-        text.text("No");
+        text.text(noText);
       }
     });
 
@@ -1660,6 +1908,50 @@ $(document).ready(function () {
   $(".saved-modal-window").on("click", function (e) {
     e.stopPropagation();
   });
+});
+
+// Skin ID & Charged (Creeper) handlers
+$(document).ready(function() {
+  // Skin popup open handled globally; aquí solo lógica del input
+  let isSkinSaved = false;
+  function updateSkinStatus(saved) {
+    const statusButton = $("#skinStatusButton");
+    const statusIcon = statusButton.find("i");
+    statusIcon.removeClass("fa-times fa-check not-saved saved").addClass(saved ? "fa-check saved" : "fa-times not-saved");
+    statusButton.css("background-color", saved ? "#86efac" : "#fca5a5").css("color", saved ? "#166534" : "#991b1b");
+    isSkinSaved = saved;
+  }
+
+  $("#skinId").on("input", function() {
+    // already sanitized via HTML oninput, double-check
+    this.value = this.value.replace(/[^0-9]/g, '');
+    const val = $(this).val().trim();
+    updateSkinStatus(!!val);
+    updateCommand();
+  });
+
+  // Charged toggle behavior
+  $("#toggleCharged").on("click", function() {
+    const $icon = $(this).find("i");
+    const $span = $(this).find("span");
+    $icon.toggleClass("fa-toggle-off fa-toggle-on");
+    const isOn = $icon.hasClass("fa-toggle-on");
+    const enabledText = t('common.enabled', 'Activado');
+    const disabledText = t('common.disabled', 'Desactivado');
+    $span.text(isOn ? enabledText : disabledText);
+
+    // actualizar status button visual
+    const statusButton = $("#chargedStatusButton");
+    const statusIcon = statusButton.find("i");
+    statusIcon.removeClass("fa-times fa-check not-saved saved").addClass(isOn ? "fa-check saved" : "fa-times not-saved");
+    statusButton.css("background-color", isOn ? "#86efac" : "#fca5a5").css("color", isOn ? "#166534" : "#991b1b");
+
+    updateCommand();
+  });
+
+  // Reset states when opening popups
+  $("#skinPopup").on("show", function(){ updateSkinStatus(false); $("#skinId").val(""); });
+  $("#chargedPopup").on("show", function(){ $("#toggleCharged i").removeClass("fa-toggle-on").addClass("fa-toggle-off"); $("#toggleCharged span").text(t('common.disabled','Desactivado')); $("#chargedStatusButton i").removeClass("fa-check saved").addClass("fa-times not-saved"); });
 });
 
 
@@ -2004,8 +2296,27 @@ function copyTextToClipboard(text) {
 function loadSavedCommandToForm(item) {
   console.log("Cargando datos guardados:", item);
   
-  // Primero cargar el mobType - esto desbloqueará las cards automáticamente
+  // Primero limpiar todo el formulario para dejar un estado limpio
+  if (typeof clearAllFormData === 'function') clearAllFormData(false);
+
+  // Luego cargar el mobType y actualizar imagen/bloqueos
   $("#mobType").val(item.mobType || "").trigger("change");
+  
+  // Asegurar que la imagen y los bloqueos se actualicen
+  const selected = $("#mobType").find(":selected");
+  const imageUrl = selected.data("image");
+  const mobImage = $("#mobImage");
+  
+  if (imageUrl) {
+    mobImage.html(`<img src="${imageUrl}" alt="${selected.text()}">`);
+    mobImage.addClass("transparent");
+  } else {
+    mobImage.empty();
+    mobImage.removeClass("transparent");
+  }
+  
+  // Cargar configuración de bloqueo para el mob
+  loadMobLockConfig(item.mobType);
   
   // Cargar los datos inmediatamente después de que se desbloqueen las cards
   const cards = item.cards || {};
