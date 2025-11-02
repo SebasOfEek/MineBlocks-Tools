@@ -313,8 +313,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 35px 26px 37px;
-  gap: 16px;
+  padding: 35px 26px 32px;
+  gap: 30px;
   flex-wrap: nowrap;
   min-width: 0;
   background-color: var(--bg-color);
@@ -362,8 +362,9 @@ body {
   font-weight: bold;
   font-size: 2.5rem;
   color: var(--text-color);
-  flex: 1 1 auto;
-  min-width: 0;
+  /* Keep the logo from shrinking when the topbar compresses; let the mob select shrink instead */
+  flex: 0 0 auto;
+  min-width: 140px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -374,14 +375,34 @@ body {
   display: flex;
   align-items: center;
   gap: 30px;
+  /* Let the wrapper use available space but avoid forcing siblings to shrink first */
   flex: 1 1 auto;
   min-width: 0;
 }
 
+.mob-select-wrapper .box.small {
+  /* keep the mob image box fixed */
+  flex: 0 0 auto;
+}
+
 .select-with-images {
+  /* Make the select flexible: it will shrink before the logo does */
+  flex: 1 2 200px;
+  min-width: 320px;
+  max-width: 80%;
   width: 100%;
-  max-width: 300px;
-  min-width: 150px;
+  box-sizing: border-box;
+}
+
+/* Make Select2 containers respect the parent widths */
+.select2-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+
+.select2-container--default .select2-selection--single {
+  width: 100% !important;
 }
 .divider {
   grid-column: 2 / 3;
@@ -734,7 +755,6 @@ body {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 10px;
 }
 
 /* Botón de guardado en la esquina superior derecha */
@@ -861,13 +881,12 @@ body {
   }
 
   .topbar {
-    padding: 25px 16px 25px;
-    gap: 12px;
+    padding: 25px 27px 25px;
   }
 
   .box.small {
-    width: 4em;
-    height: 4em;
+    width: 4.5em;
+    height: 4.5em;
   }
 
   .logo {
@@ -910,13 +929,12 @@ body {
   }
 
   .topbar {
-    padding: 20px 24px 30px;
-    gap: 10px;
+    padding: 20px 24px 28px;
   }
 
   .box.small {
-    width: 3.5em;
-    height: 3.5em;
+    width: 4em;
+    height: 4em;
   }
 
   .logo {
@@ -949,7 +967,7 @@ body {
   .container {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto 1fr auto;
-    padding: 10px;
+    padding: 20px;
     position: relative;
     padding-bottom: 120px;
     min-height: 100vh;
@@ -981,7 +999,7 @@ body {
   .menu-title {
     display: block;
     font-size: 2rem;
-    padding: 5px 0;
+    padding: 2px 0;
     margin-bottom: 10px;
   }
 
@@ -1017,6 +1035,7 @@ body {
     z-index: 999;
     background-color: var(--bg-color) !important;
     padding: 15px 20px;
+    gap: 15px;
   }
 
   .divider {
@@ -1108,11 +1127,14 @@ body {
 
   .logo {
     font-size: 1.6rem;
+    flex: 0 1 auto;
+    min-width: 0;
   }
 
   .box.small {
-    width: 3em;
-    height: 3em;
+    width: 3.2em;
+    height: 3.2em;
+    border-radius: 12px;
   }
 
   .select2-container--default .select2-selection--single {
@@ -1122,6 +1144,11 @@ body {
 
   .mob-select-wrapper {
     gap: 20px;
+  }
+
+  .select-with-images {
+    max-width: none;
+    min-width: 80px;
   }
 
   .card i {
@@ -1163,13 +1190,6 @@ body {
   
   .card span.card-text {
     font-size: 1rem !important;
-  }
-}
-
-@media screen and (max-width: 470px) {
-  .box.small {
-    width: 5em;
-    height: 3em;
   }
 }
 
@@ -2031,4 +2051,8 @@ input[type="color"].sidebar-input {
   .saved-modal-header {
     padding: 1rem 1.2rem;
   }
+}
+
+input:disabled {
+  background-color: #ccc;
 }
