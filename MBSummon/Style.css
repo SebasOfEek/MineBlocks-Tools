@@ -11,6 +11,8 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   overflow: hidden;
+  position: fixed;
+  width: 100%;
 }
 
 .container {
@@ -31,7 +33,7 @@ body {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 5px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   animation: menuSlideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
@@ -48,11 +50,31 @@ body {
 }
 
 .menu-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 2.5rem;
   font-weight: 800;
-  text-align: center;
   margin: 0;
-  padding: 10px 0;
+  padding: 10px;
+}
+
+  .menu-text {
+    font-size: 2rem;
+    font-weight: 800;
+    text-align: center;
+  }.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.menu-toggle:hover {
+  color: var(--primary-color);
 }
 
 .menu-button {
@@ -375,21 +397,16 @@ body {
   display: flex;
   align-items: center;
   gap: 30px;
-  /* Let the wrapper use available space but avoid forcing siblings to shrink first */
-  flex: 1 1 auto;
-  min-width: 0;
+  width: 100%;
 }
 
 .mob-select-wrapper .box.small {
-  /* keep the mob image box fixed */
   flex: 0 0 auto;
 }
 
 .select-with-images {
-  /* Make the select flexible: it will shrink before the logo does */
-  flex: 1 2 200px;
-  min-width: 320px;
-  max-width: 80%;
+  flex: 1;
+  min-width: 0;
   width: 100%;
   box-sizing: border-box;
 }
@@ -620,7 +637,7 @@ body {
   grid-column: 2 / 3;
   display: grid;
   grid-template-columns: 4fr 1fr;
-  gap: 30px;
+  gap: 20px;
   padding: 16px 26px 16px 25px;
   background-color: var(--bg-color);
 }
@@ -958,7 +975,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 178px;
+    height: 198px; /* Increased to account for menu top spacing */
     background-color: var(--bg-color);
     z-index: 997;
     pointer-events: none;
@@ -969,38 +986,69 @@ body {
     grid-template-rows: auto auto auto 1fr auto;
     padding: 20px;
     position: relative;
-    padding-bottom: 120px;
-    min-height: 100vh;
+    padding-bottom: 0;
+    height: 100vh;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
   }
 
+  .menu-toggle {
+    display: block;
+  }
   .menu {
-    gap: 3px;
     position: fixed;
-    top: 0;
+    top: 20px;
     left: 0;
-    width: 98%;
-    background-color: #ccc;
+    right: 0;
+    width: calc(100% - 40px); /* Leave 20px on each side */
+    max-width: 100vw;
+    box-sizing: border-box;
     z-index: 1000;
-    padding: 10px;
+    padding: 10px 15px;
     flex-direction: column;
     align-items: stretch;
-    cursor: pointer;
     transition: all 0.3s ease;
     max-height: 65px;
     overflow: hidden;
     background-color: var(--card-bg);
+    overflow-x: hidden;
+    margin: 0 20px; /* Add horizontal margin */
+    border-radius: 12px; /* Add border radius for better look */
   }
 
   .menu.show-buttons {
-    max-height: 100%;
+    max-height: 100vh;
     padding: 10px;
+    height: auto;
+    overflow-y: auto;
   }
 
   .menu-title {
-    display: block;
-    font-size: 2rem;
-    padding: 2px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 12px;
     margin-bottom: 10px;
+  }
+
+  .menu-text {
+    font-size: 1.8rem;
+    font-weight: 800;
+    padding-bottom: 2px;
+    max-width: calc(100% - 50px); /* Increased space for hamburger */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1; /* Take remaining space */
+  }
+
+  .menu-toggle {
+    display: block !important;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    padding: 5px;
+    padding-bottom: 0px;
   }
 
   .menu-button {
@@ -1009,6 +1057,8 @@ body {
     margin: 5px 0;
     border-radius: 12px;
     font-size: 1.1rem;
+    width: 100%; /* Ensure buttons take full width */
+    box-sizing: border-box; /* Include padding in width calculation */
   }
 
   .menu.show-buttons .menu-button {
@@ -1029,47 +1079,57 @@ body {
 
   .topbar {
     position: fixed;
-    top: 88px;
+    top: 103px;
     left: 0;
+    right: 0;
     width: 100%;
+    max-width: 100vw;
     z-index: 999;
     background-color: var(--bg-color) !important;
     padding: 15px 20px;
     gap: 15px;
+    height: 65px; /* Fixed height for consistency */
   }
 
   .divider {
     position: fixed;
-    top: 171px;
-    left: 20px;
-    width: 94%;
+    top: 188px; /* Adjusted to be below topbar */
+    left: 0;
+    right: 0;
+    width: calc(100% - 40px); /* Match menu width */
+    max-width: 100vw;
     z-index: 998;
-    margin: 0;
-    background-color: #ccc;
+    margin: 0 20px; /* Match menu margins */
+    background-color: var(--card-bg);
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
   }
 
   .footer-divider {
     display: block;
     position: fixed;
-    bottom: 80px;
-    left: 13px;
-    width: 94%;
+    bottom: 90px;
+    left: 0;
+    right: 0;
+    width: calc(100% - 40px);
+    max-width: 100vw;
     z-index: 119;
-    margin: 0;
-    background-color: #ccc;
+    margin: 0 20px;
+    background-color: var(--card-bg);
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
   }
 
   .main {
     grid-row: 4;
     grid-column: 1;
-    padding: 0em 10px 20px;
-    margin-top: 11.5em;
+    padding: 0em 20px 20px;
+    margin-top: 12em;
     overflow-y: auto;
-    height: calc(65vh - 60px);
-    margin-bottom: 95px;
+    height: calc(100vh - 195px - 100px); /* viewport height - header space - footer space */
+    margin-bottom: 0;
     -webkit-overflow-scrolling: touch;
+    position: relative;
   }
 
   .card-grid {
@@ -1121,7 +1181,7 @@ body {
     left: 0;
     right: 0;
     background-color: var(--bg-color) !important;
-    padding: 13px 21px 5px;
+    padding: 13px 21px 13px;
     z-index: 100;
   }
 
