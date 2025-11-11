@@ -32,12 +32,12 @@
     },
     {
       "value": "santa_hat",
-      "text": "Santa Hat",
+      "text": "Gorro de Santa",
       "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Santa_Hat_jzj24t.png"
     },
     {
       "value": "party_hat",
-      "text": "Party Hat",
+      "text": "Gorro de Fiesta",
       "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694191/Party_Hat_bjn9as.png"
     },
     {
@@ -47,12 +47,12 @@
     },
     {
       "value": "shades",
-      "text": "Shades",
+      "text": "Gafas de Sol",
       "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Shades_erre9t.png"
     },
     {
       "value": "mustache",
-      "text": "Mustache",
+      "text": "Bigote",
       "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694186/Mustache_fjc2up.png"
     }
   ],
@@ -138,3 +138,4 @@
     }
   ]
 }
+
