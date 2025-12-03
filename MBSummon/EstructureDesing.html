@@ -16,6 +16,11 @@
 <style>
 
 </style>
+    <!-- Pantalla de carga -->
+    <div id="loadingScreen" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:var(--card-bg,#fff);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;">
+      <div class="loader"></div>
+      <span id="loadingText" style="margin-top:20px;font-size:1.3em;color:var(--text-color,#333);font-weight:600;" data-i18n="common.loading">Cargando datos...</span>
+    </div>
   <body>
     <div class="container">
       <div class="menu">
@@ -147,11 +152,11 @@
           </div>
           <div class="card" id="card18">
             <span class="question-icon">?</span>
-            <i class="fas fa-code"></i>
+            <i class="fas fa-cloud-bolt"></i>
             <span class="card-text" data-i18n="cards.charged">Creeper Cargado</span>
           </div>
           <div class="card-icon">
-            <i class="fas fa-code"></i>
+            <i class="fas fa-cloud-bolt"></i>
           </div>
           <div class="card" id="card19">
             <span class="question-icon">?</span>
@@ -192,7 +197,7 @@
           </div>
           <div class="popup-content">
             <p class="popup-description" data-i18n="modals.name.help.description">
-              Esta opción te permite personalizar el nombre del mob que vas a invocar. El nombre que escribas aquí será visible flotando sobre el mob cuando lo invoques en el juego. Puedes usar códigos de formato usando el símbolo & seguido de un número.
+              Esta opción te permite personalizar el nombre del mob que vas a invocar. El nombre que escribas aquí será visible flotando sobre el mob cuando lo invoques en el juego.
             </p>
           </div>
         </div>
@@ -336,12 +341,16 @@
             <div class="popup-input-group">
               <div class="popup-input-wrapper">
                 <label for="mobHealth" data-i18n="modals.health.label">Cantidad de vida:</label>
-                <input type="number" id="mobHealth" class="popup-input" data-i18n="modals.health.placeholder" data-i18n-attr="placeholder" placeholder="Ingresa la vida..." min="1" max="100" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-tag="health">
+                <input type="number" id="mobHealth" class="popup-input" data-i18n="modals.health.placeholder" data-i18n-attr="placeholder" placeholder="Ingresa la vida..." min="1" max="1000" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-tag="health">
               </div>
               <button class="popup-button" id="healthStatusButton">
                 <i class="fas fa-times status-icon not-saved"></i>
               </button>
             </div>
+            <div id="healthHeartsWrapper" style="margin-top:12px; width:100%;">
+              <div id="healthHearts" class="health-hearts" aria-live="polite"></div>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -354,7 +363,7 @@
           </div>
           <div class="popup-content">
             <p class="popup-description" data-i18n="modals.health.help.description">
-              Esta opción te permite definir la cantidad de vida que tendrá el mob al aparecer. El valor debe estar entre 1 y 100 puntos de vida.
+              Esta opción te permite definir la cantidad de vida que tendrá el mob al aparecer. El valor debe estar entre 1 y 1000 puntos de vida.
             </p>
           </div>
         </div>
@@ -655,6 +664,30 @@
         </div>
       </div>
 
+      <!-- Charged Creeper Popup (Creeper Cargado) -->
+      <div class="popup-overlay" id="chargedPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2 data-i18n="modals.charged.title">Creeper Cargado</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <div class="popup-input-group">
+              <div class="popup-input-wrapper">
+                <label for="toggleCharged" data-i18n="modals.charged.label">Creeper cargado:</label>
+                <button id="toggleCharged" class="popup-toggle-button" data-tag="charged">
+                  <i class="fas fa-toggle-off"></i>
+                  <span data-i18n="modals.charged.disabled">Desactivado</span>
+                </button>
+              </div>
+              <button class="popup-button" id="chargedStatusButton">
+                <i class="fas fa-times status-icon not-saved"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="popup-overlay" id="chargedHelpPopup">
         <div class="popup-window">
           <div class="popup-header">
@@ -675,29 +708,103 @@
           </div>
           <div class="popup-content">
             <div class="language-buttons">
-              <button class="language-btn active" data-lang="es">
-                <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1750881497/ES-es_vsqvgk.jpg" data-i18n-attr="alt" data-i18n="languages.es.alt" alt="Español">
-                <span data-i18n="languages.es.name">Español</span>
-              </button>
-              <button class="language-btn" data-lang="en">
-                <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1750881497/EN-en_jr23vm.jpg" data-i18n-attr="alt" data-i18n="languages.en.alt" alt="English">
-                <span data-i18n="languages.en.name">English</span>
-              </button>
+<button class="language-btn active" data-lang="es">
+  <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1750881497/ES-es_vsqvgk.jpg" data-i18n="languages.es.alt" alt="Español">
+  <span data-i18n="languages.es.name">Español</span>
+</button>
+<button class="language-btn" data-lang="en">
+  <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1750881497/EN-en_jr23vm.jpg" data-i18n="languages.en.alt" alt="English">
+  <span data-i18n="languages.en.name">Inglés</span>
+</button>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Guardados Modal -->
-      <div class="popup-overlay saved-modal" id="savedModal">
-        <div class="saved-modal-window">
-          <div class="saved-modal-header">
+      <!-- Settings Modal (EXPORT / IMPORT only) -->
+      <div class="popup-overlay" id="settingsModal">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2 data-i18n="modals.settings.title">Settings</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <p class="popup-description" data-i18n="modals.settings.description">Configure your preferences for MBSummon.</p>
+
+            <div class="settings-window">
+              <div class="settings-cards">
+                <div class="settings-card">
+                  <div class="card-left">
+                    <div class="card-icon"><i class="fas fa-file-export"></i></div>
+                    <div class="card-body">
+                      <div class="card-title" data-i18n="modals.settings.exportLabel">Export saved commands:</div>
+                      <div class="card-desc" data-i18n="modals.settings.exportLabel">Export saved commands to a file</div>
+                    </div>
+                  </div>
+                  <div class="card-actions">
+                    <button id="settingsExport" class="popup-button save-button" data-i18n="modals.settings.exportButton">Export</button>
+                  </div>
+                </div>
+
+                <div class="settings-card">
+                  <div class="card-left">
+                    <div class="card-icon"><i class="fas fa-file-import"></i></div>
+                    <div class="card-body">
+                      <div class="card-title" data-i18n="modals.settings.importLabel">Import saved commands:</div>
+                      <div class="card-desc" data-i18n="modals.settings.importLabel">Import saved commands from a JSON file</div>
+                    </div>
+                  </div>
+                    <div class="card-actions" style="align-items:center;">
+                      <input type="file" id="settingsImportInput" accept="application/json" style="display:none">
+                      <button id="settingsImportButton" class="popup-button" data-i18n="modals.settings.importButton">Import</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+                <!-- filename display removed — notifications will show file info -->
+
+            <div style="display:flex;gap:0.6rem;justify-content:flex-end;margin-top:1rem;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guardados List Modal (solo lista) -->
+      <div class="popup-overlay" id="savedListModal">
+        <div class="popup-window saved-modal-window">
+          <div class="popup-header">
             <h2 data-i18n="modals.savedModal.title">Guardados</h2>
             <button class="popup-close">&times;</button>
           </div>
-          <div class="saved-modal-content">
-            <!-- Aquí puedes poner la lista de guardados o un mensaje -->
-            <p data-i18n="modals.savedModal.emptyMessage">No hay guardados aún.</p>
+          <div class="popup-content">
+            <div class="saved-modal-list" style="margin-top:1rem;">
+              <p data-i18n="modals.savedModal.emptyMessage">No hay guardados aún.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guardados Create Modal (formulario para nuevo guardado) -->
+      <div class="popup-overlay" id="savedCreateModal">
+        <div class="popup-window saved-modal-window">
+          <div class="popup-header">
+            <h2 data-i18n="modals.savedModal.createTitle">Guardar</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <!-- Minimal saved command modal: only mob image, name input and action buttons -->
+            <div class="saved-entry" style="display:flex;gap:1rem;align-items:center;">
+              <div class="saved-mob-image box small" id="savedMobImage" style="width:72px;height:72px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:10px;"></div>
+              <div style="flex:1;">
+                <label for="savedCommandName" data-i18n="modals.savedModal.nameLabel">Nombre:</label>
+                <input type="text" id="savedCommandName" class="popup-input" placeholder="Ingresa un nombre..." data-i18n="modals.savedModal.namePlaceholder" data-i18n-attr="placeholder">
+              </div>
+            </div>
+
+            <div class="saved-modal-actions" style="display:flex;gap:0.6rem;justify-content:flex-end;margin-top:1rem;">
+              <button class="popup-button save-button" id="confirmSaveButton" data-i18n="modals.savedModal.saveButton">Guardar</button>
+              <button class="popup-button" id="cancelSaveButton" data-i18n="modals.savedModal.cancelButton">Cancelar</button>
+            </div>
           </div>
         </div>
       </div>
@@ -716,7 +823,9 @@
         </div>
       </div>
     </div>
-    <script src="Function.js"></script>
+  <script src="notifications.js"></script>
+  <div id="notifContainer" class="notif-container" aria-live="polite"></div>
+  <script src="Function.js"></script>
     <script>
       
     </script>
