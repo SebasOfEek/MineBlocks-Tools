@@ -1,3 +1,106 @@
+// --- Pantalla de carga ---
+function translateLoadingScreen() {
+  const savedLanguage = localStorage.getItem("language") || "es";
+  const translations = {
+    es: "Cargando datos...",
+    en: "Loading data..."
+  };
+  $("#loadingText").text(translations[savedLanguage] || translations.es);
+}
+
+$(document).ready(function () {
+  $("body").css("overflow", "hidden");
+  translateLoadingScreen();
+  window.hideLoadingScreen = function() {
+    $("#loadingScreen").css("opacity", 0);
+    setTimeout(function() {
+      $("#loadingScreen").hide();
+      $("body").css("overflow", "auto");
+    }, 500);
+  };
+});
+
+// --- Guardar y restaurar inputs/selections ---
+function saveFormState() {
+  const state = {};
+  $("input, select, textarea").each(function() {
+    const id = $(this).attr("id");
+    if (id) {
+      if ($(this).is(":checkbox")) {
+        state[id] = $(this).prop("checked");
+      } else {
+        state[id] = $(this).val();
+      }
+    }
+  });
+  localStorage.setItem("formState", JSON.stringify(state));
+}
+
+function restoreFormState() {
+  const state = JSON.parse(localStorage.getItem("formState") || '{}');
+  Object.entries(state).forEach(([id, value]) => {
+    const $el = $("#"+id);
+    if ($el.length) {
+      if ($el.is(":checkbox")) {
+        $el.prop("checked", value);
+      } else {
+        $el.val(value);
+        if ($el.is("select")) {
+          $el.trigger("change.select2");
+        } else {
+          $el.trigger("input");
+        }
+      }
+    }
+  });
+}
+
+$(document).ready(function () {
+  restoreFormState();
+  setTimeout(window.hideLoadingScreen, 800);
+  $("input, select, textarea").on("input change", saveFormState);
+});
+
+  // Robust fallback: if for any reason the loading screen wasn't hidden (JS errors, race),
+  // ensure it's removed after a short timeout and also when the window 'load' event fires.
+  try {
+    window.addEventListener && window.addEventListener('load', function() {
+      // small delay to allow other load handlers to run
+      setTimeout(function() {
+        try {
+          if (window.hideLoadingScreen) {
+            window.hideLoadingScreen();
+          } else {
+            var el = document.getElementById('loadingScreen');
+            if (el) el.style.display = 'none';
+            document.body.style.overflow = 'auto';
+          }
+        } catch (e) {
+          // last resort
+          var el2 = document.getElementById('loadingScreen');
+          if (el2) el2.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }
+      }, 120);
+    });
+
+    // Timeout fallback: force-hide after 5 seconds if still visible
+    setTimeout(function() {
+      try {
+        var el = document.getElementById('loadingScreen');
+        if (el && (el.style.display !== 'none' && window.getComputedStyle(el).display !== 'none')) {
+          console.warn('Loading screen fallback hide triggered');
+          if (window.hideLoadingScreen) window.hideLoadingScreen();
+          else el.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }
+      } catch (e) {
+        // ignore
+      }
+    }, 5000);
+  } catch (e) {
+    // ignore
+  }
 $(document).ready(function () {
   const $themeBtn = $("#themeButton");
   const $themeIcon = $themeBtn.find("i");
@@ -96,9 +199,48 @@ function t(key, fallback) {
   return fallback;
 }
 
+// Asegura que el select2 de mobs (`#mobType`) muestre las etiquetas en el idioma actual.
+// Reescribe los textos de las <option> según `window.currentLangData` o `window.externalTranslations`
+// y re-inicializa Select2 para forzar la actualización visual si es necesario.
+function updateMobSelect2Language() {
+  try {
+    const $mob = $("#mobType");
+    if (!$mob.length) return;
+    const lang = localStorage.getItem('language') || 'es';
+
+    // Actualizar texto de cada opción según data-i18n o externalTranslations
+    $mob.find('option[data-i18n]').each(function() {
+      const $opt = $(this);
+      const key = $opt.data('i18n');
+      let newText = null;
+      if (window.currentLangData && key) {
+        // intentar con t() usando el json cargado
+        newText = t(key, null);
+      }
+      if ((!newText || newText === null) && window.externalTranslations && window.externalTranslations[key]) {
+        newText = window.externalTranslations[key][lang] || $opt.attr('data-default-text') || $opt.text();
+      }
+      if (!newText) newText = $opt.attr('data-default-text') || $opt.text();
+      // Solo actualizar si hay cambio
+      if ($opt.text() !== newText) $opt.text(newText);
+    });
+
+    // Si Select2 está inicializado, re-inicializar para forzar refresco visual
+    if ($mob.data('select2')) {
+      const currentVal = $mob.val();
+      try { $mob.select2('destroy'); } catch (e) { /* ignore */ }
+      $mob.select2({ templateResult: formatOption, templateSelection: formatSelection });
+      // Restaurar selección visible
+      $mob.val(currentVal).trigger('change.select2');
+    }
+  } catch (e) {
+    console.error('updateMobSelect2Language error', e);
+  }
+}
+
 // Función reutilizable global que limpia el formulario. Si preserveMob=true,
 // no tocará el select `#mobType` (útil al cambiar de mob y querer mantener la selección).
-function clearAllFormData(preserveMob = false) {
+function clearAllFormData(preserveMob = false, suppressNotify = false) {
   // Bloquear el sidebar primero para mostrar el candado inmediatamente
   if (typeof lockSidebar === 'function') lockSidebar();
 
@@ -154,15 +296,19 @@ function clearAllFormData(preserveMob = false) {
     $("#mobImage").empty().removeClass("transparent");
   }
 
-  // Resetear estados de botones
+  // Clear health hearts preview when clearing the form
+  if (typeof clearHealthHearts === 'function') clearHealthHearts();
+
+  // Resetear estados de botones (usar clases CSS centralizadas)
   $(".popup-button")
-    .css({
-      "background-color": "#fca5a5",
-      color: "#991b1b",
-    })
+    .addClass('status-button status-not-saved')
+    .removeClass('status-saved')
     .find("i")
     .removeClass("fa-check saved")
     .addClass("fa-times not-saved");
+
+  // Ensure loot toggle/status reset explicitly to avoid persistence issues
+  try { setLootState(false); } catch (err) { /* ignore */ }
 
   // Bloquear las cards
   if (typeof lockAllCards === 'function') lockAllCards();
@@ -172,6 +318,16 @@ function clearAllFormData(preserveMob = false) {
 
   // Actualizar el comando
   if (typeof updateCommand === 'function') updateCommand();
+
+  // Only notify when we are doing a full clear (not when preserving mob selection)
+  // and when notifications are not explicitly suppressed by the caller.
+  if (!preserveMob && !suppressNotify) {
+    if (typeof notifyInfo === 'function') {
+      notifyInfo({ key: 'notifications.cleared', timeout: 1500 });
+    } else if (typeof notify === 'function') {
+      notify({ type: 'info', key: 'notifications.cleared', timeout: 1500 });
+    }
+  }
 }
 
 $(document).ready(function () {
@@ -195,13 +351,26 @@ $(document).ready(function () {
         .select2({
           templateResult: formatOption,
           templateSelection: formatSelection,
+        })
+        .on('select2:open', function() {
+          // Evitar que la página haga scroll cuando se abre el dropdown
+          $('body').css('overflow', 'hidden');
+        })
+        .on('select2:close', function() {
+          // Restaurar overflow al cerrar
+          $('body').css('overflow', 'auto');
         });
+
+      // Si existe la función para sincronizar idioma en el select2 de mobs, llamarla ahora
+      if (typeof updateMobSelect2Language === 'function') updateMobSelect2Language();
 
       // Cuando se selecciona un mob con select2, limpiar el formulario usando
       // la misma lógica que el botón Limpiar (preservando la selección)
       mobType.on("select2:select", function (e) {
         const newVal = e && e.params && e.params.data ? e.params.data.id : $(this).val();
+        // Reset form but preserve selected mob. Also explicitly reset loot state
         clearAllFormData(true);
+        try { setLootState(false); } catch (err) { /* ignore */ }
 
         // Actualizar imagen
         const selected = mobType.find(":selected");
@@ -218,6 +387,8 @@ $(document).ready(function () {
 
         // Cargar configuración de bloqueo del mob seleccionado
         loadMobLockConfig(newVal);
+        // Ensure any previous health preview is removed when switching mobs
+        if (typeof clearHealthHearts === 'function') clearHealthHearts();
       });
 
       // Al inicio, bloquear todas las tarjetas
@@ -295,6 +466,12 @@ $(document).ready(function () {
     setTimeout(() => {
       $(this).removeClass("copied");
     }, 1000);
+    // notify copy success for footer main copy
+    if (typeof notifySuccess === 'function') {
+      notifySuccess({ key: 'notifications.copied', timeout: 1800 });
+    } else if (typeof notify === 'function') {
+      notify({ type: 'success', key: 'notifications.copied', timeout: 1800 });
+    }
   });
 });
 
@@ -307,9 +484,8 @@ const updateStatus = (saved) => {
     .removeClass("fa-times fa-check not-saved saved")
     .addClass(saved ? "fa-check saved" : "fa-times not-saved");
 
-  statusButton
-    .css("background-color", saved ? "#86efac" : "#fca5a5")
-    .css("color", saved ? "#166534" : "#991b1b");
+  // Apply unified CSS classes instead of inline styles
+  statusButton.addClass('status-button').removeClass('status-saved status-not-saved').addClass(saved ? 'status-saved' : 'status-not-saved');
 
   isSaved = saved;
 };
@@ -364,10 +540,9 @@ $(document).ready(function () {
       .removeClass("fa-times fa-check not-saved saved")
       .addClass(saved ? "fa-check saved" : "fa-times not-saved");
 
-    // Actualizar estilos directamente
-    statusButton
-      .css("background-color", saved ? "#86efac" : "#fca5a5")
-      .css("color", saved ? "#166534" : "#991b1b");
+    // Use unified classes to control visual state
+    statusButton.addClass('status-button').removeClass('status-saved status-not-saved').addClass(saved ? 'status-saved' : 'status-not-saved');
+
 
     isAmountSaved = saved;
   };
@@ -429,9 +604,7 @@ $(document).ready(function () {
       .removeClass("fa-times fa-check")
       .addClass(saved ? "fa-check" : "fa-times");
 
-    statusButton
-      .css("background-color", saved ? "#86efac" : "#fca5a5")
-      .css("color", saved ? "#166534" : "#991b1b");
+    statusButton.addClass('status-button').removeClass('status-saved status-not-saved').addClass(saved ? 'status-saved' : 'status-not-saved');
 
     isPositionSaved[coord.toLowerCase()] = saved;
   };
@@ -635,9 +808,8 @@ $(document).ready(function () {
       .removeClass("fa-times fa-check not-saved saved")
       .addClass(finalSaved ? "fa-check saved" : "fa-times not-saved");
 
-    statusButton
-      .css("background-color", finalSaved ? "#86efac" : "#fca5a5")
-      .css("color", finalSaved ? "#166534" : "#991b1b");
+    // Use finalSaved as the visual determinant (was using saved by mistake for border)
+    statusButton.addClass('status-button').removeClass('status-saved status-not-saved').addClass(finalSaved ? 'status-saved' : 'status-not-saved');
 
     isItemSaved = finalSaved;
     return finalSaved;
@@ -688,9 +860,7 @@ $(document).ready(function () {
       .removeClass("fa-times fa-check")
       .addClass(saved ? "fa-check" : "fa-times");
 
-    statusButton
-      .css("background-color", saved ? "#86efac" : "#fca5a5")
-      .css("color", saved ? "#166534" : "#991b1b");
+    statusButton.addClass('status-button').removeClass('status-saved status-not-saved').addClass(saved ? 'status-saved' : 'status-not-saved');
 
     isHealthSaved = saved;
   };
@@ -699,7 +869,7 @@ $(document).ready(function () {
     const health = $("#mobHealth").val().trim();
     if (health && !isNaN(health)) {
       const numHealth = parseInt(health);
-      if (numHealth > 0 && numHealth <= 100) {
+      if (numHealth > 0 && numHealth <= 1000) {
         updateHealthStatus(true);
         console.log("Vida guardada:", health);
         // Actualizar el comando con la nueva vida
@@ -715,13 +885,16 @@ $(document).ready(function () {
   $("#mobHealth")
     .on("input", function () {
       let value = parseInt(this.value);
-      if (value > 100) {
-        this.value = 100;
-        value = 100;
+      if (isNaN(value)) value = 0;
+      if (value > 1000) {
+        this.value = 1000;
+        value = 1000;
       }
       // Actualizar estado cuando hay un valor válido
-      const isValid = value > 0 && value <= 100;
+      const isValid = value > 0 && value <= 1000;
       updateHealthStatus(isValid);
+      // Render hearts preview
+      try { renderHealthHearts(value); } catch (e) { /* ignore */ }
     })
     .on("keypress", function (e) {
       if (e.key === "Enter" || e.keyCode === 13) {
@@ -734,6 +907,91 @@ $(document).ready(function () {
     this.value = this.value.replace(/[^0-9]/g, "");
   });
 });
+
+// Render dynamic hearts based on numeric health input
+function renderHealthHearts(healthValue) {
+  const container = document.getElementById('healthHearts');
+  if (!container) return;
+  let hp = parseInt(healthValue, 10) || 0;
+  container.innerHTML = '';
+  if (hp <= 0) return;
+
+  // Each full heart = 2 hp, half heart = 1 hp
+  const fullHearts = Math.floor(hp / 2);
+  const halfHeartCount = hp % 2 === 1 ? 1 : 0;
+  const MAX_ICONS = 50;
+
+  // Use the same image snippets but build a single HTML string (faster than DOM ops)
+  const fullHeartHTML = '<img class="block-image" src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1764644594/blocks2_okmvnm.png" style="width: 16px; height: 16px; object-fit: none; object-position: -256px -160px;">';
+  const halfHeartHTML = '<img class="block-image" src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1764644594/blocks2_okmvnm.png" style="width: 16px; height: 16px; object-fit: none; object-position: -240px -160px;">';
+
+  let iconsRendered = 0;
+  let heartsHtml = '';
+
+  for (let i = 0; i < fullHearts && iconsRendered < MAX_ICONS; i++) {
+    heartsHtml += fullHeartHTML;
+    iconsRendered++;
+  }
+  if (halfHeartCount && iconsRendered < MAX_ICONS) {
+    heartsHtml += halfHeartHTML;
+    iconsRendered++;
+  }
+
+  // If there are remaining heart units (not rendered), show a counter
+  const totalHeartUnits = fullHearts + halfHeartCount * 0.5;
+  const remainingUnits = Math.max(0, totalHeartUnits - iconsRendered);
+  if (remainingUnits > 0) {
+    const display = Number.isInteger(remainingUnits) ? String(remainingUnits) : remainingUnits.toFixed(1);
+    heartsHtml += `<div class="more-count">x(${display})</div>`;
+  }
+
+  // Set in one operation to minimize reflows
+  container.innerHTML = heartsHtml;
+}
+
+// Helper to clear the health hearts preview
+function clearHealthHearts() {
+  const container = document.getElementById('healthHearts');
+  if (!container) return;
+  container.innerHTML = '';
+}
+
+// GLOBAL: manage Loot toggle + status so other modules (load/save/clear) can call it
+// setLootState(enabled) will set the toggle UI and update the small status button
+function setLootState(enabled) {
+  const $toggle = $("#toggleLoot");
+  const $icon = $toggle.find("i");
+  const $span = $toggle.find("span");
+
+  if (enabled) {
+    $icon.removeClass("fa-toggle-off").addClass("fa-toggle-on");
+    $span.text(t('common.enabled', 'Activado'));
+  } else {
+    $icon.removeClass("fa-toggle-on").addClass("fa-toggle-off");
+    $span.text(t('common.disabled', 'Desactivado'));
+  }
+
+  // update the small status button to mirror the toggle "saved" state policy:
+  // when the toggle is enabled, treat the status as saved (true). When disabled -> not saved.
+  updateLootStatus(enabled);
+  // expose current state
+  window.isLootEnabled = !!enabled;
+}
+
+// Make updateLootStatus globally available so load/save routines can call it
+function updateLootStatus(saved) {
+  const statusButton = $("#lootStatusButton");
+  const statusIcon = statusButton.find("i");
+
+  statusIcon
+    .removeClass("fa-times fa-check")
+    .addClass(saved ? "fa-check" : "fa-times");
+
+  // unified classes
+  statusButton.addClass('status-button').removeClass('status-saved status-not-saved').addClass(saved ? 'status-saved' : 'status-not-saved');
+
+  window.isLootSaved = !!saved;
+}
 
 $(document).ready(function () {
   let isLootEnabled = false;
@@ -748,33 +1006,18 @@ $(document).ready(function () {
     $("#lootHelpPopup").addClass("show");
   });
 
-  const updateLootStatus = (saved) => {
-    const statusButton = $("#lootStatusButton");
-    const statusIcon = statusButton.find("i");
-
-    statusIcon
-      .removeClass("fa-times fa-check")
-      .addClass(saved ? "fa-check" : "fa-times");
-
-    statusButton
-      .css("background-color", saved ? "#86efac" : "#fca5a5")
-      .css("color", saved ? "#166534" : "#991b1b");
-
-    isLootSaved = saved;
-  };
-
   $("#toggleLoot").on("click", function () {
+    // Toggle state and use the centralized setter so status button is consistent
     isLootEnabled = !isLootEnabled;
-    $(this).find("i").toggleClass("fa-toggle-off fa-toggle-on");
-    const enabledText = t('common.enabled', 'Activado');
-    const disabledText = t('common.disabled', 'Desactivado');
-    $(this).find("span").text(isLootEnabled ? enabledText : disabledText);
-    updateLootStatus(false);
+    setLootState(isLootEnabled);
   });
 
   $("#lootSaveButton").on("click", function () {
+    // Mark as saved and ensure UI matches
+    setLootState(window.isLootEnabled === true);
+    // Also mark the saved status explicitly
     updateLootStatus(true);
-    console.log("Estado del loot guardado:", isLootEnabled);
+    console.log("Estado del loot guardado:", window.isLootEnabled);
   });
 });
 
@@ -852,9 +1095,7 @@ $(document).ready(function () {
             .removeClass("fa-times fa-check")
             .addClass(saved ? "fa-check" : "fa-times");
 
-          statusButton
-            .css("background-color", saved ? "#86efac" : "#fca5a5")
-            .css("color", saved ? "#166534" : "#991b1b");
+          statusButton.addClass('status-button').removeClass('status-saved status-not-saved').addClass(saved ? 'status-saved' : 'status-not-saved');
 
           armorStatus[type] = saved;
         };
@@ -903,9 +1144,7 @@ $(document).ready(function () {
       .removeClass("fa-times fa-check")
       .addClass(saved ? "fa-check" : "fa-times");
 
-    statusButton
-      .css("background-color", saved ? "#86efac" : "#fca5a5")
-      .css("color", saved ? "#166534" : "#991b1b");
+    statusButton.addClass('status-button').removeClass('status-saved status-not-saved').addClass(saved ? 'status-saved' : 'status-not-saved');
 
     isAggressivenessSaved = saved;
   };
@@ -928,7 +1167,7 @@ $(document).ready(function () {
     });
 
   // Cargar y aplicar idioma
-  function loadLanguage(lang) {
+  function loadLanguage(lang, cb) {
     const url = `lang/${lang}.json`;
     $.getJSON(url)
       .done(function (data) {
@@ -951,11 +1190,13 @@ $(document).ready(function () {
           }
 
           if (value) {
-            if ($element.data('i18n-attr')) {
-              // Si hay un atributo específico para traducir (como placeholder, title, etc)
-              const attr = $element.data('i18n-attr');
-              $element.attr(attr, value);
-            } else if ($element.is('option') && $element.parent().hasClass('select-with-images')) {
+                // Si el elemento tiene un atributo data-i18n-attr (por ejemplo: data-i18n-attr="placeholder")
+                // jQuery .data() convierte nombres con guiones a camelCase, así que leemos el atributo bruto
+                const i18nAttr = $element.attr('data-i18n-attr') || $element.data('i18nAttr') || $element.data('i18n-attr');
+                if (i18nAttr) {
+                  // Si hay un atributo específico para traducir (como placeholder, title, alt, etc)
+                  $element.attr(i18nAttr, value);
+                } else if ($element.is('option') && $element.parent().hasClass('select-with-images')) {
               // For options inside select2/complex selects, update the text and also the option's text node
               $element.text(value);
             } else {
@@ -1053,6 +1294,8 @@ $(document).ready(function () {
         $("#themeButton span").text(themeText);
 
         console.log('Idioma cargado:', lang);
+        // invoke optional callback after language has been fully applied
+        try { if (typeof cb === 'function') cb(); } catch (e) { /* ignore callback errors */ }
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
         console.error("Error al cargar el idioma:", textStatus, errorThrown);
@@ -1060,19 +1303,36 @@ $(document).ready(function () {
   }
 
   $(".language-btn").on("click", function () {
-    $(".language-btn").removeClass("active");
-    $(this).addClass("active");
-    const lang = $(this).data("lang");
-    localStorage.setItem("language", lang);
+    $('.language-btn').removeClass('active');
+    $(this).addClass('active');
+    const lang = $(this).data('lang');
+    localStorage.setItem('language', lang);
+    translateLoadingScreen(); // Traducir pantalla de carga
+    // Load language and apply translations (no notification shown)
     loadLanguage(lang);
+    // Close the language selection modal after applying the language
+    $("#languagePopup").removeClass('show');
+  });
+
+  // Home button: navigate to the external tools page when clicked
+  $(document).ready(function () {
+    $("#homeButton").off('click').on('click', function (e) {
+      e.stopPropagation();
+      window.location.href = 'https://mine-blocks-tools.vercel.app/index2.html';
+    });
   });
 
   // Corrección aquí: typo en savedLanguage
   const savedLanguage = localStorage.getItem("language") || "es";
   $(".language-btn").removeClass("active");
   $(`.language-btn[data-lang="${savedLanguage}"]`).addClass("active");
-  // Cargar idioma guardado al iniciar
-  if (typeof loadLanguage === 'function') loadLanguage(savedLanguage);
+  // Cargar idioma guardado al iniciar y refrescar select2
+  if (typeof loadLanguage === 'function') {
+    loadLanguage(savedLanguage);
+    setTimeout(function() {
+      if (typeof updateMobSelect2Language === 'function') updateMobSelect2Language();
+    }, 300);
+  }
 
   $(".popup-close, .popup-overlay").on("click", function (e) {
     if (e.target === this) {
@@ -1619,6 +1879,13 @@ function updateCommand() {
   
   // Agregar el comando después del botón
   $footerBoxBig.append(command);
+
+  // Mostrar/ocultar el botón de guardar según si hay un mob seleccionado
+  if (mobType) {
+    $("#footerSaveButton").show();
+  } else {
+    $("#footerSaveButton").hide();
+  }
 }
 
 $(document).ready(function () {
@@ -1863,12 +2130,10 @@ $(document).ready(function () {
     // Resetear el mobImage
     $("#mobImage").empty().removeClass("transparent");
 
-    // Resetear estados de botones
+    // Resetear estados de botones (usar clases CSS centralizadas)
     $(".popup-button")
-      .css({
-        "background-color": "#fca5a5",
-        color: "#991b1b",
-      })
+      .addClass('status-button status-not-saved')
+      .removeClass('status-saved')
       .find("i")
       .removeClass("fa-check saved")
       .addClass("fa-times not-saved");
@@ -1891,22 +2156,114 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-  // Guardados modal: abrir/cerrar
+  // Guardados modal: abrir/cerrar (desde menú) — mostrar SOLO la lista de guardados
   $("#savedButton").on("click", function (e) {
     e.stopPropagation();
-    $("#savedModal").addClass("show");
+    // Asegurar que el formulario de "crear guardado" esté oculto
+    $(".saved-entry, .saved-modal-actions").hide();
+    // Mostrar y renderizar la lista de guardados
+    $(".saved-modal-list").show();
+    renderSavedCommands();
+    $("#savedListModal").addClass("show");
   });
 
   // Cerrar modal al hacer click en el fondo o en el botón de cerrar
-  $("#savedModal .popup-close, #savedModal").on("click", function (e) {
+  $("#savedListModal .popup-close, #savedListModal").on("click", function (e) {
     if (e.target === this) {
-      $("#savedModal").removeClass("show");
+      // Restaurar estado por defecto: ocultar lista
+      $(".saved-modal-list").hide();
+      $("#savedListModal").removeClass("show");
+    }
+  });
+
+  // Close handler for create modal (click background or close button)
+  $("#savedCreateModal .popup-close, #savedCreateModal").on("click", function (e) {
+    if (e.target === this) {
+      $("#savedCreateModal").removeClass("show");
     }
   });
 
   // Prevenir cierre al hacer click dentro de la ventana del modal
-  $(".saved-modal-window").on("click", function (e) {
+  $("#savedListModal .saved-modal-window, #savedCreateModal .saved-modal-window, .saved-modal-window").on("click", function (e) {
     e.stopPropagation();
+  });
+});
+
+// Handlers para el modal de Guardados activado desde el botón en el footer
+$(document).ready(function () {
+  // Abrir modal de guardado mínimo (imagen + nombre + botones) al pulsar bookmark
+  $("#footerSaveButton").on("click", function (e) {
+    e.stopPropagation();
+
+    const $btn = $(this);
+
+    // Si ya está marcado como 'saved', eliminar sin pedir confirmación
+    if ($btn.hasClass("saved")) {
+      const mobType = $("#mobType").val();
+      const command = getCurrentCommandText();
+      let saved = getSavedCommands();
+      saved = saved.filter(
+        (item) => !(item.command === command && item.mobType === mobType)
+      );
+      setSavedCommands(saved);
+      $btn.removeClass("saved");
+      renderSavedCommands();
+      return;
+    }
+
+    // Si no está guardado: abrir modal para que el usuario escriba el nombre
+    const mobImgSrc = $("#mobImage img").attr("src");
+    const mobNameVal = $("#mobName").val() || $("#mobType option:selected").text() || "";
+
+    const $savedMobImage = $("#savedMobImage");
+    $savedMobImage.empty();
+    if (mobImgSrc) {
+      $savedMobImage.html(`<img src="${mobImgSrc}" alt="${mobNameVal}" style="width:100%;height:100%;object-fit:cover;">`);
+    }
+
+    // Prellenar nombre
+    $("#savedCommandName").val(mobNameVal);
+
+  // Mostrar modal (create)
+  $("#savedCreateModal").addClass("show");
+    $("#savedCommandName").focus();
+    // Mostrar el formulario de creación y ocultar la lista cuando abrimos el modal desde el bookmark
+    $(".saved-entry, .saved-modal-actions").show();
+    $(".saved-modal-list").hide();
+  });
+
+  // Confirmar guardado: usar saveCurrentCommand() después de prellenar el nombre
+  $("#confirmSaveButton").on("click", function () {
+    const name = $("#savedCommandName").val().trim();
+    if (!name) {
+      $("#savedCommandName").focus();
+      return;
+    }
+
+    // Inyectar el nombre en el formulario (card1) para que saveCurrentCommand lo incluya
+    $("#mobName").val(name).trigger("input");
+
+    // Intentar guardar usando la función central
+    const prevSavedState = $("#footerSaveButton").hasClass("saved");
+    const ok = saveCurrentCommand();
+    // Si el guardado fue exitoso, marcar y actualizar la lista; si falló (ej. duplicado),
+    // restaurar el estado visual previo para evitar cambios inesperados.
+    if (ok) {
+      $("#footerSaveButton").addClass("saved");
+      renderSavedCommands();
+      $("#savedCreateModal").removeClass("show");
+    } else {
+      if (prevSavedState) {
+        $("#footerSaveButton").addClass("saved");
+      } else {
+        $("#footerSaveButton").removeClass("saved");
+      }
+    }
+  });
+
+  // Cancelar guardado
+  $("#cancelSaveButton").on("click", function () {
+    $("#savedCreateModal").removeClass("show");
   });
 });
 
@@ -1918,7 +2275,7 @@ $(document).ready(function() {
     const statusButton = $("#skinStatusButton");
     const statusIcon = statusButton.find("i");
     statusIcon.removeClass("fa-times fa-check not-saved saved").addClass(saved ? "fa-check saved" : "fa-times not-saved");
-    statusButton.css("background-color", saved ? "#86efac" : "#fca5a5").css("color", saved ? "#166534" : "#991b1b");
+    statusButton.addClass('status-button').removeClass('status-saved status-not-saved').addClass(saved ? 'status-saved' : 'status-not-saved');
     isSkinSaved = saved;
   }
 
@@ -1944,7 +2301,7 @@ $(document).ready(function() {
     const statusButton = $("#chargedStatusButton");
     const statusIcon = statusButton.find("i");
     statusIcon.removeClass("fa-times fa-check not-saved saved").addClass(isOn ? "fa-check saved" : "fa-times not-saved");
-    statusButton.css("background-color", isOn ? "#86efac" : "#fca5a5").css("color", isOn ? "#166534" : "#991b1b");
+    statusButton.addClass('status-button').removeClass('status-saved status-not-saved').addClass(isOn ? 'status-saved' : 'status-not-saved');
 
     updateCommand();
   });
@@ -2091,7 +2448,6 @@ function saveCurrentCommand() {
   console.log("Iniciando proceso de guardado...");
 
   if (!mobType || !command) {
-    alert("No se puede guardar: Seleccione un mob y configure sus propiedades");
     console.log("No se puede guardar: falta mobType o comando");
     return false;
   }
@@ -2102,7 +2458,6 @@ function saveCurrentCommand() {
     console.log("Validando datos del item:", cards.card4);
     
     if (itemSelect && (!itemAmount || !itemData)) {
-      alert("Complete todos los datos del item (cantidad y datos) antes de guardar");
       console.log("Faltan datos del item:", {
         itemSelect,
         itemAmount: itemAmount || "falta cantidad",
@@ -2128,12 +2483,18 @@ function saveCurrentCommand() {
     saved.push(newSave);
     setSavedCommands(saved);
     console.log("Comando guardado exitosamente:", newSave);
-    
-    // Mostrar un mensaje de éxito
-    alert("¡Comando guardado exitosamente!");
+    // Mostrar un mensaje de éxito via notifications
+    if (typeof notifySuccess === 'function') {
+      notifySuccess({ key: 'notifications.saved_success', timeout: 2500 });
+    } else if (typeof notify === 'function') {
+      notify({ type: 'success', text: t('notifications.saved_success','Comando guardado'), timeout: 2500 });
+    } 
     return true;
   } else {
-    alert("Este comando ya está guardado");
+    // notify duplicate
+    if (typeof notify === 'function') {
+      notify({ type: 'info', text: t('notifications.save_duplicate','Este comando ya está guardado'), timeout: 2200 });
+    } 
     console.log("El comando ya existe en los guardados");
     return false;
   }
@@ -2144,24 +2505,31 @@ function saveCurrentCommand() {
 // Renderizar la lista de guardados en el modal (muestra datos de las cards)
 function renderSavedCommands() {
   const saved = getSavedCommands();
-  const $content = $(".saved-modal-content");
-  $content.empty();
+  // Render into the dedicated list container so we don't remove the "save current" input UI
+  let $listContainer = $(".saved-modal-list");
+  if (!$listContainer.length) {
+    $listContainer = $(".saved-modal-content");
+  }
+  $listContainer.empty();
   if (saved.length === 0) {
-    $content.append("<p>No hay guardados aún.</p>");
+    const emptyMsg = t('modals.savedModal.emptyMessage', 'No hay guardados aún.');
+    const $p = $('<p>').attr('data-i18n', 'modals.savedModal.emptyMessage').text(emptyMsg);
+    $listContainer.append($p);
     return;
   }
   const $list = $("<ul>").css({padding:0, margin:0, listStyle:"none"});
   saved.forEach((item, idx) => {
-    const $li = $("<li>").css({
-      background: "#eee",
-      margin: "0 0 10px 0",
-      padding: "12px 16px",
-      borderRadius: "12px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      gap: "10px"
-    });
+    const $li = $("<li>")
+      .addClass("saved-list-item")
+      .css({
+        margin: "0 0 15px 0",
+        padding: "12px 16px",
+        borderRadius: "12px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        gap: "10px"
+      });
 
     // Imagen del mob
     let mobImgSrc = "";
@@ -2183,13 +2551,25 @@ function renderSavedCommands() {
           })
       : $("<span>").css({width:"38px",height:"38px",display:"inline-block"});
 
-    // Comando
-    const $cmd = $("<span>")
-      .css({fontFamily:"Consolas,monospace", fontSize:"1.1em", flex: "1 1 auto", wordBreak: "break-all"})
-      .text(item.command);
+    // Nombre mostrado (sacar de card1 si existe, sino usar mobType texto)
+    let displayName = "";
+    if (item.cards && item.cards.card1 && item.cards.card1.mobName) {
+      displayName = item.cards.card1.mobName;
+    } else if (item.mobType) {
+      const $opt = $('#mobType option[value="' + item.mobType + '"]');
+      displayName = $opt.length ? $opt.text() : item.mobType;
+    } else {
+      displayName = "Guardado";
+    }
 
-    // Botones
-    const $btns = $("<div>").css({display:"flex", gap:"7px", alignItems:"center"});
+    // Let CSS control text color so dark theme can apply. Keep layout rules
+    // here but avoid hard-coding colors.
+    const $nameSpan = $("<div>")
+      .css({flex: "1 1 auto", fontSize: "1rem", fontWeight: 700})
+      .text(displayName);
+
+  // Botones
+  const $btns = $("<div>").css({display:"flex", gap:"18px", alignItems:"center"});
 
     // Copiar
     const $copy = $("<button>")
@@ -2199,14 +2579,27 @@ function renderSavedCommands() {
         color: "#166534",
         border: "none",
         borderRadius: "8px",
-        padding: "6px 10px",
+  padding: "11px 15px",
         cursor: "pointer"
       })
-      .attr("title", "Copiar comando")
+  // set data-i18n so loadLanguage() can translate tooltip titles later
+  .attr('data-i18n', 'modals.savedModal.copyTooltip')
+  .attr('data-i18n-attr', 'title')
+  .attr("title", t('modals.savedModal.copyTooltip', 'Copiar comando'))
       .on("click", function(e) {
         e.stopPropagation();
-        copyTextToClipboard(item.command);
+            copyTextToClipboard(item.command);
+            // notify copy success for saved modal
+            if (typeof notifySuccess === 'function') {
+              notifySuccess({ key: 'notifications.copied', timeout: 1800 });
+            } else if (typeof notify === 'function') {
+              notify({ type: 'success', key: 'notifications.copied', timeout: 1800 });
+            }
       });
+
+  $copy.addClass('saved-action-btn saved-copy-btn');
+    $copy.on('mousedown touchstart', function(){ $(this).addClass('pressed'); });
+    $copy.on('mouseup mouseleave touchend', function(){ $(this).removeClass('pressed'); });
 
     // Editar
     const $edit = $("<button>")
@@ -2216,15 +2609,29 @@ function renderSavedCommands() {
         color: "#7c5700",
         border: "none",
         borderRadius: "8px",
-        padding: "6px 10px",
+  padding: "11px 15px",
         cursor: "pointer"
       })
-      .attr("title", "Editar este guardado")
+  .attr('data-i18n', 'modals.savedModal.editTooltip')
+  .attr('data-i18n-attr', 'title')
+  .attr("title", t('modals.savedModal.editTooltip', 'Editar este guardado'))
       .on("click", function(e) {
         e.stopPropagation();
+        // Cerrar el modal de lista y cerrar el menú en móvil antes de cargar
+        $("#savedListModal").removeClass("show");
+        $(".menu").removeClass("show-buttons");
         loadSavedCommandToForm(item); // <-- Esta es la función correcta
-        $("#savedModal").removeClass("show");
+        // Notify that user is editing a saved command
+        if (typeof notifyInfo === 'function') {
+          notifyInfo({ key: 'notifications.editing', text: t('notifications.editing','Editando guardado'), timeout: 1800 });
+        } else if (typeof notify === 'function') {
+          notify({ type: 'info', key: 'notifications.editing', text: t('notifications.editing','Editando guardado'), timeout: 1800 });
+        }
       });
+
+  $edit.addClass('saved-action-btn saved-edit-btn');
+    $edit.on('mousedown touchstart', function(){ $(this).addClass('pressed'); });
+    $edit.on('mouseup mouseleave touchend', function(){ $(this).removeClass('pressed'); });
 
     // Eliminar
     const $del = $("<button>")
@@ -2234,47 +2641,32 @@ function renderSavedCommands() {
         color: "#991b1b",
         border: "none",
         borderRadius: "8px",
-        padding: "6px 10px",
+  padding: "11px 15px",
         cursor: "pointer"
       })
-      .attr("title", "Eliminar")
+  .attr('data-i18n', 'modals.savedModal.deleteTooltip')
+  .attr('data-i18n-attr', 'title')
+  .attr("title", t('modals.savedModal.deleteTooltip', 'Eliminar'))
       .on("click", function(e) {
         e.stopPropagation();
         removeSavedCommand(idx);
       });
 
+  $del.addClass('saved-action-btn saved-delete-btn');
+    $del.on('mousedown touchstart', function(){ $(this).addClass('pressed'); });
+    $del.on('mouseup mouseleave touchend', function(){ $(this).removeClass('pressed'); });
+
     $btns.append($copy, $edit, $del);
 
-    // Mostrar resumen de datos de cards (opcional)
-    const $cardsSummary = $("<div>").css({fontSize:"0.8em", color:"#666", marginTop:"5px", maxWidth:"300px"});
-    if (item.cards && Object.keys(item.cards).length > 0) {
-      const summaryParts = [];
-      
-      if (item.cards.card1 && item.cards.card1.mobName) {
-        summaryParts.push(`Nombre: ${item.cards.card1.mobName}`);
-      }
-      if (item.cards.card2 && item.cards.card2.mobAmount) {
-        summaryParts.push(`Cantidad: ${item.cards.card2.mobAmount}`);
-      }
-      if (item.cards.card9 && item.cards.card9.mobHealth) {
-        summaryParts.push(`Vida: ${item.cards.card9.mobHealth}`);
-      }
-      if (item.cards.card4 && item.cards.card4.itemSelect) {
-        summaryParts.push(`Item: ${item.cards.card4.itemSelect}`);
-      }
-      if (item.cards.cardAggressiveness && item.cards.cardAggressiveness.aggressivenessSelect) {
-        summaryParts.push(`Agresividad: ${item.cards.cardAggressiveness.aggressivenessSelect}`);
-      }
-      
-      if (summaryParts.length > 0) {
-        $cardsSummary.text(summaryParts.join(" | "));
-      }
-    }
+    // Append only image, name and buttons (no datos detallados)
+  $li.append($img, $nameSpan, $btns);
 
-    $li.append($img, $cmd, $cardsSummary, $btns);
+  // small press animation on item itself
+  $li.on('mousedown touchstart', function(){ $(this).addClass('pressed'); });
+  $li.on('mouseup mouseleave touchend', function(){ $(this).removeClass('pressed'); });
     $list.append($li);
   });
-  $content.append($list);
+  $listContainer.append($list);
 }
 
 // Copiar texto al portapapeles
@@ -2297,7 +2689,11 @@ function loadSavedCommandToForm(item) {
   console.log("Cargando datos guardados:", item);
   
   // Primero limpiar todo el formulario para dejar un estado limpio
-  if (typeof clearAllFormData === 'function') clearAllFormData(false);
+  // Suprimir la notificación de 'cleared' aquí porque mostraremos una notificación
+  // específica de 'editing' después de cargar el guardado.
+  if (typeof clearAllFormData === 'function') clearAllFormData(false, true);
+  // Ensure loot toggle/status is reset before loading saved data to avoid persistence bugs
+  try { setLootState(false); } catch (err) { /* ignore */ }
 
   // Luego cargar el mobType y actualizar imagen/bloqueos
   $("#mobType").val(item.mobType || "").trigger("change");
@@ -2375,17 +2771,24 @@ function loadSavedCommandToForm(item) {
     
     // Card 5 - Loot predeterminado
     if (cards.card5 && typeof cards.card5.lootEnabled !== 'undefined') {
-      const loot = cards.card5.lootEnabled;
-      const $lootIcon = $("#toggleLoot").find("i");
-      const isCurrentlyOn = $lootIcon.hasClass("fa-toggle-on");
-      
-      if (loot && !isCurrentlyOn) {
-        $("#toggleLoot").trigger("click");
-        console.log("Activado loot");
-      } else if (!loot && isCurrentlyOn) {
-        $("#toggleLoot").trigger("click");
-        console.log("Desactivado loot");
+      const loot = !!cards.card5.lootEnabled;
+      // Set the toggle state directly rather than triggering clicks to avoid side effects
+      const $toggle = $("#toggleLoot");
+      const $icon = $toggle.find("i");
+      const $span = $toggle.find("span");
+
+      if (loot) {
+        $icon.removeClass("fa-toggle-off").addClass("fa-toggle-on");
+        $span.text(t('common.enabled', 'Activado'));
+        console.log("Activado loot (load)");
+      } else {
+        $icon.removeClass("fa-toggle-on").addClass("fa-toggle-off");
+        $span.text(t('common.disabled', 'Desactivado'));
+        console.log("Desactivado loot (load)");
       }
+
+      // Update the small status button visual to match the loaded value
+      if (typeof updateLootStatus === 'function') updateLootStatus(loot);
     }
     
     // Card 6 - Armadura
@@ -2452,6 +2855,10 @@ function removeSavedCommand(idx) {
   if (!isCurrentSaved()) {
     $("#footerSaveButton").removeClass("saved");
   }
+  // notify deletion
+  if (typeof notify === 'function') {
+    notify({ type: 'info', key: 'notifications.deleted', timeout: 2000 });
+  }
 }
 
 // Verifica si el formulario current ya está guardado (por comando y mobType)
@@ -2497,42 +2904,16 @@ $(document).ready(function () {
   // También al cargar la página, por si ya hay uno seleccionado
   toggleFooterSaveButton();
 
-  // Guardado del comando desde el botón en el footer
-  $("#footerSaveButton").off("click").on("click", function () {
-    const $btn = $(this);
-    const mobType = $("#mobType").val();
-    const command = getCurrentCommandText();
-    let saved = getSavedCommands();
+  // Nota: el comportamiento de click en #footerSaveButton se maneja en otro bloque
 
-    if ($btn.hasClass("saved")) {
-      // Quitar guardado
-      if (confirm("¿Desea eliminar este comando de los guardados?")) {
-        saved = saved.filter(
-          (item) =>
-            !(item.command === command && item.mobType === mobType)
-        );
-        setSavedCommands(saved);
-        $btn.removeClass("saved");
-        alert("Comando eliminado de los guardados");
-        console.log("Guardado eliminado");
-      }
-    } else {
-      // Guardar con datos de todas las cards
-      console.log("Intentando guardar comando...");
-      const formData = getCurrentFormDataByCard();
-      console.log("Datos del formulario:", formData);
-      
-      if (saveCurrentCommand()) {
-        $btn.addClass("saved");
-        console.log("Comando guardado exitosamente");
-        // El mensaje de éxito se muestra en saveCurrentCommand
-      }
-    }
-  });
-
-  // Renderizar guardados al abrir el modal
+  // Renderizar guardados al abrir el modal (desde el menú)
   $("#savedButton").on("click", function () {
+    // Asegurar que el formulario de creación esté oculto y mostrar la lista
+    $(".saved-entry, .saved-modal-actions").hide();
+    $(".saved-modal-list").show();
     renderSavedCommands();
+    // Asegurar que el modal esté abierto
+    $("#savedListModal").addClass("show");
   });
 
   // Si cambian los campos relevantes, actualizar el estado del bookmark
@@ -2555,4 +2936,203 @@ $(document).ready(function () {
   // Inicialización del sistema de guardado
   console.log("Sistema de guardado inicializado");
   console.log("Guardados existentes:", getSavedCommands().length);
+});
+
+// Ensure Select2 inside popups don't overflow adjacent status buttons by
+// dynamically calculating and setting a max-width for the Select2 container
+// inside each .popup-input-wrapper. Runs on ready, resize and when a Select2 opens.
+$(document).ready(function() {
+  function adjustSelect2InWrapper($wrapper) {
+    if (!$wrapper || !$wrapper.length) return;
+    // prefer the select2 container inside the wrapper, fallback to next sibling of select
+    let $select2 = $wrapper.find('.select2-container').first();
+    if (!$select2.length) {
+      const $sel = $wrapper.find('select').first();
+      if ($sel.length && $sel.data('select2')) $select2 = $sel.next('.select2-container');
+    }
+
+    // find the nearest popup-button (status) to reserve space for
+    let $statusBtn = $wrapper.siblings('.popup-button').first();
+    if (!$statusBtn.length) $statusBtn = $wrapper.parent().find('.popup-button').first();
+
+    if (!$select2.length) return;
+
+    const wrapperWidth = $wrapper.width() || 0;
+    const btnWidth = $statusBtn.length ? $statusBtn.outerWidth(true) : 0;
+    const reserve = btnWidth + 12; // small gap
+    const max = Math.max(40, wrapperWidth - reserve);
+
+    $select2.css('max-width', max + 'px');
+    $select2.find('.select2-selection__rendered').css({
+      overflow: 'hidden',
+      'text-overflow': 'ellipsis',
+      'white-space': 'nowrap',
+      'max-width': '100%'
+    });
+  }
+
+  function adjustAllPopupSelects() {
+    $('.popup-input-wrapper').each(function() {
+      adjustSelect2InWrapper($(this));
+    });
+  }
+
+  // debounce helper
+  function debounce(fn, wait) {
+    let t;
+    return function() {
+      const args = arguments;
+      const ctx = this;
+      clearTimeout(t);
+      t = setTimeout(function() { fn.apply(ctx, args); }, wait);
+    };
+  }
+
+  // Run on load
+  setTimeout(adjustAllPopupSelects, 80);
+
+  // Adjust on window resize
+  $(window).on('resize', debounce(adjustAllPopupSelects, 120));
+
+  // When any Select2 opens, adjust its wrapper (some Select2 instances render after open,
+  // so schedule a short retry)
+  $(document).on('select2:open', function(e) {
+    try {
+      const $sel = $(e.target);
+      const $wrapper = $sel.closest('.popup-input-wrapper');
+      if ($wrapper.length) {
+        adjustSelect2InWrapper($wrapper);
+        setTimeout(function() { adjustSelect2InWrapper($wrapper); }, 80);
+      } else {
+        // fallback: adjust all popup selects
+        setTimeout(adjustAllPopupSelects, 80);
+      }
+    } catch (err) {
+      // ignore
+    }
+  });
+});
+
+// Settings modal: only Export / Import behavior
+$(document).ready(function() {
+  // Open settings modal
+  $('#configButton').on('click', function(e){
+    e.stopPropagation();
+    $('#settingsModal').addClass('show');
+    // Notifications will show selected file info; no DOM filename display needed
+  });
+
+  // Close handlers
+  $('#settingsClose, #settingsModal .popup-close').on('click', function(){
+    $('#settingsModal').removeClass('show');
+    // clear file input value to allow re-importing same file later
+    $('#settingsImportInput').val('');
+  });
+
+  // Export saved commands as JSON file
+  $('#settingsExport').on('click', function(){
+    try {
+      const saved = getSavedCommands() || [];
+      if (!saved || saved.length === 0) {
+        // Nothing to export — notify the user
+        if (typeof notifyWarn === 'function') {
+          notifyWarn({ text: t('modals.savedModal.emptyMessage','No saved items'), timeout: 2000 });
+        } else if (typeof notify === 'function') {
+          notify({ type: 'warning', text: t('modals.savedModal.emptyMessage','No saved items'), timeout: 2000 });
+        } 
+        return;
+      }
+      const payload = JSON.stringify(saved, null, 2);
+      const blob = new Blob([payload], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth()+1).padStart(2,'0');
+      const d = String(now.getDate()).padStart(2,'0');
+      const filename = (t('modals.settings.exportFilenamePrefix','mbsummon_saves') || 'mbsummon_saves') + '_' + y + m + d + '.json';
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      // notify export success
+      if (typeof notifySuccess === 'function') {
+        notifySuccess({ key: 'notifications.export_success', timeout: 2600 });
+      } else if (typeof notify === 'function') {
+        notify({ type: 'success', key: 'notifications.export_success', timeout: 2600 });
+      }
+    } catch (e) {
+      console.error('Export failed', e);
+      if (typeof notifyError === 'function') {
+        notifyError({ text: t('notifications.export_failed','Error al exportar'), timeout: 3200 });
+      } else if (typeof notify === 'function') {
+        notify({ type: 'error', text: t('notifications.export_failed','Error al exportar'), timeout: 3200 });
+      }
+    }
+  });
+
+  // Import: open file selector when button clicked
+  $('#settingsImportButton').on('click', function(){
+    $('#settingsImportInput').click();
+  });
+
+  // Handle file selected
+  $('#settingsImportInput').on('change', function(e){
+    const file = (e.target.files && e.target.files[0]) ? e.target.files[0] : null;
+    if (!file) return;
+    // Notify the user which file was selected
+    if (typeof notifyInfo === 'function') {
+      notifyInfo({ text: t('notifications.import_file_selected_prefix','Archivo seleccionado') + ': ' + file.name, timeout: 3000 });
+    } else if (typeof notify === 'function') {
+      notify({ type: 'info', text: t('notifications.import_file_selected_prefix','Archivo seleccionado') + ': ' + file.name, timeout: 3000 });
+    } 
+
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      try {
+        const text = evt.target.result;
+        const parsed = JSON.parse(text);
+        if (!Array.isArray(parsed)) {
+          if (typeof notifyError === 'function') {
+            notifyError({ text: t('modals.settings.importInvalidFile','Invalid import file - expected an array of saved items'), timeout: 4200 });
+          } 
+          return;
+        }
+
+        const existing = getSavedCommands() || [];
+        let added = 0;
+        parsed.forEach((item) => {
+          // minimal validation: must have mobType and command
+          if (!item || !item.mobType || !item.command) return;
+          const exists = existing.some(s => s.mobType === item.mobType && s.command === item.command);
+          if (!exists) {
+            existing.push(item);
+            added++;
+          }
+        });
+        setSavedCommands(existing);
+        renderSavedCommands();
+
+        const msg = (t('modals.settings.importSuccess','Import complete. Added %d new items.') || 'Import complete. Added %d new items.').replace('%d', added);
+        if (typeof notifySuccess === 'function') {
+          notifySuccess({ text: msg, timeout: 3500 });
+        } else if (typeof notify === 'function') {
+          notify({ type: 'success', text: msg, timeout: 3500 });
+        } 
+
+        // reset input so same file can be chosen again if needed
+        $('#settingsImportInput').val('');
+      } catch (err) {
+        console.error('Import error', err);
+        if (typeof notifyError === 'function') {
+          notifyError({ text: t('modals.settings.importFailed','Import failed - invalid JSON'), timeout: 4500 });
+        } else if (typeof notify === 'function') {
+          notify({ type: 'error', text: t('modals.settings.importFailed','Import failed - invalid JSON'), timeout: 4500 });
+        }
+      }
+    };
+    reader.readAsText(file);
+  });
 });
