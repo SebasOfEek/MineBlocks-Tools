@@ -1,4 +1,24 @@
 {
+  "common": {
+    "loading": "Cargando datos...",
+    "select": "--Seleccionar--",
+    "save": "Guardar",
+    "help": "Ayuda",
+    "enabled": "Activado",
+    "disabled": "Desactivado",
+    "yes": "Sí",
+    "no": "No"
+  },
+  "languages": {
+    "es": {
+      "name": "Español",
+      "alt": "Español"
+    },
+    "en": {
+      "name": "Inglés",
+      "alt": "English"
+    }
+  },
   "menu": {
     "title": "Menú",
     "home": "Inicio",
@@ -9,7 +29,8 @@
     },
     "discord": "Discord",
     "clear": "Limpiar",
-    "settings": "Configuración"
+    "settings": "Configuración",
+    "saved": "Guardados"
   },
   "cards": {
     "name": "Nombre",
@@ -17,10 +38,14 @@
     "position": "Posición",
     "health": "Vida",
     "equipment": "Objeto equip.",
+    "holding": "Objeto equip.",
     "defaultLoot": "Loot predet.",
     "armor": "Armadura",
     "lootTags": "Loot Tags",
-    "aggressiveness": "Agresividad"
+    "aggressiveness": "Agresividad",
+    "skin": "Skin ID",
+    "charged": "Creeper Cargado",
+    "test": "Test"
   },
   "modals": {
     "language": {
@@ -32,20 +57,201 @@
       "title": "Nombre del mob",
       "label": "Nombre personalizado:",
       "placeholder": "Ingresa un nombre...",
-      "help": "Esta opción te permite personalizar el nombre del mob que vas a invocar. El nombre que escribas aquí será visible flotando sobre el mob cuando lo invoques en el juego. Puedes usar códigos de formato usando el símbolo & seguido de un número."
+      "help": {
+        "title": "Ayuda - Nombre del mob",
+        "description": "Esta opción te permite personalizar el nombre del mob que vas a invocar. El nombre que escribas aquí será visible flotando sobre el mob cuando lo invoques en el juego. Puedes usar códigos de formato usando el símbolo & seguido de un número."
+      }
     },
     "amount": {
       "title": "Cantidad de mobs",
       "label": "Cantidad a invocar:",
       "placeholder": "Ingresa una cantidad...",
-      "help": "Esta opción te permite definir cuántos mobs quieres invocar a la vez. Por razones de rendimiento y equilibrio del juego, el límite máximo es de 20 mobs por invocación."
+      "help": {
+        "title": "Ayuda - Cantidad de mobs",
+        "description": "Esta opción te permite definir cuántos mobs quieres invocar a la vez. Por razones de rendimiento y equilibrio del juego, el límite máximo es de 20 mobs por invocación."
+      }
+    },
+    "position": {
+      "title": "Posición del mob",
+      "typeLabel": "Tipo de posición:",
+      "selectPlaceholder": "--Seleccionar tipo--",
+      "relative": "Posición relativa",
+      "absolute": "Posición absoluta",
+      "coordX": "Coordenada X:",
+      "coordY": "Coordenada Y:",
+      "coordXPlaceholder": "Ingresa la coordenada X...",
+      "coordYPlaceholder": "Ingresa la coordenada Y...",
+      "coordXRelative": "Coordenada ~X:",
+      "coordYRelative": "Coordenada ~Y:",
+      "help": {
+        "title": "Ayuda - Posición del mob",
+        "description": "Esta opción te permite definir dónde aparecerá el mob. Puedes elegir entre posición relativa (respecto al jugador) o posición absoluta (coordenadas fijas del mundo). Ingresa los valores X e Y para determinar el punto exacto de aparición."
+      }
+    },
+    "item": {
+      "title": "Objeto equipado",
+      "label": "Seleccionar objeto:",
+      "selectPlaceholder": "--Seleccionar objeto--",
+      "help": {
+        "title": "Ayuda - Objeto equipado",
+        "description": "Esta opción te permite seleccionar el objeto que el mob tendrá equipado en su mano. El objeto seleccionado aparecerá en la mano del mob cuando sea invocado."
+      }
+    },
+    "health": {
+      "title": "Vida del mob",
+      "label": "Cantidad de vida:",
+      "placeholder": "Ingresa la vida...",
+      "help": {
+        "title": "Ayuda - Vida del mob",
+        "description": "Esta opción te permite definir la cantidad de vida que tendrá el mob al aparecer. El valor debe estar entre 1 y 100 puntos de vida."
+      }
+    },
+    "loot": {
+      "title": "Loot Predeterminado",
+      "label": "Activar loot predeterminado:",
+      "enabled": "Activado",
+      "disabled": "Desactivado",
+      "help": {
+        "title": "Ayuda - Loot Predeterminado",
+        "description": "Esta opción te permite activar o desactivar el loot predeterminado del mob. Cuando está activado, el mob soltará los items que tiene configurados por defecto al morir."
+      }
+    },
+    "lootTags": {
+      "title": "Loot Tags",
+      "selectItemPlaceholder": "Seleccionar item",
+      "saveButton": "Guardar",
+      "deleteButton": "Eliminar",
+      "editButton": "Editar",
+      "fields": {
+        "amount": "Cantidad:",
+        "bonus": "Bonus:",
+        "lootBonus": "Bonus de Loot:",
+        "chance": "Probabilidad:",
+        "onFire": "Está en llamas:",
+        "size": "Tamaño:",
+        "isBaby": "Es bebé:",
+        "variant": "Variante:",
+        "isSheared": "Está esquilada:",
+        "color": "Color:"
+      },
+      "help": {
+        "title": "Ayuda - Loot Tags",
+        "description": "Los tags de loot controlan comportamientos especiales cuando el mob muere, como la probabilidad de soltar items raros o experiencia extra."
+      }
+    },
+    "armor": {
+      "title": "Armadura del mob",
+      "helmet": "Casco:",
+      "chestplate": "Pechera:",
+      "leggings": "Pantalones:",
+      "boots": "Botas:",
+      "selectPlaceholder": "--Seleccionar--",
+      "help": {
+        "title": "Ayuda - Armadura del mob",
+        "description": "Esta opción te permite equipar al mob con diferentes piezas de armadura. Puedes seleccionar casco, pechera, pantalones y botas de diferentes materiales."
+      }
+    },
+    "aggressiveness": {
+      "title": "Agresividad del mob",
+      "label": "Tipo de agresividad:",
+      "selectPlaceholder": "--Seleccionar tipo--",
+      "hostile": "Hostil",
+      "neutral": "Neutral",
+      "passive": "Pasivo",
+      "help": {
+        "title": "Ayuda - Agresividad del mob",
+        "description": "Esta opción te permite definir el comportamiento agresivo del mob. Hostil atacará a los jugadores, Neutral solo atacará si es provocado, y Pasivo nunca atacará."
+      }
+    },
+    "skin": {
+      "title": "Skin ID",
+      "label": "ID de skin (solo números):",
+      "placeholder": "Ejemplo: 76198",
+      "help": {
+        "title": "Ayuda - Skin ID",
+        "description": "Ingresa el ID numérico de la skin que deseas asignar al mob. Solo se permiten números (ej: 76198). En el comando se añadirá como skin:76198."
+      }
+    },
+    "charged": {
+      "title": "Creeper Cargado",
+      "label": "Creeper cargado:",
+      "enabled": "Activado",
+      "disabled": "Desactivado",
+      "help": {
+        "title": "Ayuda - Creeper Cargado",
+        "description": "Activa esta opción para convertir al creeper en una versión cargada. En el comando se añadirá charged:1 cuando esté activado."
+      }
+    }
+    ,
+    "savedModal": {
+      "title": "Guardados",
+      "createTitle": "Guardar",
+      "emptyMessage": "No hay guardados aún.",
+      "nameLabel": "Nombre:",
+      "namePlaceholder": "Ingresa un nombre...",
+      "saveButton": "Guardar",
+      "cancelButton": "Cancelar",
+      "copyTooltip": "Copiar comando",
+      "editTooltip": "Editar este guardado",
+      "deleteTooltip": "Eliminar"
+    }
+    ,
+    "settings": {
+      "title": "Configuración",
+      "description": "Configura tus preferencias",
+      "themeLabel": "Tema:",
+      "autoSaveLabel": "Auto-guardar comando:",
+      "autoSaveOn": "Activado",
+      "autoSaveOff": "Desactivado",
+      "imageCacheLabel": "Cache de imágenes (reducir red):",
+      "imageCacheOn": "Activado",
+      "imageCacheOff": "Desactivado",
+      "defaultAmountLabel": "Cantidad predeterminada de mobs:",
+      "clearSavedButton": "Borrar guardados",
+      "closeButton": "Cerrar",
+      "exportLabel": "Exportar comandos guardados:",
+      "exportButton": "Exportar",
+      "importLabel": "Importar comandos guardados:",
+      "importButton": "Importar",
+      "exportFilenamePrefix": "mbsummon_guardados",
+      "exportFailed": "Error al exportar",
+      "importInvalidFile": "Archivo inválido para importar - se espera un array de elementos guardados",
+      "importSuccess": "Importación completada. Se agregaron %d elementos nuevos.",
+      "importFailed": "Error en la importación - JSON inválido"
     }
   },
-  "common": {
-    "select": "--Seleccionar--",
-    "save": "Guardar",
-    "help": "Ayuda",
-    "enabled": "Activado",
-    "disabled": "Desactivado"
+  "external": {
+    "mobs": {
+      "zombie": "Zombie",
+      "creeper": "Creeper",
+      "skeleton": "Esqueleto"
+    },
+    "armor": {
+      "helmet": {
+        "leather_cap": "Casco de Cuero",
+        "iron_helmet": "Casco de Hierro",
+        "gold_helmet": "Casco de Oro",
+        "diamond_helmet": "Casco de Diamante"
+      }
+    }
+  },
+  "notifications": {
+    "saved_success": "Comando guardado",
+    "editing": "Editando elemento guardado",
+    "language_changed": "Idioma cambiado",
+    "cleared": "Formulario restablecido",
+    "copied": "Comando copiado",
+    "deleted": "Se eliminó el comando guardado",
+    "save_duplicate": "Este comando ya está guardado",
+    "import_file_selected_prefix": "Archivo seleccionado",
+    "import_success": "Importación completada",
+    "import_failed": "Error en la importación"
+  ,
+    "export_success": "Exportación completada",
+    "export_failed": "Error al exportar"
+  },
+  "footer": {
+    "saveTitle": "Guardar",
+    "copy": "Copiar comando"
   }
 }
