@@ -492,6 +492,13 @@ body {
 
 /* Opcional: en móvil, diseño horizontal con icono y card */
 @media screen and (max-width: 900px) {
+  /* On small viewports, prevent the document from scrolling so only
+     the cards area handles vertical scroll. This avoids the double-scroll
+     experience on mobile devices. */
+  html, body {
+    overflow: hidden;
+    height: 100%;
+  }
   .card-grid {
     display: grid !important;
     grid-template-columns: 1fr !important;
@@ -1146,11 +1153,10 @@ body {
     grid-column: 1;
     padding: 0em 20px 20px;
     margin-top: 12em;
-    overflow-y: auto;
-    height: calc(100vh - 195px - 100px); /* viewport height - header space - footer space */
+    /* Keep main as layout container only — do not scroll the whole page. */
+    overflow: visible;
+    height: calc(100vh - 195px - 100px); /* preserve sizing for layout */
     margin-bottom: 0;
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-y;
     position: relative;
   }
 
@@ -1162,7 +1168,10 @@ body {
     max-height: none !important;
     height: auto !important;
     padding: 5px !important;
-    overflow: visible !important; /* ensure grid doesn't block touch scrolling */
+    /* Make the cards area the only scroll container on mobile */
+    max-height: calc(100vh - 220px) !important; /* room for header/menu/footer */
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
   }
   
   .card {
