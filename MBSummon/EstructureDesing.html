@@ -15,6 +15,7 @@
   </head>
 <style>
 
+
 </style>
     <!-- Pantalla de carga -->
     <div id="loadingScreen" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:var(--card-bg,#fff);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;">
@@ -74,6 +75,7 @@
             <span class="question-icon">?</span>
             <i class="fas fa-signature"></i>
             <span class="card-text" data-i18n="cards.name">Nombre</span>
+            <!-- inputs: #mobName -->
           </div>
           <div class="card-icon">
             <i class="fas fa-signature"></i>
@@ -82,6 +84,7 @@
             <span class="question-icon">?</span>
             <i class="fas fa-hashtag"></i>
             <span class="card-text" data-i18n="cards.amount">Cantidad</span>
+            <!-- inputs: #mobAmount -->
           </div>
           <div class="card-icon">
             <i class="fas fa-hashtag"></i>
@@ -90,6 +93,7 @@
             <span class="question-icon">?</span>
             <i class="fas fa-location-dot"></i>
             <span class="card-text" data-i18n="cards.position">Posición</span>
+            <!-- inputs: #positionType, #posX, #posY -->
           </div>
           <div class="card-icon">
             <i class="fas fa-location-dot"></i>
@@ -98,6 +102,7 @@
             <span class="question-icon">?</span>
             <i class="fas fa-heart"></i>
             <span class="card-text" data-i18n="cards.health">Vida</span>
+            <!-- inputs: #mobHealth -->
           </div>
           <div class="card-icon">
             <i class="fas fa-heart"></i>
@@ -106,6 +111,7 @@
             <span class="question-icon">?</span>
             <i class="fas fa-hand-sparkles"></i>
             <span class="card-text" data-i18n="cards.holding">Objeto equip.</span>
+            <!-- inputs: #itemSelect, #itemAmount, #itemData -->
           </div>
           <div class="card-icon">
             <i class="fas fa-hand-sparkles"></i>
@@ -114,6 +120,7 @@
             <span class="question-icon">?</span>
             <i class="fas fa-box"></i>
             <span class="card-text" data-i18n="cards.defaultLoot">Loot predet.</span>
+            <!-- inputs: #toggleLoot -->
           </div>
           <div class="card-icon">
             <i class="fas fa-box"></i>
@@ -122,6 +129,7 @@
             <span class="question-icon">?</span>
             <i class="fas fa-shield"></i>
             <span class="card-text" data-i18n="cards.armor">Armadura</span>
+            <!-- inputs: #helmetSelect, #chestplateSelect, #leggingsSelect, #bootsSelect -->
           </div>
           <div class="card-icon">
             <i class="fas fa-shield"></i>
@@ -130,6 +138,7 @@
             <span class="question-icon">?</span>
             <i class="fas fa-tags"></i>
             <span class="card-text" data-i18n="cards.lootTags">Loot Tags</span>
+            <!-- inputs: #sidebarItemSelect (items), inside modal: amount, bonus, lootBonus, chance, onFire (toggle), size, isBaby (toggle), variant (select), isSheared (toggle), color -->
           </div>
           <div class="card-icon">
             <i class="fas fa-tags"></i>
@@ -138,6 +147,7 @@
             <span class="question-icon">?</span>
             <i class="fas fa-skull"></i>
             <span class="card-text" data-i18n="cards.aggressiveness">Agresividad</span>
+            <!-- inputs: #aggressivenessSelect -->
           </div>
           <div class="card-icon">
             <i class="fas fa-skull"></i>
@@ -146,6 +156,7 @@
             <span class="question-icon">?</span>
             <i class="fas fa-wand-magic-sparkles"></i>
             <span class="card-text" data-i18n="cards.skinId">Skin ID</span>
+            <!-- inputs: #skinId -->
           </div>
           <div class="card-icon">
             <i class="fas fa-wand-magic-sparkles"></i>
@@ -154,6 +165,7 @@
             <span class="question-icon">?</span>
             <i class="fas fa-cloud-bolt"></i>
             <span class="card-text" data-i18n="cards.charged">Creeper Cargado</span>
+            <!-- inputs: #toggleCharged -->
           </div>
           <div class="card-icon">
             <i class="fas fa-cloud-bolt"></i>
@@ -165,6 +177,15 @@
           </div>
           <div class="card-icon">
             <i class="fas fa-code"></i>
+          </div>
+          <div class="card" id="card15">
+            <span class="question-icon">?</span>
+            <i class="fas fa-baby"></i>
+            <span class="card-text" data-i18n="cards.baby">Bebé</span>
+            <!-- inputs: baby controls in babyPopup -->
+          </div>
+          <div class="card-icon">
+            <i class="fas fa-baby"></i>
           </div>
         </div>
       </div>
@@ -398,89 +419,95 @@
                 <i class="fas fa-plus"></i>
               </div>
               <select id="sidebarItemSelect" class="select-with-images" style="width: 200px">
-                <option value="">Seleccionar item</option>
+                <option value="" data-i18n="modals.lootTags.selectItemPlaceholder">Seleccionar item</option>
               </select>
             </div>
 
-            <!-- Botones de acción -->
+            <!-- Botones de acción (solo Agregar item bajo el select) -->
             <div class="loot-tags-buttons">
-              <button class="sidebar-button save">
-                <i class="fas fa-save"></i>
-              </button>
-              <button class="sidebar-button delete">
-                <i class="fas fa-trash"></i>
-              </button>
-              <button class="sidebar-button">
-                <i class="fas fa-edit"></i>
-              </button>
+              <button class="sidebar-button save" data-i18n="modals.lootTags.saveButton">Guardar</button>
             </div>
 
             <!-- Divisor -->
             <div class="loot-tags-divider"></div>
 
-            <!-- Contenedor de items con scroll -->
+            <!-- Contenedor de inputs de creación/edición con scroll -->
             <div class="loot-tags-container">
               <div class="loot-tags-item">
-                <label>Cantidad:</label>
-                <input type="number" class="sidebar-input" min="1" max="64">
+                <label data-i18n="modals.lootTags.fields.amount">Cantidad:</label>
+                <input type="number" class="sidebar-input integer-only" min="1" max="64" step="1">
               </div>
               
               <div class="loot-tags-item">
-                <label>Bonus:</label>
+                <label data-i18n="modals.lootTags.fields.bonus">Bonus:</label>
                 <input type="number" class="sidebar-input" min="0">
               </div>
               
               <div class="loot-tags-item">
-                <label>Loot Bonus:</label>
+                <label data-i18n="modals.lootTags.fields.lootBonus">Loot Bonus:</label>
                 <input type="number" class="sidebar-input" min="0">
               </div>
               
               <div class="loot-tags-item">
-                <label>Oportunidad:</label>
+                <label data-i18n="modals.lootTags.fields.chance">Oportunidad:</label>
                 <input type="number" class="sidebar-input" min="0" max="100" step="0.1">
               </div>
               
               <div class="loot-tags-item">
-                <label>Está en llamas:</label>
+                <label data-i18n="modals.lootTags.fields.onFire">Está en llamas:</label>
                 <button class="toggle-button">
                   <i class="fas fa-toggle-off"></i>
-                  <span>No</span>
+                  <span data-i18n="common.no">No</span>
                 </button>
               </div>
               
               <div class="loot-tags-item">
-                <label>Tamaño:</label>
-                <input type="number" class="sidebar-input" min="0.1" max="10" step="0.1">
+                <label data-i18n="modals.lootTags.fields.size">Tamaño:</label>
+                <select class="sidebar-select" data-i18n-attr="">
+                  <option value="" data-i18n="modals.lootTags.selectItemPlaceholder">--Seleccionar--</option>
+                  <option value="1" data-i18n="modals.lootTags.sizeOptions.small">Pequeño</option>
+                  <option value="2" data-i18n="modals.lootTags.sizeOptions.medium">Mediano</option>
+                  <option value="3" data-i18n="modals.lootTags.sizeOptions.large">Grande</option>
+                </select>
               </div>
               
               <div class="loot-tags-item">
-                <label>Es bebé:</label>
+                <label data-i18n="modals.lootTags.fields.isBaby">Es bebé:</label>
                 <button class="toggle-button">
                   <i class="fas fa-toggle-off"></i>
-                  <span>No</span>
+                  <span data-i18n="common.no">No</span>
                 </button>
               </div>
               
               <div class="loot-tags-item">
-                <label>Variante:</label>
-                <select class="sidebar-select">
+                <label data-i18n="modals.lootTags.fields.variant">Variante:</label>
+                <select id="lootVariantSelect" class="sidebar-select select-with-images select-variant">
                   <option value="">--Seleccionar--</option>
                 </select>
               </div>
               
               <div class="loot-tags-item">
-                <label>Está esquilada:</label>
+                <label data-i18n="modals.lootTags.fields.isSheared">Está esquilada:</label>
                 <button class="toggle-button">
                   <i class="fas fa-toggle-off"></i>
-                  <span>No</span>
+                  <span data-i18n="common.no">No</span>
                 </button>
               </div>
               
               <div class="loot-tags-item">
-                <label>Color:</label>
-                <input type="color" class="sidebar-input">
+                <label data-i18n="modals.lootTags.fields.color">Color:</label>
+                <select id="lootColorSelect" class="sidebar-select select-with-images select-color">
+                  <option value="">--Seleccionar--</option>
+                </select>
               </div>
             </div>
+
+            <div class="loot-tags-divider"></div>
+
+            <!-- Lista donde se mostrarán los items guardados -->
+            <div class="loot-tags-saved-list" style="margin-top: 38px;" aria-live="polite"></div>
+
+            <!-- Inline delete confirmation removed; using global #lootDeleteModal -->
           </div>
         </div>
       </div>
@@ -495,6 +522,23 @@
             <p class="popup-description" data-i18n="modals.lootTags.help.description">
               Esta opción te permite activar o desactivar los tags de loot del mob. Los tags controlan comportamientos especiales al morir el mob, como la posibilidad de soltar experiencia o items raros.
             </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Global delete confirmation modal for Loot Tags -->
+      <div class="popup-overlay" id="lootDeleteModal">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h3>Eliminar Loot Tag</h3>
+            <button class="popup-close" onclick="$('#lootDeleteModal').removeClass('show')">&times;</button>
+          </div>
+          <div class="popup-content">
+            <p>¿Seguro que deseas eliminar este loot tag?</p>
+            <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:12px;">
+              <button class="popup-button" id="cancelDeleteLoot">Cancelar</button>
+              <button class="popup-button save-button" id="confirmDeleteLoot">Eliminar</button>
+            </div>
           </div>
         </div>
       </div>
@@ -700,6 +744,59 @@
         </div>
       </div>
 
+      <!-- Baby Card Popups -->
+      <div class="popup-overlay" id="babyPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2 data-i18n="modals.baby.title">Bebé</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <div class="popup-input-group">
+              <div class="parent">
+                <div class="div1">
+                  <div class="popup-input-wrapper">
+                    <label for="babyMode" data-i18n="modals.baby.modeLabel">Modo Bebé:</label>
+                    <select id="babyMode" class="popup-select">
+                      <option value="" data-i18n="common.select">--Seleccionar--</option>
+                      <option value="always" data-i18n="modals.baby.option.always">Siempre</option>
+                      <option value="time" data-i18n="modals.baby.option.time">Tiempo</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="div2">
+                  <div class="first-row-status">
+                    <button class="popup-button" id="babyStatusButton">
+                      <i class="fas fa-times status-icon not-saved"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="div3" id="babyRow">
+                  <div class="popup-input-wrapper" id="babyTimeWrapper">
+                    <label for="babyTimeInput" data-i18n="modals.baby.timeLabel">Tiempo (segundos):</label>
+                    <input id="babyTimeInput" class="popup-select" type="number" min="0" placeholder="0" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-overlay" id="babyHelpPopup">
+        <div class="popup-window">
+          <div class="popup-header">
+            <h2 data-i18n="modals.baby.help.title">Ayuda - Bebé</h2>
+            <button class="popup-close">&times;</button>
+          </div>
+          <div class="popup-content">
+            <p class="popup-description" data-i18n="modals.baby.help.description">Configura cómo debe aparecer la variante bebé del mob. Elige "Siempre" para baby:true o "Tiempo" para especificar un número que aparecerá como baby:N en el comando.</p>
+          </div>
+        </div>
+      </div>
+
       <div class="popup-overlay" id="languagePopup">
         <div class="popup-window">
           <div class="popup-header">
@@ -826,6 +923,7 @@
   <script src="notifications.js"></script>
   <div id="notifContainer" class="notif-container" aria-live="polite"></div>
   <script src="Function.js"></script>
+  <script src="lootTags.js"></script>
     <script>
       
     </script>
