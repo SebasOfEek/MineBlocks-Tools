@@ -713,7 +713,7 @@ body {
   font-size: 1.1rem;
   color: var(--popup-text-color);
   background-color: var(--input-bg);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
@@ -735,8 +735,8 @@ body {
 
 .select2-dropdown {
   border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border: 1px solid #eee;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid #eee; 
 }
 
 .select2-results__option {
@@ -1288,6 +1288,10 @@ body {
   --popup-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   --popup-focus-shadow: 0 0 1 3px rgba(51, 51, 51, 0.2);
   --input-bg: #ffffff;
+  --saved-item-bg: #ffffff;
+  --saved-item-border: #e5e7eb;
+  --saved-item-edit-bg: rgba(134,238,172,0.15);
+  --saved-item-edit-border: #86efac;
 }
 
 [data-theme="dark"] {
@@ -1301,6 +1305,10 @@ body {
   --popup-text-color: #fff;
   --popup-accent: #ccc;
   --input-bg: #2a2a2a;
+  --saved-item-bg: #2b2b2b;
+  --saved-item-border: #444;
+  --saved-item-edit-bg: rgba(34,197,94,0.12);
+  --saved-item-edit-border: #16a34a;
 
   & .select2-container--default .select2-selection--single {
     background-color: var(--card-bg);
@@ -1337,6 +1345,70 @@ body {
   }
 }
 
+/* Saved list item common styles */
+.saved-list-item,
+.saved-loot-item {
+  background: var(--saved-item-bg);
+  border: 1px solid var(--saved-item-border);
+  color: var(--text-color);
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.saved-list-item .left,
+.saved-loot-item > div:first-child {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.saved-list-item.editing,
+.saved-loot-item.editing {
+  background: var(--saved-item-edit-bg);
+  border-color: var(--saved-item-edit-border);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+}
+
+/* Make editing state more visible in dark theme (green glow) */
+[data-theme="dark"] .saved-list-item.editing,
+[data-theme="dark"] .saved-loot-item.editing {
+  box-shadow: 0 8px 30px rgba(16,185,129,0.10), 0 0 0 3px rgba(16,185,129,0.06);
+  border-color: var(--saved-item-edit-border);
+}
+
+.saved-edit-btn { background: #f3f4f6; color: var(--text-color); border: 1px solid #e5e7eb; }
+.saved-delete-btn { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+.saved-update-btn { background: #d1fae5; color: #065f46; border: 1px solid #86efac; }
+
+/* Ensure update button matches edit/delete sizing and interactions */
+.saved-update-btn {
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Pressed state for edit/delete/update buttons inside loot tags saved list */
+.loot-tags-saved-list .saved-edit-btn.pressed,
+.loot-tags-saved-list .saved-edit-btn:active,
+.loot-tags-saved-list .saved-delete-btn.pressed,
+.loot-tags-saved-list .saved-delete-btn:active,
+.loot-tags-saved-list .saved-update-btn.pressed,
+.loot-tags-saved-list .saved-update-btn:active {
+  transform: translateY(1px) scale(0.98) !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08) !important;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+[data-theme="dark"] .saved-edit-btn { background: #3b3b3b; color: var(--text-color); border: 1px solid #4b4b4b; }
+[data-theme="dark"] .saved-delete-btn { background: rgba(220,38,38,0.12); color: #fecaca; border: 1px solid rgba(220,38,38,0.18); }
+[data-theme="dark"] .saved-update-btn { background: linear-gradient(180deg, #76d978, #4ca96c) !important; color: #bbf7d0; border: 1px solid rgba(16,185,129,0.18); }
+
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -1358,7 +1430,7 @@ body {
 }
 
 * {
-  scrollbar-width: thin;
+  scrollbar-width: none;
   scrollbar-color: var(--card-bg) var(--bg-color);
 }
 
@@ -1417,6 +1489,28 @@ body {
   align-items: flex-end;
   margin-bottom: 25px;
 }
+/* Baby modal: stack select on top, time+status in second row */
+#babyPopup .popup-input-group { display: block; }
+#babyPopup .baby-row { display: flex; gap: 0.8rem; align-items: center; margin-top: 6px; }
+#babyPopup .baby-row .popup-input-wrapper { flex: 1; margin-top: 0; }
+#babyPopup .baby-status-wrapper .popup-button { height: 40px; width: 56px; display:flex; align-items:center; justify-content:center; }
+
+/* Save button press animation */
+.popup-button.save-button.pressed,
+.popup-button.save-button:active {
+  transform: translateY(1px) scale(0.986);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.12);
+}
+
+/* Expanded Select2 inside Loot Tags sidebar */
+#sidebarItemSelect + .select2-container.sidebar-expanded .select2-selection {
+  height: 60px !important;
+  background-color: var(--menu-button-bg);
+  border: none !important;
+  border-radius: 15px 15px 0px 0px !important;
+  display: flex !important;
+  align-items: center !important;
+}
 
 .popup-input-wrapper {
   flex: 1;
@@ -1442,6 +1536,15 @@ body {
   box-shadow: var(--popup-focus-shadow);
 }
 
+/* Loot Tags inputs: use slimmer border on focus and match name-modal focus style */
+#lootTagsPopup .sidebar-input:focus,
+#lootTagsPopup .sidebar-select:focus,
+#lootTagsPopup input.sidebar-input:focus {
+  outline: none;
+  border: 1px solid var(--popup-header-bg) !important;
+  box-shadow: var(--popup-focus-shadow) !important;
+}
+
 .popup-button {
   background: #fca5a5;
   border: 2px solid #ed7c7c;
@@ -1455,6 +1558,14 @@ body {
   transition: all 0.2s ease;
   color: #991b1b;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Pressed state for sidebar buttons inside loot tags */
+.sidebar-button.pressed,
+.sidebar-button:active {
+  transform: translateY(1px) scale(0.98) !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08) !important;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
 }
 
 /* Unified status button classes - use these instead of inline .css(...) in JS */
@@ -1533,6 +1644,7 @@ body {
 .saved-action-btn {
   transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
   box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  cursor: pointer;
 }
 .saved-action-btn:hover {
   transform: translateY(-3px) scale(1.06);
@@ -1630,6 +1742,36 @@ body {
 /* Ensure name text inside the item doesn't get overridden by inline styles */
 .saved-list-item > div {
   color: inherit;
+}
+
+/* Truncate saved item name after ~13 characters using ch unit and ellipsis */
+.saved-list-item > div:nth-child(2) {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 13ch; /* approx 13 characters */
+  min-width: 0; /* allow flex children to shrink */
+}
+
+/* Ensure saved item name is left-aligned and buttons remain on the right */
+.saved-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Ensure edit border remains visible in dark theme (match light mode) */
+[data-theme="dark"] .saved-list-item.editing,
+[data-theme="dark"] .saved-loot-item.editing {
+  border-color: var(--saved-item-edit-border) !important;
+}
+
+/* Ensure edit border remains visible when switching back to light theme.
+   The base .saved-list-item rule appears later and may override earlier
+   editing rules; force the edit styling with higher specificity and !important. */
+.saved-list-item.editing,
+.saved-loot-item.editing {
+  background: var(--saved-item-edit-bg) !important;
+  border-color: var(--saved-item-edit-border) !important;
 }
 
 /* Saved Create Modal: make height fit content and improve button styles */
@@ -1738,6 +1880,115 @@ body {
   color: var(--text-color);
   margin-bottom: 35px;
   margin-top: 0px;
+}
+
+/* Responsive: compact saved commands modal on small screens */
+@media (max-width: 600px) {
+  .saved-list-item {
+    padding: 8px 10px !important;
+    gap: 8px !important;
+  }
+  .saved-list-item img,
+  .saved-list-item span[role="img"] {
+    width: 28px !important;
+    height: 28px !important;
+    margin-right: 8px !important;
+  }
+  .saved-list-item div[style] {
+    font-size: 0.9rem !important;
+    font-weight: 700 !important;
+    gap: 13px !important;
+  }
+  .saved-action-btn {
+    padding: 8px 10px !important;
+    border-radius: 8px !important;
+    gap: 8px !important;
+  }
+  .saved-action-btn i { font-size: 0.95rem !important; }
+
+  .popup-content {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .saved-list-item {
+    padding: 8px 10px !important;
+    gap: 8px !important;
+  }
+  .saved-list-item img,
+  .saved-list-item span[role="img"] {
+    width: 28px !important;
+    height: 28px !important;
+    margin-right: 8px !important;
+  }
+  .saved-list-item div[style] {
+    font-size: 0.9rem !important;
+    font-weight: 700 !important;
+    gap: 8px !important;
+  }
+  .saved-action-btn {
+    padding: 8px 10px !important;
+    border-radius: 8px !important;
+    gap: 8px !important;
+  }
+  .saved-action-btn i { font-size: 0.95rem !important; }
+
+  .popup-content {
+    padding: 10px;
+  }
+}
+
+/* Compact adjustments for Loot Tags modal on very small screens */
+@media (max-width: 400px) {
+  .loot-tags-window .popup-window,
+  #lootTagsPopup .popup-window {
+    width: 94vw !important;
+    max-width: 380px !important;
+    margin: 0 auto !important;
+  }
+  .loot-tags-window .popup-content,
+  #lootTagsPopup .popup-content {
+    padding: 10px !important;
+  }
+  .loot-tags-window .loot-tags-header,
+  #lootTagsPopup .loot-tags-header {
+    gap: 8px !important;
+    flex-direction: row;
+    align-items: center;
+  }
+  .loot-tags-window .loot-tags-container,
+  #lootTagsPopup .loot-tags-container {
+    padding: 5px;
+    gap: 8px !important;
+    max-height: 45vh !important;
+    overflow-y: auto !important;
+  }
+  .loot-tags-window .sidebar-input,
+  #lootTagsPopup .sidebar-input,
+  #lootTagsPopup .sidebar-select {
+    padding: 6px 8px !important;
+    font-size: 0.95rem !important;
+  }
+}
+
+/* Notifications: on small screens stack top-down and use full width */
+@media (max-width: 600px) {
+  .notif-container {
+    left: 12px !important;
+    right: 12px !important;
+    top: 12px !important;
+    align-items: center !important;
+  }
+  .notif-container { align-items: center; }
+  .notif-container .notification {
+    width: calc(100% - 24px) !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    border-radius: 12px;
+    align-self: center !important;
+  }
+  .notif-container { flex-direction: column; }
 }
 
 .label-text {
@@ -2041,7 +2292,7 @@ input[type="color"].sidebar-input {
   border-radius: 15px;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
   flex-shrink: 0;
 }
 
@@ -2061,7 +2312,6 @@ input[type="color"].sidebar-input {
 
 .loot-tags-buttons {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   margin-bottom: 20px;
 }
@@ -2079,7 +2329,7 @@ input[type="color"].sidebar-input {
   align-items: center;
   justify-content: center;
   gap: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
 }
 
 .loot-tags-buttons .sidebar-button:hover {
@@ -2094,6 +2344,7 @@ input[type="color"].sidebar-input {
 .loot-tags-buttons .sidebar-button.save {
   background-color: #86efac;
   color: #166534;
+      border: 2px solid rgb(45 165 91) !important;
 }
 
 .loot-tags-buttons .sidebar-button.delete {
@@ -2101,31 +2352,50 @@ input[type="color"].sidebar-input {
   color: #991b1b;
 }
 
+.loot-tags-buttons:focus {
+  outline: none;
+  border-color: var(--popup-header-bg);
+  box-shadow: var(--popup-focus-shadow);
+}
+
 .loot-tags-divider {
   width: 100%;
   height: 5px;
-  background-color: var(--menu-button-bg);
+  background-color: var(--card-bg);
   margin: 20px 0;
   border-radius: 200px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.loot-tags-container {
-  max-height: 400px;
-  overflow-y: auto;
-  padding: 5px;
+/* When compact, hide the form inputs (details) and show only header/buttons/saved list */
+.loot-tags-window.loot-compact .loot-tags-container{
+  display: none !important;
 }
 
-.loot-tags-container::-webkit-scrollbar {
-  width: 8px;
+.loot-tags-saved-list .saved-loot-item.selected{ box-shadow: 0 8px 22px rgba(0,0,0,0.12) !important; border-color: var(--saved-item-edit-border) !important; }
+
+/* Ensure selected item highlight persists in dark theme and uses an appropriate green accent */
+[data-theme="dark"] .loot-tags-saved-list .saved-loot-item.selected{
+  box-shadow: 0 10px 30px rgba(16,185,129,0.12) !important;
+  background-color: rgba(16,185,129,0.06) !important;
+  border-color: var(--saved-item-edit-border) !important;
 }
 
-.loot-tags-container::-webkit-scrollbar-track {
-  background: transparent;
+.saved-loot-item .popup-button.small{ padding:6px 8px; font-size:0.9rem }
+
+/* Remove inner scrollbars for inputs; popup/window provides general scrolling */
+.loot-tags-item { max-width: 100%; }
+
+/* Styling for item currently being edited */
+.loot-tags-saved-list .saved-loot-item.editing {
+  background-color: rgba(134,238,172,0.15);
+  border-color: #86efac;
 }
 
-.loot-tags-container::-webkit-scrollbar-thumb {
-  background: var(--menu-button-bg);
-  border-radius: 4px;
+/* Stronger visible editing indicator in dark theme for loot-tags saved items */
+[data-theme="dark"] .loot-tags-saved-list .saved-loot-item.editing {
+  background-color: rgba(16,185,129,0.14) !important;
+  border-color: #10b981 !important;
 }
 
 .loot-tags-item {
@@ -2159,8 +2429,12 @@ input[type="color"].sidebar-input {
   border-color: var(--popup-header-bg);
 }
 
+#lootColorSelect {
+  height: 45px;
+}
+
 .loot-tags-item .toggle-button {
-  padding: 8px 12px;
+  padding: 12px;
   border: none;
   border-radius: 8px;
   background-color: var(--input-bg);
@@ -2292,7 +2566,7 @@ input[type="color"].sidebar-input {
 }
 
 .saved-modal-window {
-  background: var(--popup-bg);
+  background: none;
   border-radius: var(--popup-border-radius);
   width: 90vw;
   max-width: 700px;
@@ -2381,6 +2655,25 @@ input:disabled {
   background-color: #d4d4d4;
 }
 
+/* Baby modal grid layout */
+.popup-window .parent {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.popup-window .div1 { grid-column: 1 / span 3; }
+.popup-window .div2 { grid-column: 4 / 5; display:flex; align-items:center; justify-content:flex-end; margin-top:38px; margin-left: 6px;}
+.popup-window .div3 { grid-column: 1 / -1; grid-row: 2; margin-right: -57px;}
+.popup-window #babyRow { display: none; }
+.popup-window #babyRow.show { display: block; }
+.popup-window .popup-input-wrapper { width: 100%; }
+.popup-window .popup-select, .popup-window .popup-input, .popup-window input[type="number"] { width: 100%; box-sizing: border-box; }
+
 /* Settings card decorative and improved button styles (minimal & elegant) */
 .settings-window .settings-cards { display:flex; gap:1rem; align-items:stretch; flex-wrap: wrap;}
 .settings-card{ position:relative; flex:1; display:flex; justify-content:space-between; align-items:center; background:var(--card-bg); border:2px solid #dadada; padding:12px; border-radius:12px; box-shadow:0 2px 4px rgba(0, 0, 0, 0.1); overflow:visible }
@@ -2412,16 +2705,26 @@ input:disabled {
 .health-hearts .more-count{ font-weight:700; color:var(--text-color); border-radius:8px; font-size:12px}
 
 @media (max-width:900px){ .settings-card::before{ display:none } .settings-window .settings-cards{ flex-direction:column } }
-/* Notifications UI */
+/* Notifications UI (Uiverse-like visuals with per-type icons) */
 .notif-container { position: fixed; top: 18px; right: 18px; z-index: 99999; display:flex; flex-direction:column; gap:10px; align-items:flex-end; }
-.notification { min-width: 280px; max-width: 420px; background: var(--popup-bg); color: var(--text-color); border-radius: 12px; padding: 12px 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.12); transform: translateY(-8px) scale(0.995); opacity: 0; transition: all 220ms ease; display:flex; align-items:center; gap:12px; }
+.notification { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; width: 320px; padding: 12px; display: flex; flex-direction: row; align-items: center; justify-content: start; background: var(--notif-bg, #fff); border-radius: 8px; box-shadow: 0px 0px 5px -3px #111; transform: translateY(-8px) scale(0.995); opacity: 0; transition: all 220ms ease; gap:12px; }
 .notification.show { transform: translateY(0) scale(1); opacity: 1; }
 .notification.hide { opacity: 0; transform: translateY(-6px); }
-.notification .notif-body { flex:1; font-weight:600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.notification .notif-close { background:transparent;border:none;color:inherit;font-size:1.1rem;cursor:pointer;padding:6px;border-radius:6px }
-.notification.notif-success { border-left:4px solid #16a34a; }
-.notification.notif-error { border-left:4px solid #ef4444; }
-.notification.notif-warning { border-left:4px solid #f59e0b; }
-.notification.notif-info { border-left:4px solid #3b82f6; }
+.notification .notif__icon { width: 20px; height: 20px; transform: translateY(-2px); margin-right: 8px; display:flex; }
+.notification .notif__icon svg { width:20px; height:20px; }
+.notification .notif__icon svg path, .notification .notif__icon svg circle { fill: #fff; stroke: none; }
+.notification .notif__title { font-weight: 500; font-size: 14px; color: #fff; flex:1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.notification .notif-close { width: 20px; height: 20px; cursor: pointer; margin-left: auto; background: transparent; border: none; padding: 0; display:flex; align-items:center; justify-content:center; color: #fff; }
+.notification .notif-close svg { width:16px; height:16px; }
 
-[data-theme="dark"] .notification { background: #1f1f1f; color: #eee; box-shadow: 0 8px 28px rgba(0,0,0,0.6); }
+/* Colors per type (use full background color like Uiverse) */
+.notification.notif-error { background: #EF665B; }
+.notification.notif-success { background: #16a34a; }
+.notification.notif-warning { background: #f59e0b; }
+.notification.notif-info { background: #3b82f6; }
+
+/* Subtle dark-theme adjustment keeps colored backgrounds readable */
+[data-theme="dark"] .notification.notif-info { box-shadow: 0 8px 28px rgba(0,0,0,0.6); }
+[data-theme="dark"] .notification.notif-success { box-shadow: 0 8px 28px rgba(0,0,0,0.6); }
+[data-theme="dark"] .notification.notif-warning { box-shadow: 0 8px 28px rgba(0,0,0,0.6); }
+[data-theme="dark"] .notification.notif-error { box-shadow: 0 8px 28px rgba(0,0,0,0.6); }
