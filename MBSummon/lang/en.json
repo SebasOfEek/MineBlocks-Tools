@@ -40,6 +40,7 @@
     "name": "Name",
     "amount": "Amount",
     "position": "Position",
+    "baby": "Baby",
     "health": "Health",
     "equipment": "Equipped Item",
     "holding": "Equipped Item",
@@ -117,6 +118,7 @@
     },
     "lootTags": {
       "title": "Loot Tags",
+      "emptyMessage": "No saved loot tags.",
       "selectItemPlaceholder": "Select item",
       "saveButton": "Save",
       "deleteButton": "Delete",
@@ -132,6 +134,11 @@
         "variant": "Variant:",
         "isSheared": "Is sheared:",
         "color": "Color:"
+      },
+      "sizeOptions": {
+        "small": "Small",
+        "medium": "Medium",
+        "large": "Large"
       },
       "help": {
         "title": "Help - Loot Tags",
@@ -179,6 +186,21 @@
       "help": {
         "title": "Help - Charged Creeper",
         "description": "Enable this option to turn the creeper into a charged variant. The command will include `charged:1` when enabled."
+      }
+    },
+    "baby": {
+      "title": "Baby",
+      "modeLabel": "Baby mode:",
+      "option": {
+        "always": "Always",
+        "time": "Time"
+      },
+      "timeLabel": "Time (seconds):",
+      "timePlaceholder": "Enter seconds...",
+      "description": "Configure how the mob should appear in its baby variant. Choose 'Always' for baby:true or 'Time' to specify a number to appear as baby:N in the command.",
+      "help": {
+        "title": "Help - Baby",
+        "description": "Set whether the mob should be spawned as a baby. 'Always' sets baby:true. 'Time' allows entering a numeric value that will be used as baby:N in the generated command."
       }
     },
     "language": {
@@ -234,6 +256,12 @@
     "import_failed": "Import failed"
   ,
     "editing": "Editing saved item",
+    "loot": {
+      "added": "Item added",
+      "updated": "Item updated",
+      "deleted": "Item deleted",
+      "missing": "You must add an item first"
+    },
     "export_success": "Export completed",
     "export_failed": "Export failed"
   },
