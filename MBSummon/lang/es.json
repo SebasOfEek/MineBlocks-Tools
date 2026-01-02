@@ -36,6 +36,7 @@
     "name": "Nombre",
     "amount": "Cantidad",
     "position": "Posición",
+  "baby": "Bebé",
     "health": "Vida",
     "equipment": "Objeto equip.",
     "holding": "Objeto equip.",
@@ -118,6 +119,7 @@
     },
     "lootTags": {
       "title": "Loot Tags",
+      "emptyMessage": "No hay loot tags guardados.",
       "selectItemPlaceholder": "Seleccionar item",
       "saveButton": "Guardar",
       "deleteButton": "Eliminar",
@@ -133,6 +135,11 @@
         "variant": "Variante:",
         "isSheared": "Está esquilada:",
         "color": "Color:"
+      },
+      "sizeOptions": {
+        "small": "Pequeño",
+        "medium": "Mediano",
+        "large": "Grande"
       },
       "help": {
         "title": "Ayuda - Loot Tags",
@@ -180,6 +187,22 @@
       "help": {
         "title": "Ayuda - Creeper Cargado",
         "description": "Activa esta opción para convertir al creeper en una versión cargada. En el comando se añadirá charged:1 cuando esté activado."
+      }
+    }
+    ,
+    "baby": {
+      "title": "Bebé",
+      "modeLabel": "Modo bebé:",
+      "option": {
+        "always": "Siempre",
+        "time": "Tiempo"
+      },
+      "timeLabel": "Tiempo (segundos):",
+      "timePlaceholder": "Ingresa segundos...",
+      "description": "Configura cómo debe aparecer la variante bebé del mob. Elige 'Siempre' para baby:true o 'Tiempo' para especificar un número que aparecerá como baby:N en el comando.",
+      "help": {
+        "title": "Ayuda - Bebé",
+        "description": "Configura si el mob debe aparecer como bebé. 'Siempre' aplica baby:true. 'Tiempo' permite ingresar un valor numérico que se usará como baby:N en el comando generado."
       }
     }
     ,
@@ -238,6 +261,12 @@
   "notifications": {
     "saved_success": "Comando guardado",
     "editing": "Editando elemento guardado",
+    "loot": {
+      "added": "Item agregado",
+      "updated": "Item actualizado",
+      "deleted": "Item eliminado",
+      "missing": "Debes agregar un item primero"
+    },
     "language_changed": "Idioma cambiado",
     "cleared": "Formulario restablecido",
     "copied": "Comando copiado",
