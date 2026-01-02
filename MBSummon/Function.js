@@ -238,6 +238,35 @@ function updateMobSelect2Language() {
   }
 }
 
+// Update the Select2 instance and placeholder for the sidebar item select (#sidebarItemSelect)
+function updateSidebarItemSelect2Language(){
+  try{
+    const $sel = $('#sidebarItemSelect');
+    if(!$sel.length) return;
+    const lang = localStorage.getItem('language') || 'es';
+    // update empty option text
+    const placeholder = t('modals.lootTags.selectItemPlaceholder', 'Select item');
+    const $first = $sel.find('option').first();
+    if($first && $first.val() === '') $first.text(placeholder);
+
+    // If Select2 initialized, destroy and reinit to update placeholder
+    if($sel.data('select2')){
+      const currentVal = $sel.val();
+      try{ $sel.select2('destroy'); }catch(e){}
+      $sel.select2({
+        templateResult: function(option){ return formatOption(option); },
+        templateSelection: function(option){ return formatSelection(option); },
+        width: '100%',
+        dropdownParent: $('#lootTagsPopup .popup-content'),
+        placeholder: placeholder,
+        allowClear: false,
+        closeOnSelect: true
+      });
+      $sel.val(currentVal).trigger('change.select2');
+    }
+  }catch(e){ console.error('updateSidebarItemSelect2Language', e); }
+}
+
 // Función reutilizable global que limpia el formulario. Si preserveMob=true,
 // no tocará el select `#mobType` (útil al cambiar de mob y querer mantener la selección).
 function clearAllFormData(preserveMob = false, suppressNotify = false) {
@@ -319,6 +348,9 @@ function clearAllFormData(preserveMob = false, suppressNotify = false) {
   // Actualizar el comando
   if (typeof updateCommand === 'function') updateCommand();
 
+  // Clear loot tags only when not preserving mob selection
+  try { if (!preserveMob && window.lootTagsStore && typeof window.lootTagsStore.clearAll === 'function') window.lootTagsStore.clearAll(); } catch(e){}
+
   // Only notify when we are doing a full clear (not when preserving mob selection)
   // and when notifications are not explicitly suppressed by the caller.
   if (!preserveMob && !suppressNotify) {
@@ -332,7 +364,7 @@ function clearAllFormData(preserveMob = false, suppressNotify = false) {
 
 $(document).ready(function () {
   $.getJSON(
-    "https://raw.githubusercontent.com/SebasOfEek/MineBlocks-Tools/main/json/mobs.json",
+    "json/mobs.json",
     function (data) {
       const mobType = $("#mobType");
       mobType.empty();
@@ -349,7 +381,11 @@ $(document).ready(function () {
 
       mobType
         .select2({
-          templateResult: formatOption,
+          // For mobType we want plain text only (no image), other selects keep image formatting
+          templateResult: function(option) {
+            if (!option.id) return option.text;
+            return $("<span>" + (option.text || '') + "</span>");
+          },
           templateSelection: formatSelection,
         })
         .on('select2:open', function() {
@@ -674,7 +710,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $.getJSON(
-    "https://raw.githubusercontent.com/SebasOfEek/MineBlocks-Tools/main/json/items.json",
+    "json/items.json",
     function (data) {
       const itemSelect = $("#itemSelect");
 
@@ -1023,7 +1059,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $.getJSON(
-    "https://raw.githubusercontent.com/SebasOfEek/MineBlocks-Tools/main/json/armor.json",
+    "json/armor.json",
     function (data) {
       const selects = ["helmet", "chestplate", "leggings", "boots"];
       const armorStatus = {};
@@ -1309,7 +1345,17 @@ $(document).ready(function () {
     localStorage.setItem('language', lang);
     translateLoadingScreen(); // Traducir pantalla de carga
     // Load language and apply translations (no notification shown)
-    loadLanguage(lang);
+    // Pass a callback to ensure dynamic UI (selects, modals) are refreshed after translations
+    loadLanguage(lang, function(){
+      try{ if(typeof updateMobSelect2Language === 'function') updateMobSelect2Language(); }catch(e){}
+      try{ if(typeof updateSidebarItemSelect2Language === 'function') updateSidebarItemSelect2Language(); }catch(e){}
+      try{ updateCommand(); }catch(e){}
+      // If baby modal is open, re-evaluate visibility/status so texts update
+      try{
+        const cur = $('#babyMode').val();
+        if(cur === 'time') { $('#babyRow').show(); $('#babyTimeWrapper').show(); } else { $('#babyRow').hide(); $('#babyTimeWrapper').hide(); }
+      }catch(e){}
+    });
     // Close the language selection modal after applying the language
     $("#languagePopup").removeClass('show');
   });
@@ -1331,6 +1377,7 @@ $(document).ready(function () {
     loadLanguage(savedLanguage);
     setTimeout(function() {
       if (typeof updateMobSelect2Language === 'function') updateMobSelect2Language();
+      try{ if(typeof updateSidebarItemSelect2Language === 'function') updateSidebarItemSelect2Language(); }catch(e){}
     }, 300);
   }
 
@@ -1525,13 +1572,14 @@ $(document).ready(function () {
 // Inicializar el modal de Loot Tags con el selector de items
 $(document).ready(function () {
   $.getJSON(
-    "https://raw.githubusercontent.com/SebasOfEek/MineBlocks-Tools/main/json/items.json",
+    "json/items.json",
     function (data) {
       const sidebarItemSelect = $("#sidebarItemSelect");
       
       // Limpiar opciones existentes
       sidebarItemSelect.empty();
-      sidebarItemSelect.append('<option value="">Seleccionar item</option>');
+      // Use translation helper for placeholder
+      sidebarItemSelect.append('<option value="">' + t('modals.lootTags.selectItemPlaceholder', 'Select item') + '</option>');
       
       // Agregar items del JSON
       data.items.forEach((item) => {
@@ -1577,7 +1625,7 @@ $(document).ready(function () {
             const $optionElem = $('<span></span>');
             if (img) {
               $optionElem.append(
-                $('<img src="' + img + '" style="width:20px;height:20px;vertical-align:middle;margin-right:8px;" />')
+                $('<img src="' + img + '" style="width:20px;height:20px;vertical-align:middle;margin-right:8px;border-radius: 6px;box-shadow:0 0 5px rgba(0, 0, 0, 0.36);" />')
               );
             }
             $optionElem.append(option.text);
@@ -1588,14 +1636,14 @@ $(document).ready(function () {
           },
           width: "100%",
           dropdownParent: $("#lootTagsPopup .popup-content"),
-          placeholder: "Seleccionar item",
+          placeholder: t('modals.lootTags.selectItemPlaceholder', 'Select item'),
           allowClear: false,
           closeOnSelect: true,
           minimumResultsForSearch: 5
         });
         
         // Asegurar que el select2 esté por encima de otros elementos
-        $("#lootTagsPopup .select2-container").css('z-index', 9999);
+        $("#lootTagsPopup .select2-container").css('z-index', 1);
         
         // Debug para ver si el select2 se inicializó correctamente
         console.log('Select2 initialized:', sidebarItemSelect.data('select2'));
@@ -1632,142 +1680,8 @@ $(document).ready(function () {
     }
   );
 
-  // Manejar botones toggle en el modal de Loot Tags
-  $("#lootTagsPopup .toggle-button").on("click", function () {
-    const $icon = $(this).find("i");
-    const $span = $(this).find("span");
-    const yesText = t('common.yes', 'Sí');
-    const noText = t('common.no', 'No');
-
-    if ($icon.hasClass("fa-toggle-off")) {
-      $icon.removeClass("fa-toggle-off").addClass("fa-toggle-on");
-      $span.text(yesText);
-    } else {
-      $icon.removeClass("fa-toggle-on").addClass("fa-toggle-off");
-      $span.text(noText);
-    }
-  });
-
-  // Container para los items guardados
-  if (!$('.saved-items-container').length) {
-    $('.loot-tags-header').before('<div class="saved-items-container" style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;"></div>');
-  }
-
-  // Función para limpiar todos los inputs
-  function clearInputs() {
-    $('#itemQuantity, #itemBonus, #lootBonus, #itemChance, #itemDamage, #itemVariant, #itemColor').val('');
-    $('#itemOnFire, #isBaby, #isSheared').prop('checked', false);
-  }
-
-  // Función para cargar datos en los inputs
-  function loadItemData(itemData) {
-    $('#itemQuantity').val(itemData.cantidad || '');
-    $('#itemBonus').val(itemData.bonus || '');
-    $('#lootBonus').val(itemData.lootBonus || '');
-    $('#itemChance').val(itemData.oportunidad || '');
-    $('#itemDamage').val(itemData.danio || '');
-    $('#itemVariant').val(itemData.variante || '');
-    $('#itemColor').val(itemData.color || '');
-    $('#itemOnFire').prop('checked', itemData.enLlamas || false);
-    $('#isBaby').prop('checked', itemData.esBebe || false);
-    $('#isSheared').prop('checked', itemData.esquilada || false);
-  }
-
-  // Click en item guardado para cargar sus datos
-  $(document).on('click', '.saved-item', function() {
-    const itemData = JSON.parse($(this).attr('data-item'));
-    loadItemData(itemData);
-    // Seleccionar el item en el select2
-    $('#sidebarItemSelect').val(itemData.value).trigger('change');
-  });
-
-  // Manejar botones de acción
-  $("#lootTagsPopup .sidebar-button.save").on("click", function () {
-    const selectedOption = $('#sidebarItemSelect').find('option:selected');
-    const imageUrl = selectedOption.data('image');
-    const itemValue = selectedOption.val();
-    
-    if (imageUrl && itemValue) {
-      // Verificar si el item ya está guardado
-      if ($('.saved-item[data-value="' + itemValue + '"]').length > 0) {
-        return; // No permitir guardar el mismo item dos veces
-      }
-
-      // Recopilar todos los datos
-      const itemData = {
-        value: itemValue,
-        image: imageUrl,
-        cantidad: $('#itemQuantity').val(),
-        bonus: $('#itemBonus').val(),
-        lootBonus: $('#lootBonus').val(),
-        oportunidad: $('#itemChance').val(),
-        enLlamas: $('#itemOnFire').is(':checked'),
-        danio: $('#itemDamage').val(),
-        esBebe: $('#isBaby').is(':checked'),
-        variante: $('#itemVariant').val(),
-        esquilada: $('#isSheared').is(':checked'),
-        color: $('#itemColor').val()
-      };
-
-      // Crear elemento para el item guardado
-      const $savedItem = $('<div>')
-        .addClass('saved-item')
-        .css({
-          width: '32px',
-          height: '32px',
-          borderRadius: '5px',
-          overflow: 'hidden',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
-          cursor: 'pointer',
-          position: 'relative'
-        })
-        .attr('data-value', itemValue)
-        .attr('data-item', JSON.stringify(itemData));
-
-      const $img = $('<img>')
-        .attr('src', imageUrl)
-        .css({
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover'
-        });
-
-      // Agregar indicador si hay datos adicionales
-      if (Object.values(itemData).some(val => val && val !== itemValue && val !== imageUrl)) {
-        const $indicator = $('<div>')
-          .css({
-            position: 'absolute',
-            bottom: '2px',
-            right: '2px',
-            width: '8px',
-            height: '8px',
-            borderRadius: '50%',
-            backgroundColor: '#4CAF50',
-            border: '1px solid white'
-          });
-        $savedItem.append($indicator);
-      }
-
-      // Agregar tooltip con los datos
-      $savedItem.attr('title', 'Click para ver detalles');
-      
-      $savedItem.append($img);
-      $('.saved-items-container').append($savedItem);
-      
-      // Limpiar selección y todos los inputs
-      $('#sidebarItemSelect').val(null).trigger('change');
-      clearInputs();
-    }
-  });
-
-  $("#lootTagsPopup .sidebar-button.delete").on("click", function () {
-    $('.saved-items-container').empty();
-  });
-
-  $("#lootTagsPopup .sidebar-button:not(.save):not(.delete)").on("click", function () {
-    console.log("Editar item en Loot Tags");
-    // Aquí puedes agregar la lógica para editar
-  });
+  // Loot Tags logic has been migrated to `lootTags.js` (independent module).
+  // The previous inline handlers were removed to avoid duplicate behavior.
 });
 
 $(document).ready(function () {
@@ -1863,6 +1777,47 @@ function updateCommand() {
   const lootEnabled = $("#toggleLoot").find("i").hasClass("fa-toggle-on");
   if (lootEnabled) attributes.push("defaultDrops:true");
 
+  // Baby handling: support select with 'always' or 'time' + numeric input
+  try {
+    const babyMode = $("#babyMode").val();
+    if (babyMode === "always") {
+      attributes.push("baby:true");
+    } else if (babyMode === "time") {
+      const bt = $("#babyTimeInput").val();
+      if (bt !== undefined && bt !== null && bt !== "" && !isNaN(bt)) {
+        attributes.push(`baby:${parseInt(bt,10)}`);
+      }
+    }
+  } catch(e) { /* ignore if elements missing */ }
+
+  // Include drops built from Loot Tags saved items
+  try {
+    // Build drops using lootTagsStore.getCommandItems to respect cards_config.json
+    try{
+      const lootItems = (window.lootTagsStore && typeof window.lootTagsStore.getCommandItems === 'function') ? window.lootTagsStore.getCommandItems(mobType) : ((window.lootTagsStore && typeof window.lootTagsStore.getAll === 'function') ? window.lootTagsStore.getAll() : []);
+      if (lootItems && lootItems.length > 0) {
+        const dropsArr = [];
+        lootItems.forEach(item => {
+          if (!item || !item.itemId) return;
+          let part = `{item:{id:"${item.itemId}"}`;
+          if (item.quantity !== undefined && item.quantity !== null && item.quantity !== "") part += `, quantity:${item.quantity}`;
+          if (item.bonus !== undefined && item.bonus !== null && item.bonus !== "") part += `, bonus:${item.bonus}`;
+          if (item.lootBonus !== undefined && item.lootBonus !== null && item.lootBonus !== "") part += `, lootBonus:${item.lootBonus}`;
+          if (item.chance !== undefined && item.chance !== null && item.chance !== "") part += `, chance:${item.chance}`;
+          if (item.variant) part += `, variant:"${item.variant}"`;
+          if (item.isSheared !== undefined) part += `, sheared:${item.isSheared}`;
+          if (item.isBaby !== undefined) part += `, isBaby:${item.isBaby}`;
+          if (item.color) part += `, color:"${item.color}"`;
+          if (item.onFire !== undefined) part += `, onFire:${item.onFire}`;
+          if (item.size !== undefined && item.size !== null && item.size !== "") part += `, size:${item.size}`;
+          part += `}`;
+          dropsArr.push(part);
+        });
+        if (dropsArr.length > 0) attributes.push(`drops:[${dropsArr.join(", ")}]`);
+      }
+    }catch(e){ /* ignore mapping errors */ }
+  } catch (e) { /* ignore if lootTags missing */ }
+
     if (attributes.length > 0) {
       command += ` {${attributes.join(", ")}}`;
     }
@@ -1893,6 +1848,77 @@ $(document).ready(function () {
   $(
     "#mobType, #mobName, #mobHealth, #itemSelect, #mobAmount, #aggressivenessSelect, #skinId"
     ).on("input change", updateCommand);
+  // Baby controls: mode select and numeric input should update command
+  $("#babyMode").on("change", function(){
+    try{
+      if($(this).val() === 'time'){
+        $("#babyRow").show();
+        $("#babyTimeWrapper").show();
+      } else {
+        $("#babyRow").hide();
+        $("#babyTimeWrapper").hide();
+      }
+    }catch(e){}
+    updateCommand();
+  });
+  $("#babyTimeInput").on("input", function(){
+    // allow only digits
+    this.value = this.value.replace(/[^0-9]/g, '');
+    updateCommand();
+  });
+
+  // Initialize baby UI state and status button
+  try{
+    function setBabyStatus(saved){
+      const $btn = $("#babyStatusButton");
+      const $i = $btn.find('i');
+      if(saved){
+        $i.removeClass('fa-times not-saved').addClass('fa-check saved');
+        $btn.addClass('status-saved').removeClass('status-not-saved');
+      } else {
+        $i.removeClass('fa-check saved').addClass('fa-times not-saved');
+        $btn.addClass('status-not-saved').removeClass('status-saved');
+      }
+    }
+
+    // initial
+    const curMode = $('#babyMode').val();
+    if(curMode === 'time') { $('#babyRow').show(); $('#babyTimeWrapper').show(); } else { $('#babyRow').hide(); $('#babyTimeWrapper').hide(); }
+    // set initial saved state
+    if(curMode === 'always') setBabyStatus(true); else if(curMode === 'time') setBabyStatus($('#babyTimeInput').val() && $('#babyTimeInput').val().trim() !== ''); else setBabyStatus(false);
+
+    // Update status when mode changes (keep existing binding but ensure row visibility)
+    $('#babyMode').on('change.babyStatus', function(){
+      const v = $(this).val();
+      if(v === 'always'){
+        setBabyStatus(true);
+        $('#babyRow').hide();
+      } else if(v === 'time'){
+        // saved only if value present
+        const val = $('#babyTimeInput').val();
+        setBabyStatus(val && val.trim() !== '' ? true : false);
+        $('#babyRow').show();
+      } else {
+        setBabyStatus(false);
+        $('#babyRow').hide();
+      }
+    });
+
+    // When typing time, set saved when value valid
+    $('#babyTimeInput').on('input.babyStatus', function(){
+      const v = $(this).val();
+      setBabyStatus(v && v.trim() !== '');
+    });
+  }catch(e){}
+  // Press animation for Save buttons: add .pressed on mousedown/touchstart
+  try{
+    $(document).on('mousedown touchstart', '.popup-button.save-button', function(e){
+      $(this).addClass('pressed');
+    });
+    $(document).on('mouseup mouseleave touchend touchcancel', '.popup-button.save-button', function(e){
+      $(this).removeClass('pressed');
+    });
+  }catch(e){}
   $("#helmetSelect, #chestplateSelect, #leggingsSelect, #bootsSelect").on(
     "change",
     updateCommand
@@ -1931,7 +1957,7 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
   $.getJSON(
-    "https://raw.githubusercontent.com/SebasOfEek/MineBlocks-Tools/main/json/items.json",
+    "json/items.json",
     function (data) {
       const sidebarItemSelect = $("#sidebarItemSelect");
       sidebarItemSelect.empty();
@@ -1972,6 +1998,19 @@ $(document).ready(function () {
         } else {
           addBtn.html('<i class="fas fa-plus"></i>');
         }
+      });
+      // Cuando se abra el dropdown de este select2 dentro del modal Loot Tags, expandir visual
+      sidebarItemSelect.on('select2:open', function(){
+        try{
+          const $cont = $(this).next('.select2-container');
+          $cont.addClass('sidebar-expanded');
+        }catch(e){}
+      });
+      sidebarItemSelect.on('select2:close', function(){
+        try{
+          const $cont = $(this).next('.select2-container');
+          $cont.removeClass('sidebar-expanded');
+        }catch(e){}
       });
     }
   );
