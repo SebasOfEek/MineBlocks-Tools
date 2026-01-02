@@ -1,0 +1,101 @@
+{
+  "colors": [
+    {
+      "value": "red",
+      "text": "Rojo",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Red_ow8fz1.png"
+    },
+    {
+      "value": "green",
+      "text": "Verde",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Green_hojzk0.png"
+    },
+    {
+      "value": "blue",
+      "text": "Azul",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Blue_nfyfrs.png"
+    },
+    {
+      "value": "brown",
+      "text": "Marrón",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Brown_n54tmt.png"
+    },
+    {
+      "value": "cyan",
+      "text": "Cian",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Cyan_ietx4o.png"
+    },
+    {
+      "value": "lightblue",
+      "text": "Azul claro",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Light_Blue_jiivto.png"
+    },
+    {
+      "value": "lightgreen",
+      "text": "Verde claro",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Light_Green_xozy6s.png"
+    },
+    {
+      "value": "magenta",
+      "text": "Magenta",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Magenta_wk1euz.png"
+    },
+    {
+      "value": "orange",
+      "text": "Naranja",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Orange_xkxwgg.png"
+    },
+    {
+      "value": "pink",
+      "text": "Rosa",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Pink_nilaad.png"
+    },
+    {
+      "value": "purple",
+      "text": "Púrpura",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Purple_r0jjhk.png"
+    },
+    {
+      "value": "white",
+      "text": "Blanco",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/White_hjvvrz.png"
+    },
+    {
+      "value": "yellow",
+      "text": "Amarillo",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Yellow_dm8nsr.png"
+    },
+    {
+      "value": "lightgray",
+      "text": "Gris claro",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Light_Gray_hjjfrv.png"
+    },
+    {
+      "value": "gray",
+      "text": "Gris",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1726962877/Gray_fkir91.png"
+    },
+    {
+      "value": "black",
+      "text": "Negro",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Black_feewkv.png"
+    }
+  ],
+  "variant": [
+    {
+      "value": "mooshroom",
+      "text": "Mooshroom",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1726898090/MoshroomHead_ekdzm1.png"
+    },
+    {
+      "value": "cowctus",
+      "text": "Cactus Cow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898075/CactuscowHead_igghuq.png"
+    },
+    {
+      "value": "normal",
+      "text": "Normal",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898081/CowHead_z4cmpi.png"
+    }
+  ]
+}
