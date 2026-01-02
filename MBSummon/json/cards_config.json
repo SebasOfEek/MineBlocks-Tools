@@ -1,4 +1,34 @@
 {
+  "_lootTagFieldNames": {
+    "AMOUNT": "amount",
+    "BONUS": "bonus",
+    "LOOT_BONUS": "lootBonus",
+    "CHANCE": "chance",
+    "ON_FIRE": "onFire",
+    "SIZE": "size",
+    "IS_BABY": "isBaby",
+    "VARIANT": "variant",
+    "IS_SHEARED": "isSheared",
+    "COLOR": "color"
+  },
+  "_lootTagPresets": {
+    "DEFAULT": ["amount","bonus","lootBonus","chance","onFire"],
+    "ANIMALS": ["amount","bonus","lootBonus","chance", "variant","isBaby","onFire"]
+  },
+  "cardNames": {
+    "card1": "name",
+    "card2": "quantity",
+    "card3": "position",
+    "card4": "equipment",
+    "card5": "defaultLoot",
+    "card6": "armor",
+    "card7": "lootTags",
+    "card8": "aggressiveness",
+    "card9": "health",
+    "card10": "skin",
+    "card18": "charged",
+    "card15": "baby"
+  },
   "zombie": {
     "lockedCards": [
       "card1",
@@ -9,6 +39,10 @@
       "card7",
       "card9"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","onFire"]
+    }
   },
   "spawnskin": {
     "lockedCards": [
@@ -22,6 +56,10 @@
       "card10",
       "cardAggressiveness"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","onFire"]
+    }
   },
   "skeleton": {
     "lockedCards": [
@@ -32,6 +70,10 @@
       "card7",
       "card9"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","onFire"]
+    }
   },
   "creeper": {
     "lockedCards": [
@@ -43,6 +85,10 @@
       "card18",
       "card7"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","onFire"]
+    }
   },
   "spider": {
     "lockedCards": [
@@ -53,6 +99,10 @@
       "card5",
       "card7"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","onFire"]
+    }
   },
   "enderman": {
     "lockedCards": [
@@ -64,6 +114,10 @@
       "card5",
       "card7"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","onFire"]
+    }
   },
   "blaze": {
     "lockedCards": [
@@ -74,6 +128,10 @@
       "card5",
       "card7"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","onFire"]
+    }
   },
   "ghast": {
     "lockedCards": [
@@ -84,6 +142,10 @@
       "card5",
       "card7"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","onFire"]
+    }
   },
   "magmacube": {
     "lockedCards": [
@@ -94,6 +156,10 @@
       "card5",
       "card7"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","onFire","size"]
+    }
   },
   "slime": {
     "lockedCards": [
@@ -104,6 +170,10 @@
       "card5",
       "card7"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","onFire","size"]
+    }
   },
   "enderdragon": {
     "lockedCards": [
@@ -114,6 +184,10 @@
       "card5",
       "card7"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","onFire"]
+    }
   },
   "nethereye": {
     "lockedCards": [
@@ -124,6 +198,10 @@
       "card5",
       "card7"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","onFire"]
+    }
   },
   "cow": {
     "lockedCards": [
@@ -135,6 +213,10 @@
       "card7",
       "card15"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","variant","isBaby","onFire"]
+    }
   },
   "sheep": {
     "lockedCards": [
@@ -146,6 +228,10 @@
       "card7",
       "card15"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","isSheared","isBaby","color","onFire"]
+    }
   },
   "mooshroom": {
     "lockedCards": [
@@ -157,6 +243,10 @@
       "card7",
       "card15"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","variant","isBaby","onFire"]
+    }
   },
   "pig": {
     "lockedCards": [
@@ -168,6 +258,10 @@
       "card7",
       "card15"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","isBaby","onFire"]
+    }
   },
   "squid": {
     "lockedCards": [
@@ -178,6 +272,10 @@
       "card5",
       "card7"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","onFire"]
+    }
   },
   "bat": {
     "lockedCards": [
@@ -188,6 +286,10 @@
       "card5",
       "card7"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","onFire"]
+    }
   },
   "chicken": {
     "lockedCards": [
@@ -199,6 +301,10 @@
       "card7",
       "card15"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","isBaby","onFire"]
+    }
   },
   "rabbit": {
     "lockedCards": [
@@ -210,6 +316,10 @@
       "card7",
       "card15"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","isBaby","onFire"]
+    }
   },
   "wolf": {
     "lockedCards": [
@@ -221,6 +331,10 @@
       "card7",
       "card15"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","isBaby","onFire"]
+    }
   },
   "pigman": {
     "lockedCards": [
@@ -232,6 +346,10 @@
       "card7",
       "card4"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","onFire"]
+    }
   },
   "snowgolem": {
     "lockedCards": [
@@ -242,6 +360,10 @@
       "card5",
       "card7"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","onFire"]
+    }
   },
   "cowctus": {
     "lockedCards": [
@@ -253,5 +375,9 @@
       "card7",
       "card15"
     ]
+    ,
+    "lootTags": {
+      "enabled": ["amount","bonus","lootBonus","chance","variant","isBaby","onFire"]
+    }
   }
 }
