@@ -1374,6 +1374,19 @@ body {
   box-shadow: 0 8px 22px rgba(0,0,0,0.12);
 }
 
+/* Selection highlight handled by class (avoid inline styles) so it persists
+   across theme toggles and DOM updates. */
+.saved-list-item.selected,
+.saved-loot-item.selected {
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+}
+
+[data-theme="dark"] .saved-list-item.selected,
+[data-theme="dark"] .saved-loot-item.selected {
+  box-shadow: 0 8px 22px rgba(0,0,0,0.45);
+}
+
 /* Make editing state more visible in dark theme (green glow) */
 [data-theme="dark"] .saved-list-item.editing,
 [data-theme="dark"] .saved-loot-item.editing {
@@ -1723,6 +1736,64 @@ body {
 
 /* Language modal button border adapt to dark */
 [data-theme="dark"] .language-btn { border-color: #444 !important; background: #333 !important; color: #eee !important; }
+
+/* Make select2 for variant and color smaller to match other inputs */
+.select2-variant-container .select2-selection,
+.select2-color-container .select2-selection {
+  height: 36px !important;
+  line-height: 36px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  font-size: 0.95rem;
+}
+.select2-variant-container .select2-selection__rendered,
+.select2-color-container .select2-selection__rendered {
+  line-height: 36px !important;
+}
+.select2-variant-container .select2-selection__arrow,
+.select2-color-container .select2-selection__arrow {
+  height: 36px !important;
+  line-height: 36px !important;
+}
+
+/* Visual for saved items disabled during editing */
+.saved-loot-item.disabled-editing,
+.saved-list-item.disabled-editing {
+  opacity: 0.48 !important;
+  filter: grayscale(60%) !important;
+  cursor: not-allowed !important;
+}
+.saved-loot-item.disabled-editing .actions,
+.saved-list-item.disabled-editing .actions {
+  opacity: 0.6 !important;
+}
+
+/* Disabled options inside the Loot Tags sidebar Select2 dropdown */
+#lootTagsPopup .select2-container .select2-results__option[aria-disabled="true"],
+.sidebar-right .select2-container .select2-results__option[aria-disabled="true"] {
+  color: #7a7a7a !important;
+  text-decoration: line-through !important;
+  opacity: 0.9 !important;
+  background: transparent !important;
+}
+#lootTagsPopup .select2-container .select2-results__option[aria-disabled="true"] img,
+.sidebar-right .select2-container .select2-results__option[aria-disabled="true"] img {
+  filter: grayscale(100%) brightness(0.85) !important;
+  opacity: 0.75 !important;
+}
+
+/* Dark theme adjustments for disabled Select2 options inside Loot Tags */
+[data-theme="dark"] #lootTagsPopup .select2-container .select2-results__option[aria-disabled="true"],
+[data-theme="dark"] .sidebar-right .select2-container .select2-results__option[aria-disabled="true"] {
+  color: #cfcfcf !important;
+  text-decoration: line-through !important;
+  opacity: 0.95 !important;
+}
+[data-theme="dark"] #lootTagsPopup .select2-container .select2-results__option[aria-disabled="true"] img,
+[data-theme="dark"] .sidebar-right .select2-container .select2-results__option[aria-disabled="true"] img {
+  filter: grayscale(100%) brightness(0.7) !important;
+  opacity: 0.8 !important;
+}
 
 .saved-list-item {
   background: var(--card-bg);
@@ -2372,15 +2443,6 @@ input[type="color"].sidebar-input {
   display: none !important;
 }
 
-.loot-tags-saved-list .saved-loot-item.selected{ box-shadow: 0 8px 22px rgba(0,0,0,0.12) !important; border-color: var(--saved-item-edit-border) !important; }
-
-/* Ensure selected item highlight persists in dark theme and uses an appropriate green accent */
-[data-theme="dark"] .loot-tags-saved-list .saved-loot-item.selected{
-  box-shadow: 0 10px 30px rgba(16,185,129,0.12) !important;
-  background-color: rgba(16,185,129,0.06) !important;
-  border-color: var(--saved-item-edit-border) !important;
-}
-
 .saved-loot-item .popup-button.small{ padding:6px 8px; font-size:0.9rem }
 
 /* Remove inner scrollbars for inputs; popup/window provides general scrolling */
@@ -2710,9 +2772,8 @@ input:disabled {
 .notification { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; width: 320px; padding: 12px; display: flex; flex-direction: row; align-items: center; justify-content: start; background: var(--notif-bg, #fff); border-radius: 8px; box-shadow: 0px 0px 5px -3px #111; transform: translateY(-8px) scale(0.995); opacity: 0; transition: all 220ms ease; gap:12px; }
 .notification.show { transform: translateY(0) scale(1); opacity: 1; }
 .notification.hide { opacity: 0; transform: translateY(-6px); }
-.notification .notif__icon { width: 20px; height: 20px; transform: translateY(-2px); margin-right: 8px; display:flex; }
-.notification .notif__icon svg { width:20px; height:20px; }
-.notification .notif__icon svg path, .notification .notif__icon svg circle { fill: #fff; stroke: none; }
+.notification .notif__icon { width: 20px; height: 20px; transform: translateY(-2px); margin-right: 8px; display:flex; align-items:center; justify-content:center; }
+.notification .notif__icon .notif__fa { color: #fff; font-size: 18px; }
 .notification .notif__title { font-weight: 500; font-size: 14px; color: #fff; flex:1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .notification .notif-close { width: 20px; height: 20px; cursor: pointer; margin-left: auto; background: transparent; border: none; padding: 0; display:flex; align-items:center; justify-content:center; color: #fff; }
 .notification .notif-close svg { width:16px; height:16px; }
