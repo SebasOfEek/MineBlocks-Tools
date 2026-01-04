@@ -49,21 +49,21 @@
     el.className = 'notification ' + (type ? 'notif-' + type : 'notif-info');
     el.setAttribute('role', 'status');
 
-    // SVG icons per type
+    // Font Awesome icons per type
     const icons = {
-      error: '<svg class="notif__icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.001 10h2v5h-2z" fill="#fff"/><path d="M11 16h2v2h-2z" fill="#fff"/><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8z" fill="#fff"/></svg>',
-      success: '<svg class="notif__icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 12.5l2 2 4-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-      warning: '<svg class="notif__icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" fill="#fff"/><path d="M12 9v4" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 17h.01" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-      info: '<svg class="notif__icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="#fff"/></svg>'
+      error: '<i class="notif__fa fas fa-times-circle" aria-hidden="true"></i>',
+      success: '<i class="notif__fa fas fa-check-circle" aria-hidden="true"></i>',
+      warning: '<i class="notif__fa fas fa-exclamation-triangle" aria-hidden="true"></i>',
+      info: '<i class="notif__fa fas fa-info-circle" aria-hidden="true"></i>'
     };
 
-    const svg = icons[type] || icons.info;
+    const fa = icons[type] || icons.info;
 
     el.innerHTML = `
-      <div class="notif__icon">${svg}</div>
+      <div class="notif__icon">${fa}</div>
       <div class="notif__title">${text}</div>
       <button class="notif-close" aria-label="close">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <i class="fas fa-times" aria-hidden="true"></i>
       </button>
     `;
 
