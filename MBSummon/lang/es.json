@@ -60,7 +60,7 @@
       "placeholder": "Ingresa un nombre...",
       "help": {
         "title": "Ayuda - Nombre del mob",
-        "description": "Esta opción te permite personalizar el nombre del mob que vas a invocar. El nombre que escribas aquí será visible flotando sobre el mob cuando lo invoques en el juego. Puedes usar códigos de formato usando el símbolo & seguido de un número."
+        "description": "Esta opción te permite personalizar el nombre del mob que vas a invocar. El nombre que escribas aquí será visible flotando sobre el mob cuando lo invoques en el juego."
       }
     },
     "amount": {
@@ -243,21 +243,7 @@
       "importFailed": "Error en la importación - JSON inválido"
     }
   },
-  "external": {
-    "mobs": {
-      "zombie": "Zombie",
-      "creeper": "Creeper",
-      "skeleton": "Esqueleto"
-    },
-    "armor": {
-      "helmet": {
-        "leather_cap": "Casco de Cuero",
-        "iron_helmet": "Casco de Hierro",
-        "gold_helmet": "Casco de Oro",
-        "diamond_helmet": "Casco de Diamante"
-      }
-    }
-  },
+  
   "notifications": {
     "saved_success": "Comando guardado",
     "editing": "Editando elemento guardado",
