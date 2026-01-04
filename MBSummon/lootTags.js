@@ -151,7 +151,9 @@
     $modal.find('#sidebarItemSelect').val('').trigger('change');
     // clear selection/editing visuals
     selectedId = null;
-    $('.saved-loot-item').removeClass('editing selected').css('boxShadow','');
+    $('.saved-loot-item').removeClass('editing selected');
+    // re-enable any items/buttons disabled during editing
+    $('.saved-loot-item').removeClass('disabled-editing').find('button').prop('disabled', false);
     $('#lootDeleteModal').removeClass('show');
     // refresh select locking
     lockSidebarOptions();
@@ -212,7 +214,19 @@
 
       const title = document.createElement('div');
       title.className = 'saved-title';
-      title.textContent = (item.itemText || item.itemId || '');
+      // Compute display text using external translations or saved text
+      let titleText = (item.itemText || item.itemId || '');
+      try {
+        const curLang = localStorage.getItem('language') || 'es';
+        const key = item.itemId ? ('external.items.' + item.itemId) : null;
+        if (key && window.externalTranslations && window.externalTranslations[key] && window.externalTranslations[key][curLang]) {
+          titleText = window.externalTranslations[key][curLang];
+        } else if (key && typeof window.t === 'function') {
+          const fromLang = window.t(key, null);
+          if (fromLang) titleText = fromLang;
+        }
+      } catch (e) { /* ignore */ }
+      title.textContent = titleText;
       left.appendChild(title);
       // actions
       const actions = document.createElement('div');
@@ -250,6 +264,9 @@
     $list.off('click.loottags', '.saved-loot-item');
     $list.on('click.loottags', '.saved-loot-item', function(e){
       const id = $(this).data('id');
+      const $editing = $list.find('.saved-loot-item.editing').first();
+      // Prevent interaction with other items while one is in editing mode
+      if($editing.length && $editing.data('id') !== id) return;
       selectSaved(id);
     });
     $list.off('click.loottags', '.edit-loot-btn');
@@ -262,6 +279,8 @@
       $item.find('.edit-loot-btn, .delete-loot-btn').prop('disabled', true).hide();
       // mark visually as editing
       $item.addClass('editing');
+      // disable interaction on other saved items while editing
+      $list.find('.saved-loot-item').not($item).addClass('disabled-editing').find('button').prop('disabled', true);
       editSaved(id);
     });
     // Pressed visual for edit/delete/update buttons (delegated)
@@ -283,9 +302,9 @@
         return;
       }
       updateLootTag(id, data);
-      // clear editing visuals/state
+      // clear editing visuals/state and re-enable other items
       $item.removeClass('editing');
-      $('.saved-loot-item').removeClass('selected').css('boxShadow','');
+      $('.saved-loot-item').removeClass('disabled-editing selected').find('button').prop('disabled', false);
       selectedId = null;
       clearForm();
     });
@@ -301,6 +320,10 @@
     $(document).on('click.loottagsCancel', function(e){
       if(!$(e.target).closest('.saved-loot-item, .loot-tags-window').length){
         $('.saved-loot-item').removeClass('editing');
+        // also re-enable any buttons disabled during editing
+        $('.saved-loot-item').removeClass('disabled-editing').find('button').prop('disabled', false);
+        // hide any update buttons that might have been shown
+        $('.update-loot-btn').hide();
       }
     });
     // refresh select locking to disable already used items
@@ -374,9 +397,9 @@
   function selectSaved(id){
     selectedId = id;
     // highlight in UI
-    $('.saved-loot-item').removeClass('selected').css('boxShadow','');
+    $('.saved-loot-item').removeClass('selected');
     const $el = $('.saved-loot-item[data-id="'+id+'"]').first();
-    $el.addClass('selected').css('boxShadow','0 6px 18px rgba(0,0,0,0.06)');
+    $el.addClass('selected');
   }
 
   function editSaved(id){
@@ -621,26 +644,47 @@
     $.getJSON('json/others.json').done(function(cfg){
       try { othersConfig = cfg || {}; } catch(e){ othersConfig = null; }
       try {
-        // populate color select
+        // populate color select and register translations
         const $color = $('#lootColorSelect');
+        window.externalTranslations = window.externalTranslations || {};
+        const curLang = localStorage.getItem('language') || 'es';
         if($color && $color.length && othersConfig && Array.isArray(othersConfig.colors)){
           $color.empty();
-          $color.append('<option value="">--Seleccionar--</option>');
+          $color.append($('<option>').attr('value','').attr('data-i18n','common.select').attr('data-default-text','--Seleccionar--').text(t('common.select','--Seleccionar--')));
           othersConfig.colors.forEach(c => {
-            const opt = $('<option>').attr('value', c.value || '').attr('data-image', c.image || '').text(c.text || c.value || '');
+            const key = `external.others.colors.${c.value}`;
+            if(c.translations) window.externalTranslations[key] = c.translations;
+            else window.externalTranslations[key] = { en: c.text || c.value, es: c.text || c.value };
+            const display = (window.externalTranslations[key] && window.externalTranslations[key][curLang]) ? window.externalTranslations[key][curLang] : (c.text || c.value || '');
+            const opt = $('<option>')
+              .attr('value', c.value || '')
+              .attr('data-image', c.image || '')
+              .attr('data-i18n', key)
+              .attr('data-default-text', c.text || c.value || '')
+              .text(display);
             $color.append(opt);
           });
-          try{ $color.select2({templateResult: formatOption, templateSelection: formatSelection, width: '200px', escapeMarkup: function(m){return m;}, containerCssClass: 'select2-color-container'}); }catch(e){}
+          try{ $color.select2({templateResult: formatOption, templateSelection: formatOption, width: '200px', escapeMarkup: function(m){return m;}, containerCssClass: 'select2-color-container'}); }catch(e){}
         }
-        // populate variant select
+        // populate variant select and register translations
         const $variant = $('#lootVariantSelect');
         if($variant && $variant.length && othersConfig && Array.isArray(othersConfig.variant)){
           $variant.empty();
+          $variant.append($('<option>').attr('value','').attr('data-i18n','common.select').attr('data-default-text','--Seleccionar--').text(t('common.select','--Seleccionar--')));
           othersConfig.variant.forEach(v => {
-            const opt = $('<option>').attr('value', v.value || '').attr('data-image', v.image || '').text(v.text || v.value || '');
+            const key = `external.others.variant.${v.value}`;
+            if(v.translations) window.externalTranslations[key] = v.translations;
+            else window.externalTranslations[key] = { en: v.text || v.value, es: v.text || v.value };
+            const display = (window.externalTranslations[key] && window.externalTranslations[key][curLang]) ? window.externalTranslations[key][curLang] : (v.text || v.value || '');
+            const opt = $('<option>')
+              .attr('value', v.value || '')
+              .attr('data-image', v.image || '')
+              .attr('data-i18n', key)
+              .attr('data-default-text', v.text || v.value || '')
+              .text(display);
             $variant.append(opt);
           });
-          try{ $variant.select2({templateResult: formatOption, templateSelection: formatSelection, width: '100px', escapeMarkup: function(m){return m;}, containerCssClass: 'select2-variant-container'}); }catch(e){}
+          try{ $variant.select2({templateResult: formatOption, templateSelection: formatOption, width: '100px', escapeMarkup: function(m){return m;}, containerCssClass: 'select2-variant-container'}); }catch(e){}
         }
       }catch(e){ }
     }).fail(function(){ othersConfig = null; });
@@ -656,6 +700,85 @@
   window.lootTagsStore = {
     init, loadStore, saveStore, getAll: () => store.slice(), add: addLootTag, update: updateLootTag, delete: deleteLootTag,
     clearAll: clearAllLootTags,
+    refreshLanguage: function(){
+      try{ renderSavedList(); }catch(e){}
+      try{
+        const curLang = localStorage.getItem('language') || 'es';
+        // Update sidebar item option texts
+        const $sidebar = $('#sidebarItemSelect');
+        if($sidebar && $sidebar.length){
+          $sidebar.find('option[data-i18n]').each(function(){
+            const $opt = $(this);
+            const key = $opt.data('i18n');
+            let newText = null;
+            try{
+              if(window.currentLangData && key){ const fromLang = window.t(key, null); if(fromLang) newText = fromLang; }
+            }catch(e){}
+            if((!newText || newText === null) && window.externalTranslations && window.externalTranslations[key]){
+              newText = window.externalTranslations[key][curLang] || $opt.attr('data-default-text') || $opt.text();
+            }
+            if(!newText) newText = $opt.attr('data-default-text') || $opt.text();
+            if($opt.text() !== newText) $opt.text(newText);
+          });
+          // Re-init Select2 to force refresh
+          try{
+            if($sidebar.data('select2')){
+              const curVal = $sidebar.val();
+              try{ $sidebar.select2('destroy'); }catch(e){}
+              try{
+                $sidebar.select2({
+                  templateResult: function(option){ return formatOption(option); },
+                  templateSelection: function(option){ return formatSelection(option); },
+                  width: '100%',
+                  dropdownParent: $('#lootTagsPopup .popup-content'),
+                  placeholder: t('modals.lootTags.selectItemPlaceholder','Select item'),
+                  allowClear: false,
+                  closeOnSelect: true
+                });
+                $sidebar.val(curVal).trigger('change.select2');
+              }catch(e){}
+            }
+          }catch(e){}
+        }
+
+        // Update color select
+        try{
+          const $color = $('#lootColorSelect');
+          if($color && $color.length){
+            $color.find('option[data-i18n]').each(function(){
+              const $o = $(this); const key = $o.data('i18n'); let newT = null;
+              try{ if(window.currentLangData && key){ const v = window.t(key,null); if(v) newT = v; } }catch(e){}
+              if((!newT || newT === null) && window.externalTranslations && window.externalTranslations[key]) newT = window.externalTranslations[key][curLang] || $o.attr('data-default-text') || $o.text();
+              if(!newT) newT = $o.attr('data-default-text') || $o.text();
+              if($o.text() !== newT) $o.text(newT);
+            });
+            if($color.data('select2')){
+              const v = $color.val(); try{ $color.select2('destroy'); }catch(e){}
+              try{ $color.select2({templateResult: formatOption, templateSelection: formatOption, width: '200px', escapeMarkup: function(m){return m;}, containerCssClass: 'select2-color-container'}); $color.val(v).trigger('change.select2'); }catch(e){}
+            }
+          }
+        }catch(e){}
+
+        // Update variant select
+        try{
+          const $variant = $('#lootVariantSelect');
+          if($variant && $variant.length){
+            $variant.find('option[data-i18n]').each(function(){
+              const $o = $(this); const key = $o.data('i18n'); let newT = null;
+              try{ if(window.currentLangData && key){ const v = window.t(key,null); if(v) newT = v; } }catch(e){}
+              if((!newT || newT === null) && window.externalTranslations && window.externalTranslations[key]) newT = window.externalTranslations[key][curLang] || $o.attr('data-default-text') || $o.text();
+              if(!newT) newT = $o.attr('data-default-text') || $o.text();
+              if($o.text() !== newT) $o.text(newT);
+            });
+            if($variant.data('select2')){
+              const v = $variant.val(); try{ $variant.select2('destroy'); }catch(e){}
+              try{ $variant.select2({templateResult: formatOption, templateSelection: formatOption, width: '100px', escapeMarkup: function(m){return m;}, containerCssClass: 'select2-variant-container'}); $variant.val(v).trigger('change.select2'); }catch(e){}
+            }
+          }
+        }catch(e){}
+
+      }catch(e){ /* ignore */ }
+    },
     // Return items mapped for command generation, respecting cards_config.json enabled fields for the given mob
     getCommandItems: function(mobKey){
       const items = store.slice();
