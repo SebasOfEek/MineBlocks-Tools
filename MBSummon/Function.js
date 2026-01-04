@@ -368,13 +368,24 @@ $(document).ready(function () {
     function (data) {
       const mobType = $("#mobType");
       mobType.empty();
-      mobType.append('<option value="" data-i18n="common.select">--Seleccionar--</option>');
+      // ensure externalTranslations map exists and pick current language
+      window.externalTranslations = window.externalTranslations || {};
+      const currentSavedLang = localStorage.getItem('language') || 'es';
+      // placeholder option - keep data-i18n so it translates
+      mobType.append('<option value="" data-i18n="common.select" data-default-text="--Seleccionar--">--Seleccionar--</option>');
       data.mobs.forEach(function (mob) {
+        const key = `external.mobs.${mob.value}`;
+        if (mob.translations) {
+          window.externalTranslations[key] = mob.translations;
+        } else {
+          window.externalTranslations[key] = { en: mob.text, es: mob.text };
+        }
+        const displayText = (window.externalTranslations[key] && window.externalTranslations[key][currentSavedLang]) ? window.externalTranslations[key][currentSavedLang] : mob.text;
         const option = $("<option>")
           .val(mob.value)
-          .text(mob.text)
+          .text(displayText)
           .attr("data-image", mob.image)
-          .attr("data-i18n", `external.mobs.${mob.value}`)
+          .attr("data-i18n", key)
           .attr("data-default-text", mob.text);
         mobType.append(option);
       });
@@ -1350,6 +1361,7 @@ $(document).ready(function () {
       try{ if(typeof updateMobSelect2Language === 'function') updateMobSelect2Language(); }catch(e){}
       try{ if(typeof updateSidebarItemSelect2Language === 'function') updateSidebarItemSelect2Language(); }catch(e){}
       try{ updateCommand(); }catch(e){}
+        try{ if(window.lootTagsStore && typeof window.lootTagsStore.refreshLanguage === 'function') window.lootTagsStore.refreshLanguage(); }catch(e){}
       // If baby modal is open, re-evaluate visibility/status so texts update
       try{
         const cur = $('#babyMode').val();
@@ -1378,6 +1390,7 @@ $(document).ready(function () {
     setTimeout(function() {
       if (typeof updateMobSelect2Language === 'function') updateMobSelect2Language();
       try{ if(typeof updateSidebarItemSelect2Language === 'function') updateSidebarItemSelect2Language(); }catch(e){}
+      try{ if(window.lootTagsStore && typeof window.lootTagsStore.refreshLanguage === 'function') window.lootTagsStore.refreshLanguage(); }catch(e){}
     }, 300);
   }
 
@@ -1578,15 +1591,27 @@ $(document).ready(function () {
       
       // Limpiar opciones existentes
       sidebarItemSelect.empty();
-      // Use translation helper for placeholder
-      sidebarItemSelect.append('<option value="">' + t('modals.lootTags.selectItemPlaceholder', 'Select item') + '</option>');
-      
-      // Agregar items del JSON
+      // Ensure externalTranslations map exists and pick current language
+      window.externalTranslations = window.externalTranslations || {};
+      const currentSavedLang = localStorage.getItem('language') || 'es';
+      // Use translation helper for placeholder and keep data-i18n
+      sidebarItemSelect.append('<option value="" data-i18n="modals.lootTags.selectItemPlaceholder" data-default-text="Select item">' + t('modals.lootTags.selectItemPlaceholder', 'Select item') + '</option>');
+
+      // Agregar items del JSON and register translations
       data.items.forEach((item) => {
+        const key = `external.items.${item.value}`;
+        if (item.translations) {
+          window.externalTranslations[key] = item.translations;
+        } else {
+          window.externalTranslations[key] = { en: item.text, es: item.text };
+        }
+        const displayText = (window.externalTranslations[key] && window.externalTranslations[key][currentSavedLang]) ? window.externalTranslations[key][currentSavedLang] : item.text;
         const option = $("<option>")
           .val(item.value)
-          .text(item.text)
-          .attr("data-image", item.image);
+          .text(displayText)
+          .attr("data-image", item.image)
+          .attr('data-i18n', key)
+          .attr('data-default-text', item.text);
         sidebarItemSelect.append(option);
       });
 
@@ -2660,12 +2685,7 @@ function renderSavedCommands() {
         $("#savedListModal").removeClass("show");
         $(".menu").removeClass("show-buttons");
         loadSavedCommandToForm(item); // <-- Esta es la función correcta
-        // Notify that user is editing a saved command
-        if (typeof notifyInfo === 'function') {
-          notifyInfo({ key: 'notifications.editing', text: t('notifications.editing','Editando guardado'), timeout: 1800 });
-        } else if (typeof notify === 'function') {
-          notify({ type: 'info', key: 'notifications.editing', text: t('notifications.editing','Editando guardado'), timeout: 1800 });
-        }
+        // (no notification shown for entering edit mode to avoid redundancy)
       });
 
   $edit.addClass('saved-action-btn saved-edit-btn');
@@ -2896,7 +2916,8 @@ function removeSavedCommand(idx) {
   }
   // notify deletion
   if (typeof notify === 'function') {
-    notify({ type: 'info', key: 'notifications.deleted', timeout: 2000 });
+    // Use same deletion notification as loot tags removal (success)
+    notify({ type: 'success', key: 'notifications.loot.deleted', timeout: 2000 });
   }
 }
 
