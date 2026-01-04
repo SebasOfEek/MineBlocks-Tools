@@ -3,122 +3,146 @@
     {
       "value": "zombie",
       "text": "Zombie",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898103/Zombie2_cmi8uo.png"
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898103/Zombie2_cmi8uo.png",
+      "translations": { "en": "Zombie", "es": "Zombie" }
     },
     {
       "value": "spawnskin",
       "text": "Spawnskin",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898066/Player_head_ak0iz8.png"
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898066/Player_head_ak0iz8.png",
+      "translations": { "en": "Spawnskin", "es": "Spawnskin" }
     },
     {
       "value": "skeleton",
-      "text": "Esqueleto",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898059/Skeleton1_rcnbyh.png"
+      "text": "Skeleton",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898059/Skeleton1_rcnbyh.png",
+      "translations": { "en": "Skeleton", "es": "Esqueleto" }
     },
     {
       "value": "creeper",
       "text": "Creeper",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898105/CreeperHead_wwk2om.png"
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898105/CreeperHead_wwk2om.png",
+      "translations": { "en": "Creeper", "es": "Creeper" }
     },
     {
       "value": "spider",
-      "text": "Araña",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload//f_webp/v1726898063/Spider1_tseshs.png"
+      "text": "Spider",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload//f_webp/v1726898063/Spider1_tseshs.png",
+      "translations": { "en": "Spider", "es": "Araña" }
     },
     {
       "value": "enderman",
       "text": "Enderman",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898083/EndermanHead_wzsopl.png"
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898083/EndermanHead_wzsopl.png",
+      "translations": { "en": "Enderman", "es": "Enderman" }
     },
     {
       "value": "blaze",
       "text": "Blaze",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898072/BlazeHead_gobfr5.png"
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898072/BlazeHead_gobfr5.png",
+      "translations": { "en": "Blaze", "es": "Blaze" }
     },
     {
       "value": "ghast",
       "text": "Ghast",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898093/GhastHead_l8codj.png"
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898093/GhastHead_l8codj.png",
+      "translations": { "en": "Ghast", "es": "Ghast" }
     },
     {
       "value": "magmacube",
-      "text": "Cubo de Magma",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898088/Magma_mtx4ol.png"
+      "text": "Magma Cube",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898088/Magma_mtx4ol.png",
+      "translations": { "en": "Magma Cube", "es": "Cubo de Magma" }
     },
     {
       "value": "slime",
       "text": "Slime",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898061/Slime_l899it.png"
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898061/Slime_l899it.png",
+      "translations": { "en": "Slime", "es": "Slime" }
     },
     {
       "value": "enderdragon",
-      "text": "Dragón de Ender",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898096/EnderDragonHead_tpq93z.png"
+      "text": "Ender Dragon",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898096/EnderDragonHead_tpq93z.png",
+      "translations": { "en": "Ender Dragon", "es": "Dragón de Ender" }
     },
     {
       "value": "nethereye",
       "text": "Nethereye",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898977/Nethereye_ykh9mm.png"
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898977/Nethereye_ykh9mm.png",
+      "translations": { "en": "Nethereye", "es": "Nethereye" }
     },
     {
       "value": "cow",
-      "text": "Vaca",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898081/CowHead_z4cmpi.png"
+      "text": "Cow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898081/CowHead_z4cmpi.png",
+      "translations": { "en": "Cow", "es": "Vaca" }
     },
     {
       "value": "sheep",
-      "text": "Oveja",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898055/SheepHead_heoidt.png"
+      "text": "Sheep",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898055/SheepHead_heoidt.png",
+      "translations": { "en": "Sheep", "es": "Oveja" }
     },
     {
       "value": "mooshroom",
-      "text": "Vaca Seta",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1726898090/MoshroomHead_ekdzm1.png"
+      "text": "Mooshroom",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1726898090/MoshroomHead_ekdzm1.png",
+      "translations": { "en": "Mooshroom", "es": "Vaca Seta" }
     },
     {
       "value": "pig",
-      "text": "Cerdo",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898099/PigHead_uzp55c.png"
+      "text": "Pig",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898099/PigHead_uzp55c.png",
+      "translations": { "en": "Pig", "es": "Cerdo" }
     },
     {
       "value": "squid",
-      "text": "Calamar",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898101/SquidHead_b5b5hi.png"
+      "text": "Squid",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898101/SquidHead_b5b5hi.png",
+      "translations": { "en": "Squid", "es": "Calamar" }
     },
     {
       "value": "bat",
-      "text": "Murciélago",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898070/BatHead_bofwz5.png"
+      "text": "Bat",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898070/BatHead_bofwz5.png",
+      "translations": { "en": "Bat", "es": "Murciélago" }
     },
     {
       "value": "chicken",
-      "text": "Pollo",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898079/ChickenHead_owuwv1.png"
+      "text": "Chicken",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898079/ChickenHead_owuwv1.png",
+      "translations": { "en": "Chicken", "es": "Pollo" }
     },
     {
       "value": "rabbit",
-      "text": "Conejo",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898057/RabbitHead_aupj5f.png"
+      "text": "Rabbit",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898057/RabbitHead_aupj5f.png",
+      "translations": { "en": "Rabbit", "es": "Conejo" }
     },
     {
       "value": "wolf",
-      "text": "Lobo",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898068/WolfHead_wrpweo.png"
+      "text": "Wolf",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898068/WolfHead_wrpweo.png",
+      "translations": { "en": "Wolf", "es": "Lobo" }
     },
     {
       "value": "pigman",
       "text": "Zombie Pigman",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898053/PigmanHead_egvkzy.png"
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898053/PigmanHead_egvkzy.png",
+      "translations": { "en": "Zombie Pigman", "es": "Zombie Pigman" }
     },
     {
       "value": "snowgolem",
-      "text": "Golem de Nieve",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898094/SnowgolemHead_yk8xc4.png"
+      "text": "Snow Golem",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898094/SnowgolemHead_yk8xc4.png",
+      "translations": { "en": "Snow Golem", "es": "Golem de Nieve" }
     },
     {
       "value": "cowctus",
-      "text": "Vaca Cactus",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898075/CactuscowHead_igghuq.png"
+      "text": "Cactus Cow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898075/CactuscowHead_igghuq.png",
+      "translations": { "en": "Cactus Cow", "es": "Vaca Cactus" }
     }
   ]
 }
