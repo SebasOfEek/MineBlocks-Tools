@@ -514,9 +514,17 @@
                 <label data-i18n="modals.lootTags.fields.item_unbreakable">Item Tag - Unbreakable:</label>
                 <button class="toggle-button"><i class="fas fa-toggle-off"></i><span>No</span></button>
               </div>
+              <div class="loot-tags-item" data-field="item_type_spawnegg" data-help-es="Tipo de huevo de generador (mob) que será dropeado." data-help-en="Type of spawn egg (mob) to be dropped.">
+                <label data-i18n="modals.lootTags.fields.item_type_spawnegg">Item Tag - Type SpawnEgg:</label>
+                <select id="itemTypeSpawneggSelect" class="sidebar-select select-with-images" style="width:100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
+              </div>
               <div class="loot-tags-item" data-field="item_enchantment" data-help-es="Añade encantamientos al item." data-help-en="Add enchantments to the item.">
                 <label data-i18n="modals.lootTags.fields.item_enchantment">Item Tag - Enchantment:</label>
-                <select id="itemEnchantSelect" class="sidebar-select" multiple style="width:100%"></select>
+                <select id="itemEnchantSelect" class="sidebar-select" multiple style="width:100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
               </div>
               <div class="loot-tags-item" data-field="item_anvilUses" data-help-es="Usos en yunque (coste de reparación) del item." data-help-en="Anvil uses (repair cost) for the item.">
                 <label data-i18n="modals.lootTags.fields.item_anvilUses">Item Tag - Anvil Uses:</label>
@@ -524,11 +532,15 @@
               </div>
               <div class="loot-tags-item" data-field="item_canPlaceOn" data-help-es="Bloques sobre los que se puede colocar este item." data-help-en="Blocks this item can be placed on.">
                 <label data-i18n="modals.lootTags.fields.item_canPlaceOn">Item Tag - CanPlaceOn:</label>
-                <select id="itemCanPlaceOnSelect" class="select-with-images" multiple style="width:100%"></select>
+                <select id="itemCanPlaceOnSelect" class="select-with-images" multiple style="width:100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
               </div>
               <div class="loot-tags-item" data-field="item_canDestroy" data-help-es="Bloques que este item puede destruir." data-help-en="Blocks this item can destroy.">
                 <label data-i18n="modals.lootTags.fields.item_canDestroy">Item Tag - CanDestroy:</label>
-                <select id="itemCanDestroySelect" class="select-with-images" multiple style="width:100%"></select>
+                <select id="itemCanDestroySelect" class="select-with-images" multiple style="width:100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
               </div>
               <div class="loot-tags-item" data-field="item_showParticles" data-help-es="Alternar para quitar las partículas del item (apagado = sin partículas)." data-help-en="Toggle to remove item particles (disabled = no particles).">
                 <label data-i18n="modals.lootTags.fields.item_showParticles">Item Tag - Disable Particles:</label>
@@ -547,6 +559,30 @@
               <div class="loot-tags-item" data-field="item_uses" data-help-es="Número de usos del item." data-help-en="Number of uses for the item.">
                 <label data-i18n="modals.lootTags.fields.item_uses">Item Tag - Uses:</label>
                 <input type="number" class="sidebar-input integer-only" min="0">
+              </div>
+              <div class="loot-tags-item" data-field="item_type_color" data-help-es="Color del item (tinturado)." data-help-en="Color of the item (dyed).">
+                <label data-i18n="modals.lootTags.fields.item_type_color">Item Tag - Type Color:</label>
+                <select id="itemTypeColorSelect" class="sidebar-select select-with-images" style="width:100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
+              </div>
+              <div class="loot-tags-item" data-field="item_type_color2" data-help-es="Color secundario del item." data-help-en="Secondary color of the item.">
+                <label data-i18n="modals.lootTags.fields.item_type_color2">Item Tag - Type Color2:</label>
+                <select id="itemTypeColor2Select" class="sidebar-select select-with-images" style="width:100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
+              </div>
+              <div class="loot-tags-item" data-field="item_type_balloon" data-help-es="Tipo de globo a generar." data-help-en="Type of balloon to generate.">
+                <label data-i18n="modals.lootTags.fields.item_type_balloon">Item Tag - Type Balloon:</label>
+                <select id="itemTypeBalloonSelect" class="sidebar-select select-with-images" style="width:100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
+              </div>
+              <div class="loot-tags-item" data-field="item_type_potion" data-help-es="Tipo de poción a generar." data-help-en="Type of potion to generate.">
+                <label data-i18n="modals.lootTags.fields.item_type_potion">Item Tag - Type Potion:</label>
+                <select id="itemTypePotionSelect" class="sidebar-select select-with-images" style="width:100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
               </div>
             </div>
 
