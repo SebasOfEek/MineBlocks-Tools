@@ -754,7 +754,7 @@
       });
 
       // If no specific config, hide all extra item fields to keep UI compact
-      const extraFields = ['item_type','item_unbreakable','item_enchantment','item_anvilUses','item_name','item_canPlaceOn','item_canDestroy','item_showParticles','item_category','item_command','item_uses'];
+      const extraFields = ['item_type','item_unbreakable','item_enchantment','item_anvilUses','item_name','item_canPlaceOn','item_canDestroy','item_showParticles','item_category','item_command','item_uses','item_type_spawnegg','item_type_color','item_type_color2','item_type_balloon','item_type_potion'];
       // Debug: log computed enabled fields for this item
       try{ console.log('applyItemConfig for itemId="' + (itemId||'') + '", enabled=', enabled); }catch(e){}
 
@@ -991,7 +991,6 @@
         try{
           const $enchant = $('#itemEnchantSelect');
           if($enchant && $enchant.length && othersConfig && Array.isArray(othersConfig.enchants)){
-            $enchant.empty();
             othersConfig.enchants.forEach(e => {
               const key = `external.others.enchants.${e.value}`;
               if(e.translations) window.externalTranslations[key] = e.translations;
@@ -1001,7 +1000,108 @@
               const opt = $('<option>').attr('value', e.value || '').attr('data-image', e.image || '').attr('data-i18n', key).attr('data-default-text', e.text || e.value || '').text(display);
               $enchant.append(opt);
             });
-            try{ $enchant.select2({ dropdownParent: $(document.body), placeholder: t('modals.lootTags.selectEnchantPlaceholder','Seleccionar encantamientos'), templateResult: formatOption, templateSelection: formatSelection, width: '100%', allowClear: true, closeOnSelect: false, escapeMarkup: function(m){return m;} }); }catch(e){}
+            try{ $enchant.select2({ dropdownParent: $(document.body), placeholder: t('common.select','--Seleccionar--'), templateResult: formatOption, templateSelection: formatSelection, width: '100%', allowClear: true, closeOnSelect: false, escapeMarkup: function(m){return m;} }); }catch(e){}
+          }
+        }catch(e){}
+        
+        // Load item type selects (spawnegg, color, color2, balloon, potion)
+        try{
+          const curLang = localStorage.getItem('language') || 'es';
+          
+          // Spawnegg - load from mobs.json
+          try{
+            $.getJSON('data/mobs.json').done(function(mobsData){
+              if(mobsData && Array.isArray(mobsData.mobs)){
+                const $spawnegg = $('#itemTypeSpawneggSelect');
+                if($spawnegg && $spawnegg.length){
+                  mobsData.mobs.forEach(m => {
+                    const key = `external.mobs.${m.value}`;
+                    if(m.translations) window.externalTranslations[key] = m.translations;
+                    else window.externalTranslations[key] = { en: m.text || m.value, es: m.text || m.value };
+                    const display = (window.externalTranslations[key] && window.externalTranslations[key][curLang]) ? window.externalTranslations[key][curLang] : (m.text || m.value || '');
+                    const opt = $('<option>')
+                      .attr('value', m.value || '')
+                      .attr('data-image', m.image || '')
+                      .attr('data-i18n', key)
+                      .attr('data-default-text', m.text || m.value || '')
+                      .text(display);
+                    $spawnegg.append(opt);
+                  });
+                  try{ $spawnegg.select2({ templateResult: formatOption, templateSelection: formatSelection, width: '100%', dropdownParent: $(document.body), escapeMarkup: function(m){return m;} }); }catch(e){}
+                }
+              }
+            }).fail(function(){ });
+          }catch(e){}
+          
+          // Color, Color2, Balloon, Potion - load from others.json
+          if(othersConfig){
+            // Color
+            const $typeColor = $('#itemTypeColorSelect');
+            if($typeColor && $typeColor.length && othersConfig.colors && Array.isArray(othersConfig.colors)){
+              othersConfig.colors.forEach(c => {
+                const key = `external.others.colors.${c.value}`;
+                const display = (window.externalTranslations[key] && window.externalTranslations[key][curLang]) ? window.externalTranslations[key][curLang] : (c.text || c.value || '');
+                const opt = $('<option>')
+                  .attr('value', c.value || '')
+                  .attr('data-image', c.image || '')
+                  .attr('data-i18n', key)
+                  .attr('data-default-text', c.text || c.value || '')
+                  .text(display);
+                $typeColor.append(opt);
+              });
+              try{ $typeColor.select2({ templateResult: formatOption, templateSelection: formatSelection, width: '100%', dropdownParent: $(document.body), escapeMarkup: function(m){return m;} }); }catch(e){}
+            }
+            
+            // Color2
+            const $typeColor2 = $('#itemTypeColor2Select');
+            if($typeColor2 && $typeColor2.length && othersConfig.typeColor && Array.isArray(othersConfig.typeColor)){
+              othersConfig.typeColor.forEach(c => {
+                const key = `external.others.typeColor.${c.value}`;
+                const display = (window.externalTranslations[key] && window.externalTranslations[key][curLang]) ? window.externalTranslations[key][curLang] : (c.text || c.value || '');
+                const opt = $('<option>')
+                  .attr('value', c.value || '')
+                  .attr('data-image', c.image || '')
+                  .attr('data-i18n', key)
+                  .attr('data-default-text', c.text || c.value || '')
+                  .text(display);
+                $typeColor2.append(opt);
+              });
+              try{ $typeColor2.select2({ templateResult: formatOption, templateSelection: formatSelection, width: '100%', dropdownParent: $(document.body), escapeMarkup: function(m){return m;} }); }catch(e){}
+            }
+            
+            // Balloon
+            const $typeBalloon = $('#itemTypeBalloonSelect');
+            if($typeBalloon && $typeBalloon.length && othersConfig.typeBalloon && Array.isArray(othersConfig.typeBalloon)){
+              othersConfig.typeBalloon.forEach(b => {
+                const key = `external.others.typeBalloon.${b.value}`;
+                const display = (window.externalTranslations[key] && window.externalTranslations[key][curLang]) ? window.externalTranslations[key][curLang] : (b.text || b.value || '');
+                const opt = $('<option>')
+                  .attr('value', b.value || '')
+                  .attr('data-image', b.image || '')
+                  .attr('data-i18n', key)
+                  .attr('data-default-text', b.text || b.value || '')
+                  .text(display);
+                $typeBalloon.append(opt);
+              });
+              try{ $typeBalloon.select2({ templateResult: formatOption, templateSelection: formatSelection, width: '100%', dropdownParent: $(document.body), escapeMarkup: function(m){return m;} }); }catch(e){}
+            }
+            
+            // Potion
+            const $typePotion = $('#itemTypePotionSelect');
+            if($typePotion && $typePotion.length && othersConfig.typePotion && Array.isArray(othersConfig.typePotion)){
+              othersConfig.typePotion.forEach(p => {
+                const key = `external.others.typePotion.${p.value}`;
+                const display = (window.externalTranslations[key] && window.externalTranslations[key][curLang]) ? window.externalTranslations[key][curLang] : (p.text || p.value || '');
+                const opt = $('<option>')
+                  .attr('value', p.value || '')
+                  .attr('data-image', p.image || '')
+                  .attr('data-i18n', key)
+                  .attr('data-default-text', p.text || p.value || '')
+                  .text(display);
+                $typePotion.append(opt);
+              });
+              try{ $typePotion.select2({ templateResult: formatOption, templateSelection: formatSelection, width: '100%', dropdownParent: $(document.body), escapeMarkup: function(m){return m;} }); }catch(e){}
+            }
           }
         }catch(e){}
       }catch(e){ }
@@ -1031,7 +1131,6 @@
               try{
                 const $can = $('#itemCanPlaceOnSelect');
                 if($can && $can.length && data && Array.isArray(data.items)){
-                  $can.empty();
                   const curLang = localStorage.getItem('language') || 'es';
                   data.items.forEach(it => {
                     const key = `external.items.${it.value}`;
@@ -1041,13 +1140,12 @@
                     const opt = $('<option>').attr('value', it.value || '').attr('data-image', it.image || '').attr('data-i18n', key).attr('data-default-text', it.text || it.value || '').text(display);
                     $can.append(opt);
                   });
-                  try{ $can.select2({ templateResult: formatOption, templateSelection: formatSelection, width: '100%', dropdownParent: $(document.body), placeholder: t('modals.lootTags.selectItemPlaceholder','Seleccionar item'), allowClear: true, closeOnSelect: false, escapeMarkup: function(m){return m;} }); }catch(e){}
+                  try{ $can.select2({ templateResult: formatOption, templateSelection: formatSelection, width: '100%', dropdownParent: $(document.body), placeholder: t('common.select','--Seleccionar--'), allowClear: true, closeOnSelect: false, escapeMarkup: function(m){return m;} }); }catch(e){}
                 }
                 // populate itemCanDestroySelect similarly
                 try{
                   const $destroy = $('#itemCanDestroySelect');
                   if($destroy && $destroy.length && data && Array.isArray(data.items)){
-                    $destroy.empty();
                     const curLang = localStorage.getItem('language') || 'es';
                     data.items.forEach(it => {
                       const key = `external.items.${it.value}`;
@@ -1057,7 +1155,7 @@
                       const opt = $('<option>').attr('value', it.value || '').attr('data-image', it.image || '').attr('data-i18n', key).attr('data-default-text', it.text || it.value || '').text(display);
                       $destroy.append(opt);
                     });
-                    try{ $destroy.select2({ templateResult: formatOption, templateSelection: formatSelection, width: '100%', dropdownParent: $(document.body), placeholder: t('modals.lootTags.selectItemPlaceholder','Seleccionar item'), allowClear: true, closeOnSelect: false, escapeMarkup: function(m){return m;} }); }catch(e){}
+                    try{ $destroy.select2({ templateResult: formatOption, templateSelection: formatSelection, width: '100%', dropdownParent: $(document.body), placeholder: t('common.select','--Seleccionar--'), allowClear: true, closeOnSelect: false, escapeMarkup: function(m){return m;} }); }catch(e){}
                   }
                 }catch(e){}
               }catch(e){}
@@ -1131,12 +1229,19 @@
       const isTouchDevice = () => (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
 
       if(isTouchDevice()) {
-        // Mobile: only use click/tap to show, tap elsewhere to dismiss
+        // Mobile: click to toggle tooltip visibility
         $btn.on('click', function(e){ 
-          e.preventDefault(); 
-          const text = resolveHelpText($row);
-          console.log('lt-help click:', $row.attr('data-field'), text);
-          showHelpTooltip($(this), text, true); 
+          e.preventDefault();
+          const $existingTooltip = $('.lt-tooltip');
+          // If tooltip already exists, close it
+          if($existingTooltip.length) {
+            hideHelpTooltip();
+          } else {
+            // Otherwise show it (will auto-close after 4 seconds)
+            const text = resolveHelpText($row);
+            console.log('lt-help click:', $row.attr('data-field'), text);
+            showHelpTooltip($(this), text, false); 
+          }
         });
         // Close tooltip when tapping outside
         $(document).on('click.lootTooltip', function(e) {
