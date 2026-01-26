@@ -68,7 +68,7 @@
       "text": "Balloon",
       "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Balloon_alwke7.png",
       "translations": { "es": "Globo" },
-      "lootFields": ["item_name","item_type","item_canDestroy","item_enchantment"]
+      "lootFields": ["item_name","item_type","item_canDestroy","item_enchantment", "item_type_balloon"]
     },
     {
       "value": "bamboo",
@@ -404,7 +404,7 @@
       "text": "Carpet",
       "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726895142/Carpet_bgbclg.png"
       ,"translations": { "es": "Alfombra" },
-      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment","item_type"]
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment","item_type", "item_type_color2"]
     },
     {
       "value": "carrot",
@@ -838,7 +838,7 @@
       "text": "Dye",
       "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890418/Dye_yqqecq.png",
       "translations": { "es": "Tinte" },
-      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_type"]
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_type", "item_type_color"]
     },
     {
       "value": "egg",
@@ -992,14 +992,14 @@
       "text": "Glass",
       "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876945/Glass_urwmmr.png",
       "translations": { "es": "Cristal" },
-      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+      "lootFields": ["item_name","item_canDestroy","item_enchantment", "item_type_color"]
     },
     {
       "value": "backdrop_glass",
       "text": "Glass Backdrop",
       "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Backdrop_Glass_hvpjhx.png",
       "translations": { "es": "Fondo de cristal" },
-      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment", "item_type_color"]
     },
     {
       "value": "glass_shard",
@@ -1398,28 +1398,28 @@
       "text": "Leather Cap",
       "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Cap_kc3wwv.png"
       ,"translations": { "es": "Casco de cuero" },
-      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_type"]
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_type", "item_type_color"]
     },
     {
       "value": "leather_tunic",
       "text": "Leather Tunic",
       "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Tunic_lk2z0j.png"
       ,"translations": { "es": "Túnica de cuero" },
-      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_type"]
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_type", "item_type_color"]
     },
     {
       "value": "leather_pants",
       "text": "Leather Pants",
       "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Pants_dknwqd.png"
       ,"translations": { "es": "Pantalones de cuero" },
-      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_type"]
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_type", "item_type_color"]
     },
     {
       "value": "leather_boots",
       "text": "Leather Boots",
       "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Boots_zofh0b.png"
       ,"translations": { "es": "Botas de cuero" },
-      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_type"]
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_type", "item_type_color"]
     },
     {
       "value": "leaves",
@@ -1783,7 +1783,7 @@
       "text": "Potion",
       "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765434/Healing_Potion_pc4a3t.png"
       ,"translations": { "es": "Poción" },
-      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_showParticles", "item_category"]
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_showParticles", "item_category", "item_type_potion"]
     },
     {
       "value": "rail_powered",
@@ -2111,7 +2111,7 @@
       "text": "Spawn Egg",
       "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Spawn_Egg_gie4jl.png",
       "translations": { "es": "Huevo de aparición" },
-      "lootFields": ["item_name","item_canDestroy","item_enchantment", "item_type"]
+      "lootFields": ["item_name","item_canDestroy","item_enchantment", "item_type_spawnegg"]
     },
     {
       "value": "spear",
@@ -2433,14 +2433,14 @@
       "text": "Wool",
       "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890410/Wool_ukof8x.png",
       "translations": { "es": "Lana" },
-      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment", "item_type"]
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment", "item_type", "item_type_color2"]
     },
     {
       "value": "backdrop_wool",
       "text": "Wool Backdrop",
       "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890418/Backdrop_Wool_s6sfpm.png",
       "translations": { "es": "Fondo de lana" },
-      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment", "item_type"]
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment", "item_type", "item_type_color2"]
     },
     {
       "value": "yellow_flower",
