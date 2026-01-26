@@ -1,0 +1,166 @@
+{
+  "helmet": [
+    {
+      "value": "leather_cap",
+      "text": "Leather Cap",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Cap_kc3wwv.png"
+      ,"translations": { "en": "Leather Cap", "es": "Casco de Cuero" }
+    },
+    {
+      "value": "iron_helmet",
+      "text": "Iron Helmet",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896975/Iron_Helmet_pibqyq.png"
+      ,"translations": { "en": "Iron Helmet", "es": "Casco de Hierro" }
+    },
+    {
+      "value": "gold_helmet",
+      "text": "Gold Helmet",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Helmet_vehqkm.png"
+      ,"translations": { "en": "Gold Helmet", "es": "Casco de Oro" }
+    },
+    {
+      "value": "diamond_helmet",
+      "text": "Diamond Helmet",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Helmet_ugg9vy.png"
+      ,"translations": { "en": "Diamond Helmet", "es": "Casco de Diamante" }
+    },
+    {
+      "value": "dragon_scale_helmet",
+      "text": "Dragon Scale Helmet",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871796/Dragon_Scale_Helmet_raeklo.png"
+      ,"translations": { "en": "Dragon Scale Helmet", "es": "Casco de Escama de Dragón" }
+    },
+    {
+      "value": "jack_o_lantern",
+      "text": "Jack-o-Lantern",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688892/Jack-o_-Lantern_mrtj6r.png"
+      ,"translations": { "en": "Jack-o-Lantern", "es": "Linterna de calabaza" }
+    },
+    {
+      "value": "santa_hat",
+      "text": "Santa Hat",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Santa_Hat_jzj24t.png"
+      ,"translations": { "en": "Santa Hat", "es": "Gorro de Santa" }
+    },
+    {
+      "value": "party_hat",
+      "text": "Party Hat",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694191/Party_Hat_bjn9as.png"
+      ,"translations": { "en": "Party Hat", "es": "Gorro de Fiesta" }
+    },
+    {
+      "value": "afro",
+      "text": "Afro",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Afro_lqqcni.png"
+      ,"translations": { "en": "Afro", "es": "Afro" }
+    },
+    {
+      "value": "shades",
+      "text": "Shades",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Shades_erre9t.png"
+      ,"translations": { "en": "Shades", "es": "Gafas de Sol" }
+    },
+    {
+      "value": "mustache",
+      "text": "Mustache",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694186/Mustache_fjc2up.png"
+      ,"translations": { "en": "Mustache", "es": "Bigote" }
+    }
+  ],
+  "chestplate": [
+    {
+      "value": "leather_tunic",
+      "text": "Leather Tunic",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Tunic_lk2z0j.png"
+      ,"translations": { "en": "Leather Tunic", "es": "Pechera de Cuero" }
+    },
+    {
+      "value": "iron_chestplate",
+      "text": "Iron Chestplate",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896973/Iron_Chestplate_gfvdbm.png"
+      ,"translations": { "en": "Iron Chestplate", "es": "Pechera de Hierro" }
+    },
+    {
+      "value": "gold_chestplate",
+      "text": "Gold Chestplate",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Chestplate_j3to7v.png"
+      ,"translations": { "en": "Gold Chestplate", "es": "Pechera de Oro" }
+    },
+    {
+      "value": "diamond_chestplate",
+      "text": "Diamond Chestplate",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Chestplate_rzyjxh.png"
+      ,"translations": { "en": "Diamond Chestplate", "es": "Pechera de Diamante" }
+    },
+    {
+      "value": "dragon_scale_chestplate",
+      "text": "Dragon Scale Chestplate",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871795/Dragon_Scale_Chestplate_heemid.png"
+      ,"translations": { "en": "Dragon Scale Chestplate", "es": "Pechera de Escama de Dragón" }
+    }
+  ],
+  "leggings": [
+    {
+      "value": "leather_pants",
+      "text": "Leather Pants",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Pants_dknwqd.png"
+      ,"translations": { "en": "Leather Pants", "es": "Pantalones de Cuero" }
+    },
+    {
+      "value": "iron_leggings",
+      "text": "Iron Leggings",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896977/Iron_Leggings_ni8md1.png"
+      ,"translations": { "en": "Iron Leggings", "es": "Pantalones de Hierro" }
+    },
+    {
+      "value": "gold_leggings",
+      "text": "Gold Leggings",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876948/Gold_Leggings_qspwtb.png"
+      ,"translations": { "en": "Gold Leggings", "es": "Pantalones de Oro" }
+    },
+    {
+      "value": "diamond_leggings",
+      "text": "Diamond Leggings",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Leggings_q4hf45.png"
+      ,"translations": { "en": "Diamond Leggings", "es": "Pantalones de Diamante" }
+    },
+    {
+      "value": "dragon_scale_leggings",
+      "text": "Dragon Scale Leggings",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871796/Dragon_Scale_Leggings_zyhqa5.png"
+      ,"translations": { "en": "Dragon Scale Leggings", "es": "Pantalones de Escama de Dragón" }
+    }
+  ],
+  "boots": [
+    {
+      "value": "leather_boots",
+      "text": "Leather Boots",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Boots_zofh0b.png"
+      ,"translations": { "en": "Leather Boots", "es": "Botas de Cuero" }
+    },
+    {
+      "value": "iron_boots",
+      "text": "Iron Boots",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896972/Iron_Boots_z5f74c.png"
+      ,"translations": { "en": "Iron Boots", "es": "Botas de Hierro" }
+    },
+    {
+      "value": "gold_boots",
+      "text": "Gold Boots",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Boots_tkocg7.png"
+      ,"translations": { "en": "Gold Boots", "es": "Botas de Oro" }
+    },
+    {
+      "value": "diamond_boots",
+      "text": "Diamond Boots",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1726844162/Diamond_Boots_ubkywn.png"
+      ,"translations": { "en": "Diamond Boots", "es": "Botas de Diamante" }
+    },
+    {
+      "value": "dragon_scale_boots",
+      "text": "Dragon Scale Boots",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871795/Dragon_Scale_Boots_r3nxyz.png"
+      ,"translations": { "en": "Dragon Scale Boots", "es": "Botas de Escama de Dragón" }
+    }
+  ]
+}
