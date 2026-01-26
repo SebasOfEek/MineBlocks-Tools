@@ -1,0 +1,317 @@
+{
+  "common": {
+    "loading": "Loading data...",
+    "select": "--Select--",
+    "save": "Save",
+    "help": "Help",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "languages": {
+    "es": {
+      "name": "Spanish",
+      "alt": "Español"
+    },
+    "en": {
+      "name": "English",
+      "alt": "English"
+    }
+  },
+  "menu": {
+    "title": "Menu",
+    "home": "Home",
+    "language": "Language",
+    "theme": {
+      "dark": "Dark",
+      "light": "Light"
+    },
+    "discord": "Discord",
+    "clear": "Clear",
+    "settings": "Settings",
+    "saved": "Saved",
+    "languages": {
+      "en": "English",
+      "es": "Spanish"
+    }
+  },
+  "cards": {
+    "name": "Name",
+    "amount": "Amount",
+    "position": "Position",
+    "baby": "Baby",
+    "health": "Health",
+    "equipment": "Equipped Item",
+    "holding": "Equipped Item",
+    "defaultLoot": "Default Loot",
+    "armor": "Armor",
+    "lootTags": "Loot Tags",
+    "aggressiveness": "Aggressiveness",
+    "skin": "Skin ID",
+    "charged": "Charged Creeper",
+    "test": "Test"
+  },
+  "modals": {
+    "name": {
+      "title": "Mob Name",
+      "label": "Custom name:",
+      "placeholder": "Enter a name...",
+      "help": {
+        "title": "Help - Mob Name",
+        "description": "This option allows you to customize the name of the mob you will summon. The name you write here will be visible floating above the mob when you summon it in the game."
+      }
+    },
+    "amount": {
+      "title": "Mob Amount",
+      "label": "Amount to summon:",
+      "placeholder": "Enter an amount...",
+      "help": {
+        "title": "Help - Mob Amount",
+        "description": "This option allows you to define how many mobs you want to summon at once. The maximum limit is 20 mobs per summon."
+      }
+    },
+      "position": {
+        "title": "Mob Position",
+        "label": "Position type:",
+        "typeLabel": "Position type:",
+        "selectPlaceholder": "--Select type--",
+        "relative": "Relative position",
+        "absolute": "Absolute position",
+      "coordXLabel": "Coordinate X:",
+      "coordYLabel": "Coordinate Y:",
+      "coordX": "Coordinate X:",
+      "coordY": "Coordinate Y:",
+  "coordXPlaceholder": "Enter X coordinate...",
+  "coordYPlaceholder": "Enter Y coordinate...",
+  "coordXRelative": "Coordinate ~X:",
+  "coordYRelative": "Coordinate ~Y:",
+      "help": {
+        "title": "Help - Mob Position",
+        "description": "This option lets you define where the mob will appear. You can choose between relative position (relative to the player) or absolute position (world coordinates). Enter X and Y values to determine the exact spawn point."
+      }
+    },
+    "item": {
+      "title": "Equipped Item",
+      "label": "Select item:",
+      "selectPlaceholder": "--Select item--",
+      "help": {
+        "title": "Help - Equipped Item",
+        "description": "This option allows you to choose the item the mob will hold in its hand. The selected item will appear in the mob's hand when summoned."
+      }
+    },
+    "health": {
+      "title": "Mob Health",
+      "label": "Amount of health:",
+      "placeholder": "Enter health...",
+      "help": {
+        "title": "Help - Mob Health",
+        "description": "This option lets you set how much health the mob will have when it appears. The value should be between 1 and 1000 health points."
+      }
+    },
+      "loot": {
+        "title": "Default Loot",
+        "label": "Disable default loot:",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "help": {
+        "title": "Help - Default Loot",
+        "description": "This option allows you to enable or disable the mob's default loot. When enabled, the mob will drop its default configured items on death."
+      }
+    },
+    "lootTags": {
+      "title": "Loot Tags",
+      "emptyMessage": "No saved loot tags.",
+      "selectEnchantPlaceholder": "Select enchantments",
+      "selectItemPlaceholder": "Select item",
+      "particlesEnabled": "Particles",
+      "particlesDisabled": "Disabled Particles",
+      "categorySplash": "Splash",
+      "categoryNormal": "Normal",
+      "saveButton": "Save",
+      "deleteButton": "Delete",
+      "editButton": "Edit",
+      "fields": {
+        "amount": "Amount:",
+        "bonus": "Bonus:",
+        "lootBonus": "Loot Bonus:",
+        "chance": "Chance:",
+        "onFire": "Is on fire:",
+        "size": "Size:",
+        "isBaby": "Is baby:",
+        "variant": "Variant:",
+        "isSheared": "Is sheared:",
+        "color": "Color:",
+        "item_name": "Item Tag - Name:",
+        "item_type": "Item Tag - Type:",
+        "item_unbreakable": "Item Tag - Unbreakable:",
+        "item_enchantment": "Item Tag - Enchantment:",
+        "item_anvilUses": "Item Tag - Anvil Uses:",
+        "item_canPlaceOn": "Item Tag - Can Place On:",
+        "item_canDestroy": "Item Tag - Can Destroy:",
+        "item_showParticles": "Item Tag - Disable Particles:",
+        "item_category": "Item Tag - Category:",
+        "item_command": "Item Tag - Command:",
+        "item_uses": "Item Tag - Uses:"
+      },
+      "sizeOptions": {
+        "small": "Small",
+        "medium": "Medium",
+        "large": "Large"
+      },
+      "help": {
+        "title": "Help - Loot Tags",
+        "description": "Loot tags control special behaviors when the mob dies, such as the chance to drop rare items."
+      }
+      ,"helpTexts":{
+        "amount":"Number of items to drop.",
+        "bonus":"Fortune bonus to apply to drops.",
+        "lootBonus":"Extra loot bonus probability.",
+        "chance":"Chance (percentage) this drop will occur.",
+        "onFire":"When enabled the drop will be generated from mobs that are on fire.",
+        "size":"Size variant for the drop (small/medium/large).",
+        "isBaby":"Whether the drop applies only to baby variants.",
+        "variant":"Mob variant this drop applies to.",
+        "isSheared":"Applies only if mob is sheared (sheep).",
+        "color":"Color filter for the drop (if applicable).",
+        "item_name":"Custom name to assign to the item.",
+        "item_type":"Type of item associated with the drop.",
+        "item_unbreakable":"Set the item as unbreakable.",
+        "item_enchantment":"Add enchantments to the item.",
+        "item_canPlaceOn":"Blocks this item can be placed on.",
+        "item_canDestroy":"Blocks this item can destroy.",
+        "item_showParticles":"Toggle to remove item particles (disabled = no particles).",
+        "item_category":"Item category (Splash or Normal).",
+        "item_command":"Custom command applied to the item.",
+        "item_uses":"Number of uses for the item.",
+        "item_anvilUses":"Anvil uses (repair cost) for the item."
+      }
+    },
+    "armor": {
+      "title": "Mob Armor",
+      "helmet": "Helmet:",
+      "chestplate": "Chestplate:",
+      "leggings": "Leggings:",
+      "boots": "Boots:",
+      "selectPlaceholder": "--Select--",
+      "help": {
+        "title": "Help - Mob Armor",
+        "description": "This option lets you equip the mob with different pieces of armor. You can choose helmet, chestplate, leggings and boots of various materials."
+      }
+    },
+    "aggressiveness": {
+      "title": "Mob Aggressiveness",
+      "label": "Aggressiveness type:",
+      "selectPlaceholder": "--Select type--",
+      "hostile": "Hostile",
+      "neutral": "Neutral",
+      "passive": "Passive",
+      "help": {
+        "title": "Help - Aggressiveness",
+        "description": "This option lets you define the mob's aggressive behavior. Hostile will attack players, Neutral will only attack if provoked, and Passive will never attack."
+      }
+    },
+    "skin": {
+      "title": "Skin ID",
+      "label": "Skin ID (numbers only):",
+      "placeholder": "Example: 76198",
+      "help": {
+        "title": "Help - Skin ID",
+        "description": "Enter the numeric ID of the skin you want to assign to the mob. Only numbers are allowed (e.g. 76198). In the command it will be added as `skin:76198`."
+      }
+    },
+    "charged": {
+      "title": "Charged Creeper",
+      "label": "Charged Creeper:",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "help": {
+        "title": "Help - Charged Creeper",
+        "description": "Enable this option to turn the creeper into a charged variant. The command will include `charged:1` when enabled."
+      }
+    },
+    "baby": {
+      "title": "Baby",
+      "modeLabel": "Baby mode:",
+      "option": {
+        "always": "Always",
+        "time": "Time"
+      },
+      "timeLabel": "Time (seconds):",
+      "timePlaceholder": "Enter seconds...",
+      "description": "Configure how the mob should appear in its baby variant. Choose 'Always' for baby:true or 'Time' to specify a number to appear as baby:N in the command.",
+      "help": {
+        "title": "Help - Baby",
+        "description": "Set whether the mob should be spawned as a baby. 'Always' sets baby:true. 'Time' allows entering a numeric value that will be used as baby:N in the generated command."
+      }
+    },
+    "language": {
+      "title": "Select Language",
+      "selectText": "Select Language"
+    },
+    "savedModal": {
+      "title": "Saved",
+      "emptyMessage": "No saved items yet.",
+      "createTitle": "Save",
+      "nameLabel": "Name:",
+      "namePlaceholder": "Enter a name...",
+      "saveButton": "Save",
+      "cancelButton": "Cancel",
+      "copyTooltip": "Copy command",
+      "editTooltip": "Edit this saved item",
+      "deleteTooltip": "Delete"
+    }
+    ,
+    "settings": {
+      "title": "Settings",
+      "description": "Configure your preferences",
+      "themeLabel": "Theme:",
+      "autoSaveLabel": "Auto-save current command:",
+      "autoSaveOn": "On",
+      "autoSaveOff": "Off",
+      "imageCacheLabel": "Image cache (reduce network):",
+      "imageCacheOn": "On",
+      "imageCacheOff": "Off",
+      "defaultAmountLabel": "Default mob amount:",
+      "clearSavedButton": "Clear saved",
+      "closeButton": "Close",
+      "exportLabel": "Export saved commands:",
+      "exportButton": "Export",
+      "importLabel": "Import saved commands:",
+      "importButton": "Import",
+      "exportFilenamePrefix": "mbsummon_saves",
+      "exportFailed": "Export failed",
+      "importInvalidFile": "Invalid import file - expected an array of saved items",
+      "importSuccess": "Import complete. Added %d new items.",
+      "importFailed": "Import failed - invalid JSON"
+    }
+  },
+  "notifications": {
+    "select_mob": "You must select a mob first",
+    "card_not_available": "Card unavailable",
+    "randomize_success": "Randomization applied",
+    "saved_success": "Command saved",
+    "language_changed": "Language changed",
+    "cleared": "Form reset",
+    "copied": "Command copied",
+    "deleted": "Command deleted",
+    "save_duplicate": "This command is already saved",
+    "import_file_selected_prefix": "Selected file",
+    "import_success": "Import completed",
+    "import_failed": "Import failed"
+  ,
+    "editing": "Editing saved item",
+    "loot": {
+      "added": "Item added",
+      "updated": "Item updated",
+      "deleted": "Item deleted",
+      "missing": "You must add an item first"
+    },
+    "export_success": "Export completed",
+    "export_failed": "Export failed"
+  },
+  "footer": {
+    "saveTitle": "Save",
+    "copy": "Copy command"
+  }
+}
