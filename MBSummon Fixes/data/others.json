@@ -1,0 +1,548 @@
+{
+  "colors": [
+    {
+      "value": "red",
+      "text": "Red",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Red_ow8fz1.png",
+      "translations": { "en": "Red", "es": "Rojo" }
+    },
+    {
+      "value": "green",
+      "text": "Green",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Green_hojzk0.png",
+      "translations": { "en": "Green", "es": "Verde" }
+    },
+    {
+      "value": "blue",
+      "text": "Blue",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Blue_nfyfrs.png",
+      "translations": { "en": "Blue", "es": "Azul" }
+    },
+    {
+      "value": "brown",
+      "text": "Brown",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Brown_n54tmt.png",
+      "translations": { "en": "Brown", "es": "Marrón" }
+    },
+    {
+      "value": "cyan",
+      "text": "Cyan",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Cyan_ietx4o.png",
+      "translations": { "en": "Cyan", "es": "Cian" }
+    },
+    {
+      "value": "lightblue",
+      "text": "Light Blue",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Light_Blue_jiivto.png",
+      "translations": { "en": "Light Blue", "es": "Azul claro" }
+    },
+    {
+      "value": "lightgreen",
+      "text": "Light Green",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Light_Green_xozy6s.png",
+      "translations": { "en": "Light Green", "es": "Verde claro" }
+    },
+    {
+      "value": "magenta",
+      "text": "Magenta",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Magenta_wk1euz.png",
+      "translations": { "en": "Magenta", "es": "Magenta" }
+    },
+    {
+      "value": "orange",
+      "text": "Orange",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Orange_xkxwgg.png",
+      "translations": { "en": "Orange", "es": "Naranja" }
+    },
+    {
+      "value": "pink",
+      "text": "Pink",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Pink_nilaad.png",
+      "translations": { "en": "Pink", "es": "Rosa" }
+    },
+    {
+      "value": "purple",
+      "text": "Purple",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Purple_r0jjhk.png",
+      "translations": { "en": "Purple", "es": "Púrpura" }
+    },
+    {
+      "value": "white",
+      "text": "White",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/White_hjvvrz.png",
+      "translations": { "en": "White", "es": "Blanco" }
+    },
+    {
+      "value": "yellow",
+      "text": "Yellow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Yellow_dm8nsr.png",
+      "translations": { "en": "Yellow", "es": "Amarillo" }
+    },
+    {
+      "value": "lightgray",
+      "text": "Light Gray",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Light_Gray_hjjfrv.png",
+      "translations": { "en": "Light Gray", "es": "Gris claro" }
+    },
+    {
+      "value": "gray",
+      "text": "Gray",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1726962877/Gray_fkir91.png",
+      "translations": { "en": "Gray", "es": "Gris" }
+    },
+    {
+      "value": "black",
+      "text": "Black",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Black_feewkv.png",
+      "translations": { "en": "Black", "es": "Negro" }
+    }
+  ],
+  "variant": [
+    {
+      "value": "mooshroom",
+      "text": "Mooshroom",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1726898090/MoshroomHead_ekdzm1.png",
+      "translations": { "en": "Mooshroom", "es": "Vaca Seta" }
+    },
+    {
+      "value": "cowctus",
+      "text": "Cactus Cow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898075/CactuscowHead_igghuq.png",
+      "translations": { "en": "Cowctus", "es": "Vaca Cactus" }
+    },
+    {
+      "value": "normal",
+      "text": "Normal",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726898081/CowHead_z4cmpi.png",
+      "translations": { "en": "Normal", "es": "Normal" }
+    }
+  ],
+  "enchants": [
+    {
+      "value": "unbreaking1",
+      "text": "Unbreaking I",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Unbreaking I", "es": "Irrompibilidad I" }
+    },
+    {
+      "value": "unbreaking2",
+      "text": "Unbreaking II",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Unbreaking II", "es": "Irrompibilidad II" }
+    },
+    {
+      "value": "unbreaking3",
+      "text": "Unbreaking III",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Unbreaking III", "es": "Irrompibilidad III" }
+    },
+    {
+      "value": "unbreaking4",
+      "text": "Unbreaking IV",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Unbreaking IV", "es": "Irrompibilidad IV" }
+    },
+    {
+      "value": "protection1",
+      "text": "Protection I",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Protection I", "es": "Protección I" }
+    },
+    {
+      "value": "protection2",
+      "text": "Protection II",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Protection II", "es": "Protección II" }
+    },
+    {
+      "value": "protection3",
+      "text": "Protection III",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Protection III", "es": "Protección III" }
+    },
+    {
+      "value": "protection4",
+      "text": "Protection IV",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Protection IV", "es": "Protección IV" }
+    },
+    {
+      "value": "protection5",
+      "text": "Protection V",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Protection V", "es": "Protección V" }
+    },
+    {
+      "value": "protectionFire1",
+      "text": "Fire Protection I",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Fire Protection I", "es": "Protección contra fuego I" }
+    },
+    {
+      "value": "protectionFire2",
+      "text": "Fire Protection II",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Fire Protection II", "es": "Protección contra fuego II" }
+    },
+    {
+      "value": "protectionFire3",
+      "text": "Fire Protection III",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Fire Protection III", "es": "Protección contra fuego III" }
+    },
+    {
+      "value": "protectionBlast1",
+      "text": "Blast Protection I",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Blast Protection I", "es": "Protección contra explosiones I" }
+    },
+    {
+      "value": "protectionBlast2",
+      "text": "Blast Protection II",
+           "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Blast Protection II", "es": "Protección contra explosiones II" }
+    },
+    {
+      "value": "protectionBlast3",
+      "text": "Blast Protection III",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Blast Protection III", "es": "Protección contra explosiones III" }
+    },
+    {
+      "value": "protectionProjectile1",
+      "text": "Projectile Protection I",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Projectile Protection I", "es": "Protección contra proyectiles I" }
+    },
+    {
+      "value": "protectionProjectile2",
+      "text": "Projectile Protection II",
+           "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Projectile Protection II", "es": "Protección contra proyectiles II" }
+    },
+    {
+      "value": "protectionProjectile3",
+      "text": "Projectile Protection III",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Projectile Protection III", "es": "Protección contra proyectiles III" }
+    },
+    {
+      "value": "protectionFalling1",
+      "text": "Feather Falling I",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Feather Falling I", "es": "Caída de pluma I" }
+    },
+    {
+      "value": "protectionFalling2",
+      "text": "Feather Falling II",
+           "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Feather Falling II", "es": "Caída de pluma II" }
+    },
+    {
+      "value": "protectionFalling3",
+      "text": "Feather Falling III",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Feather Falling III", "es": "Caída de pluma III" }
+    },
+    {
+      "value": "sharpness1",
+      "text": "Sharpness I",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Sharpness I", "es": "Filo I" }
+    },
+    {
+      "value": "sharpness2",
+      "text": "Sharpness II",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Sharpness II", "es": "Filo II" }
+    },
+    {
+      "value": "sharpness3",
+      "text": "Sharpness III",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Sharpness III", "es": "Filo III" }
+    },
+    {
+      "value": "sharpness4",
+      "text": "Sharpness IV",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Sharpness IV", "es": "Filo IV" }
+    },
+    {
+      "value": "smite1",
+      "text": "Smite I",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Smite I", "es": "Castigo I" }
+    },
+    {
+      "value": "smite2",
+      "text": "Smite II",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Smite II", "es": "Castigo II" }
+    },
+    {
+      "value": "smite3",
+      "text": "Smite III",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Smite III", "es": "Castigo III" }
+    },
+    {
+      "value": "smite4",
+      "text": "Smite IV",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Smite IV", "es": "Castigo IV" }
+    },
+    {
+      "value": "baneOfArthropods1",
+      "text": "Bane of Arthropods I",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Bane of Arthropods I", "es": "Perdición de los artrópodos I" }
+    },
+    {
+      "value": "baneOfArthropods2",
+      "text": "Bane of Arthropods II",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Bane of Arthropods II", "es": "Perdición de los artrópodos II" }
+    },
+    {
+      "value": "baneOfArthropods3",
+      "text": "Bane of Arthropods III",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Bane of Arthropods III", "es": "Perdición de los artrópodos III" }
+    },
+    {
+      "value": "knockback1",
+      "text": "Knockback I",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Knockback I", "es": "Retroceso I" }
+    },
+    {
+      "value": "knockback2",
+      "text": "Knockback II",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Knockback II", "es": "Retroceso II" }
+    },
+    {
+      "value": "knockback3",
+      "text": "Knockback III",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Knockback III", "es": "Retroceso III" }
+    },
+    {
+      "value": "fireAspect1",
+      "text": "Fire Aspect I",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Fire Aspect I", "es": "Aspecto ígneo I" }
+    },
+    {
+      "value": "fireAspect2",
+      "text": "Fire Aspect II",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Fire Aspect II", "es": "Aspecto ígneo II" }
+    },
+    {
+      "value": "looting1",
+      "text": "Looting I",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Looting I", "es": "Saqueo I" }
+    },
+    {
+      "value": "looting2",
+      "text": "Looting II",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Looting II", "es": "Saqueo II" }
+    },
+    {
+      "value": "looting3",
+      "text": "Looting III",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Looting III", "es": "Saqueo III" }
+    },
+    {
+      "value": "efficiency1",
+      "text": "Efficiency I",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Efficiency I", "es": "Eficiencia I" }
+    },
+    {
+      "value": "efficiency2",
+      "text": "Efficiency II",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Efficiency II", "es": "Eficiencia II" }
+    },
+    {
+      "value": "fortune1",
+      "text": "Fortune I",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Fortune I", "es": "Fortuna I" }
+    },
+    {
+      "value": "fortune2",
+      "text": "Fortune II",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Fortune II", "es": "Fortuna II" }
+    },
+    {
+      "value": "fortune3",
+      "text": "Fortune III",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Fortune III", "es": "Fortuna III" }
+    },
+    {
+      "value": "power1",
+      "text": "Power I",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Power I", "es": "Poder I" }
+    },
+    {
+      "value": "power2",
+      "text": "Power II",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Power II", "es": "Poder II" }
+    },
+    {
+      "value": "power3",
+      "text": "Power III",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Power III", "es": "Poder III" }
+    },
+    {
+      "value": "punch1",
+      "text": "Punch I",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Punch I", "es": "Empuje I" }
+    },
+    {
+      "value": "punch2",
+      "text": "Punch II",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Punch II", "es": "Empuje II" }
+    },
+    {
+      "value": "respiration1",
+      "text": "Respiration I",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Respiration I", "es": "Respiración I" }
+    },
+    {
+      "value": "respiration2",
+      "text": "Respiration II",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Respiration II", "es": "Respiración II" }
+    },
+    {
+      "value": "respiration3",
+      "text": "Respiration III",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Respiration III", "es": "Respiración III" }
+    },
+    {
+      "value": "thorns1",
+      "text": "Thorns I",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Thorns I", "es": "Espinas I" }
+    },
+    {
+      "value": "thorns2",
+      "text": "Thorns II",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Thorns II", "es": "Espinas II" }
+    },
+    {
+      "value": "thorns3",
+      "text": "Thorns III",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Thorns III", "es": "Espinas III" }
+    },
+    {
+      "value": "depthStrider1",
+      "text": "Depth Strider I",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Depth Strider I", "es": "Agilidad acuática I" }
+    },
+    {
+      "value": "depthStrider2",
+      "text": "Depth Strider II",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Depth Strider II", "es": "Agilidad acuática II" }
+    },
+    {
+      "value": "depthStrider3",
+      "text": "Depth Strider III",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Depth Strider III", "es": "Agilidad acuática III" }
+    },
+    {
+      "value": "frostWalker1",
+      "text": "Frost Walker I",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Frost Walker I", "es": "Paso helado I" }
+    },
+    {
+      "value": "frostWalker2",
+      "text": "Frost Walker II",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Frost Walker II", "es": "Paso helado II" }
+    },
+    {
+      "value": "silkTouch",
+      "text": "Silk Touch",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Silk Touch", "es": "Toque de seda" }
+    },
+    {
+      "value": "flame",
+      "text": "Flame",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Flame", "es": "Fuego" }
+    },
+    {
+      "value": "infinity",
+      "text": "Infinity",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Infinity", "es": "Infinidad" }
+    },
+    {
+      "value": "aquaAffinity",
+      "text": "Aqua Affinity",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Aqua Affinity", "es": "Afinidad acuática" }
+    },
+    {
+      "value": "luckOfTheSea1",
+      "text": "Luck of the Sea I",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Luck of the Sea I", "es": "Suerte marina I" }
+    },
+    {
+      "value": "luckOfTheSea2",
+      "text": "Luck of the Sea II",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Luck of the Sea II", "es": "Suerte marina II" }
+    },
+    {
+      "value": "luckOfTheSea3",
+      "text": "Luck of the Sea III",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Luck of the Sea III", "es": "Suerte marina III" }
+    },
+    {
+      "value": "lure1",
+      "text": "Lure I",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Lure I", "es": "Atracción I" }
+    },
+    {
+      "value": "lure2",
+      "text": "Lure II",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Lure II", "es": "Atracción II" }
+    },
+    {
+      "value": "lure3",
+      "text": "Lure III",
+      "image": "https://res.cloudinary.com/dnyoogvv1/image/upload/v1768445713/1_myc63d.png",
+      "translations": { "en": "Lure III", "es": "Atracción III" }
+    }
+  ]
+}
