@@ -1381,6 +1381,7 @@ body {
     padding: 13px 21px 13px;
     z-index: 100;
     gap: 20px;
+    grid-template-columns: 1fr auto;
   }
 
   .logo {
