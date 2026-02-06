@@ -345,6 +345,10 @@ body {
 }
 
 
+/* Also ensure selected option in dropdown uses subtle border in dark mode */
+[data-theme="dark"] .select2-container--default .select2-results__option--selected {
+  background-color: #666565;
+}
 
 .topbar {
   grid-column: 2 / 3;
@@ -2679,6 +2683,30 @@ input[type="color"].sidebar-input {
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
+
+/* Visually dim disabled options in Select2 results (robust against re-inits) */
+.select2-results__option[aria-disabled="true"] {
+  opacity: 0.45;
+  filter: grayscale(100%);
+  pointer-events: none;
+}
+
+.select2-container--default .select2-selection__choice[aria-disabled="true"] {
+  opacity: 0.5;
+}
+
+/* Hide images in the selected value for the mobType Select2 specifically (multiple selector variants) */
+#select2-mobType-container img,
+[id^="select2-mobType"] img,
+select#mobType + .select2-container .select2-selection__rendered img,
+select#mobType ~ .select2-container .select2-selection__rendered img,
+.select2-container .select2-selection__rendered[id^="select2-mobType"] img {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
   display: flex;
   align-items: center;
   gap: 8px;
