@@ -32,10 +32,17 @@
       }
     } catch (e) {}
     const img = $el.data('image');
-    if (!img) return display;
+    // If option is disabled, show it visually muted
+    const isDisabled = option.element && option.element.disabled;
+    if (!img) {
+      const $txt = $('<span>').addClass('select2-option-text').text(display);
+      if(isDisabled) $txt.css({ opacity: 0.45, filter: 'grayscale(80%)' });
+      return $txt;
+    }
     const $wrap = $('<span>').addClass('select2-option-wrap');
     const $img = $('<img>').addClass('select2-option-img').attr('src', img).attr('alt', display);
     $wrap.append($img).append($('<span>').addClass('select2-option-text').text(display));
+    if(isDisabled) $wrap.css({ opacity: 0.45, filter: 'grayscale(80%)' });
     return $wrap;
   }
 
@@ -159,6 +166,12 @@
           const v = $inp.val() || [];
           return Array.isArray(v) ? v.map(String) : (v ? [String(v)] : []);
         }
+        // single selects: treat empty string as explicit cleared value -> return null
+        if($inp.is('select') && !$inp.prop('multiple')){
+          const v = $inp.val();
+          if(v === undefined || v === null || String(v).trim() === '') return null;
+          return String(v);
+        }
         const type = ($inp.attr('type') || '').toLowerCase();
         const val = $inp.val();
         if(type === 'number' || $inp.hasClass('integer-only')) return parseNum(val);
@@ -216,7 +229,8 @@
           try{ $inp.trigger('change'); }catch(e){ $inp.trigger('input'); }
           return;
         }
-        $inp.val((val === null || val === undefined) ? '' : val).trigger('input');
+        $inp.val((val === null || val === undefined) ? '' : val);
+        try{ if($inp.is('select')) $inp.trigger('change'); else $inp.trigger('input'); }catch(e){ }
         return;
       }
       const $tog = $el.find('.toggle-button');
@@ -368,37 +382,41 @@
 
       const title = document.createElement('div');
       title.className = 'saved-title';
-      // Compute display text using current language translations, fallback to saved text, then to itemId
+      // Compute display text using the most-recent DOM/translation sources so
+      // language changes are reflected immediately. Prefer the currently
+      // rendered option text from the sidebar select (it is updated by
+      // `loadLanguage`), then fall back to externalTranslations, t(), saved
+      // itemText, and finally the itemId.
       let titleText = item.itemId || '';
       try {
         const curLang = localStorage.getItem('language') || 'es';
-        const key = item.itemId ? ('external.items.' + item.itemId) : null;
-        
-        // Try to get translation for current language
-        if (key) {
-          // First try external translations
-          if (window.externalTranslations && window.externalTranslations[key]) {
-            if (window.externalTranslations[key][curLang]) {
-              titleText = window.externalTranslations[key][curLang];
-            } else {
-              // If current lang not available, try first available language in translations
-              const langs = Object.keys(window.externalTranslations[key]);
-              if (langs.length > 0 && window.externalTranslations[key][langs[0]]) {
-                titleText = window.externalTranslations[key][langs[0]];
-              }
+        // Prefer the live sidebar option text (reflects current language)
+        try{
+          const $opt = $('#sidebarItemSelect').find('option[value="' + (item.itemId || '') + '"]').first();
+          if($opt && $opt.length && $opt.text().trim()){
+            titleText = $opt.text().trim();
+          }
+        }catch(e){}
+
+        // If not found in DOM, try externalTranslations map
+        if((!titleText || titleText === '') && item.itemId){
+          const key = 'external.items.' + item.itemId;
+          if (window.externalTranslations && window.externalTranslations[key]){
+            if(window.externalTranslations[key][curLang]) titleText = window.externalTranslations[key][curLang];
+            else {
+              const langs = Object.keys(window.externalTranslations[key] || {});
+              if(langs.length && window.externalTranslations[key][langs[0]]) titleText = window.externalTranslations[key][langs[0]];
             }
           }
-          // If no external translation found, try the language JSON via t()
-          if (titleText === item.itemId && typeof window.t === 'function') {
+          if((!titleText || titleText === '') && typeof window.t === 'function'){
             const fromLang = window.t(key, null);
-            if (fromLang) titleText = fromLang;
+            if(fromLang) titleText = fromLang;
           }
         }
-        
-        // Last resort: use saved itemText if nothing else worked
-        if (titleText === item.itemId && item.itemText) {
-          titleText = item.itemText;
-        }
+
+        // Last resort: saved text or id
+        if((!titleText || titleText === '') && item.itemText) titleText = item.itemText;
+        if((!titleText || titleText === '') && item.itemId) titleText = item.itemId;
       } catch (e) { /* ignore */ }
       title.textContent = titleText;
       left.appendChild(title);
@@ -514,11 +532,21 @@
   }
 
   function addLootTag(obj){
-    // Filter out null/empty properties for new items (save only filled inputs)
+    // Filter out null/empty/false properties for new items (save only filled inputs)
     const filtered = {};
     Object.keys(obj || {}).forEach(k => {
       const v = obj[k];
+      // remove null/empty strings and NaN numbers
       if (v === null || v === '' || (typeof v === 'number' && isNaN(v))) return;
+      // do not persist boolean false as "user didn't select" (only persist true)
+      if (typeof v === 'boolean' && v === false) return;
+      // arrays: ignore empty arrays or arrays with only empty strings
+      if (Array.isArray(v)){
+        const cleaned = v.filter(x => x !== undefined && x !== null && String(x).trim() !== '');
+        if(!cleaned.length) return;
+        filtered[k] = cleaned.slice();
+        return;
+      }
       filtered[k] = v;
     });
     const item = Object.assign({}, filtered, { id: uid(), createdAt: Date.now() });
@@ -541,7 +569,29 @@
   function updateLootTag(id, data){
     const idx = store.findIndex(s => s.id === id);
     if(idx === -1) return false;
-    store[idx] = Object.assign({}, store[idx], data);
+    // Filter incoming update data similar to addLootTag, but allow boolean false
+    // so users can unset toggles (e.g., disable particles) when updating existing items.
+    // For updates: user may clear selects/inputs explicitly. If a field is present
+    // in `data` and its value is null/empty/NaN, delete the existing key from stored item.
+    const updated = Object.assign({}, store[idx]);
+    Object.keys(data || {}).forEach(k => {
+      const v = data[k];
+      // delete existing key when user cleared the field (null or empty string or NaN)
+      if (v === null || v === '' || (typeof v === 'number' && isNaN(v))){
+        if(updated.hasOwnProperty(k)) delete updated[k];
+        return;
+      }
+      // Persist boolean values (both true and false) on update so toggles can be set/cleared
+      if (typeof v === 'boolean') { updated[k] = v; return; }
+      if (Array.isArray(v)){
+        const cleaned = v.filter(x => x !== undefined && x !== null && String(x).trim() !== '');
+        if(!cleaned.length){ if(updated.hasOwnProperty(k)) delete updated[k]; return; }
+        updated[k] = cleaned.slice();
+        return;
+      }
+      updated[k] = v;
+    });
+    store[idx] = updated;
     saveStore();
     renderSavedList();
     // Debug: log the updated item so the console shows final stored state
@@ -627,7 +677,7 @@
       const items = $container.find('.loot-tags-item');
       // default: enable all (include item tag fields)
       const allFields = ['amount','bonus','lootBonus','chance','onFire','size','isBaby','variant','isSheared','color',
-        'item_type','item_unbreakable','item_enchantment','item_anvilUses','item_name','item_canPlaceOn','item_canDestroy','item_showParticles','item_category','item_command','item_uses'
+        'item_unbreakable','item_enchantment','item_anvilUses','item_name','item_canPlaceOn','item_canDestroy','item_showParticles','item_category','item_command','item_uses','item_type_spawnegg','item_type_color','item_type_balloon','item_type_potion','item_type_color_carpet','item_type_color_bed','item_type_color_wool','item_type_color_wool_b','item_type_color_glass','item_type_color_glass_b','item_type_color_dye'
       ];
       let enabled = allFields.slice();
 
@@ -747,14 +797,14 @@
       };
 
       // Reset default fields first (amount, bonus, lootBonus, chance, onFire, size, isBaby, variant, isSheared, color)
-      const defaultFields = ['amount', 'bonus', 'lootBonus', 'chance', 'onFire', 'size', 'isBaby', 'variant', 'isSheared', 'color'];
+      const defaultFields = ['amount', 'bonus', 'lootBonus', 'chance', 'onFire'];
       defaultFields.forEach(name => {
         const $el = $container.find('.loot-tags-item[data-field="' + name + '"]');
         if($el && $el.length) resetField($el);
       });
 
       // If no specific config, hide all extra item fields to keep UI compact
-      const extraFields = ['item_type','item_unbreakable','item_enchantment','item_anvilUses','item_name','item_canPlaceOn','item_canDestroy','item_showParticles','item_category','item_command','item_uses','item_type_spawnegg','item_type_color','item_type_color2','item_type_balloon','item_type_potion'];
+      const extraFields = ['item_unbreakable','item_enchantment','item_anvilUses','item_name','item_canPlaceOn','item_canDestroy','item_showParticles','item_category','item_command','item_uses','item_type_spawnegg','item_type_color','item_type_balloon','item_type_potion','item_type_color_carpet','item_type_color_bed','item_type_color_wool','item_type_color_wool_b','item_type_color_glass','item_type_color_glass_b','item_type_color_dye'];
       // Debug: log computed enabled fields for this item
       try{ console.log('applyItemConfig for itemId="' + (itemId||'') + '", enabled=', enabled); }catch(e){}
 
@@ -841,6 +891,72 @@
       e.preventDefault();
       const $t = $(this);
       $t.val(final).trigger('input');
+    });
+
+    // Enchantment select: prevent selecting two levels of the same enchantment
+    const refreshEnchantSelect = function($s){
+      try{
+        const val = $s.val() || [];
+        // preserve current selection
+        const curVal = Array.isArray(val) ? val.slice() : (val ? [val] : []);
+        // preserve whether dropdown was open so we can restore state after re-init
+        let wasOpen = false;
+        try{ if($s.data('select2') && typeof $s.data('select2').isOpen === 'function'){ wasOpen = !!$s.data('select2').isOpen(); } }catch(e){}
+        if($s.data('select2')){ try{ $s.select2('destroy'); }catch(e){} }
+        try{ $s.select2({ dropdownParent: $(document.body), placeholder: t('modals.lootTags.selectEnchantPlaceholder','--Seleccionar--'), templateResult: formatOption, templateSelection: formatSelection, width: '100%', allowClear: true, closeOnSelect: false, escapeMarkup: function(m){return m;} }); }catch(e){}
+        try{ $s.val(curVal).trigger('change'); }catch(e){}
+        try{ if(wasOpen){ $s.select2('open'); } }catch(e){}
+      }catch(e){}
+    };
+
+    $(document).on('select2:select', '#itemEnchantSelect', function(e){
+      try{
+        const data = (e && e.params && e.params.data) ? e.params.data : null;
+        if(!data) return;
+        const val = (data.id !== undefined && data.id !== null) ? String(data.id) : (data.element ? String(data.element.value) : null);
+        if(!val) return;
+        const $s = $(this);
+        const cur = $s.val() || [];
+        const base = String(val).replace(/\d+$/,'');
+        const conflict = (cur || []).some(v => v && String(v) !== String(val) && String(v).replace(/\d+$/,'') === base);
+        if(conflict){
+          // Remove newly selected value (keep previous) and notify user
+          const newSel = (cur || []).filter(v => String(v) !== String(val));
+          try{ $s.val(newSel).trigger('change'); }catch(e){}
+          const msg = (typeof window.t === 'function') ? window.t('notifications.loot.enchant_conflict_short','Quita el nivel existente') : 'Quita el nivel existente';
+          try{ notify({ type: 'warning', text: msg, timeout: 1200 }); }catch(e){}
+          return;
+        }
+
+        // Disable other options with same base (different levels)
+        try{
+          $s.find('option').each(function(){
+            const $o = $(this); const v = String($o.attr('value') || '');
+            if(!v) return;
+            if(v !== val && v.replace(/\d+$/,'') === base){ $o.prop('disabled', true).attr('aria-disabled','true'); } 
+          });
+          refreshEnchantSelect($s);
+        }catch(e){}
+      }catch(e){ }
+    });
+
+    // When an enchantment is unselected, re-enable options for that base if none remaining
+    $(document).on('select2:unselect', '#itemEnchantSelect', function(e){
+      try{
+        const data = (e && e.params && e.params.data) ? e.params.data : null;
+        if(!data) return;
+        const val = (data.id !== undefined && data.id !== null) ? String(data.id) : (data.element ? String(data.element.value) : null);
+        if(!val) return;
+        const base = String(val).replace(/\d+$/,'');
+        const $s = $(this);
+        const cur = $s.val() || [];
+        const stillHas = (cur || []).some(v => v && String(v).replace(/\d+$/,'') === base);
+        if(!stillHas){
+          // re-enable all options with that base
+          $s.find('option').each(function(){ const $o=$(this); const v=String($o.attr('value')||''); if(v && v.replace(/\d+$/,'')===base){ $o.prop('disabled', false).removeAttr('aria-disabled'); } });
+          refreshEnchantSelect($s);
+        }
+      }catch(e){}
     });
 
     // Input: final sanitize to remove any stray characters (keeps digits and single dot) - only for number inputs
@@ -991,6 +1107,9 @@
         try{
           const $enchant = $('#itemEnchantSelect');
           if($enchant && $enchant.length && othersConfig && Array.isArray(othersConfig.enchants)){
+            // reset options and ensure placeholder exists to avoid duplicates
+            $enchant.empty();
+            $enchant.append($('<option>').attr('value','').attr('data-i18n','common.select').attr('data-default-text','--Seleccionar--').text(t('modals.lootTags.selectEnchantPlaceholder','--Seleccionar--')));
             othersConfig.enchants.forEach(e => {
               const key = `external.others.enchants.${e.value}`;
               if(e.translations) window.externalTranslations[key] = e.translations;
@@ -1000,11 +1119,11 @@
               const opt = $('<option>').attr('value', e.value || '').attr('data-image', e.image || '').attr('data-i18n', key).attr('data-default-text', e.text || e.value || '').text(display);
               $enchant.append(opt);
             });
-            try{ $enchant.select2({ dropdownParent: $(document.body), placeholder: t('common.select','--Seleccionar--'), templateResult: formatOption, templateSelection: formatSelection, width: '100%', allowClear: true, closeOnSelect: false, escapeMarkup: function(m){return m;} }); }catch(e){}
+            try{ $enchant.select2({ dropdownParent: $(document.body), placeholder: t('modals.lootTags.selectEnchantPlaceholder','--Seleccionar--'), templateResult: formatOption, templateSelection: formatSelection, width: '100%', allowClear: true, closeOnSelect: false, escapeMarkup: function(m){return m;} }); }catch(e){}
           }
         }catch(e){}
         
-        // Load item type selects (spawnegg, color, color2, balloon, potion)
+        // Load item type selects (spawnegg, color, balloon, potion)
         try{
           const curLang = localStorage.getItem('language') || 'es';
           
@@ -1033,13 +1152,15 @@
             }).fail(function(){ });
           }catch(e){}
           
-          // Color, Color2, Balloon, Potion - load from others.json
+          // Color, Balloon, Potion - load from others.json
           if(othersConfig){
             // Color
             const $typeColor = $('#itemTypeColorSelect');
             if($typeColor && $typeColor.length && othersConfig.colors && Array.isArray(othersConfig.colors)){
               othersConfig.colors.forEach(c => {
                 const key = `external.others.colors.${c.value}`;
+                if(c.translations) window.externalTranslations[key] = c.translations;
+                else window.externalTranslations[key] = { en: c.text || c.value, es: c.text || c.value };
                 const display = (window.externalTranslations[key] && window.externalTranslations[key][curLang]) ? window.externalTranslations[key][curLang] : (c.text || c.value || '');
                 const opt = $('<option>')
                   .attr('value', c.value || '')
@@ -1052,28 +1173,13 @@
               try{ $typeColor.select2({ templateResult: formatOption, templateSelection: formatSelection, width: '100%', dropdownParent: $(document.body), escapeMarkup: function(m){return m;} }); }catch(e){}
             }
             
-            // Color2
-            const $typeColor2 = $('#itemTypeColor2Select');
-            if($typeColor2 && $typeColor2.length && othersConfig.typeColor && Array.isArray(othersConfig.typeColor)){
-              othersConfig.typeColor.forEach(c => {
-                const key = `external.others.typeColor.${c.value}`;
-                const display = (window.externalTranslations[key] && window.externalTranslations[key][curLang]) ? window.externalTranslations[key][curLang] : (c.text || c.value || '');
-                const opt = $('<option>')
-                  .attr('value', c.value || '')
-                  .attr('data-image', c.image || '')
-                  .attr('data-i18n', key)
-                  .attr('data-default-text', c.text || c.value || '')
-                  .text(display);
-                $typeColor2.append(opt);
-              });
-              try{ $typeColor2.select2({ templateResult: formatOption, templateSelection: formatSelection, width: '100%', dropdownParent: $(document.body), escapeMarkup: function(m){return m;} }); }catch(e){}
-            }
-            
             // Balloon
             const $typeBalloon = $('#itemTypeBalloonSelect');
             if($typeBalloon && $typeBalloon.length && othersConfig.typeBalloon && Array.isArray(othersConfig.typeBalloon)){
               othersConfig.typeBalloon.forEach(b => {
                 const key = `external.others.typeBalloon.${b.value}`;
+                if(b.translations) window.externalTranslations[key] = b.translations;
+                else window.externalTranslations[key] = { en: b.text || b.value, es: b.text || b.value };
                 const display = (window.externalTranslations[key] && window.externalTranslations[key][curLang]) ? window.externalTranslations[key][curLang] : (b.text || b.value || '');
                 const opt = $('<option>')
                   .attr('value', b.value || '')
@@ -1091,6 +1197,8 @@
             if($typePotion && $typePotion.length && othersConfig.typePotion && Array.isArray(othersConfig.typePotion)){
               othersConfig.typePotion.forEach(p => {
                 const key = `external.others.typePotion.${p.value}`;
+                if(p.translations) window.externalTranslations[key] = p.translations;
+                else window.externalTranslations[key] = { en: p.text || p.value, es: p.text || p.value };
                 const display = (window.externalTranslations[key] && window.externalTranslations[key][curLang]) ? window.externalTranslations[key][curLang] : (p.text || p.value || '');
                 const opt = $('<option>')
                   .attr('value', p.value || '')
@@ -1102,6 +1210,106 @@
               });
               try{ $typePotion.select2({ templateResult: formatOption, templateSelection: formatSelection, width: '100%', dropdownParent: $(document.body), escapeMarkup: function(m){return m;} }); }catch(e){}
             }
+
+            // Additional typeColor variants (carpet, bed, wool, wool_b, glass, glass_b, dye)
+            try{
+              const $typeCarpet = $('#itemTypeColorCarpetSelect');
+              if($typeCarpet && $typeCarpet.length && othersConfig.typeColorCarpet && Array.isArray(othersConfig.typeColorCarpet)){
+                othersConfig.typeColorCarpet.forEach(c => {
+                  const key = `external.others.typeColorCarpet.${c.value}`;
+                  if(c.translations) window.externalTranslations[key] = c.translations;
+                  else window.externalTranslations[key] = { en: c.text || c.value, es: c.text || c.value };
+                  const display = (window.externalTranslations[key] && window.externalTranslations[key][curLang]) ? window.externalTranslations[key][curLang] : (c.text || c.value || '');
+                  const opt = $('<option>').attr('value', c.value || '').attr('data-image', c.image || '').attr('data-i18n', key).attr('data-default-text', c.text || c.value || '').text(display);
+                  $typeCarpet.append(opt);
+                });
+                try{ $typeCarpet.select2({ templateResult: formatOption, templateSelection: formatSelection, width: '100%', dropdownParent: $(document.body), escapeMarkup: function(m){return m;} }); }catch(e){}
+              }
+            }catch(e){}
+            try{
+              const $typeBed = $('#itemTypeColorBedSelect');
+              if($typeBed && $typeBed.length && othersConfig.typeColorBed && Array.isArray(othersConfig.typeColorBed)){
+                othersConfig.typeColorBed.forEach(c => {
+                  const key = `external.others.typeColorBed.${c.value}`;
+                  if(c.translations) window.externalTranslations[key] = c.translations;
+                  else window.externalTranslations[key] = { en: c.text || c.value, es: c.text || c.value };
+                  const display = (window.externalTranslations[key] && window.externalTranslations[key][curLang]) ? window.externalTranslations[key][curLang] : (c.text || c.value || '');
+                  const opt = $('<option>').attr('value', c.value || '').attr('data-image', c.image || '').attr('data-i18n', key).attr('data-default-text', c.text || c.value || '').text(display);
+                  $typeBed.append(opt);
+                });
+                try{ $typeBed.select2({ templateResult: formatOption, templateSelection: formatSelection, width: '100%', dropdownParent: $(document.body), escapeMarkup: function(m){return m;} }); }catch(e){}
+              }
+            }catch(e){}
+            try{
+              const $typeWool = $('#itemTypeColorWoolSelect');
+              if($typeWool && $typeWool.length && othersConfig.typeColorWool && Array.isArray(othersConfig.typeColorWool)){
+                othersConfig.typeColorWool.forEach(c => {
+                  const key = `external.others.typeColorWool.${c.value}`;
+                  if(c.translations) window.externalTranslations[key] = c.translations;
+                  else window.externalTranslations[key] = { en: c.text || c.value, es: c.text || c.value };
+                  const display = (window.externalTranslations[key] && window.externalTranslations[key][curLang]) ? window.externalTranslations[key][curLang] : (c.text || c.value || '');
+                  const opt = $('<option>').attr('value', c.value || '').attr('data-image', c.image || '').attr('data-i18n', key).attr('data-default-text', c.text || c.value || '').text(display);
+                  $typeWool.append(opt);
+                });
+                try{ $typeWool.select2({ templateResult: formatOption, templateSelection: formatSelection, width: '100%', dropdownParent: $(document.body), escapeMarkup: function(m){return m;} }); }catch(e){}
+              }
+            }catch(e){}
+            try{
+              const $typeWoolB = $('#itemTypeColorWoolBSelect');
+              if($typeWoolB && $typeWoolB.length && othersConfig.typeColorWoolB && Array.isArray(othersConfig.typeColorWoolB)){
+                othersConfig.typeColorWoolB.forEach(c => {
+                  const key = `external.others.typeColorWoolB.${c.value}`;
+                  if(c.translations) window.externalTranslations[key] = c.translations;
+                  else window.externalTranslations[key] = { en: c.text || c.value, es: c.text || c.value };
+                  const display = (window.externalTranslations[key] && window.externalTranslations[key][curLang]) ? window.externalTranslations[key][curLang] : (c.text || c.value || '');
+                  const opt = $('<option>').attr('value', c.value || '').attr('data-image', c.image || '').attr('data-i18n', key).attr('data-default-text', c.text || c.value || '').text(display);
+                  $typeWoolB.append(opt);
+                });
+                try{ $typeWoolB.select2({ templateResult: formatOption, templateSelection: formatSelection, width: '100%', dropdownParent: $(document.body), escapeMarkup: function(m){return m;} }); }catch(e){}
+              }
+            }catch(e){}
+            try{
+              const $typeGlass = $('#itemTypeColorGlassSelect');
+              if($typeGlass && $typeGlass.length && othersConfig.typeColorGlass && Array.isArray(othersConfig.typeColorGlass)){
+                othersConfig.typeColorGlass.forEach(c => {
+                  const key = `external.others.typeColorGlass.${c.value}`;
+                  if(c.translations) window.externalTranslations[key] = c.translations;
+                  else window.externalTranslations[key] = { en: c.text || c.value, es: c.text || c.value };
+                  const display = (window.externalTranslations[key] && window.externalTranslations[key][curLang]) ? window.externalTranslations[key][curLang] : (c.text || c.value || '');
+                  const opt = $('<option>').attr('value', c.value || '').attr('data-image', c.image || '').attr('data-i18n', key).attr('data-default-text', c.text || c.value || '').text(display);
+                  $typeGlass.append(opt);
+                });
+                try{ $typeGlass.select2({ templateResult: formatOption, templateSelection: formatSelection, width: '100%', dropdownParent: $(document.body), escapeMarkup: function(m){return m;} }); }catch(e){}
+              }
+            }catch(e){}
+            try{
+              const $typeGlassB = $('#itemTypeColorGlassBSelect');
+              if($typeGlassB && $typeGlassB.length && othersConfig.typeColorGlassB && Array.isArray(othersConfig.typeColorGlassB)){
+                othersConfig.typeColorGlassB.forEach(c => {
+                  const key = `external.others.typeColorGlassB.${c.value}`;
+                  if(c.translations) window.externalTranslations[key] = c.translations;
+                  else window.externalTranslations[key] = { en: c.text || c.value, es: c.text || c.value };
+                  const display = (window.externalTranslations[key] && window.externalTranslations[key][curLang]) ? window.externalTranslations[key][curLang] : (c.text || c.value || '');
+                  const opt = $('<option>').attr('value', c.value || '').attr('data-image', c.image || '').attr('data-i18n', key).attr('data-default-text', c.text || c.value || '').text(display);
+                  $typeGlassB.append(opt);
+                });
+                try{ $typeGlassB.select2({ templateResult: formatOption, templateSelection: formatSelection, width: '100%', dropdownParent: $(document.body), escapeMarkup: function(m){return m;} }); }catch(e){}
+              }
+            }catch(e){}
+            try{
+              const $typeDye = $('#itemTypeColorDyeSelect');
+              if($typeDye && $typeDye.length && othersConfig.typeColorDye && Array.isArray(othersConfig.typeColorDye)){
+                othersConfig.typeColorDye.forEach(c => {
+                  const key = `external.others.typeColorDye.${c.value}`;
+                  if(c.translations) window.externalTranslations[key] = c.translations;
+                  else window.externalTranslations[key] = { en: c.text || c.value, es: c.text || c.value };
+                  const display = (window.externalTranslations[key] && window.externalTranslations[key][curLang]) ? window.externalTranslations[key][curLang] : (c.text || c.value || '');
+                  const opt = $('<option>').attr('value', c.value || '').attr('data-image', c.image || '').attr('data-i18n', key).attr('data-default-text', c.text || c.value || '').text(display);
+                  $typeDye.append(opt);
+                });
+                try{ $typeDye.select2({ templateResult: formatOption, templateSelection: formatSelection, width: '100%', dropdownParent: $(document.body), escapeMarkup: function(m){return m;} }); }catch(e){}
+              }
+            }catch(e){}
           }
         }catch(e){}
       }catch(e){ }
@@ -1131,6 +1339,9 @@
               try{
                 const $can = $('#itemCanPlaceOnSelect');
                 if($can && $can.length && data && Array.isArray(data.items)){
+                  // reset and add placeholder once
+                  $can.empty();
+                  $can.append($('<option>').attr('value','').attr('data-i18n','common.select').attr('data-default-text','--Seleccionar--').text(t('common.select','--Seleccionar--')));
                   const curLang = localStorage.getItem('language') || 'es';
                   data.items.forEach(it => {
                     const key = `external.items.${it.value}`;
@@ -1146,6 +1357,8 @@
                 try{
                   const $destroy = $('#itemCanDestroySelect');
                   if($destroy && $destroy.length && data && Array.isArray(data.items)){
+                    $destroy.empty();
+                    $destroy.append($('<option>').attr('value','').attr('data-i18n','common.select').attr('data-default-text','--Seleccionar--').text(t('common.select','--Seleccionar--')));
                     const curLang = localStorage.getItem('language') || 'es';
                     data.items.forEach(it => {
                       const key = `external.items.${it.value}`;
@@ -1384,10 +1597,23 @@
                 if(!newT) newT = $o.attr('data-default-text') || $o.text();
                 if($o.text() !== newT) $o.text(newT);
               });
-              if($enchant.data('select2')){
-                const val = $enchant.val(); try{ $enchant.select2('destroy'); }catch(e){}
-                try{ $enchant.select2({ dropdownParent: $(document.body), placeholder: t('modals.lootTags.selectEnchantPlaceholder','Seleccionar encantamientos'), templateResult: formatOption, templateSelection: formatSelection, width: '100%', allowClear: true, closeOnSelect: false, escapeMarkup: function(m){return m;} }); $enchant.val(val).trigger('change'); }catch(e){}
-              }
+              try {
+                const val = $enchant.val();
+                try{ if($enchant.data('select2')) $enchant.select2('destroy'); }catch(e){}
+                try{
+                  $enchant.select2({
+                    dropdownParent: $(document.body),
+                    placeholder: t('modals.lootTags.selectEnchantPlaceholder','--Seleccionar--'),
+                    templateResult: formatOption,
+                    templateSelection: formatSelection,
+                    width: '100%',
+                    allowClear: true,
+                    closeOnSelect: false,
+                    escapeMarkup: function(m){return m;}
+                  });
+                  $enchant.val(val).trigger('change');
+                }catch(e){}
+              }catch(e){}
             }
           }catch(e){}
 
@@ -1492,6 +1718,34 @@
           }
         }catch(e){}
 
+        // Update enchant, canPlaceOn and canDestroy selects (ensure placeholders update on language change)
+        try{
+          const selList = ['#itemEnchantSelect','#itemCanPlaceOnSelect','#itemCanDestroySelect'];
+          selList.forEach(function(sel){
+            try{
+              const $s = $(sel);
+              if($s && $s.length){
+                $s.find('option[data-i18n]').each(function(){
+                  const $o = $(this); const key = $o.data('i18n'); let newT = null;
+                  try{ if(window.currentLangData && key){ const v = window.t(key,null); if(v) newT = v; } }catch(e){}
+                  if((!newT || newT === null) && window.externalTranslations && window.externalTranslations[key]) newT = window.externalTranslations[key][curLang] || $o.attr('data-default-text') || $o.text();
+                  if(!newT) newT = $o.attr('data-default-text') || $o.text();
+                  if($o.text() !== newT) $o.text(newT);
+                });
+                if($s.data('select2')){
+                  const v = $s.val(); try{ $s.select2('destroy'); }catch(e){}
+                  try{
+                    const placeholderKey = (sel === '#itemEnchantSelect') ? t('modals.lootTags.selectEnchantPlaceholder','--Seleccionar--') : t('common.select','--Seleccionar--');
+                    $s.select2({ dropdownParent: $(document.body), placeholder: placeholderKey, templateResult: formatOption, templateSelection: formatSelection, width: '100%', allowClear: true, closeOnSelect: false, escapeMarkup: function(m){return m;} });
+                    // Restore previous value; if empty, ensure placeholder is shown
+                    if(!v || (Array.isArray(v) && v.length === 0)) $s.val('').trigger('change.select2'); else $s.val(v).trigger('change.select2');
+                  }catch(e){}
+                }
+              }
+            }catch(e){}
+          });
+        }catch(e){}
+
       }catch(e){ /* ignore */ }
       try{ if(typeof updateSidebarItemSelect2Language === 'function') updateSidebarItemSelect2Language(); }catch(e){}
       // Now that selects/external translations have been updated, render saved list so
@@ -1517,7 +1771,7 @@
       const items = store.slice();
       try{
         const allFields = ['amount','bonus','lootBonus','chance','onFire','size','isBaby','variant','isSheared','color',
-          'item_type','item_unbreakable','item_enchantment','item_anvilUses','item_name','item_canPlaceOn','item_canDestroy','item_showParticles','item_category','item_command','item_uses'
+          'item_unbreakable','item_enchantment','item_anvilUses','item_name','item_canPlaceOn','item_canDestroy','item_showParticles','item_category','item_command','item_uses','item_type_spawnegg','item_type_color','item_type_balloon','item_type_potion','item_type_color_carpet','item_type_color_bed','item_type_color_wool','item_type_color_wool_b','item_type_color_glass','item_type_color_glass_b','item_type_color_dye'
         ];
         const presets = (cardsConfig && cardsConfig._lootTagPresets) || {};
         const aliases = (cardsConfig && cardsConfig._lootTagFieldNames) || {};
@@ -1545,6 +1799,25 @@
 
         const enabled = (resolved.length===0) ? allFields.slice() : resolved.slice();
 
+        // Auto-include any item-level fields that exist in stored items so
+        // user-entered item properties are preserved in command generation
+        // even if the mob-specific config doesn't list them explicitly.
+        try{
+          const itemLevelCandidates = new Set();
+          items.forEach(it => {
+            if(!it || typeof it !== 'object') return;
+            Object.keys(it).forEach(k => {
+              // include fields that are clearly item-level (start with item_)
+              // or common alias names used in stored objects
+              if(k && (k.indexOf('item_') === 0 || ['itemName','item_name','item_command','item_enchantment','item_unbreakable','item_anvilUses','item_uses','item_canPlaceOn','item_canDestroy'].indexOf(k) !== -1)){
+                const val = it[k];
+                if(val !== undefined && val !== null && val !== '' ) itemLevelCandidates.add(k);
+              }
+            });
+          });
+          itemLevelCandidates.forEach(f => { if(enabled.indexOf(f) === -1) enabled.push(f); });
+        }catch(e){}
+
         // map items
         return items.map(it => {
           const out = { id: it.id, itemId: it.itemId || it.itemText || '', itemText: it.itemText || '' };
@@ -1553,25 +1826,61 @@
           if(enabled.indexOf('lootBonus')!==-1 && it.lootBonus !== undefined) out.lootBonus = it.lootBonus;
           if(enabled.indexOf('chance')!==-1 && it.chance !== undefined) out.chance = it.chance;
           if(enabled.indexOf('variant')!==-1 && it.variant !== undefined) out.variant = it.variant;
-          if(enabled.indexOf('isSheared')!==-1 && it.isSheared !== undefined) out.isSheared = !!it.isSheared;
-          if(enabled.indexOf('isBaby')!==-1 && it.isBaby !== undefined) out.isBaby = !!it.isBaby;
+          if(enabled.indexOf('isSheared')!==-1 && it.isSheared === true) out.isSheared = true;
+          if(enabled.indexOf('isBaby')!==-1 && it.isBaby === true) out.isBaby = true;
           if(enabled.indexOf('color')!==-1 && it.color !== undefined) out.color = it.color;
-          if(enabled.indexOf('onFire')!==-1 && it.onFire !== undefined) out.onFire = !!it.onFire;
+          if(enabled.indexOf('onFire')!==-1 && it.onFire === true) out.onFire = true;
           if(enabled.indexOf('size')!==-1 && it.size !== undefined) out.size = it.size;
-          // item-specific tags mapping
-          if(enabled.indexOf('item_unbreakable')!==-1 && it.item_unbreakable !== undefined) out.unbreakable = !!it.item_unbreakable;
+          // item-specific tags mapping (explicit common ones)
+          if(enabled.indexOf('item_unbreakable')!==-1 && it.item_unbreakable === true) out.unbreakable = true;
           if(enabled.indexOf('item_enchantment')!==-1 && it.item_enchantment !== undefined){
-            if(Array.isArray(it.item_enchantment)) out.enchantments = it.item_enchantment.slice();
-            else if(it.item_enchantment) out.enchantments = [String(it.item_enchantment)];
+            const arr = Array.isArray(it.item_enchantment) ? it.item_enchantment.slice() : (it.item_enchantment ? [String(it.item_enchantment)] : []);
+            const cleaned = arr.filter(x => x !== undefined && x !== null && String(x).trim() !== '');
+            if(cleaned.length) out.enchantments = cleaned;
           }
-          if(enabled.indexOf('item_name')!==-1 && it.item_name !== undefined) out.name = it.item_name;
+          if(enabled.indexOf('item_name')!==-1 && it.item_name !== undefined && String(it.item_name).trim() !== '') out.name = it.item_name;
           if(enabled.indexOf('item_canPlaceOn')!==-1 && it.item_canPlaceOn !== undefined){
-            if(Array.isArray(it.item_canPlaceOn)) out.canPlaceOn = it.item_canPlaceOn.slice();
-            else if(it.item_canPlaceOn) out.canPlaceOn = [String(it.item_canPlaceOn)];
+            const arr = Array.isArray(it.item_canPlaceOn) ? it.item_canPlaceOn.slice() : (it.item_canPlaceOn ? [String(it.item_canPlaceOn)] : []);
+            const cleaned = arr.filter(x => x !== undefined && x !== null && String(x).trim() !== '');
+            if(cleaned.length) out.canPlaceOn = cleaned;
           }
-          if(enabled.indexOf('item_uses')!==-1 && it.item_uses !== undefined) out.uses = it.item_uses;
-          if(enabled.indexOf('item_command')!==-1 && it.item_command !== undefined) out.command = it.item_command;
+          if(enabled.indexOf('item_uses')!==-1 && it.item_uses !== undefined && it.item_uses !== null && it.item_uses !== '') out.uses = it.item_uses;
+          if(enabled.indexOf('item_command')!==-1 && it.item_command !== undefined && String(it.item_command).trim() !== '') out.command = it.item_command;
           if(enabled.indexOf('item_anvilUses')!==-1 && it.item_anvilUses !== undefined) out.anvilUses = it.item_anvilUses;
+
+          // Generic mapping: include any other item_* fields found in the stored object
+          Object.keys(it).forEach(k => {
+            if(!k || k.indexOf('item_')!==0) return;
+            // Skip the ones already handled above
+            const skip = ['item_unbreakable','item_enchantment','item_name','item_canPlaceOn','item_uses','item_command','item_anvilUses'];
+            if(skip.indexOf(k)!==-1) return;
+            if(enabled.indexOf(k)===-1) return; // only include if enabled for this mob
+            const outKey = k.replace(/^item_/, '');
+            const v = it[k];
+            // Special cases: invert/transform certain toggles
+            if(k === 'item_showParticles'){
+              // UI toggle `item_showParticles` is "Disable Particles". Only include
+              // showParticles in command when user has disabled particles (true -> showParticles:false).
+              if(v === true){ out.showParticles = false; }
+              return;
+            }
+            if(k === 'item_category'){
+              // category toggle: when true -> 'splash'. Do not include when normal/false.
+              if(v === true) out.category = 'splash';
+              return;
+            }
+            // Normalize item_type_* fields to use `type` in command output
+            if(outKey.indexOf('type') === 0){
+              if(v === undefined || v === null) return;
+              out['type'] = Array.isArray(v) ? v.slice() : v;
+              return;
+            }
+            if(v === undefined || v === null) return;
+            // preserve arrays as arrays, otherwise coerce to string/boolean/number as appropriate
+            if(Array.isArray(v)) out[outKey] = v.slice();
+            else out[outKey] = v;
+          });
+
           return out;
         }).filter(i => i.itemId);
       }catch(e){ return store.slice(); }
