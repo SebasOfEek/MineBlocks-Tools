@@ -199,6 +199,13 @@ function formatSelection(option) {
   } catch (e) {}
   const img = $el.data('image');
   if (!img) return display;
+  // If this option belongs to the mobType select, do not include image in selection
+  try{
+    const $parentSelect = $el.closest('select');
+    if($parentSelect && $parentSelect.attr('id') === 'mobType'){
+      return display;
+    }
+  }catch(e){}
   const $sel = $('<span>').addClass('select2-selection-wrap');
   $sel.append($('<img>').addClass('select2-selection-img').attr('src', img).attr('alt', display));
   $sel.append($('<span>').addClass('select2-selection-text').text(display));
@@ -222,10 +229,6 @@ function t(key, fallback) {
   }
   return fallback;
 }
-
-// Asegura que el select2 de mobs (`#mobType`) muestre las etiquetas en el idioma actual.
-// Reescribe los textos de las <option> según `window.currentLangData` o `window.externalTranslations`
-// y re-inicializa Select2 para forzar la actualización visual si es necesario.
 function updateMobSelect2Language() {
   try {
     const $mob = $("#mobType");
@@ -249,7 +252,6 @@ function updateMobSelect2Language() {
       if ($opt.text() !== newText) $opt.text(newText);
     });
 
-    // Si Select2 está inicializado, re-inicializar para forzar refresco visual
     if ($mob.data('select2')) {
       const currentVal = $mob.val();
       try { $mob.select2('destroy'); } catch (e) { /* ignore */ }
@@ -291,8 +293,6 @@ function updateSidebarItemSelect2Language(){
   }catch(e){ console.error('updateSidebarItemSelect2Language', e); }
 }
 
-// Función reutilizable global que limpia el formulario. Si preserveMob=true,
-// no tocará el select `#mobType` (útil al cambiar de mob y querer mantener la selección).
 function clearAllFormData(preserveMob = false, suppressNotify = false) {
   // Bloquear el sidebar primero para mostrar el candado inmediatamente
   if (typeof lockSidebar === 'function') lockSidebar();
@@ -503,6 +503,14 @@ $(document).ready(function () {
 
   $(".popup-close, .popup-overlay").on("click", function (e) {
     if (e.target === this) {
+      const $ov = $(this).closest('.popup-overlay');
+      try{
+        if($ov && $ov.attr('id') === 'lootTagsPopup'){
+          if($('#lootTagsPopup .saved-loot-item.editing').length){
+            return; // editing-block notification handled centrally elsewhere
+          }
+        }
+      }catch(e){}
       $(this).closest(".popup-overlay").removeClass("show");
     }
   });
@@ -521,8 +529,8 @@ $(document).ready(function () {
       document._footerActionInProgress = true; setTimeout(function(){ document._footerActionInProgress = false; }, 700);
       window._lastFooterAction = Date.now();
     }catch(e){}
-    // Obtener el texto del comando sin las etiquetas HTML
-    const commandText = $(".footer-box-big").text();
+    // Obtener el texto del comando sin las etiquetas HTML (trim para eliminar espacios extra)
+    const commandText = $(".footer-box-big").text().trim();
 
     // Crear un elemento textarea temporal
     const textarea = document.createElement("textarea");
@@ -561,7 +569,7 @@ $(document).ready(function () {
       const $found = $(found);
       if($found.data('copy-bound')) return; // original handler exists
       ev.stopPropagation(); ev.preventDefault();
-      const commandText = document.querySelector('.footer-box-big') ? document.querySelector('.footer-box-big').innerText : '';
+      const commandText = document.querySelector('.footer-box-big') ? document.querySelector('.footer-box-big').innerText.trim() : '';
       const textarea = document.createElement('textarea');
       textarea.value = commandText;
       document.body.appendChild(textarea);
@@ -590,7 +598,7 @@ $(document).ready(function () {
         ev.stopPropagation(); ev.preventDefault();
         // set lock so other handlers ignore this same user action
         document._footerActionInProgress = true; setTimeout(function(){ document._footerActionInProgress = false; }, 700);
-        const commandText = document.querySelector('.footer-box-big') ? document.querySelector('.footer-box-big').innerText : '';
+        const commandText = document.querySelector('.footer-box-big') ? document.querySelector('.footer-box-big').innerText.trim() : '';
         const textarea = document.createElement('textarea'); textarea.value = commandText; document.body.appendChild(textarea); textarea.select(); document.execCommand('copy'); document.body.removeChild(textarea);
         try{ $(candidate).addClass('copied'); setTimeout(()=>{ $(candidate).removeClass('copied'); }, 1000); }catch(e){}
         if (typeof notifySuccess === 'function') notifySuccess({ key: 'notifications.copied', timeout: 1800 });
@@ -1485,6 +1493,17 @@ $(document).ready(function () {
   $(".popup-close, .popup-overlay").on("click", function (e) {
     if (e.target === this) {
       const $ov = $(this).closest('.popup-overlay');
+      // If closing the loot tags modal while an item is being edited, prevent closing
+      try{
+        if($ov && $ov.attr('id') === 'lootTagsPopup'){
+          // if any saved item is in editing state, block closing silently (short notify handled elsewhere)
+          if($('#lootTagsPopup .saved-loot-item.editing').length){
+            const msg = (typeof window.t === 'function') ? window.t('notifications.edit_block','Termina edición') : 'Termina edición';
+            if (typeof notify === 'function') notify({ type: 'warning', text: msg, timeout: 1200 });
+            return;
+          }
+        }
+      }catch(e){}
       // If closing the loot tags modal, set a short-lived flag so other handlers
       // (like the global click cancel) can detect an intentional close and avoid
       // hiding update buttons.
@@ -1978,7 +1997,63 @@ function updateCommand() {
         const dropsArr = [];
         lootItems.forEach(item => {
           if (!item || !item.itemId) return;
-          let part = `{item:{id:"${item.itemId}"}`;
+
+          const perItemModifiers = ['quantity','bonus','lootBonus','chance','variant','isSheared','isBaby','color','onFire','size'];
+
+          // Build inner item object parts with requested ordering: id, name, unbreakable, enchantments, others...
+          const inner = [];
+          inner.push(`id:"${item.itemId}"`);
+
+          if (item.name) inner.push(`name:"${String(item.name).replace(/"/g,'\\"')}"`);
+          if (item.unbreakable !== undefined) inner.push(`unbreakable:${item.unbreakable ? 'true' : 'false'}`);
+
+          if (item.enchantments !== undefined && Array.isArray(item.enchantments) && item.enchantments.length) {
+            const enchArr = item.enchantments.filter(e => e !== undefined && e !== null && String(e).trim() !== '');
+            if (enchArr.length) {
+              const ench = enchArr.map(e => '"' + String(e).replace(/"/g, '\\"') + '"').join(", ");
+              inner.push(`enchantments:[${ench}]`);
+            }
+          }
+
+          if (item.uses !== undefined && item.uses !== null && item.uses !== "") inner.push(`uses:${item.uses}`);
+
+          if (item.canPlaceOn !== undefined && Array.isArray(item.canPlaceOn) && item.canPlaceOn.length) {
+            const cpArr = item.canPlaceOn.filter(v => v !== undefined && v !== null && String(v).trim() !== '');
+            if (cpArr.length) {
+              const cp = cpArr.map(v => '"' + String(v).replace(/"/g,'\\"') + '"').join(", ");
+              inner.push(`canPlaceOn:[${cp}]`);
+            }
+          }
+
+          if (item.command) inner.push(`command:"${String(item.command).replace(/"/g,'\\"')}"`);
+          if (item.anvilUses !== undefined) inner.push(`anvilUses:${item.anvilUses}`);
+
+          // include any other item_* derived keys returned by getCommandItems (e.g., showParticles, category, type_potion, type_balloon, color variants)
+          Object.keys(item).forEach(k => {
+            if (!k) return;
+            if (k === 'itemId' || k === 'itemText' || k === 'id' || perItemModifiers.indexOf(k) !== -1) return;
+            // already handled keys
+            const handled = ['name','unbreakable','enchantments','uses','canPlaceOn','command','anvilUses'];
+            if (handled.indexOf(k) !== -1) return;
+            const v = item[k];
+            if (v === undefined || v === null) return;
+            // arrays
+            if (Array.isArray(v) && v.length) {
+              const arr = v.filter(x => x !== undefined && x !== null && String(x).trim() !== '').map(x => '"' + String(x).replace(/"/g,'\\"') + '"');
+              if (arr.length) inner.push(`${k}:[${arr.join(', ')}]`);
+            } else if (typeof v === 'boolean') {
+              inner.push(`${k}:${v ? 'true' : 'false'}`);
+            } else if (typeof v === 'number') {
+              inner.push(`${k}:${v}`);
+            } else if (String(v).trim() !== '') {
+              inner.push(`${k}:"${String(v).replace(/"/g,'\\"')}"`);
+            }
+          });
+
+          // Build part string
+          let part = `{item:{${inner.join(', ')}}`;
+
+          // append per-item modifiers (outside the inner item object)
           if (item.quantity !== undefined && item.quantity !== null && item.quantity !== "") part += `, quantity:${item.quantity}`;
           if (item.bonus !== undefined && item.bonus !== null && item.bonus !== "") part += `, bonus:${item.bonus}`;
           if (item.lootBonus !== undefined && item.lootBonus !== null && item.lootBonus !== "") part += `, lootBonus:${item.lootBonus}`;
@@ -1989,20 +2064,7 @@ function updateCommand() {
           if (item.color) part += `, color:"${item.color}"`;
           if (item.onFire !== undefined) part += `, onFire:${item.onFire}`;
           if (item.size !== undefined && item.size !== null && item.size !== "") part += `, size:${item.size}`;
-          // item-level special properties
-          if (item.unbreakable !== undefined) part += `, unbreakable:${item.unbreakable ? 'true' : 'false'}`;
-          if (item.enchantments !== undefined && Array.isArray(item.enchantments) && item.enchantments.length) {
-            const ench = item.enchantments.map(e => '"' + String(e).replace(/"/g, '\\"') + '"').join(", ");
-            part += `, enchantments:[${ench}]`;
-          }
-          if (item.name) part += `, name:"${String(item.name).replace(/"/g,'\\"')}"`;
-          if (item.uses !== undefined && item.uses !== null && item.uses !== "") part += `, uses:${item.uses}`;
-          if (item.canPlaceOn !== undefined && Array.isArray(item.canPlaceOn) && item.canPlaceOn.length) {
-            const cp = item.canPlaceOn.map(v => '"' + String(v).replace(/"/g,'\\"') + '"').join(", ");
-            part += `, canPlaceOn:[${cp}]`;
-          }
-          if (item.command) part += `, command:"${String(item.command).replace(/"/g,'\\"')}"`;
-          if (item.anvilUses !== undefined) part += `, anvilUses:${item.anvilUses}`;
+
           part += `}`;
           dropsArr.push(part);
         });
@@ -2745,6 +2807,8 @@ function setSavedCommands(arr) {
 // Nueva función para guardar el comando, guardando cada card por separado
 function saveCurrentCommand() {
   const mobType = $("#mobType").val();
+  // Ensure command is up-to-date (includes drops built from loot tags)
+  try{ if(typeof updateCommand === 'function') updateCommand(); }catch(e){}
   const command = getCurrentCommandText();
   const cards = getCurrentFormDataByCard();
   let saved = getSavedCommands();
@@ -2780,6 +2844,8 @@ function saveCurrentCommand() {
     const newSave = {
       mobType: mobType,
       command: command,
+      // persist mapped loot items for deterministic restore/use
+      lootItems: (function(){ try{ if(window.lootTagsStore && typeof window.lootTagsStore.getCommandItems === 'function') return window.lootTagsStore.getCommandItems(mobType) || []; }catch(e){} return []; })(),
       cards: cards,
       timestamp: new Date().toISOString()
     };
@@ -3351,6 +3417,24 @@ $(document).ready(function() {
         // fallback: adjust all popup selects
         setTimeout(adjustAllPopupSelects, 80);
       }
+      // Ensure dropdown starts from first option (do not auto-scroll to current selection)
+      try{
+        const inst = $sel.data('select2');
+        if(inst && inst.$dropdown){
+          // run after a microtask so Select2 finishes its internal scroll
+          setTimeout(function(){
+            const $results = inst.$dropdown.find('.select2-results__options');
+            if($results && $results.length){
+              $results.scrollTop(0);
+              // remove any highlighted class so focus doesn't jump to selected
+              $results.find('.select2-results__option--highlighted').removeClass('select2-results__option--highlighted');
+            }
+          }, 0);
+        } else {
+          // fallback: affect visible dropdowns
+          setTimeout(function(){ try{ const $open = $('.select2-dropdown:visible').last(); const $res = $open.find('.select2-results__options'); if($res.length) { $res.scrollTop(0); $res.find('.select2-results__option--highlighted').removeClass('select2-results__option--highlighted'); } }catch(e){} }, 0);
+        }
+      }catch(e){}
     } catch (err) {
       // ignore
     }
