@@ -12,11 +12,17 @@
     "COLOR": "color"
   },
   "_lootTagPresets": {
-    "DEFAULT": ["amount","bonus","lootBonus","chance","onFire"],
+    "DEFAULT": [
+      "amount","bonus","lootBonus","chance","onFire",
+      "variant","isSheared","isBaby","size","color",
+      "item_unbreakable","item_enchantment","item_anvilUses","item_name",
+      "item_canPlaceOn","item_canDestroy","item_showParticles","item_category",
+      "item_command","item_uses"
+    ],
     "ANIMALS": ["amount","bonus","lootBonus","chance", "variant","isBaby","onFire"]
   },
   "_itemPresets": {
-    "PICKAXE_FULL": ["item_type","item_unbreakable","item_enchantment","item_anvilUses","item_name","item_uses"]
+    "PICKAXE_FULL": ["item_unbreakable","item_enchantment","item_anvilUses","item_name","item_uses"]
   },
   "cardNames": {
     "card1": "name",
