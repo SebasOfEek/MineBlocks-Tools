@@ -1,1 +1,2453 @@
-
+{
+  "items": [
+    {
+      "value": "acid",
+      "text": "Acid",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683347/Acid_pojqsr.png",
+      "translations": { "es": "Ácido" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "rail_activator",
+      "text": "Activator Minecart Rail",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683347/Activator_rail_blkhzt.png",
+      "translations": { "es": "Raíl activador" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "afro",
+      "text": "Afro",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Afro_lqqcni.png",
+      "translations": { "es": "Afro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "anvil",
+      "text": "Anvil",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Anvil_awvhog.png",
+      "translations": { "es": "Yunque" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment","block_damage","block_input","block_output"]
+    },
+    {
+      "value": "apple",
+      "text": "Apple",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763957/Apple_p26lrl.png",
+      "translations": { "es": "Manzana" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "apple_juice",
+      "text": "Apple Juice",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763955/Apple_Juice_ro3q9h.png",
+      "translations": { "es": "Jugo de manzana" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "leaves_apple",
+      "text": "Apple in Leaves",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Apple_in_Leaves_adnq5y.png",
+      "translations": { "es": "Manzana en hojas" },
+      "lootFields": ["item_name", "item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "arrow",
+      "text": "Arrow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Arrow_fil3ar.png",
+      "translations": { "es": "Flecha" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "potato_baked",
+      "text": "Baked Potato",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763957/Baked_Potato_bzs4yg.png",
+      "translations": { "es": "Papa asada" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "balloon",
+      "text": "Balloon",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Balloon_alwke7.png",
+      "translations": { "es": "Globo" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment", "item_type_balloon"]
+    },
+    {
+      "value": "bamboo",
+      "text": "Bamboo",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Bamboo_no8jkp.png",
+      "translations": { "es": "Bambú" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "bamboo_block",
+      "text": "Bamboo Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Bamboo_Block_ujpesl.png",
+      "translations": { "es": "Bloque de bambú" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "backdrop_bamboo",
+      "text": "Bamboo Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775084/Backdrop_Bamboo_qs3f8y.png",
+      "translations": { "es": "Fondo de bambú" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "stairs_bamboo",
+      "text": "Bamboo Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775092/Stair_Bamboo_ayi04h.png",
+      "translations": { "es": "Escalera de bambú" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "slab_bamboo",
+      "text": "Bamboo Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775091/Slab_Bamboo_fjrwan.png",
+      "translations": { "es": "Losa de bambú" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "bamboo_door",
+      "text": "Bamboo Door",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775086/Bamboo_Door_drbz8x.png",
+      "translations": { "es": "Puerta de bambú" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "barrier",
+      "text": "Barrier",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726683346/Barrier_j18rjv.png",
+      "translations": { "es": "Barrera" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "bed",
+      "text": "Bed",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726895514/Bed_hob94q.png",
+      "translations": { "es": "Cama" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment","item_type_color_bed"]
+    },
+    {
+      "value": "bedrock",
+      "text": "Bedrock",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687264/Bedrock_hragzu.png",
+      "translations": { "es": "Roca madre" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "slab_bedrock",
+      "text": "Bedrock Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775085/Bedrock_Slab_e7jjk6.png",
+      "translations": { "es": "Losa de roca madre" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "stairs_bedrock",
+      "text": "Bedrock Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775087/Bedrock-Stair_mzgxaj.png",
+      "translations": { "es": "Escalera de roca madre" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "beet_soup",
+      "text": "Beet Soup",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763952/Beet_Soup_g26uvp.png",
+      "translations": { "es": "Sopa de remolacha" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "beetroot",
+      "text": "Beetroot",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763952/Beetroot_hdg9xa.png",
+      "translations": { "es": "Remolacha" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "beetroot_seed",
+      "text": "Beetroot Seed",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763952/Beetroot_Seed_fwyds0.png",
+      "translations": { "es": "Semilla de remolacha" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "blaze_powder",
+      "text": "Blaze Powder",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763953/Blaze_Powder_pbjh3z.png",
+      "translations": { "es": "Polvo de blaze" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "blaze_rod",
+      "text": "Blaze Rod",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Blaze_Rod_pvzr1v.png",
+      "translations": { "es": "Vara de blaze" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "bone",
+      "text": "Bone",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1726769261/Bone_tdofq4.png",
+      "translations": { "es": "Hueso" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "bone_block",
+      "text": "Bone Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687269/Bone_Block_sfa7nl.png",
+      "translations": { "es": "Bloque de hueso" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "bone_meal",
+      "text": "Bone Meal",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769265/Bone_Meal_c4sbsq.png",
+      "translations": { "es": "Polvo de hueso" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "bone_shuriken",
+      "text": "Bone Shuriken",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687271/Bone_Shuriken_yf7gin.png",
+      "translations": { "es": "Shuriken de hueso" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "book",
+      "text": "Book",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769265/Book_y6ei1a.png",
+      "translations": { "es": "Libro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "bookshelf",
+      "text": "Bookshelf",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687273/Bookshelf_pwquo1.png",
+      "translations": { "es": "Estantería" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "backdrop_bookshelf",
+      "text": "Bookshelf Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775087/Bookshelf_Backdrop_zes5zj.png",
+      "translations": { "es": "Fondo de estantería" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "bottle_of_enchanting",
+      "text": "Bottle of Enchanting",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763962/Bottle_of_Enchanting_rnlbxz.png",
+      "translations": { "es": "Botella de encantamiento" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "bow",
+      "text": "Bow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687275/Bow_udyzbk.png",
+      "translations": { "es": "Arco" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "bowl",
+      "text": "Bowl",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763954/Bowl_dwhevo.png",
+      "translations": { "es": "Cuenco" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "bread",
+      "text": "Bread",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775088/Bread_mjfxkl.png",
+      "translations": { "es": "Pan" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "brewing_stand",
+      "text": "Brewing Stand",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687280/Brewing_Stand_c19pin.png",
+      "translations": { "es": "Soporte de pociones" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "brick",
+      "text": "Brick",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775094/Brick_zbta4b.png",
+      "translations": { "es": "Ladrillo" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "bricks",
+      "text": "Bricks",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687282/Bricks_lx0n2a.png",
+      "translations": { "es": "Ladrillos" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "backdrop_brick",
+      "text": "Brick Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775084/Backdrop_Bricks_yrkyiy.png",
+      "translations": { "es": "Fondo de Ladrillos" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "stairs_brick",
+      "text": "Brick Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775092/Stair_Bricks_kuucfc.png",
+      "translations": { "es": "Escalera de Ladrillos" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "slab_brick",
+      "text": "Brick Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775092/Slab_Bricks_sm89uz.png",
+      "translations": { "es": "Losa de Ladrillos" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "brown_mushroom",
+      "text": "Brown Mushroom",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775088/Brown_Mushroom_xhy18f.png",
+      "translations": { "es": "Champiñón marrón" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "brown_mushroom_cap",
+      "text": "Brown Mushroom Cap",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775089/Brown_Mushroom_Cap_jhdyvt.png",
+      "translations": { "es": "Sombrero de champiñón marrón" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "brown_mushroom_stem",
+      "text": "Brown Mushroom Stem",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775089/Brown_Mushroom_Stem_wl5u0e.png",
+      "translations": { "es": "Tallo de champiñón" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "bucket_acid",
+      "text": "Bucket of Acid",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687284/Bucket_of_Acid_gpwjfv.png",
+      "translations": { "es": "Cubo de ácido" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "bucket_lava",
+      "text": "Bucket of Lava",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687290/Bucket_of_Lava_umlfoa.png",
+      "translations": { "es": "Cubo de lava" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "bucket_milk",
+      "text": "Bucket of Milk",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763957/Bucket_of_Milk_gtuxsp.png",
+      "translations": { "es": "Cubo de leche" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "bucket_water",
+      "text": "Bucket of Water",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688917/Bucket_of_Water_tesg5f.png",
+      "translations": { "es": "Cubo de agua" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "button",
+      "text": "Button",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687317/Button_zcnf0g.png"
+      ,"translations": { "es": "Botón" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "cactus",
+      "text": "Cactus",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687319/Cactus_hd8nja.png"
+      ,"translations": { "es": "Cactus" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "cactus_cake",
+      "text": "Cactus Cake",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687321/Cactus_Cake_z81duo.png"
+      ,"translations": { "es": "Pastel de cactus" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "cake",
+      "text": "Cake",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687324/Cake_tomaze.png"
+      ,"translations": { "es": "Pastel" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "apple_candy",
+      "text": "Candy Apple",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763965/Candy_apple_oo2dh6.png"
+      ,"translations": { "es": "Manzana caramelizada" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "candy_cane",
+      "text": "Candy Cane",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763960/Candy_Cane_atpeee.png"
+      ,"translations": { "es": "Bastón de caramelo" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "caramel",
+      "text": "Caramel",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763956/Caramel_eks5xx.png"
+      ,"translations": { "es": "Caramelo" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "carpet",
+      "text": "Carpet",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726895142/Carpet_bgbclg.png"
+      ,"translations": { "es": "Alfombra" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment", "item_type_color_carpet"]
+    },
+    {
+      "value": "carrot",
+      "text": "Carrot",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763957/Carrot_hftz9p.png"
+      ,"translations": { "es": "Zanahoria" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "carrot_on_a_stick",
+      "text": "Carrot on a Stick",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1726775090/Carrot_on_a_Stick_kms9of.png"
+      ,"translations": { "es": "Zanahoria en palo" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "cauldron",
+      "text": "Cauldron",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/f_webp/v1726687337/Cauldron_vnpi7l.png"
+      ,"translations": { "es": "Caldero" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "charcoal",
+      "text": "Charcoal",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Charcoal_xueqiz.png"
+      ,"translations": { "es": "Carbón vegetal" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "chest",
+      "text": "Chest",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687199/Chest_xdt3ol.png"
+      ,"translations": { "es": "Cofre" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "chicken_nugget",
+      "text": "Chicken Nugget",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763962/Chicken_Nugget_pilyuw.png"
+      ,"translations": { "es": "Nugget de pollo" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "clay",
+      "text": "Clay",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769265/Clay_gxqjfj.png"
+      ,"translations": { "es": "Arcilla" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "clay_block",
+      "text": "Clay Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687202/Clay_Block_z7gvez.png"
+      ,"translations": { "es": "Bloque de arcilla" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "clock",
+      "text": "Clock",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687204/Clock_gtkdf1.png"
+      ,"translations": { "es": "Reloj" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "clownfish",
+      "text": "Clownfish",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763918/Clownfish_p9ljdj.png"
+      ,"translations": { "es": "Pez payaso" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "coal",
+      "text": "Coal",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769266/Coal_qkizys.png"
+      ,"translations": { "es": "Carbón" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "coal_block",
+      "text": "Coal Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687205/Coal_Block_rd6rfs.png"
+      ,"translations": { "es": "Bloque de carbón" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "coal_ore",
+      "text": "Coal Ore",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688957/Coal_Ore_yqizpr.png"
+      ,"translations": { "es": "Mineral de carbón" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "coarse_dirt",
+      "text": "Coarse Dirt",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687207/Coarse_Dirt_kuiokc.png"
+      ,"translations": { "es": "Tierra gruesa" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "cobblestone",
+      "text": "Cobblestone",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687209/Cobblestone_j1mi9j.png"
+      ,"translations": { "es": "Adoquín" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "backdrop_cobblestone",
+      "text": "Cobblestone Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Backdrop_Cobblestone_ooudju.png"
+      ,"translations": { "es": "Fondo de adoquín" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "stairs_cobblestone",
+      "text": "Cobblestone Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Stair_Cobblestone_jwbr6h.png"
+      ,"translations": { "es": "Escalera de adoquín" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "slab_cobblestone",
+      "text": "Cobblestone Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Slab_Cobblestone_f0xgei.png"
+      ,"translations": { "es": "Losa de adoquín" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "cobweb",
+      "text": "Cobweb",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687211/Cobweb_ex5z9n.png",
+      "translations": { "es": "Telaraña" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "cocoa_bean",
+      "text": "Cocoa Bean",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763918/Cocoa_Bean_jvrwyk.png",
+      "translations": { "es": "Grano de cacao" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "command_book",
+      "text": "Command Book",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Command_Book_zavc2s.png",
+      "translations": { "es": "Libro de comandos" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_command","item_uses"]
+    },
+    {
+      "value": "compass",
+      "text": "Compass",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687213/Compass_qocmq7.png",
+      "translations": { "es": "Brújula" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "composter",
+      "text": "Composter",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687215/Composter_ootfoa.png",
+      "translations": { "es": "Compostador" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "bacon_cooked",
+      "text": "Cooked Bacon",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Cooked_Bacon_jnlvjm.png",
+      "translations": { "es": "Tocino cocido" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "chicken_cooked",
+      "text": "Cooked Chicken",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763918/Cooked_Chicken_akjmwn.png",
+      "translations": { "es": "Pollo cocido" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "cooked_egg",
+      "text": "Cooked Egg",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763918/Cooked_Egg_zpavtp.png",
+      "translations": { "es": "Huevo cocido" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "fish_cooked",
+      "text": "Cooked Fish",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763924/Cooked_Fish_racqnp.png",
+      "translations": { "es": "Pescado cocido" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "cooked_mutton",
+      "text": "Cooked Mutton",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763943/Cooked_Mutton_fpwcwn.png",
+      "translations": { "es": "Carne de cordero cocida" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "porkchop_cooked",
+      "text": "Cooked Porkchop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763948/Cooked_Porkchop_tkzfsq.png",
+      "translations": { "es": "Chuleta de cerdo cocida" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "rabbit_cooked",
+      "text": "Cooked Rabbit",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763943/Cooked_Rabbit_cr2wtx.png",
+      "translations": { "es": "Conejo cocido" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "salmon_cooked",
+      "text": "Cooked Salmon",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Cooked_Salmon_ckmz3z.png",
+      "translations": { "es": "Salmón cocido" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "cookie",
+      "text": "Cookie",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763944/Cookie_bgmhhc.png",
+      "translations": { "es": "Galleta" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "coral",
+      "text": "Coral",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687217/Coral_dt3kcu.png",
+      "translations": { "es": "Coral" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "coral_lantern",
+      "text": "Coral Lantern",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687219/Coral_Lantern_ofuesm.png",
+      "translations": { "es": "Linterna de coral" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "crafting_table",
+      "text": "Crafting Table",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687221/Crafting_Table_dq2zc4.png",
+      "translations": { "es": "Mesa de trabajo" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "dead_bush",
+      "text": "Desert Shrub",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687224/Desert_Shrub_weel3x.png",
+      "translations": { "es": "Arbusto del desierto" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "rail_detector",
+      "text": "Detector Minecart Rail",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687277/Detector_rail_opqnpp.png",
+      "translations": { "es": "Raíl detector" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "diamond",
+      "text": "Diamond",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769266/Diamond_w7dr8y.png",
+      "translations": { "es": "Diamante" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "diamond_ore",
+      "text": "Diamond Ore",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687226/Diamond_Ore_s5mdqe.png",
+      "translations": { "es": "Mineral de diamante" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "diamond_block",
+      "text": "Diamond Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688952/Diamond_Block_zuvh5s.png",
+      "translations": { "es": "Bloque de diamante" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "stairs_diamond",
+      "text": "Diamond Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871612/Diamond_Stair_dydts2.png",
+      "translations": { "es": "Escalera de diamante" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "slab_diamond",
+      "text": "Diamond Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871594/Diamond_Slab_wsegsu.png",
+      "translations": { "es": "Losa de diamante" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "diamond_helmet",
+      "text": "Diamond Helmet",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Helmet_ugg9vy.png",
+      "translations": { "es": "Casco de diamante" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "diamond_chestplate",
+      "text": "Diamond Chestplate",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Chestplate_rzyjxh.png",
+      "translations": { "es": "Pechera de diamante" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "diamond_leggings",
+      "text": "Diamond Leggings",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Leggings_q4hf45.png",
+      "translations": { "es": "Pantalones de diamante" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "diamond_boots",
+      "text": "Diamond Boots",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726844162/Diamond_Boots_ubkywn.png",
+      "translations": { "es": "Botas de diamante" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "diamond_pickaxe",
+      "text": "Diamond Pickaxe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871799/Diamond_Pickaxe_vhadur.png",
+      "translations": { "es": "Pico de diamante" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "diamond_axe",
+      "text": "Diamond Axe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871796/Diamond_Axe_sggiqp.png",
+      "translations": { "es": "Hacha de diamante" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "diamond_hoe",
+      "text": "Diamond Hoe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871799/Diamond_Hoe_tt4aha.png",
+      "translations": { "es": "Azada de diamante" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "diamond_shovel",
+      "text": "Diamond Shovel",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871799/Diamond_Shovel_sqtoua.png",
+      "translations": { "es": "Pala de diamante" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "diamond_sword",
+      "text": "Diamond Sword",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871631/Diamond_Sword_t8lpfx.png",
+      "translations": { "es": "Espada de diamante" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "dirt",
+      "text": "Dirt",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687228/Dirt_sgepvg.png",
+      "translations": { "es": "Tierra" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "backdrop_dirt",
+      "text": "Dirt Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871797/Backdrop_Dirt_loek8x.png",
+      "translations": { "es": "Fondo de tierra" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "dispenser",
+      "text": "Dispenser",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687230/Dispenser_v3pfcf.png",
+      "translations": { "es": "Dispensador" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "dragon_scale",
+      "text": "Dragon Scale",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769267/Dragon_Scale_viorgs.png",
+      "translations": { "es": "Escama de dragón" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "dragon_scale_block",
+      "text": "Dragon Scale Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687232/Dragon_Scale_Block_a8r0c8.png",
+      "translations": { "es": "Bloque de escamas de dragón" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "dragon_scale_helmet",
+      "text": "Dragon Scale Helmet",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871796/Dragon_Scale_Helmet_raeklo.png",
+      "translations": { "es": "Casco de escamas de dragón" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "dragon_scale_chestplate",
+      "text": "Dragon Scale Chestplate",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871795/Dragon_Scale_Chestplate_heemid.png",
+      "translations": { "es": "Pechera de escamas de dragón" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "dragon_scale_leggings",
+      "text": "Dragon Scale Leggings",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871796/Dragon_Scale_Leggings_zyhqa5.png",
+      "translations": { "es": "Pantalones de escamas de dragón" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "dragon_scale_boots",
+      "text": "Dragon Scale Boots",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726871795/Dragon_Scale_Boots_r3nxyz.png",
+      "translations": { "es": "Botas de escamas de dragón" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "dropper",
+      "text": "Dropper",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687234/Dropper_wrqeer.png",
+      "translations": { "es": "Soltador" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "dye",
+      "text": "Dye",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890418/Dye_yqqecq.png",
+      "translations": { "es": "Tinte" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment", "item_type_color_dye"]
+    },
+    {
+      "value": "egg",
+      "text": "Egg",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763962/Egg_kpabbx.png",
+      "translations": { "es": "Huevo" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "bucket_empty",
+      "text": "Empty Bucket",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687236/Empty_Bucket_xpgkfw.png",
+      "translations": { "es": "Cubo vacío" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "bottle_empty",
+      "text": "Empty Bottle",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763960/Empty_Bottle_bfsgem.png",
+      "translations": { "es": "Botella vacía" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "enchantment_table",
+      "text": "Enchantment Table",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687238/Enchantment_table_qdchdy.png",
+      "translations": { "es": "Mesa de encantamientos" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "ender_chest",
+      "text": "Ender Chest",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687258/Ender_Chest_enlgti.png",
+      "translations": { "es": "Cofre Ender" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "ender_dragon_egg",
+      "text": "Ender Dragon Egg",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687260/Ender_Dragon_Egg_ux1roz.png",
+      "translations": { "es": "Huevo del dragón Ender" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "ender_gem",
+      "text": "Ender Gem",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769269/Ender_Gem_u8wjn7.png",
+      "translations": { "es": "Gema Ender" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "ender_gem_ore",
+      "text": "Ender Gem Ore",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687262/Ender_Gem_Ore_idiuxe.png",
+      "translations": { "es": "Mineral de gema Ender" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "enderstone",
+      "text": "Enderstone",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688913/Enderstone_vz7iqa.png",
+      "translations": { "es": "Piedra Ender" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "ender_pearl",
+      "text": "Ender Pearl",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769269/Ender_Pearl_ioawuv.png",
+      "translations": { "es": "Perla de Ender" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "eye_of_ender",
+      "text": "Eye of Ender",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769269/Eye_of_Ender_ysc4j0.png",
+      "translations": { "es": "Ojo de Ender" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "farmland",
+      "text": "Farmland",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688925/Farmland_d0pfyx.png",
+      "translations": { "es": "Tierra de cultivo" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "feather",
+      "text": "Feather",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769269/Feather_nb3gem.png",
+      "translations": { "es": "Pluma" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "fermented_spider_eye",
+      "text": "Fermented Spider Eye",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763962/Fermented_Spider_Eye_zgj39j.png",
+      "translations": { "es": "Ojo de araña fermentado" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "egg_fire",
+      "text": "Fire Egg",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763960/Fire_Egg_daaumd.png",
+      "translations": { "es": "Huevo de fuego" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "fishing_rod",
+      "text": "Fishing Rod",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688935/Fishing_Rod_p0a9jw.png",
+      "translations": { "es": "Caña de pescar" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "flint",
+      "text": "Flint",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769272/Flint_pddojt.png",
+      "translations": { "es": "Pedernal" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "flint_and_steel",
+      "text": "Flint and Steel",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688941/Flint_and_Steel_ldtv7m.png",
+      "translations": { "es": "Pedernal y acero" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "furnace",
+      "text": "Furnace",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688948/Furnace_ukutec.png",
+      "translations": { "es": "Horno" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "frosted_ice",
+      "text": "Frosted Ice",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688946/Frosted_Ice_yy0evm.png",
+      "translations": { "es": "Hielo escarchado" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "ghast_tear",
+      "text": "Ghast Tear",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769270/Ghast_Tear_rgy9vt.png",
+      "translations": { "es": "Lágrima de ghast" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "glass",
+      "text": "Glass",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876945/Glass_urwmmr.png",
+      "translations": { "es": "Cristal" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment", "item_type_color_glass"]
+    },
+    {
+      "value": "backdrop_glass",
+      "text": "Glass Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Backdrop_Glass_hvpjhx.png",
+      "translations": { "es": "Fondo de cristal" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment", "item_type_color_glass_b"]
+    },
+    {
+      "value": "glass_shard",
+      "text": "Glass Shard",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769270/Glass_Shard_o3ovxy.png",
+      "translations": { "es": "Fragmento de cristal" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "glistering_melon",
+      "text": "Glistering Melon",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763948/Glistering_Melon_nntbpp.png",
+      "translations": { "es": "Melón reluciente" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "glow_stone",
+      "text": "Glow Stone",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688927/Glowstone_gthsd6.png",
+      "translations": { "es": "Piedra luminosa" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "glowstone_dust",
+      "text": "Glowstone Dust",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726877477/Glowstone_Dust_ycrgss.png",
+      "translations": { "es": "Polvo de piedra luminosa" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "gold_nugget",
+      "text": "Gold Nugget",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726877476/Gold_Nugget_wahhq4.png"
+      ,"translations": { "es": "Pepita de oro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "gold_ingot",
+      "text": "Gold Ingot",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769272/Gold_Ingot_i9a5pi.png"
+      ,"translations": { "es": "Lingote de oro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "gold_ore",
+      "text": "Gold Ore",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688929/Gold_Ore_vjzlfw.png"
+      ,"translations": { "es": "Mineral de oro" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "gold_block",
+      "text": "Gold Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688950/Gold_Block_u7uf2k.png"
+      ,"translations": { "es": "Bloque de oro" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "stairs_gold",
+      "text": "Gold Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876950/Gold_Stair_xxpd7a.png"
+      ,"translations": { "es": "Escalera de oro" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "slab_gold",
+      "text": "Gold Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876951/Gold_Slab_iprrxh.png"
+      ,"translations": { "es": "Losa de oro" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "gold_helmet",
+      "text": "Gold Helmet",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Helmet_vehqkm.png"
+      ,"translations": { "es": "Casco de oro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "gold_chestplate",
+      "text": "Gold Chestplate",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Chestplate_j3to7v.png"
+      ,"translations": { "es": "Pechera de oro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "gold_leggings",
+      "text": "Gold Leggings",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876948/Gold_Leggings_qspwtb.png"
+      ,"translations": { "es": "Pantalones de oro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "gold_boots",
+      "text": "Gold Boots",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Boots_tkocg7.png"
+      ,"translations": { "es": "Botas de oro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "golden_pickaxe",
+      "text": "Golden Pickaxe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876949/Gold_Pickaxe_jgvxzj.png"
+      ,"translations": { "es": "Pico de oro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "golden_axe",
+      "text": "Golden Axe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876946/Gold_Axe_juptxw.png"
+      ,"translations": { "es": "Hacha de oro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "golden_hoe",
+      "text": "Golden Hoe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876948/Gold_Hoe_u2qwso.png"
+      ,"translations": { "es": "Azada de oro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "golden_shovel",
+      "text": "Golden Shovel",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876949/Gold_Shovel_cdbnhe.png"
+      ,"translations": { "es": "Pala de oro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "golden_sword",
+      "text": "Golden Sword",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726876951/Gold_Sword_oth7st.png"
+      ,"translations": { "es": "Espada de oro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "gold_soil",
+      "text": "Gold Soil",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688959/Gold_Soil_orspe5.png"
+      ,"translations": { "es": "Tierra dorada" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "golden_apple",
+      "text": "Golden Apple",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763949/Golden_Apple_dyo6i1.png"
+      ,"translations": { "es": "Manzana dorada" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "golden_apple_seed",
+      "text": "Golden Apple Seed",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765431/Golden_Apple_Seed_qhyfr6.png"
+      ,"translations": { "es": "Semilla de manzana dorada" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "leaves_golden_apple",
+      "text": "Golden Apple in Leaves",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688973/Golden_Apple_in_Leaves_rs4ucr.png"
+      ,"translations": { "es": "Manzana dorada en hojas" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "carrot_golden",
+      "text": "Golden Carrot",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765430/Golden_Carrot_ly8oap.png"
+      ,"translations": { "es": "Zanahoria dorada" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "grass",
+      "text": "Grass",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688982/Grass_uickic.png"
+      ,"translations": { "es": "Césped" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "gravel",
+      "text": "Gravel",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688965/Gravel_lyodun.png"
+      ,"translations": { "es": "Grava" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "gunpowder",
+      "text": "Gunpowder",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769272/Gunpowder_spkuzf.png"
+      ,"translations": { "es": "Pólvora" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "hay_bale",
+      "text": "Hay Bale",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688967/Hay_Bale_nydn5n.png"
+      ,"translations": { "es": "Paca de heno" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "healing_crystal",
+      "text": "Healing Crystal",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688961/Healing_Crystal_ds8sda.png"
+      ,"translations": { "es": "Cristal curativo" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "ice",
+      "text": "Ice",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688955/Ice_ypn1fs.png"
+      ,"translations": { "es": "Hielo" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "ice_cream",
+      "text": "Ice Cream",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765427/Ice_Cream_yqort2.png"
+      ,"translations": { "es": "Helado" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "ink_sac",
+      "text": "Ink Sac",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769272/Ink_Sac_uvsyuo.png"
+      ,"translations": { "es": "Saco de tinta" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "iron_nugget",
+      "text": "Iron Nugget",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769273/Iron_Nugget_asiajr.png"
+      ,"translations": { "es": "Pepita de hierro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "iron_ingot",
+      "text": "Iron Ingot",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769272/Iron_Ingot_vpcqcv.png"
+      ,"translations": { "es": "Lingote de hierro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "iron_ore",
+      "text": "Iron Ore",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688878/Iron_Ore_rrrzqo.png"
+      ,"translations": { "es": "Mineral de hierro" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "iron_block",
+      "text": "Iron Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688977/Iron_Block_oumxkt.png"
+      ,"translations": { "es": "Bloque de hierro" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "stairs_iron",
+      "text": "Iron Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878561/Iron_Stair_bhpewy.png"
+      ,"translations": { "es": "Escalera de hierro" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "slab_iron",
+      "text": "Iron Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878561/Iron_Slab_blp5tz.png"
+      ,"translations": { "es": "Losa de hierro" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "iron_helmet",
+      "text": "Iron Helmet",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896975/Iron_Helmet_pibqyq.png"
+      ,"translations": { "es": "Casco de hierro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "iron_chestplate",
+      "text": "Iron Chestplate",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896973/Iron_Chestplate_gfvdbm.png"
+      ,"translations": { "es": "Pechera de hierro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "iron_leggings",
+      "text": "Iron Leggings",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896977/Iron_Leggings_ni8md1.png"
+      ,"translations": { "es": "Pantalones de hierro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "iron_boots",
+      "text": "Iron Boots",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726896972/Iron_Boots_z5f74c.png"
+      ,"translations": { "es": "Botas de hierro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "iron_pickaxe",
+      "text": "Iron Pickaxe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688880/Iron_Pickaxe_g1yiry.png"
+      ,"translations": { "es": "Pico de hierro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "iron_axe",
+      "text": "Iron Axe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694186/Iron_Axe_nf7nnx.png"
+      ,"translations": { "es": "Hacha de hierro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "iron_hoe",
+      "text": "Iron Hoe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688876/Iron_Hoe_iufxh3.png"
+      ,"translations": { "es": "Azada de hierro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "iron_shovel",
+      "text": "Iron Shovel",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688889/Iron_Shovel_otmgkh.png"
+      ,"translations": { "es": "Pala de hierro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "iron_sword",
+      "text": "Iron Sword",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694186/Iron_Sword_ityryc.png"
+      ,"translations": { "es": "Espada de hierro" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "iron_bars",
+      "text": "Iron Bars",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688969/Iron_Bars_zjdfxm.png"
+      ,"translations": { "es": "Barras de hierro" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "iron_door",
+      "text": "Iron Door",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890421/Iron_Door_q35vu3.png"
+      ,"translations": { "es": "Puerta de hierro" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "jack_o_lantern",
+      "text": "Jack-o-Lantern",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688892/Jack-o_-Lantern_mrtj6r.png"
+      ,"translations": { "es": "Linterna de calabaza" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "ladder",
+      "text": "Ladder",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688894/Ladder_ersevn.png"
+      ,"translations": { "es": "Escalera" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "lapis",
+      "text": "Lapis Lazuli",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769288/Lapis_Lazuli_ltepob.png"
+      ,"translations": { "es": "Lapis Lazuli" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "lapis_ore",
+      "text": "Lapis Lazuli Ore",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688896/Lapis_Lazuli_Ore_kkmpn9.png"
+      ,"translations": { "es": "Mineral de Lapis Lazuli" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "lapis_lazuli_block",
+      "text": "Lapis Lazuli Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1726688916/Lapis_Lazuli_Block_e0vf7e.png"
+      ,"translations": { "es": "Bloque de Lapis Lazuli" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "lava",
+      "text": "Lava",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688931/Lava_noq1bp.png"
+      ,"translations": { "es": "Lava" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "leather",
+      "text": "Leather",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769289/Leather_ok5fjz.png"
+      ,"translations": { "es": "Cuero" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "leather_cap",
+      "text": "Leather Cap",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Cap_kc3wwv.png"
+      ,"translations": { "es": "Casco de cuero" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment", "item_type_color"]
+    },
+    {
+      "value": "leather_tunic",
+      "text": "Leather Tunic",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Tunic_lk2z0j.png"
+      ,"translations": { "es": "Túnica de cuero" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment", "item_type_color"]
+    },
+    {
+      "value": "leather_pants",
+      "text": "Leather Pants",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Pants_dknwqd.png"
+      ,"translations": { "es": "Pantalones de cuero" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment", "item_type_color"]
+    },
+    {
+      "value": "leather_boots",
+      "text": "Leather Boots",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726878833/Leather_Boots_zofh0b.png"
+      ,"translations": { "es": "Botas de cuero" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment", "item_type_color"]
+    },
+    {
+      "value": "leaves",
+      "text": "Leaves",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688898/Leaves_anwhq8.png"
+      ,"translations": { "es": "Hojas" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "lemon",
+      "text": "Lemon",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765429/Lemon_qrdw8j.png"
+      ,"translations": { "es": "Limón" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "lemon_block",
+      "text": "Lemon Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688900/Lemon_Block_jvzcut.png"
+      ,"translations": { "es": "Bloque de limón" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "leaves_lemon",
+      "text": "Lemon in Leaves",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688902/Lemon_in_Leaves_afumce.png"
+      ,"translations": { "es": "Limón en hojas" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "lemonade",
+      "text": "Lemonade",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765432/Lemonade_ejzq4s.png"
+      ,"translations": { "es": "Limonada" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "lever",
+      "text": "Lever",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688904/Lever_s6wpso.png"
+      ,"translations": { "es": "Palanca" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "lilypad",
+      "text": "Lily Pad",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688919/Lily_Pad_visuys.png"
+      ,"translations": { "es": "Nenúfar" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "long_grass",
+      "text": "Long Grass",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688906/Long_Grass_fjqebh.png"
+      ,"translations": { "es": "Hierba alta" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "magma_cream",
+      "text": "Magma Cream",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769289/Magma_Cream_cbwqpx.png"
+      ,"translations": { "es": "Crema de magma" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "magma_block",
+      "text": "Magma Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688908/Magma_Block_bmfnpx.png"
+      ,"translations": { "es": "Bloque de magma" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "melon",
+      "text": "Melon",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765439/Melon_phnsjp.png"
+      ,"translations": { "es": "Melón" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "melon_block",
+      "text": "Melon Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688910/Melon_Block_k61fn8.png"
+      ,"translations": { "es": "Bloque de melón" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "melon_seed",
+      "text": "Melon Seed",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765433/Melon_Seed_rl77bc.png"
+      ,"translations": { "es": "Semilla de melón" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "minecart",
+      "text": "Minecart",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688921/Minecart_zlufjq.png"
+      ,"translations": { "es": "Vagoneta" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "minecart_furnace",
+      "text": "Minecart Furnace",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694185/Furnace_Minecart_bdzhdy.png"
+      ,"translations": { "es": "Vagoneta con horno" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "minecart_chest",
+      "text": "Minecart Chest",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687200/Chest_Minecart_kbpoqr.png"
+      ,"translations": { "es": "Vagoneta con cofre" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "rail",
+      "text": "Minecart Rail",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688936/Minecart_Rail_prvr6e.png"
+      ,"translations": { "es": "Raíl" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "monster_spawner",
+      "text": "Monster Spawner",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688923/Monster_Spawner_cqhshz.png"
+      ,"translations": { "es": "Generador de monstruos" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "moss",
+      "text": "Moss",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688912/Moss_pjq3ge.png"
+      ,"translations": { "es": "Musgo" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "moss_stone",
+      "text": "Moss Stone",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688938/Moss_Stone_pkyjuf.png"
+      ,"translations": { "es": "Piedra musgosa" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "mycelium",
+      "text": "Mycelium",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694187/Mycelium_knjcwb.png"
+      ,"translations": { "es": "Micelio" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "mustache",
+      "text": "Mustache",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694186/Mustache_fjc2up.png"
+      ,"translations": { "es": "Bigote" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "name_tag",
+      "text": "Name Tag",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694187/Name_Tag_axwcot.png"
+      ,"translations": { "es": "Etiqueta" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "nether_brick",
+      "text": "Nether Brick",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694188/Nether_Brick_zgoc21.png"
+      ,"translations": { "es": "Ladrillo del Nether" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "nether_bricks",
+      "text": "Nether Bricks",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694188/Nether_Bricks_ba5s62.png"
+      ,"translations": { "es": "Ladrillos del Nether" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "backdrop_nether_brick",
+      "text": "Nether Brick Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882507/Backdrop_Nether_Bricks_xkz21o.png"
+      ,"translations": { "es": "Fondo de ladrillos del Nether" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "stairs_nether_brick",
+      "text": "Nether Brick Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882513/Stair_Nether_Brick_mvxhii.png",
+      "translations": { "es": "Escalera de ladrillos del Nether" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "slab_nether_brick",
+      "text": "Nether Brick Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882512/Slab_Nether_Brick_iqwky7.png"
+      ,"translations": { "es": "Losa de ladrillos del Nether" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "nether_fence",
+      "text": "Nether Brick Fence",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890421/Nether_Brick_Fence_q3bkxk.png"
+      ,"translations": { "es": "Valla de ladrillos del Nether" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "nether_fence_gate",
+      "text": "Nether Brick Fence Gate",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882509/Nether_Brick_Fence_Gate_vvzah9.png"
+      ,"translations": { "es": "Puerta de valla de ladrillos del Nether" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "nether_wart",
+      "text": "Nether Wart",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769289/Nether_Wart_kratav.png"
+      ,"translations": { "es": "Verruga del Nether" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "nether_wart_block",
+      "text": "Nether Wart Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694189/Nether_Wart_Block_hr0pbd.png"
+      ,"translations": { "es": "Bloque de verrugas del Nether" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "netherrack",
+      "text": "Netherrack",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694188/Netherrack_rwknpl.png"
+      ,"translations": { "es": "Roca del Nether" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "note_block",
+      "text": "Note Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719732/Note_Block_v9moxk.png"
+      ,"translations": { "es": "Bloque de notas" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "obsidian",
+      "text": "Obsidian",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694189/Obsidian_cudeye.png"
+      ,"translations": { "es": "Obsidiana" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "backdrop_obsidian",
+      "text": "Obsidian Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882508/Backdrop_Obsidian_uarkom.png"
+      ,"translations": { "es": "Fondo de obsidiana" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "stairs_obsidian",
+      "text": "Obsidian Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882514/Stair_Obsidian_laeped.png"
+      ,"translations": { "es": "Escalera de obsidiana" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "slab_obsidian",
+      "text": "Obsidian Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882512/Slab_Obsidian_kqbung.png"
+      ,"translations": { "es": "Losa de obsidiana" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "odd_rock",
+      "text": "Odd Rock",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769290/Odd_Rock_onof4h.png"
+      ,"translations": { "es": "Roca extraña" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "odd_rock_ore",
+      "text": "Odd Rock Ore",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694190/Odd_Rock_Ore_sdgdsm.png"
+      ,"translations": { "es": "Mineral de roca extraña" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "odd_torch",
+      "text": "Odd Torch",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694190/Odd_Torch_ml6l7n.png"
+      ,"translations": { "es": "Antorcha extraña" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "orange",
+      "text": "Orange",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765433/Orange_cpi0du.png"
+      ,"translations": { "es": "Naranja" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "orange_juice",
+      "text": "Orange Juice",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765436/Orange_Juice_xqg5zi.png"
+      ,"translations": { "es": "Jugo de naranja" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "leaves_orange",
+      "text": "Orange in Leaves",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694190/Orange_in_Leaves_pakzdf.png"
+      ,"translations": { "es": "Naranja en hojas" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "paper",
+      "text": "Paper",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769290/Paper_teh5gb.png"
+      ,"translations": { "es": "Papel" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "party_hat",
+      "text": "Party Hat",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694191/Party_Hat_bjn9as.png"
+      ,"translations": { "es": "Sombrero de fiesta" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "piston",
+      "text": "Piston",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694191/Piston_o2bdfm.png"
+      ,"translations": { "es": "Pistón" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "poisonous_potato",
+      "text": "Poisonous Potato",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726766540/Poisonous_Potato_cqpgsg.png"
+      ,"translations": { "es": "Papa venenosa" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "portal_frame",
+      "text": "Portal Frame",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694192/Portal_Frame_ob7x5y.png"
+      ,"translations": { "es": "Marco de portal" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "portal_stone",
+      "text": "Portal Stone",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694192/Portal_Stone_m9hhbk.png"
+      ,"translations": { "es": "Piedra del portal" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "potato",
+      "text": "Potato",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765440/Potato_ii3edg.png"
+      ,"translations": { "es": "Papa" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "potion",
+      "text": "Potion",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765434/Healing_Potion_pc4a3t.png"
+      ,"translations": { "es": "Poción" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_showParticles", "item_category", "item_type_potion"]
+    },
+    {
+      "value": "rail_powered",
+      "text": "Powered Minecart Rail",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694192/Powered_rail_xez7lx.png"
+      ,"translations": { "es": "Raíl propulsor" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "pressure_plate",
+      "text": "Pressure Plate",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694192/Pressure_Plate_nbiube.png"
+      ,"translations": { "es": "Placa de presión" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "pufferfish",
+      "text": "Pufferfish",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765441/Pufferfish_nbvrqc.png"
+      ,"translations": { "es": "Pez globo" }
+    },
+    {
+      "value": "pumpkin",
+      "text": "Pumpkin",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694193/Pumpkin_rnjsyk.png"
+      ,"translations": { "es": "Calabaza" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "pumpkin_pie",
+      "text": "Pumpkin Pie",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765438/Pumpkin_Pie_q8qz0a.png"
+      ,"translations": { "es": "Pastel de calabaza" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "pumpkin_seed",
+      "text": "Pumpkin Seed",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765436/Pumpkin_Seed_fuxbyt.png"
+      ,"translations": { "es": "Semilla de calabaza" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "rabbit_hide",
+      "text": "Rabbit Hide",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Rabbit_Hide_i1s1fd.png"
+      ,"translations": { "es": "Piel de conejo" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "rabbit_stew",
+      "text": "Rabbit Stew",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765431/Rabbit_Stew_eiqsc6.png"
+      ,"translations": { "es": "Estofado de conejo" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "rabbits_foot",
+      "text": "Rabbit's Foot",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Rabbit_s_Foot_l1xnon.png"
+      ,"translations": { "es": "Patita de conejo" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "raft",
+      "text": "Raft",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719733/Raft_vwf1sw.png"
+      ,"translations": { "es": "Barco" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "bacon",
+      "text": "Raw Bacon",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1726882511/Raw_Bacon_hkogvl.png"
+      ,"translations": { "es": "Tocino crudo" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "beef",
+      "text": "Raw Beef",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765442/Raw_Beef_qweexs.png"
+      ,"translations": { "es": "Carne cruda" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "chicken",
+      "text": "Raw Chicken",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765437/Raw_Chicken_dvqbar.png",
+      "translations": { "es": "Pollo crudo" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "fish",
+      "text": "Raw Fish",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765435/Raw_Fish_piqkpn.png",
+      "translations": { "es": "Pescado crudo" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "mutton",
+      "text": "Raw Mutton",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765439/Raw_Mutton_xytorj.png",
+      "translations": { "es": "Carne de oveja cruda" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "porkchop",
+      "text": "Raw Porkchop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765442/Raw_Porkchop_iqrljp.png",
+      "translations": { "es": "Chuleta de cerdo cruda" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "rabbit",
+      "text": "Raw Rabbit",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765443/Raw_Rabbit_jnaoav.png",
+      "translations": { "es": "Conejo crudo" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "salmon",
+      "text": "Raw Salmon",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726766541/Raw_Salmon_n759fj.png",
+      "translations": { "es": "Salmón crudo" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "red_flower",
+      "text": "Red Flower",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688944/Flower2_ng4atf.png",
+      "translations": { "es": "Flor roja" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "red_mushroom",
+      "text": "Red Mushroom",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726688933/Mushroom2_qj9jac.png",
+      "translations": { "es": "Seta roja" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "red_mushroom_cap",
+      "text": "Red Mushroom Cap",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882515/Red_Mushroom_Cap_wpw6cr.png",
+      "translations": { "es": "Sombrero de seta roja" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "red_mushroom_stem",
+      "text": "Red Mushroom Stem",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882516/Red_Mushroom_Stem_z6cniu.png",
+      "translations": { "es": "Tallo de seta roja" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "nether_bricks_red",
+      "text": "Red Nether Bricks",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694193/Red_Nether_Bricks_embna7.png",
+      "translations": { "es": "Ladrillos rojos del Nether" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "redstone",
+      "text": "Redstone Dust",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765444/Redstone_unba0a.png",
+      "translations": { "es": "Polvo de Redstone" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "redstone_lamp",
+      "text": "Redstone Lamp",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694194/Redstone_Lamp_hmwsba.png",
+      "translations": { "es": "Lámpara de Redstone" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "redstone_ore",
+      "text": "Redstone Ore",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694194/Redstone_Ore_vvcxm6.png",
+      "translations": { "es": "Mineral de Redstone" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "redstone_torch",
+      "text": "Redstone Torch",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694194/Redstone_Torch_vssp21.png",
+      "translations": { "es": "Antorcha de Redstone" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "rope",
+      "text": "Rope",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694195/Rope_mbqgxw.png",
+      "translations": { "es": "Cuerda" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "rotten_flesh",
+      "text": "Rotten Flesh",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765446/Rotten_Flesh_cvxmzv.png",
+      "translations": { "es": "Carne podrida" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "saddle",
+      "text": "Saddle",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882517/Saddle_nlp6ev.png",
+      "translations": { "es": "Montura" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "sand",
+      "text": "Sand",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694195/Sand_ou2qvk.png",
+      "translations": { "es": "Arena" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "sandstone",
+      "text": "Sandstone",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694195/Sandstone_fkgaiq.png",
+      "translations": { "es": "Arenisca" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "santa_hat",
+      "text": "Santa Hat",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Santa_Hat_jzj24t.png",
+      "translations": { "es": "Gorro de Santa" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "sapling",
+      "text": "Sapling",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726882517/Sappling_jccbia.png",
+      "translations": { "es": "Brote" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "seaweed",
+      "text": "Seaweed",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Seaweed_slvtvy.png",
+      "translations": { "es": "Algas" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "seeds",
+      "text": "Seeds",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765446/Seeds_zdicrp.png",
+      "translations": { "es": "Semillas" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "shades",
+      "text": "Shades",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Shades_erre9t.png",
+      "translations": { "es": "Gafas de sol" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "shear",
+      "text": "Shear",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Shears_bfupbu.png",
+      "translations": { "es": "Tijeras" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "shrub",
+      "text": "Shrub",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719734/Shrub_zrtj5c.png",
+      "translations": { "es": "Arbusto" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "sign",
+      "text": "Sign",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Sign_ynevxj.png",
+      "translations": { "es": "Cartel" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "slime_block",
+      "text": "Slime Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Slime_Block_jpvxr2.png",
+      "translations": { "es": "Bloque de slime" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "slimeball",
+      "text": "Slimeball",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Slimeball_mzqlxd.png",
+      "translations": { "es": "Bola de slime" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "snow_ball",
+      "text": "Snow Ball",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Snow_Ball_mvkx2c.png",
+      "translations": { "es": "Bola de nieve" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "snow_block",
+      "text": "Snow Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Snow_Block_eukorp.png",
+      "translations": { "es": "Bloque de nieve" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "soul_sand",
+      "text": "Soul Sand",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Soul_Sand_f9pq2y.png",
+      "translations": { "es": "Arena de almas" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "soup",
+      "text": "Soup",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765445/Soup_dpx8up.png",
+      "translations": { "es": "Sopa" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "spawn_egg",
+      "text": "Spawn Egg",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Spawn_Egg_gie4jl.png",
+      "translations": { "es": "Huevo de aparición" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment", "item_type_spawnegg"]
+    },
+    {
+      "value": "spear",
+      "text": "Spear",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694181/Spear_zm6cba.png",
+      "translations": { "es": "Lanza" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "spider_eye",
+      "text": "Spider Eye",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765448/Spider_Eye_ealks0.png",
+      "translations": { "es": "Ojo de araña" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "steak",
+      "text": "Steak",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726765447/Steak_tl1ccw.png",
+      "translations": { "es": "Bistec" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "stick",
+      "text": "Stick", 
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694183/Stick_cxkdco.png",
+      "translations": { "es": "Palo" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "piston_sticky",
+      "text": "Sticky Piston",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694184/Sticky_Piston_k7pe2f.png",
+      "translations": { "es": "Pistón pegajoso" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "stone",
+      "text": "Stone",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694184/Stone_gko4lw.png",
+      "translations": { "es": "Piedra" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "backdrop_stone",
+      "text": "Stone Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890413/Backdrop_Stone_wjnnrb.png",
+      "translations": { "es": "Fondo de piedra" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "stairs_stone",
+      "text": "Stone Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694185/Stone_Stairs_ysp7ty.png",
+      "translations": { "es": "Escalera de piedra" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "slab_stone",
+      "text": "Stone Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694184/Stone_Slab_fsqmax.png",
+      "translations": { "es": "Losa de piedra" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "stone_pickaxe",
+      "text": "Stone Pickaxe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890397/Stone_Pickaxe_ezr6rv.png",
+      "translations": { "es": "Pico de piedra" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "stone_axe",
+      "text": "Stone Axe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726891290/Stone_Axe_i7rx00.png",
+      "translations": { "es": "Hacha de piedra" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "stone_hoe",
+      "text": "Stone Hoe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890397/Stone_Hoe_xkp77l.png",
+      "translations": { "es": "Azada de piedra" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "stone_shovel",
+      "text": "Stone Shovel",
+      "image": "https://res.cloudinary.com/dkrcpm3,2u/image/upload/f_webp/v1726890398/Stone_Shovel_z0vuoi.png",
+      "translations": { "es": "Pala de piedra" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "stone_sword",
+      "text": "Stone Sword",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890400/Stone_Sword_vvirm6.png",
+      "translations": { "es": "Espada de piedra" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "stone_brick",
+      "text": "Stone Brick",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726694184/Stone_Brick_rbds7j.png",
+      "translations": { "es": "Ladrillo de piedra" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "backdrop_stone_brick",
+      "text": "Stone Brick Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890415/Backdrop_Stone_Brick_in3vxv.png",
+      "translations": { "es": "Fondo de ladrillo de piedra" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "stairs_stone_brick",
+      "text": "Stone Brick Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726891287/Stair_Stone_Brick_zmcacy.png",
+      "translations": { "es": "Escalera de ladrillo de piedra" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "slab_stone_brick",
+      "text": "Stone Brick Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890909/Slab_Stone_Brick_tqvzow.png",
+      "translations": { "es": "Losa de ladrillo de piedra" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "string",
+      "text": "String",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/String_ngvv2d.png",
+      "translations": { "es": "Hilo" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "sugar",
+      "text": "Sugar",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775094/Sugar_pzzhmz.png",
+      "translations": { "es": "Azúcar" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "sugarcane",
+      "text": "Sugarcane",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719734/Sugarcane_tsu8k1.png",
+      "translations": { "es": "Caña de azúcar" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "tnt",
+      "text": "TNT",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719735/TNT_faqcxq.png",
+      "translations": { "es": "TNT" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "minecart_tnt",
+      "text": "TNT Minecart",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719619/TNT_Minecart_ybq1gr.png",
+      "translations": { "es": "Vagoneta TNT" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "topaz",
+      "text": "Topaz",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769260/Topaz_tqbllx.png",
+      "translations": { "es": "Topacio" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "topaz_block",
+      "text": "Topaz Block",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726687266/Block_of_Topaz_bzgnfy.png",
+      "translations": { "es": "Bloque de topacio" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "topaz_ore",
+      "text": "Topaz Ore",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719620/Topaz_Ore_ka07wl.png",
+      "translations": { "es": "Mineral de topacio" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "torch",
+      "text": "Torch",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719620/Torch_qffndk.png",
+      "translations": { "es": "Antorcha" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "water",
+      "text": "Water",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719621/Water_rl5hym.png",
+      "translations": { "es": "Agua" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "wheat",
+      "text": "Wheat",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726775094/Wheat_gqbzfz.png",
+      "translations": { "es": "Trigo" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "trap_door",
+      "text": "Trap Door",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719621/Trap_Door_by0deq.png",
+      "translations": { "es": "Trampilla" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "tree_wood",
+      "text": "Tree Wood",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719629/Wood_gbhuqz.png",
+      "translations": { "es": "Madera de árbol" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "wood",
+      "text": "Wood",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719629/Wood_gbhuqz.png",
+      "translations": { "es": "Madera" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "wooden_planks",
+      "text": "Wooden Planks",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726719679/Wooden_Planks_n0ponw.png",
+      "translations": { "es": "Tablones de madera" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "backdrop_wooden_planks",
+      "text": "Wooden Planks Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890415/Backdrop_Wooden_Plank_cwjyhd.png",
+      "translations": { "es": "Fondo de tablones de madera" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "stairs_wooden_planks",
+      "text": "Wooden Planks Stairs",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726891287/Stair_Wooden_Plank_qdk1v0.png",
+      "translations": { "es": "Escalera de tablones de madera" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "slab_wooden_planks",
+      "text": "Wooden Planks Slab",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726891287/Slab_Wooden_Plank_bl2osj.png",
+      "translations": { "es": "Losa de tablones de madera" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "wooden_pickaxe",
+      "text": "Wooden Pickaxe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890406/Wooden_Pickaxe_k45e3c.png",
+      "translations": { "es": "Pico de madera" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "wooden_axe",
+      "text": "Wooden Axe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890401/Wooden_Axe_dg67if.png",
+      "translations": { "es": "Hacha de madera" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "wooden_hoe",
+      "text": "Wooden Hoe",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890404/Wooden_Hoe_pfyxyi.png",
+      "translations": { "es": "Azada de madera" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "wooden_shovel",
+      "text": "Wooden Shovel",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890407/Wooden_Shovel_pheilb.png",
+      "translations": { "es": "Pala de madera" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "wooden_sword",
+      "text": "Wooden Sword",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890409/Wooden_Sword_dvt16x.png",
+      "translations": { "es": "Espada de madera" },
+      "lootFields": ["item_name","item_canDestroy","item_enchantment","item_unbreakable"]
+    },
+    {
+      "value": "fence",
+      "text": "Wooden Fence",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890403/Wooden_Fence_gqqxcz.png",
+      "translations": { "es": "Valla de madera" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "fence_gate",
+      "text": "Wooden Fence Gate",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726752883/Wooden_Fence_Gate_stz1cv.png",
+      "translations": { "es": "Puerta de valla de madera" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "wooden_door",
+      "text": "Wooden Door",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890403/Wooden_Door_ploffn.png",
+      "translations": { "es": "Puerta de madera" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "pressure_plate_wooden",
+      "text": "Wooden Pressure Plate",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726893427/Wooden_Pressure_Plate_z8mdzz.png",
+      "translations": { "es": "Placa de presión de madera" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    },
+    {
+      "value": "wool",
+      "text": "Wool",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890410/Wool_ukof8x.png",
+      "translations": { "es": "Lana" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment", "item_type_color_wool"]
+    },
+    {
+      "value": "backdrop_wool",
+      "text": "Wool Backdrop",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890418/Backdrop_Wool_s6sfpm.png",
+      "translations": { "es": "Fondo de lana" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment", "item_type_color_wool_b"]
+    },
+    {
+      "value": "yellow_flower",
+      "text": "Yellow Flower",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726890412/Yellow_Flower_pk30c3.png",
+      "translations": { "es": "Flor amarilla" },
+      "lootFields": ["item_name","item_canPlaceOn","item_canDestroy","item_enchantment"]
+    }
+  ]
+}
