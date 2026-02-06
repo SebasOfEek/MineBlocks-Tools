@@ -4,25 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MBSummon</title>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+
+
+    </style>
   </head>
-<style>
-
-
-</style>
+  <body>
     <!-- Pantalla de carga -->
     <div id="loadingScreen" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:var(--card-bg,#fff);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;">
       <div class="loader"></div>
       <span id="loadingText" style="margin-top:20px;font-size:1.3em;color:var(--text-color,#333);font-weight:600;" data-i18n="common.loading">Cargando datos...</span>
     </div>
-  <body>
     <div class="container">
       <div class="menu">
         <div class="menu-title">
@@ -257,7 +257,7 @@
           </div>
           <div class="popup-content">
             <p class="popup-description" data-i18n="modals.amount.help.description">
-              Esta opción te permite definir cuántos mobs quieres invocar a la vez. Por razones de rendimiento y equilibrio del juego, el límite máximo es de 20 mobs por invocación.
+              Esta opción te permite definir cuántos mobs quieres invocar a la vez. El límite máximo es de 20 mobs por invocación.
             </p>
           </div>
         </div>
@@ -433,27 +433,27 @@
 
             <!-- Contenedor de inputs de creación/edición con scroll -->
             <div class="loot-tags-container">
-              <div class="loot-tags-item">
+              <div class="loot-tags-item" data-field="amount">
                 <label data-i18n="modals.lootTags.fields.amount">Cantidad:</label>
                 <input type="number" class="sidebar-input integer-only" min="1" max="64" step="1">
               </div>
               
-              <div class="loot-tags-item">
+              <div class="loot-tags-item" data-field="bonus">
                 <label data-i18n="modals.lootTags.fields.bonus">Bonus:</label>
                 <input type="number" class="sidebar-input" min="0">
               </div>
               
-              <div class="loot-tags-item">
+              <div class="loot-tags-item" data-field="lootBonus">
                 <label data-i18n="modals.lootTags.fields.lootBonus">Loot Bonus:</label>
                 <input type="number" class="sidebar-input" min="0">
               </div>
               
-              <div class="loot-tags-item">
+              <div class="loot-tags-item" data-field="chance">
                 <label data-i18n="modals.lootTags.fields.chance">Oportunidad:</label>
                 <input type="number" class="sidebar-input" min="0" max="100" step="0.1">
               </div>
               
-              <div class="loot-tags-item">
+              <div class="loot-tags-item" data-field="onFire">
                 <label data-i18n="modals.lootTags.fields.onFire">Está en llamas:</label>
                 <button class="toggle-button">
                   <i class="fas fa-toggle-off"></i>
@@ -461,17 +461,17 @@
                 </button>
               </div>
               
-              <div class="loot-tags-item">
+              <div class="loot-tags-item" data-field="size">
                 <label data-i18n="modals.lootTags.fields.size">Tamaño:</label>
                 <select class="sidebar-select" data-i18n-attr="">
-                  <option value="" data-i18n="modals.lootTags.selectItemPlaceholder">--Seleccionar--</option>
+                  <option value="" data-i18n="common.select" data-default-text="--Seleccionar--">--Seleccionar--</option>
                   <option value="1" data-i18n="modals.lootTags.sizeOptions.small">Pequeño</option>
                   <option value="2" data-i18n="modals.lootTags.sizeOptions.medium">Mediano</option>
                   <option value="3" data-i18n="modals.lootTags.sizeOptions.large">Grande</option>
                 </select>
               </div>
               
-              <div class="loot-tags-item">
+              <div class="loot-tags-item" data-field="isBaby">
                 <label data-i18n="modals.lootTags.fields.isBaby">Es bebé:</label>
                 <button class="toggle-button">
                   <i class="fas fa-toggle-off"></i>
@@ -479,14 +479,14 @@
                 </button>
               </div>
               
-              <div class="loot-tags-item">
+              <div class="loot-tags-item" data-field="variant">
                 <label data-i18n="modals.lootTags.fields.variant">Variante:</label>
                 <select id="lootVariantSelect" class="sidebar-select select-with-images select-variant">
                   <option value="">--Seleccionar--</option>
                 </select>
               </div>
               
-              <div class="loot-tags-item">
+              <div class="loot-tags-item" data-field="isSheared">
                 <label data-i18n="modals.lootTags.fields.isSheared">Está esquilada:</label>
                 <button class="toggle-button">
                   <i class="fas fa-toggle-off"></i>
@@ -494,9 +494,126 @@
                 </button>
               </div>
               
-              <div class="loot-tags-item">
+              <div class="loot-tags-item" data-field="color">
                 <label data-i18n="modals.lootTags.fields.color">Color:</label>
                 <select id="lootColorSelect" class="sidebar-select select-with-images select-color">
+                  <option value="">--Seleccionar--</option>
+                </select>
+              </div>
+              
+              <!-- New Item Tag fields -->
+              <div class="loot-tags-item" data-field="item_name">
+                <label data-i18n="modals.lootTags.fields.item_name">Item Tag - Name:</label>
+                <input type="text" class="sidebar-input">
+              </div>
+              <div class="loot-tags-item" data-field="item_unbreakable">
+                <label data-i18n="modals.lootTags.fields.item_unbreakable">Item Tag - Unbreakable:</label>
+                <button class="toggle-button"><i class="fas fa-toggle-off"></i><span>No</span></button>
+              </div>
+              <div class="loot-tags-item" data-field="item_type_spawnegg">
+                <label data-i18n="modals.lootTags.fields.item_type_spawnegg">Item Tag - Type SpawnEgg:</label>
+                <select id="itemTypeSpawneggSelect" class="sidebar-select select-with-images" style="width:100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
+              </div>
+              <div class="loot-tags-item" data-field="item_enchantment">
+                <label data-i18n="modals.lootTags.fields.item_enchantment">Item Tag - Enchantment:</label>
+                <select id="itemEnchantSelect" class="sidebar-select" multiple style="width:100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
+              </div>
+              <div class="loot-tags-item" data-field="item_anvilUses">
+                <label data-i18n="modals.lootTags.fields.item_anvilUses">Item Tag - Anvil Uses:</label>
+                <input type="number" class="sidebar-input integer-only" min="0">
+              </div>
+              <div class="loot-tags-item" data-field="item_canPlaceOn">
+                <label data-i18n="modals.lootTags.fields.item_canPlaceOn">Item Tag - CanPlaceOn:</label>
+                <select id="itemCanPlaceOnSelect" class="select-with-images" multiple style="width:100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
+              </div>
+              <div class="loot-tags-item" data-field="item_canDestroy">
+                <label data-i18n="modals.lootTags.fields.item_canDestroy">Item Tag - CanDestroy:</label>
+                <select id="itemCanDestroySelect" class="select-with-images" multiple style="width:100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
+              </div>
+              <div class="loot-tags-item" data-field="item_showParticles">
+                <label data-i18n="modals.lootTags.fields.item_showParticles">Item Tag - Disable Particles:</label>
+                <button class="toggle-button"><i class="fas fa-toggle-off"></i><span>No</span></button>
+              </div>
+              <div class="loot-tags-item" data-field="item_category">
+                  <label for="item_category" data-i18n="modals.lootTags.fields.item_category">Item Tag - Category:</label>
+                      <button id="item_category" type="button" class="toggle-button" data-role="category">
+                        <i class="fa fa-toggle-off"></i> <span>Normal</span>
+                      </button>
+              </div>
+              <div class="loot-tags-item" data-field="item_command">
+                <label data-i18n="modals.lootTags.fields.item_command">Item Tag - Command:</label>
+                <input type="text" class="sidebar-input">
+              </div>
+              <div class="loot-tags-item" data-field="item_uses">
+                <label data-i18n="modals.lootTags.fields.item_uses">Item Tag - Uses:</label>
+                <input type="number" class="sidebar-input integer-only" min="0">
+              </div>
+              <div class="loot-tags-item" data-field="item_type_color">
+                <label data-i18n="modals.lootTags.fields.item_type_color">Item Tag - Type Color:</label>
+                <select id="itemTypeColorSelect" class="sidebar-select select-with-images" style="width:100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
+              </div>
+              <div class="loot-tags-item" data-field="item_type_balloon">
+                <label data-i18n="modals.lootTags.fields.item_type_balloon">Item Tag - Type Balloon:</label>
+                <select id="itemTypeBalloonSelect" class="sidebar-select select-with-images" style="width:100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
+              </div>
+              <div class="loot-tags-item" data-field="item_type_potion">
+                <label data-i18n="modals.lootTags.fields.item_type_potion">Item Tag - Type Potion:</label>
+                <select id="itemTypePotionSelect" class="sidebar-select select-with-images" style="width:100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
+              </div>
+              <!-- Additional specific color/type selects -->
+              <div class="loot-tags-item" data-field="item_type_color_carpet">
+                <label data-i18n="modals.lootTags.fields.item_type_color_carpet">Item Tag - Type Color Carpet:</label>
+                <select id="itemTypeColorCarpetSelect" class="sidebar-select select-with-images" style="width:100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
+              </div>
+              <div class="loot-tags-item" data-field="item_type_color_bed">
+                <label data-i18n="modals.lootTags.fields.item_type_color_bed">Item Tag - Type Color Bed:</label>
+                <select id="itemTypeColorBedSelect" class="sidebar-select select-with-images" style="width:100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
+              </div>
+              <div class="loot-tags-item" data-field="item_type_color_wool">
+                <label data-i18n="modals.lootTags.fields.item_type_color_wool">Item Tag - Type Color Wool:</label>
+                <select id="itemTypeColorWoolSelect" class="sidebar-select select-with-images" style="width:100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
+              </div>
+              <div class="loot-tags-item" data-field="item_type_color_wool_b">
+                <label data-i18n="modals.lootTags.fields.item_type_color_wool_b">Item Tag - Type Color Wool B:</label>
+                <select id="itemTypeColorWoolBSelect" class="sidebar-select select-with-images" style="width:100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
+              </div>
+              <div class="loot-tags-item" data-field="item_type_color_glass">
+                <label data-i18n="modals.lootTags.fields.item_type_color_glass">Item Tag - Type Color Glass:</label>
+                <select id="itemTypeColorGlassSelect" class="sidebar-select select-with-images" style="width:100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
+              </div>
+              <div class="loot-tags-item" data-field="item_type_color_glass_b">
+                <label data-i18n="modals.lootTags.fields.item_type_color_glass_b">Item Tag - Type Color Glass B:</label>
+                <select id="itemTypeColorGlassBSelect" class="sidebar-select select-with-images" style="width:100%">
+                  <option value="">--Seleccionar--</option>
+                </select>
+              </div>
+              <div class="loot-tags-item" data-field="item_type_color_dye">
+                <label data-i18n="modals.lootTags.fields.item_type_color_dye">Item Tag - Type Color Dye:</label>
+                <select id="itemTypeColorDyeSelect" class="sidebar-select select-with-images" style="width:100%">
                   <option value="">--Seleccionar--</option>
                 </select>
               </div>
@@ -806,11 +923,11 @@
           <div class="popup-content">
             <div class="language-buttons">
 <button class="language-btn active" data-lang="es">
-  <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1750881497/ES-es_vsqvgk.jpg" data-i18n="languages.es.alt" alt="Español">
+  <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1768410911/ES-es_vsqvgk.jpg" data-i18n="languages.es.alt" alt="Español">
   <span data-i18n="languages.es.name">Español</span>
 </button>
 <button class="language-btn" data-lang="en">
-  <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1750881497/EN-en_jr23vm.jpg" data-i18n="languages.en.alt" alt="English">
+  <img src="https://res.cloudinary.com/dnyoogvv1/image/upload/v1768410819/EN-en_jr23vm.jpg" data-i18n="languages.en.alt" alt="English">
   <span data-i18n="languages.en.name">Inglés</span>
 </button>
             </div>
@@ -899,8 +1016,9 @@
             </div>
 
             <div class="saved-modal-actions" style="display:flex;gap:0.6rem;justify-content:flex-end;margin-top:1rem;">
-              <button class="popup-button save-button" id="confirmSaveButton" data-i18n="modals.savedModal.saveButton">Guardar</button>
-              <button class="popup-button" id="cancelSaveButton" data-i18n="modals.savedModal.cancelButton">Cancelar</button>
+              <button type="button" class="popup-button save-button" id="confirmSaveButton" data-i18n="modals.savedModal.saveButton">Guardar</button>
+              <button type="button" class="popup-button" id="cancelSaveButton" data-i18n="modals.savedModal.cancelButton">Cancelar</button>
+              
             </div>
           </div>
         </div>
@@ -915,17 +1033,18 @@
           </button>
           <!-- El comando generado se inserta aquí por JS -->
         </div>
-        <div class="footer-box">
+        <div class="footer-box" id="footerRandomButton" title="Randomize">
+          <i class="fas fa-shuffle"></i>
+        </div>
+        <div class="footer-box" id="footerCopyButton" title="Copy command">
           <i class="fas fa-copy"></i>
         </div>
       </div>
     </div>
-  <script src="notifications.js"></script>
+  <script src="js/ui/notifications.js"></script>
   <div id="notifContainer" class="notif-container" aria-live="polite"></div>
-  <script src="Function.js"></script>
-  <script src="lootTags.js"></script>
-    <script>
-      
-    </script>
+  <script src="js/main.js"></script>
+  <script src="js/core/lootTags.js"></script>
+  <script src="js/core/randomizer.js"></script>
   </body>
 </html>
