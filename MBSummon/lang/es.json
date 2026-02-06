@@ -69,7 +69,7 @@
       "placeholder": "Ingresa una cantidad...",
       "help": {
         "title": "Ayuda - Cantidad de mobs",
-        "description": "Esta opción te permite definir cuántos mobs quieres invocar a la vez. Por razones de rendimiento y equilibrio del juego, el límite máximo es de 20 mobs por invocación."
+        "description": "Esta opción te permite definir cuántos mobs quieres invocar a la vez. El límite máximo es de 20 mobs por invocación."
       }
     },
     "position": {
@@ -109,7 +109,7 @@
     },
     "loot": {
       "title": "Loot Predeterminado",
-      "label": "Activar loot predeterminado:",
+      "label": "Desactivar loot predeterminado:",
       "enabled": "Activado",
       "disabled": "Desactivado",
       "help": {
@@ -120,7 +120,12 @@
     "lootTags": {
       "title": "Loot Tags",
       "emptyMessage": "No hay loot tags guardados.",
+      "selectEnchantPlaceholder": "--Seleccionar--",
       "selectItemPlaceholder": "Seleccionar item",
+      "particlesEnabled": "Partículas",
+      "particlesDisabled": "Partículas desactivadas",
+      "categorySplash": "Splash",
+      "categoryNormal": "Normal",
       "saveButton": "Guardar",
       "deleteButton": "Eliminar",
       "editButton": "Editar",
@@ -134,7 +139,29 @@
         "isBaby": "Es bebé:",
         "variant": "Variante:",
         "isSheared": "Está esquilada:",
-        "color": "Color:"
+        "color": "Color:",
+        "item_name": "Item Tag - Nombre:",
+        "item_unbreakable": "Item Tag - Irrompible:",
+        "item_enchantment": "Item Tag - Encantamientos:",
+        "item_anvilUses": "Item Tag - Usos de Yunque:",
+        "item_canPlaceOn": "Item Tag - Puede colocar en:",
+        "item_canDestroy": "Item Tag - Puede destruir:",
+        "item_showParticles": "Item Tag - Desactivar Partículas:",
+        "item_category": "Item Tag - Categoría:",
+        "item_command": "Item Tag - Comando:",
+        "item_uses": "Item Tag - Usos:"
+        ,"item_type_spawnegg":"Item Tag - Tipo SpawnEgg:",
+        "item_type_color":"Item Tag - Tipo Color:",
+        "item_type_color2":"Item Tag - Tipo Color2:",
+        "item_type_balloon":"Item Tag - Tipo Globo:",
+        "item_type_potion":"Item Tag - Tipo Poción:",
+        "item_type_color_carpet":"Item Tag - Tipo Color Alfombra:",
+        "item_type_color_bed":"Item Tag - Tipo Color Cama:",
+        "item_type_color_wool":"Item Tag - Tipo Color Lana:",
+        "item_type_color_wool_b":"Item Tag - Tipo Color Lana B:",
+        "item_type_color_glass":"Item Tag - Tipo Color Vidrio:",
+        "item_type_color_glass_b":"Item Tag - Tipo Color Vidrio B:",
+        "item_type_color_dye":"Item Tag - Tipo Color Tintura:"
       },
       "sizeOptions": {
         "small": "Pequeño",
@@ -143,7 +170,41 @@
       },
       "help": {
         "title": "Ayuda - Loot Tags",
-        "description": "Los tags de loot controlan comportamientos especiales cuando el mob muere, como la probabilidad de soltar items raros o experiencia extra."
+        "description": "Los tags de loot controlan comportamientos especiales cuando el mob muere, como la probabilidad de soltar items raros."
+      }
+      ,"helpTexts":{
+        "amount":"Número de items que se generarán.",
+        "bonus":"Permite obtener una cantidad aleatoria de objetos extra, hasta el valor indicado, si se cumplen las condiciones. Por defecto es 0.",
+        "lootBonus":"Permite obtener una cantidad aleatoria de objetos extra al usar el encantamiento máximo de saqueo, hasta el valor indicado, si se cumplen las condiciones. Por defecto es 0.",
+        "chance":"Controla si el objeto cae o no. Se genera un valor aleatorio entre 0 y 1: el objeto cae si ese valor está entre min (incluido) y max (excluido). Si varios objetos usan la misma seed, comparten el mismo valor; rangos que se superponen pueden hacer que caigan varios, mientras que rangos separados permiten que solo caiga uno",
+        "onFire":"El objeto solo se suelta si la entidad está en llamas en el momento de morir.",
+        "size":"El objeto solo se suelta si el tamaño de la entidad coincide con el valor indicado.",
+        "isBaby":"El objeto solo se suelta si la entidad es (o no es) bebé, según el valor indicado.",
+        "variant":"El objeto solo se suelta si la variante de la entidad coincide con la indicada. Solo se aplica a mobs que tienen variantes (por ejemplo: normal, mooshroom, cowctus).",
+        "isSheared":"El objeto solo se suelta si la oveja está esquilada (o no), según el valor indicado.",
+        "color":"El objeto solo se suelta si el color de la oveja coincide con el valor indicado. Solo se aplica a ovejas.",
+        "item_name":"Sobrescribe el nombre del objeto, como si hubiera sido renombrado en un yunque. Se aplica a todos los objetos.",
+        "item_unbreakable":"Si está activado y el objeto es una herramienta, nunca perderá durabilidad. Se aplica a todas las herramientas.",
+        "item_enchantment":"Define los encantamientos que tendrá el objeto. Se aplica a todos los objetos.",
+        "item_canPlaceOn":"Indica en qué bloques se puede colocar el objeto en modo Aventura. Puede ser un bloque específico, varios bloques o all, que permite colocarlo en cualquier bloque.",
+        "item_canDestroy":"Indica qué bloques puede romper el objeto en modo Aventura. Puede ser un bloque específico, varios bloques o all, que permite romper cualquier bloque.",
+        "item_showParticles":"Controla si se muestran las partículas de los efectos de la poción al beberla. Solo se aplica a pociones.",
+        "item_category":"Define la categoría de la poción. Por ejemplo, usar splash la convierte en una poción arrojadiza. Solo se aplica a pociones.",
+        "item_command":"Define el comando que ejecutará un libro de comandos al usarse. Solo se aplica a libros de comandos; el comando no se valida al crearse.",
+        "item_uses":"Indica cuántas veces se puede usar un libro de comandos antes de desaparecer. Solo se aplica a libros de comandos.",
+        "item_anvilUses":"Indica cuántas veces el objeto ha sido usado en un yunque. Solo afecta al costo de futuras operaciones en el yunque. Se aplica a todos los objetos.",
+        "item_type_spawnegg":"Define qué tipo de criatura generará el huevo de aparición. Este valor determina el mob que aparecerá al usar el huevo, por ejemplo un zombi, un dragón del End o cualquier otra entidad compatible.",
+        "item_type_color":"Color del item (tinturado).",
+        "item_type_color2":"Color del item (tinturado).",
+        "item_type_balloon":"Define el tipo o color del globo que se generará. Dependiendo del valor seleccionado, el globo puede cambiar su apariencia o adoptar variantes especiales compatibles..",
+        "item_type_potion":"Especifica el tipo de poción que se generará. Puede ser una poción vacía, de agua o una poción con efectos específicos.",
+        "item_type_color_carpet":"Color de la alfombra.",
+        "item_type_color_bed":"Color de la cama.",
+        "item_type_color_wool":"Color de la lana.",
+        "item_type_color_wool_b":"Color de la lana.",
+        "item_type_color_glass":"Color del vidrio.",
+        "item_type_color_glass_b":"Color del vidrio.",
+        "item_type_color_dye":"Color de la tintura."
       }
     },
     "armor": {
@@ -245,8 +306,12 @@
   },
   
   "notifications": {
+    "select_mob": "Debes seleccionar un mob primero",
+    "card_not_available": "Tarjeta no disponible",
+    "randomize_success": "Aleatorización aplicada",
     "saved_success": "Comando guardado",
     "editing": "Editando elemento guardado",
+    "edit_block": "Termina edición",
     "loot": {
       "added": "Item agregado",
       "updated": "Item actualizado",
@@ -256,7 +321,7 @@
     "language_changed": "Idioma cambiado",
     "cleared": "Formulario restablecido",
     "copied": "Comando copiado",
-    "deleted": "Se eliminó el comando guardado",
+    "deleted": "Comando eliminado",
     "save_duplicate": "Este comando ya está guardado",
     "import_file_selected_prefix": "Archivo seleccionado",
     "import_success": "Importación completada",
