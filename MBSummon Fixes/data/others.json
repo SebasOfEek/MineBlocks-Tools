@@ -43,22 +43,28 @@
       "translations": { "en": "Light Green", "es": "Verde claro" }
     },
     {
-      "value": "magenta",
-      "text": "Magenta",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Magenta_wk1euz.png",
-      "translations": { "en": "Magenta", "es": "Magenta" }
-    },
-    {
       "value": "orange",
       "text": "Orange",
       "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Orange_xkxwgg.png",
       "translations": { "en": "Orange", "es": "Naranja" }
     },
     {
+      "value": "yellow",
+      "text": "Yellow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Yellow_dm8nsr.png",
+      "translations": { "en": "Yellow", "es": "Amarillo" }
+    },
+    {
       "value": "pink",
       "text": "Pink",
       "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Pink_nilaad.png",
       "translations": { "en": "Pink", "es": "Rosa" }
+    },
+    {
+      "value": "magenta",
+      "text": "Magenta",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Magenta_wk1euz.png",
+      "translations": { "en": "Magenta", "es": "Magenta" }
     },
     {
       "value": "purple",
@@ -71,12 +77,6 @@
       "text": "White",
       "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/White_hjvvrz.png",
       "translations": { "en": "White", "es": "Blanco" }
-    },
-    {
-      "value": "yellow",
-      "text": "Yellow",
-      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Yellow_dm8nsr.png",
-      "translations": { "en": "Yellow", "es": "Amarillo" }
     },
     {
       "value": "lightgray",
@@ -96,6 +96,1136 @@
       "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Black_feewkv.png",
       "translations": { "en": "Black", "es": "Negro" }
     }
+  ],
+  "typeColor": [
+    {
+      "value": "red",
+      "text": "Red",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Red_ow8fz1.png",
+      "translations": { "en": "Red", "es": "Rojo" }
+    },
+    {
+      "value": "green",
+      "text": "Green",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Green_hojzk0.png",
+      "translations": { "en": "Green", "es": "Verde" }
+    },
+    {
+      "value": "blue",
+      "text": "Blue",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Blue_nfyfrs.png",
+      "translations": { "en": "Blue", "es": "Azul" }
+    },
+    {
+      "value": "brown",
+      "text": "Brown",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Brown_n54tmt.png",
+      "translations": { "en": "Brown", "es": "Marrón" }
+    },
+    {
+      "value": "cyan",
+      "text": "Cyan",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Cyan_ietx4o.png",
+      "translations": { "en": "Cyan", "es": "Cian" }
+    },
+    {
+      "value": "lightblue",
+      "text": "Light Blue",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Light_Blue_jiivto.png",
+      "translations": { "en": "Light Blue", "es": "Azul claro" }
+    },
+    {
+      "value": "lightgreen",
+      "text": "Light Green",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Light_Green_xozy6s.png",
+      "translations": { "en": "Light Green", "es": "Verde claro" }
+    },
+    {
+      "value": "orange",
+      "text": "Orange",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Orange_xkxwgg.png",
+      "translations": { "en": "Orange", "es": "Naranja" }
+    },
+    {
+      "value": "yellow",
+      "text": "Yellow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Yellow_dm8nsr.png",
+      "translations": { "en": "Yellow", "es": "Amarillo" }
+    },
+    {
+      "value": "pink",
+      "text": "Pink",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Pink_nilaad.png",
+      "translations": { "en": "Pink", "es": "Rosa" }
+    },
+    {
+      "value": "magenta",
+      "text": "Magenta",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Magenta_wk1euz.png",
+      "translations": { "en": "Magenta", "es": "Magenta" }
+    },
+    {
+      "value": "purple",
+      "text": "Purple",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Purple_r0jjhk.png",
+      "translations": { "en": "Purple", "es": "Púrpura" }
+    },
+    {
+      "value": "white",
+      "text": "White",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/White_hjvvrz.png",
+      "translations": { "en": "White", "es": "Blanco" }
+    },
+    {
+      "value": "lightgray",
+      "text": "Light Gray",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Light_Gray_hjjfrv.png",
+      "translations": { "en": "Light Gray", "es": "Gris claro" }
+    },
+    {
+      "value": "gray",
+      "text": "Gray",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1726962877/Gray_fkir91.png",
+      "translations": { "en": "Gray", "es": "Gris" }
+    },
+    {
+      "value": "black",
+      "text": "Black",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Black_feewkv.png",
+      "translations": { "en": "Black", "es": "Negro" }
+    },
+    {
+      "value": "rainbow",
+      "text": "Rainbow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Black_feewkv.png",
+      "translations": { "en": "Rainbow", "es": "Arcoíris" }
+    }
+  ],
+  "typeColorCarpet": [
+    {
+      "value": "rainbow",
+      "text": "Rainbow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769705475/rainbow_mgjhve.png",
+      "translations": { "en": "Rainbow", "es": "Arcoíris" }
+    },
+    {
+      "value": "red",
+      "text": "Red",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769688356/red_ycs25j.png",
+      "translations": { "en": "Red", "es": "Rojo" }
+    },
+    {
+      "value": "green",
+      "text": "Green",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769687894/green_tfpev0.png",
+      "translations": { "en": "Green", "es": "Verde" }
+    },
+    {
+      "value": "blue",
+      "text": "Blue",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769687849/blue_s93iyj.png",
+      "translations": { "en": "Blue", "es": "Azul" }
+    },
+    {
+      "value": "brown",
+      "text": "Brown",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769687849/brown_kuooze.png",
+      "translations": { "en": "Brown", "es": "Marrón" }
+    },
+    {
+      "value": "cyan",
+      "text": "Cyan",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769688867/cyan_laqxbg.png",
+      "translations": { "en": "Cyan", "es": "Cian" }
+    },
+    {
+      "value": "lightblue",
+      "text": "Light Blue",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769687916/lightblue_tnnvf3.png",
+      "translations": { "en": "Light Blue", "es": "Azul claro" }
+    },
+    {
+      "value": "lightgreen",
+      "text": "Light Green",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769687917/lightgreen_ve42lk.png",
+      "translations": { "en": "Light Green", "es": "Verde claro" }
+    },
+    {
+      "value": "orange",
+      "text": "Orange",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769687918/orange_eylsv3.png",
+      "translations": { "en": "Orange", "es": "Naranja" }
+    },
+    {
+      "value": "yellow",
+      "text": "Yellow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769688494/yellow_phoiku.png",
+      "translations": { "en": "Yellow", "es": "Amarillo" }
+    },
+    {
+      "value": "pink",
+      "text": "Pink",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769687925/pink_etjhc6.png",
+      "translations": { "en": "Pink", "es": "Rosa" }
+    },
+    {
+      "value": "magenta",
+      "text": "Magenta",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769687917/magenta_ml6o9c.png",
+      "translations": { "en": "Magenta", "es": "Magenta" }
+    },
+    {
+      "value": "purple",
+      "text": "Purple",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769688356/purple_mevps3.png",
+      "translations": { "en": "Purple", "es": "Púrpura" }
+    },
+    {
+      "value": "white",
+      "text": "White",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769688357/white_t39de7.png",
+      "translations": { "en": "White", "es": "Blanco" }
+    },
+    {
+      "value": "lightgray",
+      "text": "Light Gray",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769687917/lightgray_p77qyv.png",
+      "translations": { "en": "Light Gray", "es": "Gris claro" }
+    },
+    {
+      "value": "gray",
+      "text": "Gray",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769687893/gray_vt4lnw.png",
+      "translations": { "en": "Gray", "es": "Gris" }
+    },
+    {
+      "value": "black",
+      "text": "Black",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769687849/black_sqmxhk.png",
+      "translations": { "en": "Black", "es": "Negro" }
+    }
+  ],
+  "typeColorBed": [
+    {
+      "value": "red",
+      "text": "Red",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769679262/red_djnw7m.png",
+      "translations": { "en": "Red", "es": "Rojo" }
+    },
+    {
+      "value": "green",
+      "text": "Green",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769679183/green_yd7gjt.png",
+      "translations": { "en": "Green", "es": "Verde" }
+    },
+    {
+      "value": "blue",
+      "text": "Blue",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769679122/blue_zk386t.png",
+      "translations": { "en": "Blue", "es": "Azul" }
+    },
+    {
+      "value": "brown",
+      "text": "Brown",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769679122/brown_dhfi6g.png",
+      "translations": { "en": "Brown", "es": "Marrón" }
+    },
+    {
+      "value": "cyan",
+      "text": "Cyan",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769679169/cyan_uoqezl.png",
+      "translations": { "en": "Cyan", "es": "Cian" }
+    },
+    {
+      "value": "lightblue",
+      "text": "Light Blue",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769679203/lightblue_rrauam.png",
+      "translations": { "en": "Light Blue", "es": "Azul claro" }
+    },
+    {
+      "value": "lightgreen",
+      "text": "Light Green",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769679217/lightgreen_vxjome.png",
+      "translations": { "en": "Light Green", "es": "Verde claro" }
+    },
+    {
+      "value": "orange",
+      "text": "Orange",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769679239/orange_ft2vvf.png",
+      "translations": { "en": "Orange", "es": "Naranja" }
+    },
+    {
+      "value": "yellow",
+      "text": "Yellow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769679295/yellow_nxv750.png",
+      "translations": { "en": "Yellow", "es": "Amarillo" }
+    },
+    {
+      "value": "pink",
+      "text": "Pink",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769679261/pink_oiyarb.png",
+      "translations": { "en": "Pink", "es": "Rosa" }
+    },
+    {
+      "value": "magenta",
+      "text": "Magenta",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769679238/magenta_chyhkp.png",
+      "translations": { "en": "Magenta", "es": "Magenta" }
+    },
+    {
+      "value": "purple",
+      "text": "Purple",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769679261/purple_j2nnm9.png",
+      "translations": { "en": "Purple", "es": "Púrpura" }
+    },
+    {
+      "value": "white",
+      "text": "White",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769679294/white_p0qxmk.png",
+      "translations": { "en": "White", "es": "Blanco" }
+    },
+    {
+      "value": "lightgray",
+      "text": "Light Gray",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769679216/lightgray_kf5fpo.png",
+      "translations": { "en": "Light Gray", "es": "Gris claro" }
+    },
+    {
+      "value": "gray",
+      "text": "Gray",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769679182/gray_nb86db.png",
+      "translations": { "en": "Gray", "es": "Gris" }
+    },
+    {
+      "value": "black",
+      "text": "Black",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769679121/black_edbdk2.png",
+      "translations": { "en": "Black", "es": "Negro" }
+    }
+  ],
+  "typeColorWool": [
+    {
+      "value": "rainbow",
+      "text": "Rainbow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769705856/rainbow_klvl03.png",
+      "translations": { "en": "Rainbow", "es": "Arcoíris" }
+    },
+    {
+      "value": "red",
+      "text": "Red",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769673854/red_z8ki70.png",
+      "translations": { "en": "Red", "es": "Rojo" }
+    },
+    {
+      "value": "green",
+      "text": "Green",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769673854/green_yvyyrh.png",
+      "translations": { "en": "Green", "es": "Verde" }
+    },
+    {
+      "value": "blue",
+      "text": "Blue",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Blue_nfyfrs.png",
+      "translations": { "en": "Blue", "es": "Azul" }
+    },
+    {
+      "value": "brown",
+      "text": "Brown",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Brown_n54tmt.png",
+      "translations": { "en": "Brown", "es": "Marrón" }
+    },
+    {
+      "value": "cyan",
+      "text": "Cyan",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Cyan_ietx4o.png",
+      "translations": { "en": "Cyan", "es": "Cian" }
+    },
+    {
+      "value": "lightblue",
+      "text": "Light Blue",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962877/Light_Blue_jiivto.png",
+      "translations": { "en": "Light Blue", "es": "Azul claro" }
+    },
+    {
+      "value": "lightgreen",
+      "text": "Light Green",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769673854/lightgreen_rt1lz8.png",
+      "translations": { "en": "Light Green", "es": "Verde claro" }
+    },
+    {
+      "value": "orange",
+      "text": "Orange",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769673855/orange_um9kw5.png",
+      "translations": { "en": "Orange", "es": "Naranja" }
+    },
+    {
+      "value": "yellow",
+      "text": "Yellow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769673855/yellow_bqijzx.png",
+      "translations": { "en": "Yellow", "es": "Amarillo" }
+    },
+    {
+      "value": "pink",
+      "text": "Pink",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769673855/pink_ru9ltc.png",
+      "translations": { "en": "Pink", "es": "Rosa" }
+    },
+    {
+      "value": "magenta",
+      "text": "Magenta",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726962881/Magenta_wk1euz.png",
+      "translations": { "en": "Magenta", "es": "Magenta" }
+    },
+    {
+      "value": "purple",
+      "text": "Purple",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769673855/purple_svgnfh.png",
+      "translations": { "en": "Purple", "es": "Púrpura" }
+    },
+    {
+      "value": "white",
+      "text": "White",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769673854/white_cx9xbo.png",
+      "translations": { "en": "White", "es": "Blanco" }
+    },
+    {
+      "value": "lightgray",
+      "text": "Light Gray",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769673855/lightgray_tmyjbb.png",
+      "translations": { "en": "Light Gray", "es": "Gris claro" }
+    },
+    {
+      "value": "gray",
+      "text": "Gray",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769673854/gray_kbside.png",
+      "translations": { "en": "Gray", "es": "Gris" }
+    },
+    {
+      "value": "black",
+      "text": "Black",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769673854/black_phwuq2.png",
+      "translations": { "en": "Black", "es": "Negro" }
+    }
+  ],
+  "typeColorWoolB": [
+    {
+      "value": "rainbow",
+      "text": "Rainbow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769706387/rainbow_k8ydw9.png",
+      "translations": { "en": "Rainbow", "es": "Arcoíris" }
+    },
+    {
+      "value": "red",
+      "text": "Red",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769676065/red_kscat4.png",
+      "translations": { "en": "Red", "es": "Rojo" }
+    },
+    {
+      "value": "green",
+      "text": "Green",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675920/green_aidbew.png",
+      "translations": { "en": "Green", "es": "Verde" }
+    },
+    {
+      "value": "blue",
+      "text": "Blue",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675634/blue_om2opd.png",
+      "translations": { "en": "Blue", "es": "Azul" }
+    },
+    {
+      "value": "brown",
+      "text": "Brown",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675656/brown_hlwush.png",
+      "translations": { "en": "Brown", "es": "Marrón" }
+    },
+    {
+      "value": "cyan",
+      "text": "Cyan",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675895/cyan_k6k47q.png",
+      "translations": { "en": "Cyan", "es": "Cian" }
+    },
+    {
+      "value": "lightblue",
+      "text": "Light Blue",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675932/lightblue_nabfhq.png",
+      "translations": { "en": "Light Blue", "es": "Azul claro" }
+    },
+    {
+      "value": "lightgreen",
+      "text": "Light Green",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675958/lightgreen_onecy4.png",
+      "translations": { "en": "Light Green", "es": "Verde claro" }
+    },
+    {
+      "value": "orange",
+      "text": "Orange",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769676043/orange_evxi5y.png",
+      "translations": { "en": "Orange", "es": "Naranja" }
+    },
+    {
+      "value": "yellow",
+      "text": "Yellow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769676086/yellow_ushptr.png",
+      "translations": { "en": "Yellow", "es": "Amarillo" }
+    },
+    {
+      "value": "pink",
+      "text": "Pink",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769676043/pink_ohjrzw.png",
+      "translations": { "en": "Pink", "es": "Rosa" }
+    },
+    {
+      "value": "magenta",
+      "text": "Magenta",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675958/magenta_limjww.png",
+      "translations": { "en": "Magenta", "es": "Magenta" }
+    },
+    {
+      "value": "purple",
+      "text": "Purple",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769676064/purple_cw46cf.png",
+      "translations": { "en": "Purple", "es": "Púrpura" }
+    },
+    {
+      "value": "white",
+      "text": "White",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769676086/whiteb_zbsgwh.png",
+      "translations": { "en": "White", "es": "Blanco" }
+    },
+    {
+      "value": "lightgray",
+      "text": "Light Gray",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675933/lightgray_zvfvxq.png",
+      "translations": { "en": "Light Gray", "es": "Gris claro" }
+    },
+    {
+      "value": "gray",
+      "text": "Gray",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675896/gray_rfrszf.png",
+      "translations": { "en": "Gray", "es": "Gris" }
+    },
+    {
+      "value": "black",
+      "text": "Black",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675634/black_lj5ynn.png",
+      "translations": { "en": "Black", "es": "Negro" }
+    }
+  ],
+  "typeColorGlass": [
+    {
+      "value": "red",
+      "text": "Red",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675194/red_tpxack.png",
+      "translations": { "en": "Red", "es": "Rojo" }
+    },
+    {
+      "value": "green",
+      "text": "Green",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769674756/green_im0qdo.png",
+      "translations": { "en": "Green", "es": "Verde" }
+    },
+    {
+      "value": "blue",
+      "text": "Blue",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769674155/blue_gv0hb7.png",
+      "translations": { "en": "Blue", "es": "Azul" }
+    },
+    {
+      "value": "brown",
+      "text": "Brown",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769674156/brown_bso1sl.png",
+      "translations": { "en": "Brown", "es": "Marrón" }
+    },
+    {
+      "value": "cyan",
+      "text": "Cyan",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769674755/cyan_qdsust.png",
+      "translations": { "en": "Cyan", "es": "Cian" }
+    },
+    {
+      "value": "lightblue",
+      "text": "Light Blue",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675113/lightblue_ad4tai.png",
+      "translations": { "en": "Light Blue", "es": "Azul claro" }
+    },
+    {
+      "value": "lightgreen",
+      "text": "Light Green",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675136/lightgreen_ej54wf.png",
+      "translations": { "en": "Light Green", "es": "Verde claro" }
+    },
+    {
+      "value": "orange",
+      "text": "Orange",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675141/orange_goay8v.png",
+      "translations": { "en": "Orange", "es": "Naranja" }
+    },
+    {
+      "value": "yellow",
+      "text": "Yellow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675206/yellow_m2r4gs.png",
+      "translations": { "en": "Yellow", "es": "Amarillo" }
+    },
+    {
+      "value": "pink",
+      "text": "Pink",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675173/pink_jvyubj.png",
+      "translations": { "en": "Pink", "es": "Rosa" }
+    },
+    {
+      "value": "magenta",
+      "text": "Magenta",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675137/magenta_ejgslf.png",
+      "translations": { "en": "Magenta", "es": "Magenta" }
+    },
+    {
+      "value": "purple",
+      "text": "Purple",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675173/purple_pgfqqn.png",
+      "translations": { "en": "Purple", "es": "Púrpura" }
+    },
+    {
+      "value": "white",
+      "text": "White",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675206/white_v5plj1.png",
+      "translations": { "en": "White", "es": "Blanco" }
+    },
+    {
+      "value": "lightgray",
+      "text": "Light Gray",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675113/lightgray_hsamvr.png",
+      "translations": { "en": "Light Gray", "es": "Gris claro" }
+    },
+    {
+      "value": "gray",
+      "text": "Gray",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769674756/gray_nep1qc.png",
+      "translations": { "en": "Gray", "es": "Gris" }
+    },
+    {
+      "value": "black",
+      "text": "Black",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769674155/black_pfkdda.png",
+      "translations": { "en": "Black", "es": "Negro" }
+    }
+  ],
+  "typeColorGlassB": [
+    {
+      "value": "red",
+      "text": "Red",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675402/red_pabpgd.png",
+      "translations": { "en": "Red", "es": "Rojo" }
+    },
+    {
+      "value": "green",
+      "text": "Green",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675314/green_jo10oz.png",
+      "translations": { "en": "Green", "es": "Verde" }
+    },
+    {
+      "value": "blue",
+      "text": "Blue",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675260/blue_rue0cq.png",
+      "translations": { "en": "Blue", "es": "Azul" }
+    },
+    {
+      "value": "brown",
+      "text": "Brown",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675261/brown_ysuikf.png",
+      "translations": { "en": "Brown", "es": "Marrón" }
+    },
+    {
+      "value": "cyan",
+      "text": "Cyan",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675290/cyan_mbsqfc.png",
+      "translations": { "en": "Cyan", "es": "Cian" }
+    },
+    {
+      "value": "lightblue",
+      "text": "Light Blue",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675315/lightblue_qolgpp.png",
+      "translations": { "en": "Light Blue", "es": "Azul claro" }
+    },
+    {
+      "value": "lightgreen",
+      "text": "Light Green",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675338/lightgreen_egtghw.png",
+      "translations": { "en": "Light Green", "es": "Verde claro" }
+    },
+    {
+      "value": "orange",
+      "text": "Orange",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675373/orange_jxl2mc.png",
+      "translations": { "en": "Orange", "es": "Naranja" }
+    },
+    {
+      "value": "yellow",
+      "text": "Yellow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675424/yellow_fe7xwh.png",
+      "translations": { "en": "Yellow", "es": "Amarillo" }
+    },
+    {
+      "value": "pink",
+      "text": "Pink",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675373/pink_hzmccb.png",
+      "translations": { "en": "Pink", "es": "Rosa" }
+    },
+    {
+      "value": "magenta",
+      "text": "Magenta",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675339/magenta_wkr5m4.png",
+      "translations": { "en": "Magenta", "es": "Magenta" }
+    },
+    {
+      "value": "purple",
+      "text": "Purple",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675401/purple_najzh6.png",
+      "translations": { "en": "Purple", "es": "Púrpura" }
+    },
+    {
+      "value": "white",
+      "text": "White",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675423/white_h7db7z.png",
+      "translations": { "en": "White", "es": "Blanco" }
+    },
+    {
+      "value": "lightgray",
+      "text": "Light Gray",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675337/lightgray_jvzmvi.png",
+      "translations": { "en": "Light Gray", "es": "Gris claro" }
+    },
+    {
+      "value": "gray",
+      "text": "Gray",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675291/gray_lqozz9.png",
+      "translations": { "en": "Gray", "es": "Gris" }
+    },
+    {
+      "value": "black",
+      "text": "Black",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769675260/black_datjtu.png",
+      "translations": { "en": "Black", "es": "Negro" }
+    }
+  ],
+  "typeColorDye": [
+    {
+      "value": "red",
+      "text": "Red",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769678463/red_pr0kdd.png",
+      "translations": { "en": "Red", "es": "Rojo" }
+    },
+    {
+      "value": "green",
+      "text": "Green",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769678462/green_xvgu1f.png",
+      "translations": { "en": "Green", "es": "Verde" }
+    },
+    {
+      "value": "blue",
+      "text": "Blue",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769288/Lapis_Lazuli_ltepob.png",
+      "translations": { "en": "Blue", "es": "Azul" }
+    },
+    {
+      "value": "brown",
+      "text": "Brown",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769678462/brown_jv8jty.png",
+      "translations": { "en": "Brown", "es": "Marrón" }
+    },
+    {
+      "value": "cyan",
+      "text": "Cyan",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769678462/cyan_veuku0.png",
+      "translations": { "en": "Cyan", "es": "Cian" }
+    },
+    {
+      "value": "lightblue",
+      "text": "Light Blue",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769678462/lightblue_dpaptv.png",
+      "translations": { "en": "Light Blue", "es": "Azul claro" }
+    },
+    {
+      "value": "lightgreen",
+      "text": "Light Green",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769678463/lightgreen_xhdh9g.png",
+      "translations": { "en": "Light Green", "es": "Verde claro" }
+    },
+    {
+      "value": "orange",
+      "text": "Orange",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769678463/orange_cjn0vn.png",
+      "translations": { "en": "Orange", "es": "Naranja" }
+    },
+    {
+      "value": "yellow",
+      "text": "Yellow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769678463/yellow_vyt14l.png",
+      "translations": { "en": "Yellow", "es": "Amarillo" }
+    },
+    {
+      "value": "pink",
+      "text": "Pink",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769678463/pink_jnbkkf.png",
+      "translations": { "en": "Pink", "es": "Rosa" }
+    },
+    {
+      "value": "magenta",
+      "text": "Magenta",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769678463/magenta_jo4x8p.png",
+      "translations": { "en": "Magenta", "es": "Magenta" }
+    },
+    {
+      "value": "purple",
+      "text": "Purple",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769678463/purple_urbgwk.png",
+      "translations": { "en": "Purple", "es": "Púrpura" }
+    },
+    {
+      "value": "white",
+      "text": "White",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769265/Bone_Meal_c4sbsq.png",
+      "translations": { "en": "White", "es": "Blanco" }
+    },
+    {
+      "value": "lightgray",
+      "text": "Light Gray",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769678462/lightgray_a2fqmx.png",
+      "translations": { "en": "Light Gray", "es": "Gris claro" }
+    },
+    {
+      "value": "gray",
+      "text": "Gray",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769678462/gray_fmru5t.png",
+      "translations": { "en": "Gray", "es": "Gris" }
+    },
+    {
+      "value": "black",
+      "text": "Black",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726769272/Ink_Sac_uvsyuo.png",
+      "translations": { "en": "Black", "es": "Negro" }
+    }
+  ],
+  "typeBalloon": [
+    {
+      "value": "ghast",
+      "text": "Ghast",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769619918/balloonghast_ve3p7k.webp",
+      "translations": { "en": "Ghast", "es": "Ghast" }
+    },
+    {
+      "value": "red",
+      "text": "Red",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769619300/balloon_red_zlex5v.webp",
+      "translations": { "en": "Red", "es": "Rojo" }
+    },
+    {
+      "value": "green",
+      "text": "Green",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769619297/balloon_green_sifwxc.webp",
+      "translations": { "en": "Green", "es": "Verde" }
+    },
+    {
+      "value": "blue",
+      "text": "Blue",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769619297/balloon_blue_cjkw3p.webp",
+      "translations": { "en": "Blue", "es": "Azul" }
+    },
+    {
+      "value": "brown",
+      "text": "Brown",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769619297/balloon_brown_hbjcvs.webp",
+      "translations": { "en": "Brown", "es": "Marrón" }
+    },
+    {
+      "value": "cyan",
+      "text": "Cyan",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769619298/balloon_cyan_ohssyf.webp",
+      "translations": { "en": "Cyan", "es": "Cian" }
+    },
+    {
+      "value": "lightblue",
+      "text": "Light Blue",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769619297/balloon_lightblue_aw1eci.webp",
+      "translations": { "en": "Light Blue", "es": "Azul claro" }
+    },
+    {
+      "value": "lightgreen",
+      "text": "Light Green",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769619298/balloon_lightgreen_poigff.webp",
+      "translations": { "en": "Light Green", "es": "Verde claro" }
+    },
+    {
+      "value": "orange",
+      "text": "Orange",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769619298/balloon_orange_o2xtv4.webp",
+      "translations": { "en": "Orange", "es": "Naranja" }
+    },
+    {
+      "value": "yellow",
+      "text": "Yellow",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769619595/balloon_yellow_tqrju6.webp",
+      "translations": { "en": "Yellow", "es": "Amarillo" }
+    },
+    {
+      "value": "pink",
+      "text": "Pink",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769619298/balloon_pink_n8x6pf.webp",
+      "translations": { "en": "Pink", "es": "Rosa" }
+    },
+    {
+      "value": "magenta",
+      "text": "Magenta",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769619298/balloon_magenta_gms6x6.webp",
+      "translations": { "en": "Magenta", "es": "Magenta" }
+    },
+    {
+      "value": "purple",
+      "text": "Purple",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769619298/balloon_purple_zjwmnj.webp",
+      "translations": { "en": "Purple", "es": "Púrpura" }
+    },
+    {
+      "value": "white",
+      "text": "White",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769619299/balloon_white_gzvqid.webp",
+      "translations": { "en": "White", "es": "Blanco" }
+    },
+    {
+      "value": "lightgray",
+      "text": "Light Gray",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769619298/balloon_lightgray_bteqqv.webp",
+      "translations": { "en": "Light Gray", "es": "Gris claro" }
+    },
+    {
+      "value": "gray",
+      "text": "Gray",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769619297/balloon_gray_m0sgaj.webp",
+      "translations": { "en": "Gray", "es": "Gris" }
+    },
+    {
+      "value": "black",
+      "text": "Black",
+      "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769619297/balloon_black_ionetx.webp",
+      "translations": { "en": "Black", "es": "Negro" }
+    }
+  ],
+  "typePotion": [
+  {
+    "value": "empty",
+    "text": "Empty Bottle",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/f_webp/v1726763960/Empty_Bottle_bfsgem.png",
+    "translations": { "en": "Empty Bottle", "es": "Botella Vacía" }
+  },
+  {
+    "value": "water",
+    "text": "Water Bottle",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634902/water_h4plso.webp",
+    "translations": { "en": "Water Bottle", "es": "Botella de Agua" }
+  },
+  {
+    "value": "thick",
+    "text": "Thick Potion",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634902/water_h4plso.webp",
+    "translations": { "en": "Thick Potion", "es": "Poción Espesa" }
+  },
+  {
+    "value": "mundane",
+    "text": "Mundane Potion",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634902/water_h4plso.webp",
+    "translations": { "en": "Mundane Potion", "es": "Poción Común" }
+  },
+  {
+    "value": "awkward",
+    "text": "Awkward Potion",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634902/water_h4plso.webp",
+    "translations": { "en": "Awkward Potion", "es": "Poción Incómoda" }
+  },
+  {
+    "value": "healing",
+    "text": "Healing Potion",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634095/healing_jw1wov.png",
+    "translations": { "en": "Healing Potion", "es": "Poción de Curación" }
+  },
+  {
+    "value": "healing2",
+    "text": "Healing Potion II",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634095/healing_jw1wov.png",
+    "translations": { "en": "Healing Potion II", "es": "Poción de Curación II" }
+  },
+  {
+    "value": "harming",
+    "text": "Harming Potion",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634095/harming_i1p7zd.png",
+    "translations": { "en": "Harming Potion", "es": "Poción de Daño" }
+  },
+  {
+    "value": "harming2",
+    "text": "Harming Potion II",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634095/harming_i1p7zd.png",
+    "translations": { "en": "Harming Potion II", "es": "Poción de Daño II" }
+  },
+  {
+    "value": "swiftness",
+    "text": "Swiftness Potion",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634181/swifness_bmeu1w.png",
+    "translations": { "en": "Swiftness Potion", "es": "Poción de Velocidad" }
+  },
+  {
+    "value": "swiftness+",
+    "text": "Swiftness Potion +",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634181/swifness_bmeu1w.png",
+    "translations": { "en": "Swiftness Potion +", "es": "Poción de Velocidad +" }
+  },
+  {
+    "value": "swiftness2",
+    "text": "Swiftness Potion II",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634181/swifness_bmeu1w.png",
+    "translations": { "en": "Swiftness Potion II", "es": "Poción de Velocidad II" }
+  },
+  {
+    "value": "slowness",
+    "text": "Slowness Potion",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634181/slowness_y2s2du.png",
+    "translations": { "en": "Slowness Potion", "es": "Poción de Lentitud" }
+  },
+  {
+    "value": "slowness+",
+    "text": "Slowness Potion +",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634181/slowness_y2s2du.png",
+    "translations": { "en": "Slowness Potion +", "es": "Poción de Lentitud +" }
+  },
+  {
+    "value": "poison",
+    "text": "Poison Potion",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634095/poison_xt6gzj.png",
+    "translations": { "en": "Poison Potion", "es": "Poción de Veneno" }
+  },
+  {
+    "value": "poison+",
+    "text": "Poison Potion +",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634095/poison_xt6gzj.png",
+    "translations": { "en": "Poison Potion +", "es": "Poción de Veneno +" }
+  },
+  {
+    "value": "poison2",
+    "text": "Poison Potion II",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634095/poison_xt6gzj.png",
+    "translations": { "en": "Poison Potion II", "es": "Poción de Veneno II" }
+  },
+  {
+    "value": "regeneration",
+    "text": "Regeneration Potion",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634095/regeneration_ehbmiv.png",
+    "translations": { "en": "Regeneration Potion", "es": "Poción de Regeneración" }
+  },
+  {
+    "value": "regeneration+",
+    "text": "Regeneration Potion +",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634095/regeneration_ehbmiv.png",
+    "translations": { "en": "Regeneration Potion +", "es": "Poción de Regeneración +" }
+  },
+  {
+    "value": "regeneration2",
+    "text": "Regeneration Potion II",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634095/regeneration_ehbmiv.png",
+    "translations": { "en": "Regeneration Potion II", "es": "Poción de Regeneración II" }
+  },
+  {
+    "value": "strength",
+    "text": "Strength Potion",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634181/streght_zlhtmt.png",
+    "translations": { "en": "Strength Potion", "es": "Poción de Fuerza" }
+  },
+  {
+    "value": "strength+",
+    "text": "Strength Potion +",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634181/streght_zlhtmt.png",
+    "translations": { "en": "Strength Potion +", "es": "Poción de Fuerza +" }
+  },
+  {
+    "value": "strength2",
+    "text": "Strength Potion II",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634181/streght_zlhtmt.png",
+    "translations": { "en": "Strength Potion II", "es": "Poción de Fuerza II" }
+  },
+  {
+    "value": "weakness",
+    "text": "Weakness Potion",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634902/weakness_ezo9sa.png",
+    "translations": { "en": "Weakness Potion", "es": "Poción de Debilidad" }
+  },
+  {
+    "value": "weakness+",
+    "text": "Weakness Potion +",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634902/weakness_ezo9sa.png",
+    "translations": { "en": "Weakness Potion +", "es": "Poción de Debilidad +" }
+  },
+  {
+    "value": "fireresistance",
+    "text": "Fire Resistance Potion",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634095/fireresistance_t4cb6t.png",
+    "translations": { "en": "Fire Resistance Potion", "es": "Poción de Resistencia al Fuego" }
+  },
+  {
+    "value": "fireresistance+",
+    "text": "Fire Resistance Potion +",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634095/fireresistance_t4cb6t.png",
+    "translations": { "en": "Fire Resistance Potion +", "es": "Poción de Resistencia al Fuego +" }
+  },
+  {
+    "value": "waterbreathing",
+    "text": "Water Breathing Potion",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634181/waterbreath_wyjseu.png",
+    "translations": { "en": "Water Breathing Potion", "es": "Poción de Respiración Acuática" }
+  },
+  {
+    "value": "waterbreathing+",
+    "text": "Water Breathing Potion +",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634181/waterbreath_wyjseu.png",
+    "translations": { "en": "Water Breathing Potion +", "es": "Poción de Respiración Acuática +" }
+  },
+  {
+    "value": "leaping",
+    "text": "Leaping Potion",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634095/leaping_cjl4lt.png",
+    "translations": { "en": "Leaping Potion", "es": "Poción de Salto" }
+  },
+  {
+    "value": "leaping+",
+    "text": "Leaping Potion +",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634095/leaping_cjl4lt.png",
+    "translations": { "en": "Leaping Potion +", "es": "Poción de Salto +" }
+  },
+  {
+    "value": "leaping2",
+    "text": "Leaping Potion II",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634095/leaping_cjl4lt.png",
+    "translations": { "en": "Leaping Potion II", "es": "Poción de Salto II" }
+  },
+  {
+    "value": "invisibility",
+    "text": "Invisibility Potion",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634095/invisibility_vedj8d.png",
+    "translations": { "en": "Invisibility Potion", "es": "Poción de Invisibilidad" }
+  },
+  {
+    "value": "invisibility+",
+    "text": "Invisibility Potion +",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634095/invisibility_vedj8d.png",
+    "translations": { "en": "Invisibility Potion +", "es": "Poción de Invisibilidad +" }
+  },
+  {
+    "value": "nightvision",
+    "text": "Night Vision Potion",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634095/nightvision_mousop.png",
+    "translations": { "en": "Night Vision Potion", "es": "Poción de Visión Nocturna" }
+  },
+  {
+    "value": "nightvision+",
+    "text": "Night Vision Potion +",
+    "image": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1769634095/nightvision_mousop.png",
+    "translations": { "en": "Night Vision Potion +", "es": "Poción de Visión Nocturna +" }
+  }
   ],
   "variant": [
     {
