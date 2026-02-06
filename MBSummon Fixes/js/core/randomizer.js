@@ -345,8 +345,8 @@
     toggle.id = 'footerMobileToggle';
     toggle.className = 'footer-box footer-mobile-toggle';
     toggle.title = (typeof t === 'function') ? t('footer.saveTitle','Actions') : 'Actions';
-    // default icon: grip (fa-grip)
-    toggle.innerHTML = '<i class="fas fa-grip"></i>';
+    // default icon: 4-squares grid (fa-th)
+    toggle.innerHTML = '<i class="fas fa-border-all"></i>';
 
     const actions = document.createElement('div');
     actions.id = 'footerMobileActions';
@@ -379,22 +379,22 @@
       e.stopPropagation();
       const isShown = actions.classList.toggle('show');
       updateToggleSize();
-      // toggle icon: show down arrow when opened, grip when closed
+      // toggle icon: show down arrow when opened, 4-squares when closed
       const ico = toggle.querySelector('i');
-      if(ico){ ico.className = isShown ? 'fas fa-chevron-down' : 'fas fa-grip'; }
+      if(ico){ ico.className = isShown ? 'fas fa-chevron-down' : 'fas fa-border-all'; }
     });
 
     document.addEventListener('click', function(e){
       if(!e.target.closest || (!e.target.closest('#footerMobileActions') && !e.target.closest('#footerMobileToggle'))){
         if(actions.classList.contains('show')){
           actions.classList.remove('show');
-          const ico = toggle.querySelector('i'); if(ico) ico.className = 'fas fa-grip';
+          const ico = toggle.querySelector('i'); if(ico) ico.className = 'fas fa-border-all';
         }
       }
     }, true);
 
-    document.getElementById('mobileRandomBtn').addEventListener('click', function(){ const rb = document.getElementById('footerRandomButton'); if(rb) rb.click(); actions.classList.remove('show'); const ico = toggle.querySelector('i'); if(ico) ico.className = 'fas fa-grip'; });
-    document.getElementById('mobileCopyBtn').addEventListener('click', function(){ const cb = document.getElementById('footerCopyButton'); if(cb) cb.click(); actions.classList.remove('show'); const ico = toggle.querySelector('i'); if(ico) ico.className = 'fas fa-grip'; });
+    document.getElementById('mobileRandomBtn').addEventListener('click', function(){ const rb = document.getElementById('footerRandomButton'); if(rb) rb.click(); actions.classList.remove('show'); const ico = toggle.querySelector('i'); if(ico) ico.className = 'fas fa-border-all'; });
+    document.getElementById('mobileCopyBtn').addEventListener('click', function(){ const cb = document.getElementById('footerCopyButton'); if(cb) cb.click(); actions.classList.remove('show'); const ico = toggle.querySelector('i'); if(ico) ico.className = 'fas fa-border-all'; });
   }
 
   if(document.readyState === 'complete' || document.readyState === 'interactive') init();
