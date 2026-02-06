@@ -68,17 +68,20 @@
       "placeholder": "Enter an amount...",
       "help": {
         "title": "Help - Mob Amount",
-        "description": "This option allows you to define how many mobs you want to summon at once. For performance and game balance reasons, the maximum limit is 20 mobs per summon."
+        "description": "This option allows you to define how many mobs you want to summon at once. The maximum limit is 20 mobs per summon."
       }
     },
-  "position": {
-      "title": "Mob Position",
-      "label": "Position type:",
-      "selectPlaceholder": "--Select type--",
-      "relative": "Relative position",
-      "absolute": "Absolute position",
-  "coordXLabel": "Coordinate X:",
-  "coordYLabel": "Coordinate Y:",
+      "position": {
+        "title": "Mob Position",
+        "label": "Position type:",
+        "typeLabel": "Position type:",
+        "selectPlaceholder": "--Select type--",
+        "relative": "Relative position",
+        "absolute": "Absolute position",
+      "coordXLabel": "Coordinate X:",
+      "coordYLabel": "Coordinate Y:",
+      "coordX": "Coordinate X:",
+      "coordY": "Coordinate Y:",
   "coordXPlaceholder": "Enter X coordinate...",
   "coordYPlaceholder": "Enter Y coordinate...",
   "coordXRelative": "Coordinate ~X:",
@@ -106,9 +109,9 @@
         "description": "This option lets you set how much health the mob will have when it appears. The value should be between 1 and 1000 health points."
       }
     },
-    "loot": {
-      "title": "Default Loot",
-      "label": "Enable default loot:",
+      "loot": {
+        "title": "Default Loot",
+        "label": "Disable default loot:",
       "enabled": "Enabled",
       "disabled": "Disabled",
       "help": {
@@ -119,7 +122,12 @@
     "lootTags": {
       "title": "Loot Tags",
       "emptyMessage": "No saved loot tags.",
+      "selectEnchantPlaceholder": "--Select--",
       "selectItemPlaceholder": "Select item",
+      "particlesEnabled": "Particles",
+      "particlesDisabled": "Disabled Particles",
+      "categorySplash": "Splash",
+      "categoryNormal": "Normal",
       "saveButton": "Save",
       "deleteButton": "Delete",
       "editButton": "Edit",
@@ -133,7 +141,30 @@
         "isBaby": "Is baby:",
         "variant": "Variant:",
         "isSheared": "Is sheared:",
-        "color": "Color:"
+        "color": "Color:",
+        "item_name": "Item Tag - Name:",
+        "item_type": "Item Tag - Type:",
+        "item_unbreakable": "Item Tag - Unbreakable:",
+        "item_enchantment": "Item Tag - Enchantment:",
+        "item_anvilUses": "Item Tag - Anvil Uses:",
+        "item_canPlaceOn": "Item Tag - Can Place On:",
+        "item_canDestroy": "Item Tag - Can Destroy:",
+        "item_showParticles": "Item Tag - Disable Particles:",
+        "item_category": "Item Tag - Category:",
+        "item_command": "Item Tag - Command:",
+        "item_uses": "Item Tag - Uses:",
+        "item_type_spawnegg":"Item Tag - Type SpawnEgg:",
+        "item_type_color":"Item Tag - Type Color:",
+        "item_type_color2":"Item Tag - Type Color2:",
+        "item_type_balloon":"Item Tag - Type Balloon:",
+        "item_type_potion":"Item Tag - Type Potion:",
+        "item_type_color_carpet":"Item Tag - Type Color Carpet:",
+        "item_type_color_bed":"Item Tag - Type Color Bed:",
+        "item_type_color_wool":"Item Tag - Type Color Wool:",
+        "item_type_color_wool_b":"Item Tag - Type Color Wool B:",
+        "item_type_color_glass":"Item Tag - Type Color Glass:",
+        "item_type_color_glass_b":"Item Tag - Type Color Glass B:",
+        "item_type_color_dye":"Item Tag - Type Color Dye:"
       },
       "sizeOptions": {
         "small": "Small",
@@ -142,7 +173,41 @@
       },
       "help": {
         "title": "Help - Loot Tags",
-        "description": "Loot tags control special behaviors when the mob dies, such as the chance to drop rare items or extra experience."
+        "description": "Loot tags control special behaviors when the mob dies, such as the chance to drop rare items."
+      }
+      ,"helpTexts":{
+        "amount":"Number of items to drop.",
+        "bonus":"Allows obtaining a random number of extra items, up to the specified value, if the conditions are met. Defaults to 0.",
+        "lootBonus":"Allows a random number of extra items to drop when using the maximum looting enchantment, up to the specified value, if the conditions are met. Defaults to 0.",
+        "chance":"Controls whether the item drops or not. A random value between 0 and 1 is generated: the item drops if the value is between min (inclusive) and max (exclusive). If multiple items share the same seed, they use the same value; overlapping ranges may cause multiple items to drop, while separated ranges allow only one.",
+        "onFire":"The item only drops if the entity is on fire at the moment it dies.",
+        "size":"The item only drops if the mob’s size matches the specified value.",
+        "isBaby":"The item only drops if the mob is (or is not) a baby, depending on the specified value.",
+        "variant":"The item only drops if the mob’s variant matches the specified one. Only applies to mobs that have variants (for example: normal, mooshroom, cowctus).",
+        "isSheared":"The item only drops if the sheep’s color matches the specified value.",
+        "color":"The item only drops if the sheep’s color matches the specified value. Only applies to sheep mobs.",
+        "item_name":"Overrides the item’s name, as if it were renamed using an anvil. Applies to all items.",
+        "item_unbreakable":"If enabled and the item is a tool, it will never lose durability. Applies to all tools.",
+        "item_enchantment":"Defines the enchantments applied to the item. Applies to all items.",
+        "item_canPlaceOn":"Specifies which blocks the item can be placed on in Adventure mode. Can be a single block, multiple blocks, or all, which allows placing it on any block.",
+        "item_canDestroy":"Specifies which blocks the item can destroy in Adventure mode. Can be a single block, multiple blocks, or all, which allows breaking any block.",
+        "item_showParticles":"Defines the potion’s category. For example, using splash makes it a splash potion. Only applies to potions.",
+        "item_category":"Defines the potion’s category. For example, using splash makes it a splash potion. Only applies to potions.",
+        "item_command":"Specifies the command that a command book will run when used. Only applies to command books; the command is not validated on creation.",
+        "item_uses":"Specifies how many times a command book can be used before it disappears. Only applies to command books.",
+        "item_anvilUses":"Specifies how many times the item has been used in an anvil. Only affects the cost of future anvil operations. Applies to all items."
+        ,"item_type_spawnegg":"Defines which creature the spawn egg will generate. This value determines the mob that will appear when the egg is used, such as a zombie, an Ender Dragon, or any other supported entity.",
+        "item_type_color":"Color of the item (dyed).",
+        "item_type_color2":"Color of the item (dyed).",
+        "item_type_balloon":"Defines the type or color of the balloon that will be generated. Depending on the selected value, the balloon’s appearance may change or use special supported variants.",
+        "item_type_potion":"Specifies the type of potion that will be generated. This can be an empty potion, a water bottle, or a potion with specific effects. The selected value defines how the potion behaves when used.",
+        "item_type_color_carpet":"Carpet color.",
+        "item_type_color_bed":"Bed color.",
+        "item_type_color_wool":"Wool color.",
+        "item_type_color_wool_b":"Wool color.",
+        "item_type_color_glass":"Glass color.",
+        "item_type_color_glass_b":"Glass color.",
+        "item_type_color_dye":"Dye color."
       }
     },
     "armor": {
@@ -245,17 +310,21 @@
     }
   },
   "notifications": {
+    "select_mob": "You must select a mob first",
+    "card_not_available": "Card unavailable",
+    "randomize_success": "Randomization applied",
     "saved_success": "Command saved",
     "language_changed": "Language changed",
     "cleared": "Form reset",
     "copied": "Command copied",
-    "deleted": "Saved command has been removed",
+    "deleted": "Command deleted",
     "save_duplicate": "This command is already saved",
     "import_file_selected_prefix": "Selected file",
     "import_success": "Import completed",
     "import_failed": "Import failed"
   ,
     "editing": "Editing saved item",
+    "edit_block": "Finish editing",
     "loot": {
       "added": "Item added",
       "updated": "Item updated",
