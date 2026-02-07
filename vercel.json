@@ -3,12 +3,12 @@
     {
       "source": "/es.html",
       "destination": "/MBSummon/index.html",
-      "permanent": "true"
+      "permanent": true
     },
     {
       "source": "/en.html",
       "destination": "/MBSummon/index.html",
-      "permanent": "true"
+      "permanent": true
     }
   ],
   "rewrites": [
