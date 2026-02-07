@@ -1,4 +1,16 @@
 {
+  "redirects": [
+    {
+      "source": "/es.html",
+      "destination": "/MBSummon/index.html",
+      "permanent": "true"
+    },
+    {
+      "source": "/en.html",
+      "destination": "/MBSummon/index.html",
+      "permanent": "true"
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",
