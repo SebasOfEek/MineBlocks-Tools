@@ -2,12 +2,12 @@
   "redirects": [
     {
       "source": "/es.html",
-      "destination": "/MBSummon/index.html",
+      "destination": "/index.html",
       "permanent": true
     },
     {
       "source": "/en.html",
-      "destination": "/MBSummon/index.html",
+      "destination": "/index.html",
       "permanent": true
     }
   ],
