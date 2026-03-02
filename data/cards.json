@@ -1,0 +1,46 @@
+[
+  {
+    "img": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1772392537/MBSummon_p7awuq.png",
+    "title": "MBSummon",
+    "desc": "Calculadora rápida para contar bloques y estimar materiales.",
+    "author": "SebasOfEek",
+    "link": "#contador",
+    "statuses": [{ "label": "Disponible", "state": "available", "color": "#6cd26a" }]
+  },
+
+  {
+    "img": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1772392537/MBSkin_dw1jmy.png",
+    "title": "MBSkins",
+    "desc": "Calculadora rápida para contar bloques y estimar materiales.",
+    "author": "SebasOfEek",
+    "link": "#contador",
+    "statuses": [{ "label": "Disponible", "state": "available", "color": "#6cd26a" }]
+  },
+
+  {
+    "img": "https://res.cloudinary.com/dkrcpm32u/image/upload/v1772392538/MBWorldAnalyzer5_e2riqo.png",
+    "title": "MBWorldAnzalyzer",
+    "desc": "Temporizador para medir sesiones y optimizar rutinas.",
+    "author": "SebasOfEek",
+    "link": "#cronometro",
+    "statuses": [{ "label": "En progreso", "state": "in-progress", "color": "#f3c261" }]
+  },
+
+  {
+    "img": "https://media.discordapp.net/attachments/1315360495821394013/1316442608205168750/WorldEdit-ReScale.png?ex=69a5bbb8&is=69a46a38&hm=09de3a81eafc7723fb89753302f19d27eeaf47fde46a33f6d375d5e6de43ad3c&=&format=webp&quality=lossless&width=461&height=461",
+    "title": "MBWorldEdit",
+    "desc": "Edita y personaliza los mundos de Mine Blocks.",
+    "author": "Koult",
+    "link": "https://crys1534.github.io/MB-World-Editor/",
+    "statuses": [{ "label": "Disponible", "state": "available", "color": "#6cd26a" }]
+  },
+
+  {
+    "img": "",
+    "title": "Cronómetro de Minería",
+    "desc": "Temporizador para medir sesiones y optimizar rutinas.",
+    "author": "SebasOfEek",
+    "link": "#cronometro",
+    "statuses": [{ "label": "Pausado", "state": "paused", "color": "#ff7b7b" }]
+  }
+]
